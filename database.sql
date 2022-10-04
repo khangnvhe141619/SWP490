@@ -64,7 +64,7 @@ CREATE TABLE `cartypes`(
 
 CREATE TABLE `Category_car`(
     `id` INT UNSIGNED NOT NULL AUTO_INCREMENT primary key,
-    `name_Brand` INT NOT NULL
+    `name_Brand` VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE `Session_Participants`(
