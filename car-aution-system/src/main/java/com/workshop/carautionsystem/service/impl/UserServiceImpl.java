@@ -21,4 +21,9 @@ public class UserServiceImpl implements UserService {
     public List<User> listUser() {
         return responsitory.findAll();
     }
+
+    @Override
+    public User register(User user) {
+        return responsitory.save(user);
+    }
 }

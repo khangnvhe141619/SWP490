@@ -10,4 +10,5 @@ import java.util.Optional;
 public interface UserService {
     public Optional<User> login (String username,String password);
     public List<User> listUser();
+    public User register(User user);
 }
