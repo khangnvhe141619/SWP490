@@ -1,7 +1,7 @@
 package com.workshop.carautionsystem.service.impl;
 
 import com.workshop.carautionsystem.model.User;
-import com.workshop.carautionsystem.responsitory.UserResponsitory;
+import com.workshop.carautionsystem.repository.UserResponsitory;
 import com.workshop.carautionsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

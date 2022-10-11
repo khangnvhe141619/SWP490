@@ -2,7 +2,7 @@ package com.workshop.carautionsystem.controller;
 
 import com.workshop.carautionsystem.model.ResponseObject;
 import com.workshop.carautionsystem.model.User;
-import com.workshop.carautionsystem.responsitory.UserResponsitory;
+import com.workshop.carautionsystem.repository.UserResponsitory;
 import com.workshop.carautionsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

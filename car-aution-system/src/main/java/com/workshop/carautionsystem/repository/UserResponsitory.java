@@ -1,4 +1,4 @@
-package com.workshop.carautionsystem.responsitory;
+package com.workshop.carautionsystem.repository;
 
 import com.workshop.carautionsystem.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
