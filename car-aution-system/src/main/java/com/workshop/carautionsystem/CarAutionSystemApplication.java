@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServic
 public class CarAutionSystemApplication {
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(CarAutionSystemApplication.class, args);
 	}
 
