@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>User Infomation</title>
+        <link rel="stylesheet" href="css/updateProfile.css">
+        <link rel="stylesheet" href="fontawesome/css/all.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+    <body>
+        <div class="container">
+            <div class="leftbox">
+                <nav>
+                    <a onclick="tabs(0)" class="tab">
+                        <i class="fa fa-user-circle-o"></i>
+                    </a>
+                    <a onclick="tabs(1)" class="tab">
+                        <i class="fa fa-key"></i>
+                    </a>
+                </nav>
+            </div>
+            <div class="rightbox">
+                <div class="profile tabShow">
+                    <div class="info">
+                        <h1>User Infomation</h1>
+                        <h2>Username</h2>
+                        <input type="text" class="input" placeholder="Username">
+                        <h2>Fullname</h2>
+                        <input type="text" class="input" placeholder="Fullname">
+                        <h2>Email</h2>
+                        <input type="text" class="input" placeholder="Email">
+                        <h2>Phone</h2>
+                        <input type="text" class="input" placeholder="Phone">
+                    </div>
+                    <div class="ava">
+                        <img class="image" alt="" src="images/Avatar/avatar2.jpg" style="border-radius: 100px; display: flex;" />
+                        <p>
+                        <div class="form-group">
+                           <input class="form-control input-lg" type="file" name="avatar" accept="image/png,image/jpeg">
+                       </div>
+                    </div>
+                    <div>
+                        <button type="button" class="btn">Update</button>
+                    </div>
+                </div>
+                <div class="changePassword tabShow">
+                    <h1>Change Password</h1>
+                    <h2>Old password</h2>
+                    <input type="password" class="input" placeholder="Old password">
+                    <h2>New password</h2>
+                    <input type="password" class="input" placeholder="New password">
+                    <h2>Re-new password</h2>
+                    <input type="password" class="input" placeholder="Re-new password">
+                    <button class="btn">Change</button>
+                </div>
+            </div>
+        </div>
+        <script>
+            const tabBtn = document.querySelectorAll(".tab");
+            const tab = document.querySelectorAll(".tabShow");
+            function tabs(panelIndex) {
+                tab.forEach(function(node){
+                    node.style.display = "none";
+                });
+                tab[panelIndex].style.display = "block";
+            }
+            tabs(0);
+        </script>
+        <script>
+            $(".tab").click(function() {
+                $(this).addClass("active").siblings().removeClass("active");
+            })
+        </script>
+    </body>
+</html>
