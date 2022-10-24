@@ -8,7 +8,21 @@ CREATE TABLE `User`(
     `LName` VARCHAR(255) NOT NULL,
     `Email` VARCHAR(255) NOT NULL,
     `Phone` INT NOT NULL,
-    `RoleId` INT NOT NULL
+    `Enabled` INT NOT NULL
+);
+
+CREATE TABLE `Verification_token`(
+	ID INT UNSIGNED PRIMARY KEY,
+    expiry_date DATETIME NOT NULL,
+    token varchar(255) NOT NULL,
+    user_id INT UNSIGNED
+);
+
+CREATE TABLE `Password_reset_token`(
+	ID INT UNSIGNED PRIMARY KEY,
+    expiry_date DATETIME NOT NULL,
+    token varchar(255) NOT NULL,
+    user_id INT UNSIGNED
 );
 
 CREATE TABLE `Set_Bids`(
@@ -20,6 +34,11 @@ CREATE TABLE `Set_Bids`(
 CREATE TABLE `Role`(
     `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT primary key,
     `Name` VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE `User_role`(
+	`user_id` INT UNSIGNED ,
+    `role_id` INT UNSIGNED
 );
 
 CREATE TABLE `Session`(
@@ -83,10 +102,17 @@ ALTER TABLE
     `Car` ADD CONSTRAINT `car_category_id_foreign` FOREIGN KEY(`category_id`) REFERENCES `Category_car`(`id`);
 ALTER TABLE
     `Car` ADD CONSTRAINT `car_cartype_id_foreign` FOREIGN KEY(`cartype_id`) REFERENCES `cartypes`(`id`);
-    
+ ALTER TABLE
+    `User_role` ADD CONSTRAINT `user_id_foreign` FOREIGN KEY(`user_id`) REFERENCES `User`(`ID`);   
+ALTER TABLE
+    `User_role` ADD CONSTRAINT `role_id_foreign` FOREIGN KEY(`role_id`) REFERENCES `Role`(`ID`);
+ALTER TABLE
+    `Verification_token` ADD CONSTRAINT `user_token_id_foreign` FOREIGN KEY(`user_id`) REFERENCES `User`(`ID`);    
+ALTER TABLE
+    `Password_reset_token` ADD CONSTRAINT `user_passreset_id_foreign` FOREIGN KEY(`user_id`) REFERENCES `User`(`ID`);    
 
-INSERT INTO `swp490_carautionsystem`.`user` ( `UserName`, `Password`, `LName`, `FName`, `Email`, `Phone`, `RoleId`) VALUES ( 'admin', '123', 'Khang', 'Nguyen', 'khang@gmail.com', '0123121', '1');
-INSERT INTO `swp490_carautionsystem`.`user` ( `UserName`, `Password`, `LName`, `FName`, `Email`, `Phone`, `RoleId`) VALUES ( 'mra', '123', 'sy', 'nguyen', 'synguyen0002@gmail.com', '01234921', '2');
+INSERT INTO `swp490_carautionsystem`.`user` ( `UserName`, `Password`, `LName`, `FName`, `Email`, `Phone`, `Enabled`) VALUES ( 'admin', '123', 'Khang', 'Nguyen', 'khang@gmail.com', '0123121', '1');
+INSERT INTO `swp490_carautionsystem`.`user` ( `UserName`, `Password`, `LName`, `FName`, `Email`, `Phone`, `Enabled`) VALUES ( 'mra', '123', 'sy', 'nguyen', 'synguyen0002@gmail.com', '01234921', '1');
 
 INSERT INTO `swp490_carautionsystem`.`role` ( `Name`) VALUES ('Admin');
 INSERT INTO `swp490_carautionsystem`.`role` ( `Name`) VALUES ('User');
@@ -99,3 +125,6 @@ INSERT INTO `swp490_carautionsystem`.`session` (`Date`, `Start_time`, `End_Time`
 INSERT INTO `swp490_carautionsystem`.`set_bids` (`Session_id`, `Bidder_id`, `Bids`) VALUES ('1', '1', '1000');
 
 INSERT INTO `swp490_carautionsystem`.`car` (`Name_car`,`Picture`, `Price`, `model`, `yearOfmake`, `color`, `cartype_id`, `category_id`, `session_id`, `Seller_id`) VALUES ('Vinfast lux A 2.0','aaa', '1000', '2020', '2020', 'black', '1', '1', '1', '1');
+
+INSERT INTO `swp490_carautionsystem`.`user_role` (`user_id`, `role_id`) VALUES ('1', '1');
+INSERT INTO `swp490_carautionsystem`.`user_role` (`user_id`, `role_id`) VALUES ('2', '2');
