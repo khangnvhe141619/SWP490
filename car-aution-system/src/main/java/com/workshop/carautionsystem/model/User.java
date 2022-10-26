@@ -1,15 +1,26 @@
 package com.workshop.carautionsystem.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-@Table(name = "user")
+@Table(name = "user", uniqueConstraints = {
+        @UniqueConstraint(columnNames= {
+                "username"
+        }),
+        @UniqueConstraint(columnNames= {
+                "email"
+        }),
+})
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name = "username")
+    @Column(name = "Username")
     private String userName;
     @Column(name="Password")
     private String password;
@@ -21,20 +32,34 @@ public class User {
     private String email;
     @Column(name = "Phone")
     private int phone;
-    @Column(name="roleid")
-    private int roleId;
-
+    @ManyToMany(fetch =  FetchType.EAGER)
+    @JoinTable(name = "user_role",
+    joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    Set<Role> roles = new HashSet<>();
+    @Column(name="Enabled")
+    private int enabled;
     public User() {
+
     }
 
-    public User(String userName, String password, String fName, String lName, String email, int phone, int roleId) {
+    public User(int id, String userName, String password, String fName, String lName, String email, int phone, Set<Role> roles, int enabled) {
+        this.id = id;
         this.userName = userName;
         this.password = password;
         this.fName = fName;
         this.lName = lName;
         this.email = email;
         this.phone = phone;
-        this.roleId = roleId;
+        this.roles = roles;
+        this.enabled = enabled;
+    }
+
+    public int getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(int enabled) {
+        this.enabled = enabled;
     }
 
     public int getId() {
@@ -93,11 +118,12 @@ public class User {
         this.phone = phone;
     }
 
-    public int getRoleId() {
-        return roleId;
+
+    public Set<Role> getRoles() {
+        return roles;
     }
 
-    public void setRoleId(int roleId) {
-        this.roleId = roleId;
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }
