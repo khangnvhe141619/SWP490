@@ -8,5 +8,6 @@ import java.util.Optional;
 
 public interface UserResponsitory extends JpaRepository<User,Integer> {
     public Optional<User> findUserByUserNameAndPassword(String username, String password);
-    public List<User> findUserByUserName(String username);
+
+    Optional<User> findUserByUserName(String name);
 }

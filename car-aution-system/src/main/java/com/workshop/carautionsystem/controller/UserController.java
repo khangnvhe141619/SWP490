@@ -1,11 +1,15 @@
 package com.workshop.carautionsystem.controller;
 
 import com.workshop.carautionsystem.model.ResponseObject;
+import com.workshop.carautionsystem.model.Role;
 import com.workshop.carautionsystem.model.User;
 import com.workshop.carautionsystem.model.UserDTO;
 import com.workshop.carautionsystem.model.VerificationToken;
 import com.workshop.carautionsystem.registration.OnRegistrationCompleteEvent;
 import com.workshop.carautionsystem.repository.UserResponsitory;
+import com.workshop.carautionsystem.security.jwt.JwtProvider;
+import com.workshop.carautionsystem.security.jwt.JwtResponse;
+import com.workshop.carautionsystem.security.userPrinciple.UserPrinciple;
 import com.workshop.carautionsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
@@ -20,9 +24,19 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Calendar;
+
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
+import java.util.Set;
 
 @RestController
 @RequestMapping(path = "/api/v1")
@@ -32,6 +46,7 @@ public class UserController {
     @Autowired
     UserResponsitory userResponsitory;
     @Autowired
+
     private JavaMailSender mailSender;
     @Autowired
     private Environment env;
@@ -41,12 +56,45 @@ public class UserController {
     private ApplicationEventPublisher eventPublisher;
 
     @GetMapping("")
-    public List<User> getAll() {
+    public List<User> getAllUser() {
+        return userService.listUser();
+	}
+    PasswordEncoder passwordEncoder;
+    @Autowired
+    AuthenticationManager authenticationManager;
+    @Autowired
+    JwtProvider jwtProvider;
+    @GetMapping("")
+    public List<User> getAll(){
         return userService.listUser();
     }
+    @PostMapping("")
+    public ResponseEntity<?> login(@RequestBody User user){
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUserName(),user.getPassword()));
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        String token= jwtProvider.createToken(authentication);
+        UserPrinciple userPrinciple = (UserPrinciple) authentication.getPrincipal();
+        return ResponseEntity.ok(new JwtResponse(token, userPrinciple.getUserName(), userPrinciple.getAuthorities()));
+    }
+//    @PostMapping("/register")
+//    public ResponseEntity<ResponseObject> insertUser(@RequestBody User newUser){
+//        Optional<User> findUserName= userResponsitory.findUserByUserName(newUser.getUserName().trim());
+//        if(findUserName==null){
+//            return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).body(new ResponseObject("Already","register faile"));
+//        }
+//        User u =new User();
+//        u.setUserName(newUser.getUserName());
+//        u.setPassword(passwordEncoder.encode(newUser.getPassword()));
+//        u.setEmail(newUser.getEmail());
+//        u.setPhone(newUser.getPhone());
+//
+//        userService.registerNewUser(u);
+//
+//        return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject("ok","add success"));
+//    }
 
     @PostMapping("/login")
-    public ResponseEntity<ResponseObject> login(@RequestBody User user) {
+    public ResponseEntity<ResponseObject> login2(@RequestBody User user) {
         Optional<User> u = userService.login(user.getUserName(), user.getPassword());
         if (u.isPresent()) {
             return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject("Successfully", "Login success"));
@@ -54,22 +102,6 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ResponseObject("Failed", "Login Failed"));
         }
     }
-
-//    @PostMapping("/register")
-//    public ResponseEntity<ResponseObject> insertUser(@RequestBody User newUser) {
-//        List<User> findUserName = userResponsitory.findUserByUserName(newUser.getUserName().trim());
-//        if (findUserName.size() > 0) {
-//            return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).body(new ResponseObject("Already", "register faile"));
-//        }
-//        User u = new User();
-//        u.setUserName(newUser.getUserName());
-//        u.setPassword(newUser.getPassword());
-//        u.setEmail(newUser.getEmail());
-//        u.setPhone(newUser.getPhone());
-//        userService.registerNewUser(u);
-//
-//        return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject("ok", "add success"));
-//    }
 
     // Registration
     @PostMapping("/user/registration")

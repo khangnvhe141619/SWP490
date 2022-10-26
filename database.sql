@@ -13,14 +13,14 @@ CREATE TABLE `User`(
 
 CREATE TABLE `Verification_token`(
 	ID INT UNSIGNED PRIMARY KEY,
-    expiry_date DATETIME NOT NULL,
+    expiry_date DATETIME(6),
     token varchar(255) NOT NULL,
     user_id INT UNSIGNED
 );
 
 CREATE TABLE `Password_reset_token`(
 	ID INT UNSIGNED PRIMARY KEY,
-    expiry_date DATETIME NOT NULL,
+    expiry_date DATETIME(6),
     token varchar(255) NOT NULL,
     user_id INT UNSIGNED
 );
@@ -114,8 +114,8 @@ ALTER TABLE
 INSERT INTO `swp490_carautionsystem`.`user` ( `UserName`, `Password`, `LName`, `FName`, `Email`, `Phone`, `Enabled`) VALUES ( 'admin', '123', 'Khang', 'Nguyen', 'khang@gmail.com', '0123121', '1');
 INSERT INTO `swp490_carautionsystem`.`user` ( `UserName`, `Password`, `LName`, `FName`, `Email`, `Phone`, `Enabled`) VALUES ( 'mra', '123', 'sy', 'nguyen', 'synguyen0002@gmail.com', '01234921', '1');
 
-INSERT INTO `swp490_carautionsystem`.`role` ( `Name`) VALUES ('Admin');
-INSERT INTO `swp490_carautionsystem`.`role` ( `Name`) VALUES ('User');
+INSERT INTO `swp490_carautionsystem`.`role` ( `Name`) VALUES ('ADMIN_ROLE');
+INSERT INTO `swp490_carautionsystem`.`role` ( `Name`) VALUES ('USER_ROLE');
 
 INSERT INTO `swp490_carautionsystem`.`cartypes` (`SeatCapacity`, `Name`) VALUES ( '7', 'SUV');
 INSERT INTO `swp490_carautionsystem`.`cartypes` (`SeatCapacity`, `Name`) VALUES ( '4', 'SEDAN');
