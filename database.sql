@@ -13,14 +13,14 @@ CREATE TABLE `User`(
 
 CREATE TABLE `Verification_token`(
 	ID INT UNSIGNED PRIMARY KEY,
-    expiry_date DATETIME(6) NOT NULL,
+    expiry_date DATETIME(6),
     token varchar(255) NOT NULL,
     user_id INT UNSIGNED
 );
 
 CREATE TABLE `Password_reset_token`(
 	ID INT UNSIGNED PRIMARY KEY,
-    expiry_date DATETIME(6) NOT NULL,
+    expiry_date DATETIME(6),
     token varchar(255) NOT NULL,
     user_id INT UNSIGNED
 );
