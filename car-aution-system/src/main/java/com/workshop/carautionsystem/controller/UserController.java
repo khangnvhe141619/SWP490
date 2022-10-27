@@ -7,9 +7,6 @@ import com.workshop.carautionsystem.model.UserDTO;
 import com.workshop.carautionsystem.model.VerificationToken;
 import com.workshop.carautionsystem.registration.OnRegistrationCompleteEvent;
 import com.workshop.carautionsystem.repository.UserResponsitory;
-import com.workshop.carautionsystem.security.jwt.JwtProvider;
-import com.workshop.carautionsystem.security.jwt.JwtResponse;
-import com.workshop.carautionsystem.security.userPrinciple.UserPrinciple;
 import com.workshop.carautionsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
@@ -46,7 +43,6 @@ public class UserController {
     @Autowired
     UserResponsitory userResponsitory;
     @Autowired
-
     private JavaMailSender mailSender;
     @Autowired
     private Environment env;
@@ -55,27 +51,19 @@ public class UserController {
     @Autowired
     private ApplicationEventPublisher eventPublisher;
 
-    @GetMapping("")
-    public List<User> getAllUser() {
-        return userService.listUser();
-	}
     PasswordEncoder passwordEncoder;
-    @Autowired
-    AuthenticationManager authenticationManager;
-    @Autowired
-    JwtProvider jwtProvider;
     @GetMapping("")
     public List<User> getAll(){
         return userService.listUser();
     }
-    @PostMapping("")
-    public ResponseEntity<?> login(@RequestBody User user){
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUserName(),user.getPassword()));
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        String token= jwtProvider.createToken(authentication);
-        UserPrinciple userPrinciple = (UserPrinciple) authentication.getPrincipal();
-        return ResponseEntity.ok(new JwtResponse(token, userPrinciple.getUserName(), userPrinciple.getAuthorities()));
-    }
+//    @PostMapping("")
+//    public ResponseEntity<?> login(@RequestBody User user){
+//        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUserName(),user.getPassword()));
+//        SecurityContextHolder.getContext().setAuthentication(authentication);
+//        String token= jwtProvider.createToken(authentication);
+//        UserPrinciple userPrinciple = (UserPrinciple) authentication.getPrincipal();
+//        return ResponseEntity.ok(new JwtResponse(token, userPrinciple.getUserName(), userPrinciple.getAuthorities()));
+//    }
 //    @PostMapping("/register")
 //    public ResponseEntity<ResponseObject> insertUser(@RequestBody User newUser){
 //        Optional<User> findUserName= userResponsitory.findUserByUserName(newUser.getUserName().trim());
@@ -145,7 +133,7 @@ public class UserController {
     // ============== NON-API ============
 
     private SimpleMailMessage constructResendVerificationTokenEmail(final String contextPath, final Locale locale, final VerificationToken newToken, final User user) {
-        final String confirmationUrl = contextPath + "/registrationConfirm.html?token=" + newToken.getToken();
+        final String confirmationUrl = contextPath + "api/v1/registrationConfirm.html?token=" + newToken.getToken();
         final String message = messages.getMessage("message.resendToken", null, locale);
         return constructEmail("Resend Registration Token", message + " \r\n" + confirmationUrl, user);
     }
