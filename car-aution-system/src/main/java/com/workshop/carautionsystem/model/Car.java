@@ -8,7 +8,7 @@ public class Car {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Column(name = "Name_car")
     private String nameCar;
@@ -28,23 +28,30 @@ public class Car {
     @Column(name = "Color")
     private String color;
 
-    @Column(name = "Cartype_id")
-    private Integer cartypeID;
+    @OneToOne
+    @JoinColumn(name = "Cartype_id",referencedColumnName = "id")
+    private CarTypes cartypeID;
 
-    @Column(name = "Category_id")
-    private Integer categoryID;
+    @OneToOne
+    @JoinColumn(name = "Category_id",referencedColumnName = "id")
+    private Category categoryID;
 
-    @Column(name = "Session_id")
-    private Integer sessionID;
+    @OneToOne
+    @JoinColumn(name = "Session_id", referencedColumnName = "id")
+    private Session sessionID;
 
-    @Column(name = "Seller_id")
-    private Integer sellerID;
+    @OneToOne
+    @JoinColumn(name = "Seller_id", referencedColumnName = "id")
+    private User sellerID;
+
+    @Column(name ="Description")
+    private String description;
 
     public Car() {
     }
 
     public Car(String nameCar, String picture, Double price, String model, Integer yearOfMake,
-               String color, Integer cartypeID, Integer categoryID, Integer sessionID, Integer sellerID) {
+               String color, CarTypes cartypeID, Category categoryID, Session sessionID, User sellerID,String description) {
         this.nameCar = nameCar;
         this.picture = picture;
         this.price = price;
@@ -55,13 +62,14 @@ public class Car {
         this.categoryID = categoryID;
         this.sessionID = sessionID;
         this.sellerID = sellerID;
+        this.description = description;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -97,14 +105,6 @@ public class Car {
         this.model = model;
     }
 
-    public Integer getYearOfMake() {
-        return yearMake;
-    }
-
-    public void setYearOfMake(Integer yearOfMake) {
-        this.yearMake = yearOfMake;
-    }
-
     public String getColor() {
         return color;
     }
@@ -113,36 +113,52 @@ public class Car {
         this.color = color;
     }
 
-    public Integer getCartypeID() {
+    public CarTypes getCartypeID() {
         return cartypeID;
     }
 
-    public void setCartypeID(Integer cartypeID) {
+    public void setCartypeID(CarTypes cartypeID) {
         this.cartypeID = cartypeID;
     }
 
-    public Integer getCategoryID() {
+    public Category getCategoryID() {
         return categoryID;
     }
 
-    public void setCategoryID(Integer categoryID) {
+    public void setCategoryID(Category categoryID) {
         this.categoryID = categoryID;
     }
 
-    public Integer getSessionID() {
+    public Session getSessionID() {
         return sessionID;
     }
 
-    public void setSessionID(Integer sessionID) {
+    public void setSessionID(Session sessionID) {
         this.sessionID = sessionID;
     }
 
-    public Integer getSellerID() {
+    public User getSellerID() {
         return sellerID;
     }
 
-    public void setSellerID(Integer sellerID) {
+    public void setSellerID(User sellerID) {
         this.sellerID = sellerID;
+    }
+
+    public Integer getYearMake() {
+        return yearMake;
+    }
+
+    public void setYearMake(Integer yearMake) {
+        this.yearMake = yearMake;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override
@@ -159,6 +175,7 @@ public class Car {
                 ", categoryID=" + categoryID +
                 ", sessionID=" + sessionID +
                 ", sellerID=" + sellerID +
+                ", description=" + description +
                 '}';
     }
 }

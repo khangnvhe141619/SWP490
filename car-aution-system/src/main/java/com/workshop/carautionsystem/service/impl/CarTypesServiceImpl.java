@@ -2,7 +2,7 @@ package com.workshop.carautionsystem.service.impl;
 
 
 import com.workshop.carautionsystem.model.CarTypes;
-import com.workshop.carautionsystem.responsitory.CarTypesResponsitory;
+import com.workshop.carautionsystem.repository.CarTypesRepository;
 import com.workshop.carautionsystem.service.CarTypesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +12,7 @@ import java.util.List;
 @Service
 public class CarTypesServiceImpl implements CarTypesService {
     @Autowired
-    private CarTypesResponsitory repo;
+    private CarTypesRepository repo;
 
     @Override
     public List<CarTypes> listAllCarTypes() {

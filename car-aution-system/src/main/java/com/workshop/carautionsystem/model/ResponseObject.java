@@ -1,8 +1,12 @@
 package com.workshop.carautionsystem.model;
 
+import java.util.Optional;
+
 public class ResponseObject {
     private String status;
     private String message;
+
+    private Object data;
 
     public ResponseObject() {
 
@@ -11,7 +15,12 @@ public class ResponseObject {
     public ResponseObject(String status, String message) {
         this.status = status;
         this.message = message;
+    }
 
+    public ResponseObject(String status, String message, Object data) {
+        this.status = status;
+        this.message = message;
+        this.data = data;
     }
 
     public String getStatus() {
@@ -30,4 +39,11 @@ public class ResponseObject {
         this.message = message;
     }
 
+    public Object getData() {
+        return data;
+    }
+
+    public void setData(Object data) {
+        this.data = data;
+    }
 }
