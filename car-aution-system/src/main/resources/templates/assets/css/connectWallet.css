@@ -1,0 +1,44 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.content{
+    color: black;
+}
+
+.logo img{
+    margin-top: 150px;
+    height: 80px;
+}
+
+.contant a{
+    padding: 13px 40px;
+    background-color: royalblue;
+    border-radius: 20px;
+    border: none;
+    color: #fff;
+}
+
+.contant a {
+    color: #fff;
+}
+
+.contant img {
+    height: 40px;
+    margin-right: 20px;
+}
+
+h1 {
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.contant a:hover{
+    background-color: rgb(160, 0, 253);
+    transition: 0.5s all e;
+}
+
+.line {
+    margin: 20px;
+}

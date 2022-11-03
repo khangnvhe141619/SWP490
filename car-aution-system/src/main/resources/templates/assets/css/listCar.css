@@ -1,0 +1,13 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.content {
+    margin-top: 100px;
+}
+
+.head h2{
+    font-weight: 600;
+    font-size: 40px;
+}

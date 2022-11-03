@@ -1,0 +1,137 @@
+body{
+    background-image: url("assets/img/about-bg1.png");
+}
+
+.mt-200 {
+    margin-top: 150px;
+}
+
+a:hover,
+a:focus {
+    color: #6ca5f6;
+}
+
+h4{
+    margin-top: 20px;
+}
+
+.box{
+    max-width: 400px;
+    width: 100%;
+  
+  }
+  .box .search-box{
+    position: relative;
+    height: 30px;
+    max-width: 50px;
+    margin: auto;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 25px;
+    transition: all 0.3s ease;
+  }
+  #check:checked ~ .search-box{
+    max-width: 380px;
+  }
+  .search-box input{
+   position: absolute;
+   height: 100%;
+   width: 100%;
+   border-radius: 25px;
+   background: #fff;
+   outline: none;
+   border: none;
+   padding-left: 20px;
+   font-size: 15px;
+  }
+  .search-box .icon{
+    position: absolute;
+    right: -2px;
+    top: 0;
+    width: 50px;
+    background: #FFF;
+    height: 100%;
+    text-align: center;
+    line-height: 30px;
+    color: #fd0202;
+    font-size: 18px;
+    border-radius: 25px;
+  }
+  #check:checked ~ .search-box .icon{
+    background: #37f647aa;
+    color: #FFF;
+    width: 60px;
+    border-radius: 0 25px 25px 0;
+  }
+  #check{
+    display: none;
+  }
+  
+
+h4{
+    border-bottom: 1px solid black;
+}
+
+.right-content a{
+    border-bottom: 1px solid rgb(183, 179, 179);
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+.pe-auto{
+    color: rgb(91, 89, 89);
+    font-weight: 600;
+}
+
+.nameNews p{
+    font-size: 15px;
+}
+.nameNews p a{
+    font-size: 14px;
+    color: rgb(201, 174, 174);
+}
+.nameNews p a:hover{
+    font-size: 15px;
+    color: rgb(255, 0, 0);
+}
+
+.paging ul{
+    margin-left: 40%;
+    width: 24%;
+    display: flex;
+    flex-wrap: wrap;
+    background: #fff;
+    padding: 8px;
+    border-radius: 50px;
+    box-shadow: 0px 10px 15px rgba(0,0,0,0.1);
+  }
+  .paging ul li{
+    color: #5f92eb;
+    list-style: none;
+    line-height: 30px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.3s ease;
+  }
+  .paging ul li.numb{
+    list-style: none;
+    height: 30px;
+    width: 30px;
+    margin: 0 3px;
+    line-height: 30px;
+    border-radius: 50%;
+  }
+
+  .paging ul li.btn{
+    padding: 0 20px;
+    border-radius: 50px;
+  }
+  .paging li.active,
+  .paging ul li.numb:hover,
+  .paging ul li:first-child:hover,
+  .paging ul li:last-child:hover{
+    color: #fff;
+    background: #43a0f2;
+  }

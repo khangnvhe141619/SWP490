@@ -37,6 +37,15 @@ public class User {
         this.roleId = roleId;
     }
 
+    public User(String userName, String password, String fName, String lName, String email, int phone) {
+        this.userName = userName;
+        this.password = password;
+        this.fName = fName;
+        this.lName = lName;
+        this.email = email;
+        this.phone = phone;
+    }
+
     public int getId() {
         return id;
     }
@@ -99,5 +108,19 @@ public class User {
 
     public void setRoleId(int roleId) {
         this.roleId = roleId;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", fName='" + fName + '\'' +
+                ", lName='" + lName + '\'' +
+                ", email='" + email + '\'' +
+                ", phone=" + phone +
+                ", roleId=" + roleId +
+                '}';
     }
 }

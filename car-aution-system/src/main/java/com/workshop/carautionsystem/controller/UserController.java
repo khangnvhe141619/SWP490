@@ -20,9 +20,9 @@ public class UserController {
     @Autowired
     UserResponsitory userResponsitory;
     @GetMapping("")
-    public List<User> getAll(){
-        return service.listUser();
-    }
+//    public List<User> getAll(){
+////        return userResponsitory.listAll();
+//    }
     @PostMapping("")
     public ResponseEntity<ResponseObject> login(@RequestBody User user){
         Optional<User> u=  service.login(user.getUserName(),user.getPassword());
