@@ -1,0 +1,15 @@
+.winning-bids{
+    height: 200px;
+    background-color: rgba(83, 189, 250, 0.39);
+    border-radius: 20px;
+    border: 5px solid #fff;
+}
+
+.winning-bids img {
+    width: 60%;
+}
+
+.winning-bids i {
+    margin-top: 10px;
+    padding-left: 40px;
+}

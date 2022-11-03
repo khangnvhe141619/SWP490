@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html>
+<title>W3.CSS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link href="assets/img/favicon.png" rel="icon">
+<link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700"
+    rel="stylesheet">
+<link href="assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+<link href="assets/vendor/aos/aos.css" rel="stylesheet">
+<link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+<link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+<link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+<link href="assets/css/style.css" rel="stylesheet">
+<script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+<link href="assets/css/auctionRoom.css" rel="stylesheet">
+
+
+<body>
+    <header id="header" class="fixed-top d-flex align-items-center header-transparent">
+        <div class="container-fluid">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-xl-11 d-flex align-items-center justify-content-between">
+                    <h1 class="logo"><a href="home.html">CAB Auction</a></h1>
+                    <nav id="navbar" class="navbar">
+                        <ul>
+                            <li><a class="nav-link scrollto active" href="Home.html">Home</a></li>
+                            <li><a class="nav-link scrollto" href="home.html">Brand</a></li>
+                            <li><a class="nav-link scrollto " href="home.html">Auction Room</a></li>
+                            <li><a class="nav-link scrollto" href="blog.html">News</a></li>
+                            <li><a class="nav-link scrollto" href="guideline.html">Guideline</a></li>
+                            <li><a class="nav-link scrollto " href="home.html">About Us</a></li>
+                        </ul>
+                        <a href="connectWallet.html" style="background-color: rgb(66, 180, 66); padding-right: 30px;"
+                            class="connectwallet">Connect wallet</a>
+                        <a href="PeronalProfile.html"><i class="bi bi-person-circle" style="font-size: 30px;"></i></a>
+                    </nav>
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+    <div class="content" style="background: url('assets/img/about-bg1.png');">
+        <div class="w3-content" style="padding-top: 3%;">
+            <div class="slideShow">
+                <img class="mySlides" src="assets/img/car/03.png" style="display:none">
+                <img class="mySlides" src="assets/img/car/04.png">
+                <img class="mySlides" src="assets/img/car/03.png" style="display:none">
+            </div>
+            <div class="w3-row-padding w3-section">
+                <div class="w3-col s2">
+                    <img class="demo w3-opacity w3-hover-opacity-off " src="assets/img/car/03.png"
+                        style="width:100%;cursor:pointer; height: 100px;" onclick="currentDiv(1)">
+                </div>
+                <div class="w3-col s2">
+                    <img class="demo w3-opacity w3-hover-opacity-off" src="assets/img/car/04.png"
+                        style="width:100%;cursor:pointer; height: 100px;" onclick="currentDiv(2)">
+                </div>
+                <div class="w3-col s2">
+                    <img class="demo w3-opacity w3-hover-opacity-off" src="assets/img/car/03.png"
+                        style="width:100%;cursor:pointer; height: 100px;" onclick="currentDiv(3)">
+                </div>
+                <div class="w3-col s2">
+                    <img class="demo w3-opacity w3-hover-opacity-off" src="assets/img/car/04.png"
+                        style="width:100%;cursor:pointer; height: 100px;" onclick="currentDiv(2)">
+                </div>
+                <div class="w3-col s2">
+                    <img class="demo w3-opacity w3-hover-opacity-off" src="assets/img/car/03.png"
+                        style="width:100%;cursor:pointer; height: 100px;" onclick="currentDiv(3)">
+                </div>
+                <div class="w3-col s2">
+                    <img class="demo w3-opacity w3-hover-opacity-off" src="assets/img/car/04.png"
+                        style="width:100%;cursor:pointer; height: 100px;" onclick="currentDiv(2)">
+                </div>
+            </div>
+        </div>
+        <div class="container mt-200">
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-7 border-right">
+                    <div class="p-3 profile" id="person-profile">
+                        <div class="d-flex justify-content-between mb-3">
+                            <h1>The Breeze Zodiac IX</h1>
+                        </div>
+                        <div class="row mt-3 room-info pt-3 rounded ">
+                            <div class="col-md-2 winning-bids"></div>
+                            <div class="col-md-4 winning-bids">
+                                <h3 class="mb-5">Current Price</h3>
+                                <h5>From To</h5>
+                                <h5>Your Price</h5>
+                            </div>
+                            <div class="col-md-4 winning-bids">
+                                <h3 class="text-success mb-5">***</h3>
+                                <h5>700 CAB - 1000 CAB</h5>
+                                <div class="yourPrice" style="color: crimson; "></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-3 bg-white border-bottom border-top">
+                        <div class="row mt-3">
+                            <div class="col-md-2 active-bids">
+                                <img src="assets/img/logo-bid.png">
+                            </div>
+                            <div class="col-md-7 align-self-center">
+                                <span class="error" id="error" style="color: red; font-size: 12px;"></span>
+                                <input id="inputPrie" type="text" placeholder="Enter you bid amount" class="w-100 rounded-pill p-3" >
+                            </div>
+                            <div class="col-md-3 align-self-center">
+                                <button id="btnBid" class="btn rounded-pill Larger shadow" type="button" onclick="yourPrice()"
+                                    style="background-color: #04af04; color: #fff">Submit A Bid</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 border-right rounded h-25" style="background-color: #f5f5f5;">
+                    <div class="d-flex flex-column align-items-center text-center m-3 my-5 border-bottom pb-3">
+                        <div id="clock">
+                            <h5>This Auction Ends in:</h5>
+                            <div id="time">
+                                <div>
+                                    <span id="hours">00</span><span>Hours</span>
+                                </div>
+                                <div>
+                                    <span id="minutes">00</span><span>Minutes</span>
+                                </div>
+                                <div>
+                                    <span id="seconds">00</span><span>Seconds</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-4"><img src="assets/img/icon1.png"></div>
+                        <div class="col-md-6 border-right">
+                            <div>
+                                <span class="font-weight-bold h3 text-black">61</span>
+                            </div>
+                            <div>
+                                <span>Active Bidders</span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- <div class="row mb-3">
+                        <div class="col-md-4"><img src="assets/img/icon2.png"></div>
+                        <div class="col-md-6 border-right">
+                            <div>
+                                <span class="font-weight-bold h3 text-black">209</span>
+                            </div>
+                            <div>
+                                <span>Watching</span>
+                            </div>
+                        </div>
+
+                    </div> -->
+                    <div class="row mb-3">
+                        <div class="col-md-4"><img src="assets/img/icon3.png"></div>
+                        <div class="col-md-6 border-right">
+                            <div>
+                                <span class="font-weight-bold h3 text-black">74</span>
+                            </div>
+                            <div>
+                                <span>Total Bids</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div style="margin-left: 200px; margin-right: 200px; margin-top: 20px;" class="tabbar-room">
+                <button class="tablink" onclick="openPage('Home', this, '#04befe')" id="defaultOpen"><img
+                        src="assets/img/description.png">Description</button>
+                <button class="tablink" onclick="openPage('News', this, '#04befe')"><img
+                        src="assets/img/delivery.png">Specifications</button>
+                <button class="tablink" onclick="openPage('Contact', this, '#04befe')"><img
+                        src="assets/img/guide.png">Guideline</button>
+                <button class="tablink" onclick="openPage('About', this, '#04befe')"><img
+                        src="assets/img/boxchat.png">Box
+                    chat</button>
+            </div>
+            <div>
+                <div id="Home" class="tabcontent" style="margin-left: 200px; margin-right: 200px;">
+                    <h2>2012 Ford Escape Hybrid (Brooklyn, NY 11214)</h2>
+                    <table class="table table-striped mt-4">
+                        <tr>
+                            <td class="h5">Condition</td>
+                            <td style="border-right: 1px solid #afafaf;">New</td>
+                            <td class="h5">Mileage</td>
+                            <td>15,000 miles</td>
+                        </tr>
+                        <tr>
+                            <td class="h5">Year</td>
+                            <td style="border-right: 1px solid #afafaf;">09-2017</td>
+                            <td class="h5">Engine</td>
+                            <td>I-4 1,5 l</td>
+                        </tr>
+                        <tr>
+                            <td class="h5">Fuel</td>
+                            <td style="border-right: 1px solid #afafaf;">Regular</td>
+                            <td class="h5">Doors</td>
+                            <td>5</td>
+                        </tr>
+                        <tr>
+                            <td class="h5">Transmission</td>
+                            <td style="border-right: 1px solid #afafaf;">Automatic</td>
+                            <td class="h5">Color</td>
+                            <td>Blue</td>
+                        </tr>
+                    </table>
+                    <h3>NYC Fleet / DCAS units may be located at either of two locations:</h3>
+                    <p>Brooklyn, NY (1908 Shore Parkway)</p>
+                    <p>Medford, NY (66 Peconic Ave)</p>
+
+                    <h3>This unit is located at:</h3>
+                    <p>Kenben Industries Ltd.</p>
+                    <p>1908 Shore Parkway</p>
+                    <p>Brooklyn, NY 11214</p>
+
+                    <h3>Acceptance of condition - buyer inspection/preview</h3>
+                    <p>Vehicles and equipment often display significant wear and tear. Assets are sold AS IS with no
+                        warranty, express or implied, and we highly recommend previewing them before bidding. The
+                        preview
+                        period is the only opportunity to inspect an asset to verify condition and suitability. No
+                        refunds,
+                        adjustments or returns will be entertained.</p>
+                    <p>Vehicle preview inspections of the vehicle can be done at the below location on Monday and
+                        Tuesday
+                        from 10am - 2pm. See Preview Rules Here.</p>
+                    <p>BUYER is responsible for all storage fees at time of pick-up. See above under IMPORTANT PICK-UP
+                        TIMES
+                        for specific requirements for this asset, but generally assets must be picked up within 2
+                        business
+                        days of payment otherwise additional storage fees will be applied.</p>
+                    <p>Kenben Industries Ltd.
+                        1908 Shore Parkway
+                        Brooklyn, NY 11214</p>
+                    <h3>Acceptance of condition - buyer inspection/preview</h3>
+                    <p>Vehicles and equipment often display significant wear and tear. Assets are sold AS IS with no
+                        warranty, express or implied, and we highly recommend previewing them before bidding. The
+                        preview
+                        period is the only opportunity to inspect an asset to verify condition and suitability. No
+                        refunds,
+                        adjustments or returns will be entertained.</p>
+                    <p>Vehicle preview inspections of the vehicle can be done at the below location on Monday and
+                        Tuesday
+                        from 10am - 2pm. See Preview Rules Here.</p>
+                    <p>BUYER is responsible for all storage fees at time of pick-up. See above under IMPORTANT PICK-UP
+                        TIMES
+                        for specific requirements for this asset, but generally assets must be picked up within 2
+                        business
+                        days of payment otherwise additional storage fees will be applied.</p>
+                    <p>Kenben Industries Ltd.
+                        1908 Shore Parkway
+                        Brooklyn, NY 11214</p>
+                    <h3>Acceptance of condition - buyer inspection/preview</h3>
+                    <p>Vehicles and equipment often display significant wear and tear. Assets are sold AS IS with no
+                        warranty, express or implied, and we highly recommend previewing them before bidding. The
+                        preview
+                        period is the only opportunity to inspect an asset to verify condition and suitability. No
+                        refunds,
+                        adjustments or returns will be entertained.</p>
+                    <p>Vehicle preview inspections of the vehicle can be done at the below location on Monday and
+                        Tuesday
+                        from 10am - 2pm. See Preview Rules Here.</p>
+                    <p>BUYER is responsible for all storage fees at time of pick-up. See above under IMPORTANT PICK-UP
+                        TIMES
+                        for specific requirements for this asset, but generally assets must be picked up within 2
+                        business
+                        days of payment otherwise additional storage fees will be applied.</p>
+                    <p>Kenben Industries Ltd.
+                        1908 Shore Parkway
+                        Brooklyn, NY 11214</p>
+                    <h3>Acceptance of condition - buyer inspection/preview</h3>
+                    <p>Vehicles and equipment often display significant wear and tear. Assets are sold AS IS with no
+                        warranty, express or implied, and we highly recommend previewing them before bidding. The
+                        preview
+                        period is the only opportunity to inspect an asset to verify condition and suitability. No
+                        refunds,
+                        adjustments or returns will be entertained.</p>
+                    <p>Vehicle preview inspections of the vehicle can be done at the below location on Monday and
+                        Tuesday
+                        from 10am - 2pm. See Preview Rules Here.</p>
+                    <p>BUYER is responsible for all storage fees at time of pick-up. See above under IMPORTANT PICK-UP
+                        TIMES
+                        for specific requirements for this asset, but generally assets must be picked up within 2
+                        business
+                        days of payment otherwise additional storage fees will be applied.</p>
+                    <p>Kenben Industries Ltd.
+                        1908 Shore Parkway
+                        Brooklyn, NY 11214</p>
+                    <h3>Acceptance of condition - buyer inspection/preview</h3>
+                    <p>Vehicles and equipment often display significant wear and tear. Assets are sold AS IS with no
+                        warranty, express or implied, and we highly recommend previewing them before bidding. The
+                        preview
+                        period is the only opportunity to inspect an asset to verify condition and suitability. No
+                        refunds,
+                        adjustments or returns will be entertained.</p>
+                    <p>Vehicle preview inspections of the vehicle can be done at the below location on Monday and
+                        Tuesday
+                        from 10am - 2pm. See Preview Rules Here.</p>
+                    <p>BUYER is responsible for all storage fees at time of pick-up. See above under IMPORTANT PICK-UP
+                        TIMES
+                        for specific requirements for this asset, but generally assets must be picked up within 2
+                        business
+                        days of payment otherwise additional storage fees will be applied.</p>
+                    <p>Kenben Industries Ltd.
+                        1908 Shore Parkway
+                        Brooklyn, NY 11214</p>
+                    <h3>Acceptance of condition - buyer inspection/preview</h3>
+                    <p>Vehicles and equipment often display significant wear and tear. Assets are sold AS IS with no
+                        warranty, express or implied, and we highly recommend previewing them before bidding. The
+                        preview
+                        period is the only opportunity to inspect an asset to verify condition and suitability. No
+                        refunds,
+                        adjustments or returns will be entertained.</p>
+                    <p>Vehicle preview inspections of the vehicle can be done at the below location on Monday and
+                        Tuesday
+                        from 10am - 2pm. See Preview Rules Here.</p>
+                    <p>BUYER is responsible for all storage fees at time of pick-up. See above under IMPORTANT PICK-UP
+                        TIMES
+                        for specific requirements for this asset, but generally assets must be picked up within 2
+                        business
+                        days of payment otherwise additional storage fees will be applied.</p>
+                    <p>Kenben Industries Ltd.
+                        1908 Shore Parkway
+                        Brooklyn, NY 11214</p>
+                    <h3>Acceptance of condition - buyer inspection/preview</h3>
+                    <p>Vehicles and equipment often display significant wear and tear. Assets are sold AS IS with no
+                        warranty, express or implied, and we highly recommend previewing them before bidding. The
+                        preview
+                        period is the only opportunity to inspect an asset to verify condition and suitability. No
+                        refunds,
+                        adjustments or returns will be entertained.</p>
+                    <p>Vehicle preview inspections of the vehicle can be done at the below location on Monday and
+                        Tuesday
+                        from 10am - 2pm. See Preview Rules Here.</p>
+                    <p>BUYER is responsible for all storage fees at time of pick-up. See above under IMPORTANT PICK-UP
+                        TIMES
+                        for specific requirements for this asset, but generally assets must be picked up within 2
+                        business
+                        days of payment otherwise additional storage fees will be applied.</p>
+                    <p>Kenben Industries Ltd.
+                        1908 Shore Parkway
+                        Brooklyn, NY 11214</p>
+                    <h3>Acceptance of condition - buyer inspection/preview</h3>
+                    <p>Vehicles and equipment often display significant wear and tear. Assets are sold AS IS with no
+                        warranty, express or implied, and we highly recommend previewing them before bidding. The
+                        preview
+                        period is the only opportunity to inspect an asset to verify condition and suitability. No
+                        refunds,
+                        adjustments or returns will be entertained.</p>
+                    <p>Vehicle preview inspections of the vehicle can be done at the below location on Monday and
+                        Tuesday
+                        from 10am - 2pm. See Preview Rules Here.</p>
+                    <p>BUYER is responsible for all storage fees at time of pick-up. See above under IMPORTANT PICK-UP
+                        TIMES
+                        for specific requirements for this asset, but generally assets must be picked up within 2
+                        business
+                        days of payment otherwise additional storage fees will be applied.</p>
+                    <p>Kenben Industries Ltd.
+                        1908 Shore Parkway
+                        Brooklyn, NY 11214</p>
+                </div>
+
+                <div id="News" class="tabcontent" class="tabcontent" style="margin-left: 200px; margin-right: 200px;">
+                    <h3>Engine</h3>
+                    <table class="table table-striped">
+                        <tbody>
+                            <tr>
+                                <td>Engine Order Code</td>
+                                <td>NA</td>
+                            </tr>
+                            <tr>
+                                <td>Engine Type and Required Fuel</td>
+                                <td>Intercooled Turbo Premium Unleaded I-4</td>
+                            </tr>
+                            <tr>
+                                <td>Displacement (liters/cubic inches)</td>
+                                <td>itter</td>
+                            </tr>
+                            <tr>
+                                <td>Fuel System</td>
+                                <td>2.0 L/121</td>
+                            </tr>
+                            <tr>
+                                <td>Maximum Horsepower @ RPM</td>
+                                <td>itter</td>
+                            </tr>
+                            <tr>
+                                <td>Maximum Torque @ RPM</td>
+                                <td>273 @ 1800</td>
+                            </tr>
+                            <tr>
+                                <td>Cooling System Capacity (quarts)</td>
+                                <td>273 @ 1800</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <h3>Weight Infomation</h3>
+                    <table class="table table-striped">
+                        <tbody>
+                            <tr>
+                                <td>Engine Order Code</td>
+                                <td>NA</td>
+                            </tr>
+                            <tr>
+                                <td>Engine Type and Required Fuel</td>
+                                <td>Intercooled Turbo Premium Unleaded I-4</td>
+                            </tr>
+                            <tr>
+                                <td>Displacement (liters/cubic inches)</td>
+                                <td>itter</td>
+                            </tr>
+                            <tr>
+                                <td>Fuel System</td>
+                                <td>2.0 L/121</td>
+                            </tr>
+                            <tr>
+                                <td>Maximum Horsepower @ RPM</td>
+                                <td>itter</td>
+                            </tr>
+                            <tr>
+                                <td>Maximum Torque @ RPM</td>
+                                <td>273 @ 1800</td>
+                            </tr>
+                            <tr>
+                                <td>Cooling System Capacity (quarts)</td>
+                                <td>273 @ 1800</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <h3>Eterior Dimesions</h3>
+                    <table class="table table-striped">
+                        <tbody>
+                            <tr>
+                                <td>Engine Order Code</td>
+                                <td>NA</td>
+                            </tr>
+                            <tr>
+                                <td>Engine Type and Required Fuel</td>
+                                <td>Intercooled Turbo Premium Unleaded I-4</td>
+                            </tr>
+                            <tr>
+                                <td>Displacement (liters/cubic inches)</td>
+                                <td>itter</td>
+                            </tr>
+                            <tr>
+                                <td>Fuel System</td>
+                                <td>2.0 L/121</td>
+                            </tr>
+                            <tr>
+                                <td>Maximum Horsepower @ RPM</td>
+                                <td>itter</td>
+                            </tr>
+                            <tr>
+                                <td>Maximum Torque @ RPM</td>
+                                <td>273 @ 1800</td>
+                            </tr>
+                            <tr>
+                                <td>Cooling System Capacity (quarts)</td>
+                                <td>273 @ 1800</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <h3>Interior Dimensions</h3>
+                    <table class="table table-striped">
+                        <tbody>
+                            <tr>
+                                <td>Engine Order Code</td>
+                                <td>NA</td>
+                            </tr>
+                            <tr>
+                                <td>Engine Type and Required Fuel</td>
+                                <td>Intercooled Turbo Premium Unleaded I-4</td>
+                            </tr>
+                            <tr>
+                                <td>Displacement (liters/cubic inches)</td>
+                                <td>itter</td>
+                            </tr>
+                            <tr>
+                                <td>Fuel System</td>
+                                <td>2.0 L/121</td>
+                            </tr>
+                            <tr>
+                                <td>Maximum Horsepower @ RPM</td>
+                                <td>itter</td>
+                            </tr>
+                            <tr>
+                                <td>Maximum Torque @ RPM</td>
+                                <td>273 @ 1800</td>
+                            </tr>
+                            <tr>
+                                <td>Cooling System Capacity (quarts)</td>
+                                <td>273 @ 1800</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="Contact" class="tabcontent" class="tabcontent"
+                    style="margin-left: 200px; margin-right: 200px;">
+                    <h3>Before You Bid</h3>
+                    <p>Keep in mind that you may start placing bids only once your account is activated (e. you have
+                        submitted the documents required to complete registration and received an email from us
+                        confirming
+                        that your account is now active). If you'd like to place bids higher than $1,200, also remember
+                        to
+                        add a deposit or upgrade to Premier beforehand..</p>
+                    <h3>Joining Copart Auctions</h3>
+                    <p>Once you've found the vehicles on which you'd like to bid, you can submit a preliminary bid or
+                        join a
+                        live online auction!</p>
+                    <p>You don't need to be logged in to view an auction, but you will need a Basic or Premier
+                        Membership to
+                        place a bid. Sign in or register here. Once you're signed in, click on the Auctions tab to see a
+                        list of Today's Auctions, where you can jump directly into ongoing live online auctions, and the
+                        Auctions Calendar to view future auctions. There are a handful of other entry points for
+                        auctions as
+                        well, includin the Copart homepage. Member Dashboard and individual Location pages</p>
+                    <p>Ultimately, you'll be directed to the Auctions Dashboard, where Basic and Premier Members can add
+                        as
+                        many auctions as are running at that particular time (non-Members and Registered Guests may only
+                        view one auction at a time). The Auctions Dashboard is where you car minimize or maximize
+                        auction
+                        windows and even place bids. Reorganize your Auctions Dashboard using the customization
+                        drag-and-drop feature, and experience Copart auctions the way you prefer. Copart's Auction
+                        Dashboard
+                        is powered by our revolutionary VB3 platform</p>
+                </div>
+
+                <div id="About" class="tabcontent" style="background-image: url(assets/img/bg-chat.jpg);">
+                    <div class="container mt-4">
+                        <div class="card mx-auto" style="max-width:800px" style="background-color: #4481eb;">
+                            <div class="card-header bg-transparent">
+                                <div class="navbar navbar-expand p-0">
+                                    <ul class="navbar-nav me-auto align-items-center">
+                                        <li class="nav-item">
+                                            <a href="#!" class="nav-link">Box chat</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-body p-4" style="height: 500px; overflow: auto; width: 100%;">
+
+                                <div class="d-flex align-items-baseline mb-4">
+                                    <div class="position-relative avatar">
+                                        <img src="https://nextbootstrap.netlify.app/assets/images/profiles/1.jpg"
+                                            class="img-fluid rounded-circle" alt="">
+                                        <span
+                                            class="position-absolute bottom-0 start-100 translate-middle p-1 bg-success border border-light rounded-circle">
+                                            <span class="visually-hidden">New alerts</span>
+                                        </span>
+                                    </div>
+                                    <div class="pe-2">
+                                        <div>
+                                            <div class="card card-text d-inline-block p-2 px-3 m-1">Hi helh, are you
+                                                available to chat?
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex align-items-baseline text-end justify-content-end mb-4">
+                                    <div class="pe-2">
+                                        <div>
+                                            <div class="card card-text d-inline-block p-2 px-3 m-1">Sure</div>
+                                        </div>
+                                        <div>
+                                            <div class="card card-text d-inline-block p-2 px-3 m-1">Let me know when
+                                                you're
+                                                available?
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="position-relative avatar">
+                                        <img src="https://nextbootstrap.netlify.app/assets/images/profiles/2.jpg"
+                                            class="img-fluid rounded-circle" alt="">
+                                        <span
+                                            class="position-absolute bottom-0 start-100 translate-middle p-1 bg-success border border-light rounded-circle">
+                                            <span class="visually-hidden">New alerts</span>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex align-items-baseline mb-4">
+                                    <div class="position-relative avatar">
+                                        <img src="assets/img/sy.jpg" class="img-fluid rounded-circle" alt="">
+                                        <span
+                                            class="position-absolute bottom-0 start-100 translate-middle p-1 bg-success border border-light rounded-circle">
+                                            <span class="visually-hidden">New alerts</span>
+                                        </span>
+                                    </div>
+                                    <div class="pe-2">
+                                        <div>
+                                            <div class="card card-text d-inline-block p-2 px-3 m-1">3:00pm??</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex align-items-baseline text-end justify-content-end mb-4">
+                                    <div class="pe-2">
+                                        <div>
+                                            <div class="card card-text d-inline-block p-2 px-3 m-1">Cool</div>
+                                        </div>
+                                    </div>
+                                    <div class="position-relative avatar">
+                                        <img src="https://nextbootstrap.netlify.app/assets/images/profiles/2.jpg"
+                                            class="img-fluid rounded-circle" alt="">
+                                        <span
+                                            class="position-absolute bottom-0 start-100 translate-middle p-1 bg-success border border-light rounded-circle">
+                                            <span class="visually-hidden">New alerts</span>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex align-items-baseline mb-4">
+                                    <div class="position-relative avatar">
+                                        <img src="assets/img/ava1.jpg" class="img-fluid rounded-circle" alt="">
+                                        <span
+                                            class="position-absolute bottom-0 start-100 translate-middle p-1 bg-success border border-light rounded-circle">
+                                            <span class="visually-hidden">New alerts</span>
+                                        </span>
+                                    </div>
+                                    <div class="pe-2">
+                                        <div>
+                                            <div class="card card-text d-inline-block p-2 px-3 m-1">Hey Bro</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex align-items-baseline mb-4">
+                                    <div class="position-relative avatar">
+                                        <img src="assets/img/ava2.jpg" class="img-fluid rounded-circle" alt="">
+                                        <span
+                                            class="position-absolute bottom-0 start-100 translate-middle p-1 bg-success border border-light rounded-circle">
+                                            <span class="visually-hidden">New alerts</span>
+                                        </span>
+                                    </div>
+                                    <div class="pe-2">
+                                        <div>
+                                            <div class="card card-text d-inline-block p-2 px-3 m-1">What ?</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex align-items-baseline mb-4">
+                                    <div class="position-relative avatar">
+                                        <img src="assets/img/ava3.jpg" class="img-fluid rounded-circle" alt="">
+                                        <span
+                                            class="position-absolute bottom-0 start-100 translate-middle p-1 bg-success border border-light rounded-circle">
+                                            <span class="visually-hidden">New alerts</span>
+                                        </span>
+                                    </div>
+                                    <div class="pe-2">
+                                        <div>
+                                            <div class="card card-text d-inline-block p-2 px-3 m-1">"TẠI SAO TÔI PHẢI CÓ
+                                                10
+                                                CHIẾC FERRARI, 20 CHIẾC ĐỒNG HỒ NẠM KIM CƯƠNG HOẶC VÀI CHIẾC MÁY BAY?
+                                                NHỮNG
+                                                THỨ XA HOA PHÙ PHIẾM ĐÂU CÓ LÀM TÔI VUI VẺ HƠN" - Sống Sao Mới Chuẩn
+                                                -------
+                                                Là một trong những tài năng hiếm có của CLB Liverpool, Sadio Mané hiện
+                                                đang
+                                                sở hữu số dư tài khoản mỗi tháng khoảng 852.000 USD/tháng (tương đương
+                                                19,5
+                                                tỷ VNĐ). Tuy đây chỉ là mức lương thuộc hàng khá ở giải ngoại hạng Anh,
+                                                nhưng cũng là con số nhiều người "mơ cũng không thấy".
+                                                Việc nhận mức lương khủng khiến nhiều người nghĩ rằng, ngôi sao này sẽ
+                                                sống
+                                                trong "nhung lụa", hàng hiệu đắt tiền chắc chắn là thứ không thể thiếu.
+                                                Tuy
+                                                nhiên, tiền đạo này lại rất khác biệt.
+                                                Dân mạng đã liên tục truyền tay nhau về bức hình anh chàng này đi dạo
+                                                phố,
+                                                điểm đặc biệt là chiếc điện thoại Sadio Mané đang cầm trên tay.
+                                                Người hâm mộ nhanh chóng nhận ra và khá bất ngờ khi ngôi sao tiền tỷ của
+                                                Liverpool đang dùng chiếc iPhone đời cũ bị vỡ nát màn hình, và thay vì
+                                                dùng
+                                                chiếc AirPods sang chảnh như người khác, Sadio Mané vẫn còn đeo tai nghe
+                                                cũ
+                                                có dây rợ ngoằn ngoèo.
+                                                Vậy, với 19,5 tỷ mỗi tháng, anh chàng này "để đâu cho hết"? Và đây là
+                                                câu
+                                                trả lời của anh:
+                                                "Tại sao tôi phải có 10 chiếc Ferrari, 20 chiếc đồng hồ nạm kim cương
+                                                hoặc
+                                                vài chiếc máy bay? Những thứ xa hoa phù phiếm đâu có làm tôi vui vẻ hơn.
+                                                Nhiều năm về trước, gia đình tôi luôn trong cảnh thiếu ăn. Tôi từng phải
+                                                làm
+                                                việc ngoài cánh đồng để phụ giúp cha mẹ. Mặc dù không được học hành đầy
+                                                đủ,
+                                                nhưng nhờ bóng đá, giờ đây tôi đã có thể giúp đồng bào của mình.
+                                                Tôi đã xây trường học, sân vận động, mang đến quần áo, giày dép, thức
+                                                ăn.
+                                                Thêm vào đó, tôi cũng chu cấp 70 euro (khoảng 1,8 triệu VND) mỗi tháng
+                                                cho
+                                                những người dân ở những khu vực đói khổ nhất tại Senegal để trang trải
+                                                cuộc
+                                                sống cho gia đình họ" 🥰
+                                                Mới đây nhất, Sadio Mané đã chi ra nửa triệu USD để xây dựng bệnh xá và
+                                                trường học tại Bambali. Đây là làng quê nghèo, nơi ngôi sao Liverpool
+                                                được
+                                                sinh ra và lớn lên.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer bg-white position-absolute w-100 mb-0 m-0 p-1">
+                                <div class="input-group">
+                                    <input type="text" class="form-control border-0" placeholder="Write a message...">
+                                    <button class="btn-send bg-primary text-white rounded-pill" style="width: 13%;">
+                                        <i class="bi bi-send-fill"></i>SEND</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div>
+            <footer id="footer">
+                <div class="footer-top">
+                    <div class="container">
+                        <div class="row">
+
+                            <div class="col-lg-3 col-md-6 footer-info">
+                                <h3>CAB Auction</h3>
+                            </div>
+
+                            <div class="col-lg-3 col-md-6 footer-links">
+                                <h4>Useful Links</h4>
+                                <ul>
+                                    <li><i class="bi bi-chevron-right"></i> <a href="#">Home</a></li>
+                                    <li><i class="bi bi-chevron-right"></i> <a href="#">About us</a></li>
+                                    <li><i class="bi bi-chevron-right"></i> <a href="#">Services</a></li>
+                                    <li><i class="bi bi-chevron-right"></i> <a href="#">Terms of service</a></li>
+                                    <li><i class="bi bi-chevron-right"></i> <a href="#">Privacy policy</a></li>
+                                </ul>
+                            </div>
+
+                            <div class="col-lg-3 col-md-6 footer-contact">
+                                <h4>Contact Us</h4>
+                                <p>
+                                    FPT <br>
+                                    Thach Hoa Thach That<br>
+                                    Ha Noi<br>
+                                    <strong>Phone:</strong> +84 3213212<br>
+                                    <strong>Email:</strong> cabauction@gmail.com<br>
+                                </p>
+
+                                <div class="social-links">
+                                    <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                                    <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                                    <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                                    <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                                    <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+                                </div>
+
+                            </div>
+
+                            <div class="col-lg-3 col-md-6 footer-newsletter">
+                                <h4>Our Newsletter</h4>
+                                <form action="" method="post">
+                                    <input type="email" name="email"><input type="submit" value="Subscribe">
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="copyright">
+                        &copy; Copyright <strong>BizPage</strong>. All Rights Reserved
+                    </div>
+                    <div class="credits">
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+            class="bi bi-arrow-up-short"></i></a>
+    <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+    <script src="assets/vendor/aos/aos.js"></script>
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+    <script src="assets/vendor/php-email-form/validate.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/acutionRoom.js"></script>
+
+</body>
+
+</html>

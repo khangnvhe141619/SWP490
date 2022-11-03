@@ -26,4 +26,9 @@ public class UserServiceImpl implements UserService {
     public User register(User user) {
         return responsitory.save(user);
     }
+
+    @Override
+    public User viewProfile(int id) {
+        return responsitory.findUserById(id);
+    }
 }
