@@ -1,10 +1,8 @@
 package com.workshop.carautionsystem.service;
 
-import com.workshop.carautionsystem.model.Brand;
+import com.workshop.carautionsystem.entity.Brand;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;

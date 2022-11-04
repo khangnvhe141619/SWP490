@@ -1,4 +1,4 @@
-package com.workshop.carautionsystem.model;
+package com.workshop.carautionsystem.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

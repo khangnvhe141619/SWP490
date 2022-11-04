@@ -1,6 +1,6 @@
 package com.workshop.carautionsystem;
 
-import com.workshop.carautionsystem.model.Brand;
+import com.workshop.carautionsystem.entity.Brand;
 import com.workshop.carautionsystem.repository.BrandRepository;
 import lombok.Data;
 import org.assertj.core.api.Assertions;
@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.Rollback;
-import org.springframework.boot.test.context.SpringBootTest;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)

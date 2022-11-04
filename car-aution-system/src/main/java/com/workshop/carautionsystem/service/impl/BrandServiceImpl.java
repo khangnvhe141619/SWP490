@@ -1,6 +1,6 @@
 package com.workshop.carautionsystem.service.impl;
 
-import com.workshop.carautionsystem.model.Brand;
+import com.workshop.carautionsystem.entity.Brand;
 import com.workshop.carautionsystem.repository.BrandRepository;
 import com.workshop.carautionsystem.service.BrandService;
 import org.springframework.beans.factory.annotation.Autowired;
