@@ -1,6 +1,6 @@
 package com.workshop.carautionsystem.registration;
 
-import com.workshop.carautionsystem.model.User;
+import com.workshop.carautionsystem.entity.User;
 import org.springframework.context.ApplicationEvent;
 
 import java.util.Locale;
