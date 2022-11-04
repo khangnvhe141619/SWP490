@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        table.center {
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body>
+<form action="/brand/create" method="post" th:object="${brand}">
+    <table class="center">
+        <h1>List Brand</h1>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Img</th>
+            <th>Action</th>
+        <tr>
+            <td></td>
+            <td><input th:field="*{brandName}" placeholder="input name"></td>
+            <td><input th:field="*{imgPath}" placeholder="input img"></td>
+        </tr>
+        <button class="btn btn-success" type="submit">create</button>
+        <button type="button" onclick="cancelFrom()">Cancel</button>
+
+    </table>
+</form>
+<script type="text/javascript">
+    function cancelFrom() {
+        window.location = "/brand?page=0";
+    }
+</script>
+</body>
+</html>
