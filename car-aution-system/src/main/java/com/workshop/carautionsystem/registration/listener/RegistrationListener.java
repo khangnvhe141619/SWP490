@@ -1,6 +1,6 @@
 //package com.workshop.carautionsystem.registration.listener;
 //
-//import com.workshop.carautionsystem.model.User;
+//import com.workshop.carautionsystem.entity.User;
 //import com.workshop.carautionsystem.registration.OnRegistrationCompleteEvent;
 //import com.workshop.carautionsystem.service.UserService;
 //import org.springframework.beans.factory.annotation.Autowired;
