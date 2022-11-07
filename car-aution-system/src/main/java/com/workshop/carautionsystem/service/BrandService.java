@@ -10,6 +10,7 @@ import java.util.Optional;
 
 
 public interface BrandService {
+
     List<Brand> getAllBrand();
     public void saveBrand(Brand brand);
     public void delete(Long id) throws NotFoundException;

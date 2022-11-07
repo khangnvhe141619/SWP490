@@ -13,8 +13,8 @@ public class CarAutionSystemApplication {
     public static void main(String[] args) {
         SpringApplication.run(CarAutionSystemApplication.class, args);
     }
-    @Bean
-    public RequestContextListener requestContextListener() {
-        return new RequestContextListener();
-    }
+//   // @Bean
+//   // public RequestContextListener requestContextListener() {
+//        return new RequestContextListener();
+//    }
 }
