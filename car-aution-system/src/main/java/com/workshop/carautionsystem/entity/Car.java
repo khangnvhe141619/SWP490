@@ -32,14 +32,14 @@ public class Car {
     private Long downBroundPrice;
 
     @OneToOne
-    @Column(name = "modelid")
+    @JoinColumn(name = "modelid")
     private Model modelId;
 
     @Column(name = "status")
     private String status;
 
     @OneToOne
-    @Column(name = "createby")
+    @JoinColumn(name = "createby")
     private User createBy;
 
     @Column(name = "createat")

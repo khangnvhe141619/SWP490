@@ -18,7 +18,7 @@ public class Model {
     private Integer id;
 
     @OneToOne
-    @Column(name = "brandid")
+    @JoinColumn(name = "brandid")
     private Brand brandId;
 
     @Column(name = "modelName")
