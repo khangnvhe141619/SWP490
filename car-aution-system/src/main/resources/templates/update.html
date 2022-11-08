@@ -17,16 +17,16 @@
     </style>
 </head>
 <body>
-<form action="/brand/create" method="post" th:object="${brand}" enctype="multipart/form-data">
+<form action="/brand/edit" method="post" th:object="${brand}" enctype="multipart/form-data">
     <table class="center">
-        <h1>List Brand</h1>
+        <h1>Update Brand</h1>
         <tr>
-            <th>#</th>
+            <th>id</th>
             <th>Name</th>
             <th>Img</th>
             <th>Action</th>
         <tr>
-            <td></td>
+            <td><input th:field="*{id}" readonly="readonly"></td>
             <td><input th:field="*{brandName}"></td>
             <td><img th:src="*{imgPath}" height="50" width="50"></td>
             <td><input name="upImg" type="file"></td>

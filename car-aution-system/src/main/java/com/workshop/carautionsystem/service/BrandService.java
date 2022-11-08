@@ -15,8 +15,6 @@ public interface BrandService {
     public void saveBrand(Brand brand);
     public void delete(Long id) throws NotFoundException;
     public Brand findById(Long id) throws NotFoundException;
-    public Page<Brand> findAll(Pageable pageable);
-
-    public Page<Brand> findAllById(Pageable pageable);
+    public Page<Brand> findAllOrderById(Pageable pageable);
 
 }
