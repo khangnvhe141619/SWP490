@@ -18,19 +18,20 @@
 <body>
 <table class="center">
     <h1>List Brand</h1>
-        <button><a href="/brand/create">Create</a></button>
+        <button><a th:href="@{/brand/create}">Create</a></button>
+    <tr style="color: green" th:if="${message}" >[[${message}]]</tr>
     <tr>
         <th>#</th>
         <th>Name</th>
         <th>Img</th>
         <th>Action</th>
-    <tr th:each="c :${brands}">
-        <td th:text="${c.id}"></td>
+    <tr th:each="c,loop :${brands}">
+        <td th:text="${loop.count}"></td>
         <td th:text="${c.brandName}"></td>
         <td><img th:src="${c.imgPath}" height="50" width="50"></td>
         <td>
             <a th:href="@{/brand/edit/{id}(id=${c.id})}">edit</a>
-            <a th:href="@{/brand/delete(id=${c.id})}">delete</a>
+            <a th:href="@{/brand/delete/{id}(id=${c.id})}">delete</a>
             <a>view</a>
         </td>
     </tr>

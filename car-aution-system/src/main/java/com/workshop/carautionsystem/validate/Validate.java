@@ -2,6 +2,7 @@ package com.workshop.carautionsystem.validate;
 
 import com.workshop.carautionsystem.entity.Brand;
 import com.workshop.carautionsystem.service.BrandService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -25,9 +26,10 @@ public class Validate implements Validator {
         List<Brand> brands = brandService.getAllBrand();
         for (Brand s:brands) {
             if (brand.getBrandName().equals(s.getBrandName())){
-                errors.rejectValue("name", "", "Name Exist");
+                errors.rejectValue("brandName", "", "Name Exist");
                 return;
             }
         }
     }
+
 }
