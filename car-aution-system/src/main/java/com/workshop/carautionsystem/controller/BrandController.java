@@ -22,7 +22,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 
 @Controller
 public class BrandController {
@@ -47,13 +46,13 @@ public class BrandController {
     }
 
     @GetMapping("/brand/create")
-    public ModelAndView showFormCreate(){
+    public ModelAndView showFormCreate() {
         ModelAndView modelAndView = null;
         try {
             modelAndView = new ModelAndView("test");
-            modelAndView.addObject("brand",new Brand());
+            modelAndView.addObject("brand", new Brand());
             return modelAndView;
-        }catch (Exception e){
+        } catch (Exception e) {
             modelAndView = new ModelAndView("page404");
             return modelAndView;
         }
@@ -62,44 +61,43 @@ public class BrandController {
     @PostMapping("brand/create")
     public String create(@Valid @ModelAttribute(value = "brand") Brand brand,
                          BindingResult bindingResult, @RequestParam MultipartFile upImg,
-                         RedirectAttributes ra) {
+                         RedirectAttributes ra,Model model) {
         validate.validate(brand, bindingResult);
         if (bindingResult.hasFieldErrors()) {
             return "test";
         }
         String nameFile = upImg.getOriginalFilename();
         try {
-            FileCopyUtils.copy(upImg.getBytes(), new File("E:\\DoAn\\SWP490\\car-aution-system\\src\\main\\resources\\templates\\hoang/" + nameFile));
+            FileCopyUtils.copy(upImg.getBytes(), new File("E:\\DoAn\\SWP490\\car-aution-system\\src\\main\\resources\\static\\assets\\hoang/" + nameFile));
             brand.setImgPath("/hoang/" + nameFile);
             brandService.saveBrand(brand);
-
+            ra.addFlashAttribute("message", "The brand has been saved successfully");
+            return "redirect:/brand";
         } catch (IOException e) {
-            brand.setBrandName("/img/p1.png");
-            brandService.saveBrand(brand);
-            e.printStackTrace();
+            model.addAttribute("message", "Must upload a image");
+            return "test";
         }
-        ra.addFlashAttribute("message","The brand has been saved successfully");
-        return "redirect:/brand";
     }
 
+
     @GetMapping("/brand/delete/{id}")
-    public String deleteBrand(@PathVariable (value = "id") Long id,RedirectAttributes ra){
-        try{
+    public String deleteBrand(@PathVariable(value = "id") Long id, RedirectAttributes ra) {
+        try {
             brandService.delete(id);
-        }catch (NotFoundException e){
-            ra.addFlashAttribute("message",e.getMessage());
+        } catch (NotFoundException e) {
+            ra.addFlashAttribute("message", e.getMessage());
         }
         return "redirect:/brand";
     }
 
     @GetMapping("/brand/edit/{id}")
-    public String showFormUpdate(@PathVariable(value = "id") Long id,Model model,RedirectAttributes ra){
+    public String showFormUpdate(@PathVariable(value = "id") Long id, Model model, RedirectAttributes ra) {
         try {
             Brand brand = brandService.findById(id);
             model.addAttribute("brand", brand);
             return "update";
-        }catch (NotFoundException e ){
-            ra.addFlashAttribute("message",e.getMessage());
+        } catch (NotFoundException e) {
+            ra.addFlashAttribute("message", e.getMessage());
             return "redirect:/brand";
         }
     }
@@ -110,7 +108,7 @@ public class BrandController {
                          RedirectAttributes ra) {
         String nameFile = upImg.getOriginalFilename();
         try {
-            FileCopyUtils.copy(upImg.getBytes(), new File("E:\\DoAn\\SWP490\\car-aution-system\\src\\main\\resources\\templates\\hoang/" + nameFile));
+            FileCopyUtils.copy(upImg.getBytes(), new File("E:\\DoAn\\SWP490\\car-aution-system\\src\\main\\resources\\static\\assets\\hoang/" + nameFile));
             brand.setImgPath("/hoang/" + nameFile);
             brandService.saveBrand(brand);
 
@@ -119,7 +117,7 @@ public class BrandController {
             brandService.saveBrand(brand);
             e.printStackTrace();
         }
-        ra.addFlashAttribute("message","The brand has been saved successfully");
+        ra.addFlashAttribute("message", "The brand has been saved successfully");
         return "redirect:/brand";
     }
 
