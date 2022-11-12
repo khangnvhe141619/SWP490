@@ -24,6 +24,7 @@ public class Model {
     @Column(name = "modelName")
     private String modelName;
 
-    @Column(name = "modelspecificationid")
-    private String modelSpecificationId;
+    @OneToOne
+    @JoinColumn(name = "modelspecificationid")
+    private ModelSpecification modelSpecificationId;
 }

@@ -61,7 +61,7 @@ public class BrandController {
     @PostMapping("brand/create")
     public String create(@Valid @ModelAttribute(value = "brand") Brand brand,
                          BindingResult bindingResult, @RequestParam MultipartFile upImg,
-                         RedirectAttributes ra,Model model) {
+                         RedirectAttributes ra, Model model) {
         validate.validate(brand, bindingResult);
         if (bindingResult.hasFieldErrors()) {
             return "test";
@@ -91,31 +91,37 @@ public class BrandController {
     }
 
     @GetMapping("/brand/edit/{id}")
-    public String showFormUpdate(@PathVariable(value = "id") Long id, Model model, RedirectAttributes ra) {
-        try {
-            Brand brand = brandService.findById(id);
+    public String showFormUpdate(@PathVariable(value = "id") Long id, Model model, RedirectAttributes ra) throws NotFoundException {
+        Brand brand = brandService.findById(id);
+        if (brand != null) {
             model.addAttribute("brand", brand);
             return "update";
-        } catch (NotFoundException e) {
-            ra.addFlashAttribute("message", e.getMessage());
-            return "redirect:/brand";
+        } else {
+            throw new NotFoundException("Could not find any with ID");
         }
     }
 
     @PostMapping("brand/edit")
     public String update(@Valid @ModelAttribute(value = "brand") Brand brand,
-                         BindingResult bindingResult, @RequestParam MultipartFile upImg,
+                         BindingResult bindingResult, @RequestParam MultipartFile upImg, @RequestParam Long id,
                          RedirectAttributes ra) {
         String nameFile = upImg.getOriginalFilename();
+        Brand brandId = brandService.findById(id);
+        brand.setImgPath(brandId.getImgPath());
         try {
+            if(!brand.getBrandName().equals(brandId.getBrandName())){
+                validate.validate(brand, bindingResult);
+                if (bindingResult.hasFieldErrors()) {
+                    return "update";
+                }
+            }
+
             FileCopyUtils.copy(upImg.getBytes(), new File("E:\\DoAn\\SWP490\\car-aution-system\\src\\main\\resources\\static\\assets\\hoang/" + nameFile));
             brand.setImgPath("/hoang/" + nameFile);
             brandService.saveBrand(brand);
-
         } catch (IOException e) {
-            brand.setBrandName("/img/p1.png");
+            brand.setImgPath(brandId.getImgPath());
             brandService.saveBrand(brand);
-            e.printStackTrace();
         }
         ra.addFlashAttribute("message", "The brand has been saved successfully");
         return "redirect:/brand";
