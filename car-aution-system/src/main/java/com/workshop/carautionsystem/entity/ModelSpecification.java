@@ -20,6 +20,7 @@ public class ModelSpecification {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "modelid")
     private Long id;
 
     @Pattern(regexp = "[a-zA-Z]+",message = "Name not null and no number")
