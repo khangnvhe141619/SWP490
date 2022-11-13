@@ -1,4 +1,4 @@
-package com.workshop.carautionsystem.exception;
+package com.workshop.carauctionsystem.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
