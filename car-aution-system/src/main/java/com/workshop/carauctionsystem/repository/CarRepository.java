@@ -1,6 +1,6 @@
-package com.workshop.carautionsystem.repository;
+package com.workshop.carauctionsystem.repository;
 
-import com.workshop.carautionsystem.entity.Car;
+import com.workshop.carauctionsystem.entity.Car;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

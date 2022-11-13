@@ -1,7 +1,7 @@
-package com.workshop.carautionsystem.validate;
+package com.workshop.carauctionsystem.validate;
 
-import com.workshop.carautionsystem.entity.ModelCar;
-import com.workshop.carautionsystem.entity.ModelSpecification;
+import com.workshop.carauctionsystem.entity.ModelCar;
+import com.workshop.carauctionsystem.entity.ModelSpecification;
 
 import java.util.List;
 

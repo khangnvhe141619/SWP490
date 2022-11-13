@@ -1,8 +1,8 @@
 package com.workshop.carauctionsystem.controller;
 
-import com.workshop.carautionsystem.entity.User;
-import com.workshop.carautionsystem.repository.UserResponsitory;
-import com.workshop.carautionsystem.service.UserService;
+import com.workshop.carauctionsystem.entity.User;
+import com.workshop.carauctionsystem.repository.UserResponsitory;
+import com.workshop.carauctionsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;

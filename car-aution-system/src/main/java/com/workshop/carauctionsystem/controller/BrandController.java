@@ -1,10 +1,10 @@
-package com.workshop.carautionsystem.controller;
+package com.workshop.carauctionsystem.controller;
 
 
-import com.workshop.carautionsystem.entity.Brand;
-import com.workshop.carautionsystem.exception.NotFoundException;
-import com.workshop.carautionsystem.service.impl.BrandServiceImpl;
-import com.workshop.carautionsystem.validate.Validate;
+import com.workshop.carauctionsystem.entity.Brand;
+import com.workshop.carauctionsystem.exception.NotFoundException;
+import com.workshop.carauctionsystem.service.impl.BrandServiceImpl;
+import com.workshop.carauctionsystem.validate.Validate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -36,7 +36,7 @@ public class BrandController {
         ModelAndView modelAndView = null;
         Page<Brand> list = brandService.findAllOrderById(PageRequest.of(page, 5, Sort.by(id)));
         if (!list.isEmpty()) {
-            modelAndView = new ModelAndView("index");
+            modelAndView = new ModelAndView("admin/listBrand");
             modelAndView.addObject("brands", list);
         } else {
             modelAndView = new ModelAndView("page404");

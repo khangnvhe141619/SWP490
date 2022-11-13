@@ -1,9 +1,9 @@
-package com.workshop.carautionsystem.service.impl;
+package com.workshop.carauctionsystem.service.impl;
 
-import com.workshop.carautionsystem.entity.Car;
-import com.workshop.carautionsystem.entity.Image;
-import com.workshop.carautionsystem.repository.CarRepository;
-import com.workshop.carautionsystem.service.CarService;
+import com.workshop.carauctionsystem.entity.Car;
+import com.workshop.carauctionsystem.entity.Image;
+import com.workshop.carauctionsystem.repository.CarRepository;
+import com.workshop.carauctionsystem.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

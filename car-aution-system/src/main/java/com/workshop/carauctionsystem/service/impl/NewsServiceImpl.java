@@ -1,9 +1,9 @@
-package com.workshop.carautionsystem.service.impl;
+package com.workshop.carauctionsystem.service.impl;
 
 import com.workshop.carautionsystem.entity.News;
-import com.workshop.carautionsystem.exception.NotFoundException;
-import com.workshop.carautionsystem.repository.NewsRepository;
-import com.workshop.carautionsystem.service.NewsService;
+import com.workshop.carauctionsystem.exception.NotFoundException;
+import com.workshop.carauctionsystem.repository.NewsRepository;
+import com.workshop.carauctionsystem.service.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

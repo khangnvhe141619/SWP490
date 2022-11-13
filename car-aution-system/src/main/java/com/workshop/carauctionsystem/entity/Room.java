@@ -1,4 +1,4 @@
-package com.workshop.carautionsystem.entity;
+package com.workshop.carauctionsystem.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

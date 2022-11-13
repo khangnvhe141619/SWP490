@@ -1,9 +1,9 @@
-package com.workshop.carautionsystem.service.impl;
+package com.workshop.carauctionsystem.service.impl;
 
-import com.workshop.carautionsystem.entity.ModelSpecification;
-import com.workshop.carautionsystem.exception.NotFoundException;
-import com.workshop.carautionsystem.repository.ModelSpecificationRepository;
-import com.workshop.carautionsystem.service.ModelSpecificationService;
+import com.workshop.carauctionsystem.entity.ModelSpecification;
+import com.workshop.carauctionsystem.exception.NotFoundException;
+import com.workshop.carauctionsystem.repository.ModelSpecificationRepository;
+import com.workshop.carauctionsystem.service.ModelSpecificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

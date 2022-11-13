@@ -1,11 +1,11 @@
-package com.workshop.carautionsystem.controller;
+package com.workshop.carauctionsystem.controller;
 
-import com.workshop.carautionsystem.entity.Car;
-import com.workshop.carautionsystem.entity.Room;
-import com.workshop.carautionsystem.repository.CarRepository;
-import com.workshop.carautionsystem.repository.RoomRepository;
-import com.workshop.carautionsystem.service.CarService;
-import com.workshop.carautionsystem.service.RoomService;
+import com.workshop.carauctionsystem.entity.Car;
+import com.workshop.carauctionsystem.entity.Room;
+import com.workshop.carauctionsystem.repository.CarRepository;
+import com.workshop.carauctionsystem.repository.RoomRepository;
+import com.workshop.carauctionsystem.service.CarService;
+import com.workshop.carauctionsystem.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;

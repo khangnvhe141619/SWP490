@@ -1,7 +1,7 @@
-package com.workshop.carautionsystem.service;
+package com.workshop.carauctionsystem.service;
 
 import com.workshop.carautionsystem.entity.News;
-import com.workshop.carautionsystem.exception.NotFoundException;
+import com.workshop.carauctionsystem.exception.NotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

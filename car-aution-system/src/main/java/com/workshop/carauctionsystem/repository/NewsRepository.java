@@ -1,4 +1,4 @@
-package com.workshop.carautionsystem.repository;
+package com.workshop.carauctionsystem.repository;
 
 import com.workshop.carautionsystem.entity.News;
 import org.springframework.data.domain.Page;
