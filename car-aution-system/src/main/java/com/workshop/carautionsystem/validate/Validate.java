@@ -15,6 +15,7 @@ public class Validate implements Validator {
 
     @Autowired
     private BrandService brandService;
+
     @Override
     public boolean supports(Class<?> clazz) {
         return false;
@@ -31,5 +32,4 @@ public class Validate implements Validator {
             }
         }
     }
-
 }

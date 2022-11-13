@@ -28,13 +28,13 @@
         <tr>
             <td></td>
             <td><input th:field="*{brandName}" placeholder="input name"></td>
-            <td><input name="upImg" type="file" id="upImg" accept="image/png, image/jpeg"></td>
+            <td><input name="upImg" type="file" id="upImg" accept="image/png, image/jpeg, image/jpg"><span id="upImgMsg"></span></td>
             <td><img id="thumbnail" alt="logo preview"/></td>
         </tr>
         <tr>
             <td></td>
             <td style="color: red" th:if="${#fields.hasErrors('brandName')}" th:errors="*{brandName}"></td>
-            <td style="color: red" th:if="${#fields.hasErrors('imgPath')}" th:errors="*{imgPath}"></td>
+            <td style="color: red" th:if ="${message}">[[${message}]]</td>
         </tr>
         <tr>
             <td>
@@ -51,6 +51,8 @@
     function cancelFrom() {
         window.location = "/brand?page=0";
     }
+
+
 </script>
 </body>
 </html>
