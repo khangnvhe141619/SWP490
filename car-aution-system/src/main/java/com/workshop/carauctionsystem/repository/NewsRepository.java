@@ -1,6 +1,6 @@
 package com.workshop.carauctionsystem.repository;
 
-import com.workshop.carautionsystem.entity.News;
+import com.workshop.carauctionsystem.entity.News;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;

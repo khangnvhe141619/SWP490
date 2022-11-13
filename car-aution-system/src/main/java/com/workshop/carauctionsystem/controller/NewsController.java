@@ -1,6 +1,6 @@
 package com.workshop.carauctionsystem.controller;
 
-import com.workshop.carautionsystem.entity.News;
+import com.workshop.carauctionsystem.entity.News;
 import com.workshop.carauctionsystem.exception.NotFoundException;
 import com.workshop.carauctionsystem.service.impl.NewsServiceImpl;
 import com.workshop.carauctionsystem.validate.Validate;
