@@ -1,4 +1,4 @@
-package com.workshop.carautionsystem.service.impl;
+package com.workshop.carauctionsystem.service.impl;
 
 public class ModelServiceImpl {
 }

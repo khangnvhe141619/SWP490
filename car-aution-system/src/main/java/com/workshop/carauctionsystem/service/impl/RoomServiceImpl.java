@@ -1,8 +1,8 @@
-package com.workshop.carautionsystem.service.impl;
+package com.workshop.carauctionsystem.service.impl;
 
-import com.workshop.carautionsystem.entity.Room;
-import com.workshop.carautionsystem.repository.RoomRepository;
-import com.workshop.carautionsystem.service.RoomService;
+import com.workshop.carauctionsystem.entity.Room;
+import com.workshop.carauctionsystem.repository.RoomRepository;
+import com.workshop.carauctionsystem.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

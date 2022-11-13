@@ -1,4 +1,4 @@
-package com.workshop.carautionsystem.controller;
+package com.workshop.carauctionsystem.controller;
 
 public class ModelController {
 }

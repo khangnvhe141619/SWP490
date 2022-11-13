@@ -1,7 +1,7 @@
-package com.workshop.carautionsystem.service;
+package com.workshop.carauctionsystem.service;
 
-import com.workshop.carautionsystem.entity.Car;
-import com.workshop.carautionsystem.entity.Image;
+import com.workshop.carauctionsystem.entity.Car;
+import com.workshop.carauctionsystem.entity.Image;
 
 import java.util.List;
 

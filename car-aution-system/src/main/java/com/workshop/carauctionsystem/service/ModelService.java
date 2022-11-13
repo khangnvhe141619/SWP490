@@ -1,4 +1,4 @@
-package com.workshop.carautionsystem.service;
+package com.workshop.carauctionsystem.service;
 
 
 public interface ModelService {

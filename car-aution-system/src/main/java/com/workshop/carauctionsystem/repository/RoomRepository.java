@@ -1,6 +1,6 @@
-package com.workshop.carautionsystem.repository;
+package com.workshop.carauctionsystem.repository;
 
-import com.workshop.carautionsystem.entity.Room;
+import com.workshop.carauctionsystem.entity.Room;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface RoomRepository extends JpaRepository<Room, Integer> {
