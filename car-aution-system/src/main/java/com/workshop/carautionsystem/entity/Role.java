@@ -22,7 +22,7 @@ public class Role implements Serializable {
     private int id;
     @ManyToMany(mappedBy = "roles")
     private Collection<User> users;
-    @Column(name = "roleName")
+    @Column(name = "rolename")
     private String name;
 
     @Override

@@ -3,6 +3,7 @@ package com.workshop.carautionsystem.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 
@@ -10,20 +11,18 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name = "model")
-public class Model {
+@ToString
+@Table(name = "image")
 
+public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @OneToOne
-    @JoinColumn(name = "brandid")
-    private Brand brandId;
+    @ManyToOne
+    @JoinColumn(name = "carid")
+    private Car carId;
 
-    @Column(name = "modelname")
-    private String modelName;
-
-    @Column(name = "modelspecificationid")
-    private String modelSpecificationId;
+    @Column(name = "imgpath")
+    private String imgPath;
 }
