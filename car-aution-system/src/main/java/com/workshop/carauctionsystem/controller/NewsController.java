@@ -1,9 +1,8 @@
 package com.workshop.carautionsystem.controller;
 
-
-import com.workshop.carautionsystem.entity.Brand;
+import com.workshop.carautionsystem.entity.News;
 import com.workshop.carautionsystem.exception.NotFoundException;
-import com.workshop.carautionsystem.service.impl.BrandServiceImpl;
+import com.workshop.carautionsystem.service.impl.NewsServiceImpl;
 import com.workshop.carautionsystem.validate.Validate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -12,7 +11,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -23,33 +21,32 @@ import java.io.File;
 import java.io.IOException;
 
 @Controller
-public class BrandController {
-
+public class NewsController {
     @Autowired
-    BrandServiceImpl brandService;
+    NewsServiceImpl newsService;
 
     @Autowired
     Validate validate;
 
-    @GetMapping("/brand")
+    @GetMapping("/news")
     public ModelAndView showList(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "id") String id) {
         ModelAndView modelAndView = null;
-        Page<Brand> list = brandService.findAllOrderById(PageRequest.of(page, 5, Sort.by(id)));
+        Page<News> list = newsService.findAllOrderById(PageRequest.of(page, 5, Sort.by(id)));
         if (!list.isEmpty()) {
-            modelAndView = new ModelAndView("index");
-            modelAndView.addObject("brands", list);
+            modelAndView = new ModelAndView("listNews");
+            modelAndView.addObject("news", list);
         } else {
             modelAndView = new ModelAndView("page404");
         }
         return modelAndView;
     }
 
-    @GetMapping("/brand/create")
+    @GetMapping("/news/create")
     public ModelAndView showFormCreate() {
         ModelAndView modelAndView = null;
         try {
-            modelAndView = new ModelAndView("test");
-            modelAndView.addObject("brand", new Brand());
+            modelAndView = new ModelAndView("showFormCreate");
+            modelAndView.addObject("news", new News());
             return modelAndView;
         } catch (Exception e) {
             modelAndView = new ModelAndView("page404");
@@ -57,21 +54,16 @@ public class BrandController {
         }
     }
 
-    @PostMapping("brand/create")
-    public String create(@Valid @ModelAttribute(value = "brand") Brand brand,
-                         BindingResult bindingResult, @RequestParam MultipartFile upImg,
-                         RedirectAttributes ra, Model model) {
-        validate.validate(brand, bindingResult);
-        if (bindingResult.hasFieldErrors()) {
-            return "test";
-        }
+    @PostMapping("news/create")
+    public String create(@Valid @ModelAttribute(value = "news") News news,
+                         @RequestParam MultipartFile upImg, RedirectAttributes ra, Model model) {
+        String nameFile = upImg.getOriginalFilename();
         try {
-            String nameFile = upImg.getOriginalFilename();
             FileCopyUtils.copy(upImg.getBytes(), new File("E:\\DoAn\\SWP490\\car-aution-system\\src\\main\\resources\\static\\assets\\hoang/" + nameFile));
-            brand.setImgPath("/hoang/" + nameFile);
-            brandService.saveBrand(brand);
-            ra.addFlashAttribute("message", "The brand has been saved successfully");
-            return "redirect:/brand";
+            news.setImg("/hoang/" + nameFile);
+            newsService.saveNews(news);
+            ra.addFlashAttribute("message", "The news has been saved successfully");
+            return "redirect:/news";
         } catch (IOException e) {
             model.addAttribute("message", "Must upload a image");
             return "test";
@@ -79,52 +71,44 @@ public class BrandController {
     }
 
 
-    @GetMapping("/brand/delete/{id}")
+    @GetMapping("/news/delete/{id}")
     public String deleteBrand(@PathVariable(value = "id") Long id, RedirectAttributes ra) {
         try {
-            brandService.delete(id);
+            newsService.delete(id);
         } catch (NotFoundException e) {
             ra.addFlashAttribute("message", e.getMessage());
         }
-        return "redirect:/brand";
+        return "redirect:/news";
     }
 
-    @GetMapping("/brand/edit/{id}")
+    @GetMapping("/news/edit/{id}")
     public String showFormUpdate(@PathVariable(value = "id") Long id, Model model, RedirectAttributes ra) throws NotFoundException {
-        Brand brand = brandService.findById(id);
-        if (brand != null) {
-            model.addAttribute("brand", brand);
+        News news = newsService.findById(id);
+        if (news != null) {
+            model.addAttribute("news", news);
             return "update";
         } else {
             throw new NotFoundException("Could not find any with ID");
         }
     }
 
-    @PostMapping("brand/edit")
-    public String update(@Valid @ModelAttribute(value = "brand") Brand brand,
-                         BindingResult bindingResult, @RequestParam MultipartFile upImg, @RequestParam Long id,
+    @PostMapping("news/edit")
+    public String update(@Valid @ModelAttribute(value = "news") News news,
+                         @RequestParam MultipartFile upImg, @RequestParam Long id,
                          RedirectAttributes ra) {
         String nameFile = upImg.getOriginalFilename();
-        Brand brandId = brandService.findById(id);
-        brand.setImgPath(brandId.getImgPath());
+        News newsId = newsService.findById(id);
+        news.setImg(newsId.getImg());
+
         try {
-            if(!brand.getBrandName().equals(brandId.getBrandName())){
-                validate.validate(brand, bindingResult);
-                if (bindingResult.hasFieldErrors()) {
-                    return "update";
-                }
-            }
-
             FileCopyUtils.copy(upImg.getBytes(), new File("E:\\DoAn\\SWP490\\car-aution-system\\src\\main\\resources\\static\\assets\\hoang/" + nameFile));
-            brand.setImgPath("/hoang/" + nameFile);
-            brandService.saveBrand(brand);
+            news.setImg("/hoang/" + nameFile);
+            newsService.saveNews(news);
         } catch (IOException e) {
-            brand.setImgPath(brandId.getImgPath());
-            brandService.saveBrand(brand);
+            news.setImg(newsId.getImg());
+            newsService.saveNews(news);
         }
-        ra.addFlashAttribute("message", "The brand has been saved successfully");
-        return "redirect:/brand";
+        ra.addFlashAttribute("message", "The news has been saved successfully");
+        return "redirect:/news";
     }
-
-
 }

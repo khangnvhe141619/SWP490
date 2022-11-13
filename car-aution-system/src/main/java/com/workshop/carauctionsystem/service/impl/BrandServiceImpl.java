@@ -50,7 +50,6 @@ public class BrandServiceImpl implements BrandService {
 
     @Override
     public Page<Brand> findAllOrderById(Pageable pageable) {
-
         return brandRepository.findAllOrderById(pageable);
     }
 }
