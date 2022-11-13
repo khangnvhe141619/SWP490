@@ -21,9 +21,10 @@ public class Model {
     @JoinColumn(name = "brandid")
     private Brand brandId;
 
-    @Column(name = "modelName")
+    @Column(name = "modelname")
     private String modelName;
 
-    @Column(name = "modelspecificationid")
-    private String modelSpecificationId;
+    @OneToOne
+    @JoinColumn(name = "modelspecificationid")
+    private ModelSpecification modelSpecificationId;
 }

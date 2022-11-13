@@ -7,6 +7,7 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -25,11 +26,11 @@ public class Car {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "upbroundprice")
-    private Long upBroundPrice;
+    @Column(name = "upboundprice")
+    private Long upBounPprice;
 
-    @Column(name = "downbroundprice")
-    private Long downBroundPrice;
+    @Column(name = "downboundprice")
+    private Long downBoundPrice;
 
     @OneToOne
     @JoinColumn(name = "modelid")
@@ -39,13 +40,12 @@ public class Car {
     private String status;
 
     @OneToOne
-    @JoinColumn(name = "createby")
-    private User createBy;
+    @JoinColumn(name = "createdby")
+    private User createdBy;
 
-    @Column(name = "createat")
-    private Timestamp createAt;
+    @Column(name = "createdat")
+    private Timestamp createdAt;
 
-    @Column(name = "updateat")
-    private Timestamp updateAt;
-
+    @Column(name = "updatedat")
+    private Timestamp updatedAt;
 }

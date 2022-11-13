@@ -8,7 +8,7 @@
     <title>CAB Auction</title>
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700"
-        rel="stylesheet">
+          rel="stylesheet">
     <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
     <link href="assets/css/style.css" rel="stylesheet">
@@ -16,165 +16,149 @@
 
 </head>
 
-<body style="background: url(assets/img/about-bg1.png);">
-    <header id="header" class="fixed-top d-flex align-items-center header-transparent bg-black">
-        <div class="container-fluid">
-          <div class="row justify-content-center align-items-center">
+<body style="background: url(/assets/img/about-bg1.png);">
+<header id="header" class="fixed-top d-flex align-items-center header-transparent bg-black">
+    <div class="container-fluid">
+        <div class="row justify-content-center align-items-center">
             <div class="col-xl-11 d-flex align-items-center justify-content-between">
-              <h1 class="logo"><a href="home.html">CAB Auction</a></h1>
-              <nav id="navbar" class="navbar">
-                <ul>
-                  <li><a class="nav-link scrollto active" href="home.html">Home</a></li>
-                  <li><a class="nav-link scrollto" href="home.html">Brand</a></li>
-                  <li><a class="nav-link scrollto " href="home.html">Auction Room</a></li>
-                  <li><a class="nav-link scrollto" href="blog.html">News</a></li>
-                  <li><a class="nav-link scrollto" href="guideline.html">Guideline</a></li>
-                  <li><a class="nav-link scrollto " href="home.html">About Us</a></li>
-                </ul>
-                <a href="connectWallet.html" style="background-color: rgb(66, 180, 66); padding-right: 30px;" class="connectwallet">Connect wallet</a>
-                <a href="PeronalProfile.html"><i class="bi bi-person-circle" style="font-size: 30px;"></i></a>
-              </nav>
+                <h1 class="logo"><a href="home.html">CAB Auction</a></h1>
+                <nav id="navbar" class="navbar">
+                    <ul>
+                        <li><a class="nav-link scrollto active" th:href="@{/home}">Home</a></li>
+                        <li><a class="nav-link scrollto" href="home.html">Brand</a></li>
+                        <li><a class="nav-link scrollto " href="home.html">Auction Room</a></li>
+                        <li><a class="nav-link scrollto" href="blog.html">News</a></li>
+                        <li><a class="nav-link scrollto" href="guideline.html">Guideline</a></li>
+                        <li><a class="nav-link scrollto " href="home.html">About Us</a></li>
+                    </ul>
+                    <a href="connectWallet.html" style="background-color: rgb(66, 180, 66); padding-right: 30px;" class="connectwallet">Connect wallet</a>
+                    <a th:href="@{/personProfile}"><i class="bi bi-person-circle" style="font-size: 30px;"></i><i th:text="${cookieValue.value}"></i></a>
+                </nav>
             </div>
-          </div>
-    
         </div>
-      </header>
-    <div class="container rounded mt-200 mb-5">
-        <div class="row">
-            <div class="col-md-1"></div>
-            <div class="col-md-3 border-right bg-white rounded-pill">
-                <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                    <img class="rounded-circle mt-2" src="assets/img/sy.jpg">
-                    <span class="font-weight-bold">Khang Nguyen</span>
-                    <span class="text-black-50">Nguyenkhang@gmail.com</span>
-                </div>
-                <div class="d-flex flex-column text-center">
-                    <a href="myActive.html" class="font-weight-bold h5 text-black">My Active</a>
-                    <a href="PeronalProfile.html" class="font-weight-bold mt-50 h5 text-info">Personal Profile</a>
-                    <a href="winningBids.html" class="font-weight-bold mt-50 h5 text-black">Winning Bids</a>
-                    <a href="myFavorite.html" class="font-weight-bold mt-50 mb-5 h5 text-black">My Favorite</a>
 
+    </div>
+</header>
+<div class="container rounded mt-200 mb-5">
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-3 border-right bg-white rounded-pill">
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                <img class="rounded-circle mt-2" src="assets/img/sy.jpg">
+                <span class="font-weight-bold">Khang Nguyen</span>
+                <span class="text-black-50">Nguyenkhang@gmail.com</span>
+            </div>
+            <div class="d-flex flex-column text-center">
+                <a href="myActive.html" class="font-weight-bold h5 text-black">My Active</a>
+                <a href="PeronalProfile.html" class="font-weight-bold mt-50 h5 text-info">Personal Profile</a>
+                <a href="winningBids.html" class="font-weight-bold mt-50 h5 text-black">Winning Bids</a>
+                <a href="myFavorite.html" class="font-weight-bold mt-50 mb-5 h5 text-black">My Favorite</a>
+                <a th:href="@{/logout}" class="font-weight-bold mt-50 mb-5 h5 text-black">Logout</a>
+            </div>
+        </div>
+        <div class="col-md-7 border-right">
+            <div class="p-3 bg-white profile" id="person-profile">
+                <div class="d-flex justify-content-between mb-3">
+                    <h4>Personal Profile</h4>
+                    <i id="edit-profile" class="bi bi-pencil-square edit" onclick="editProfile()"></i>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-12">
+                        <label class="labels">Name</label>
+                        <input type="text" class="form-control" placeholder="first name" th:value="${name}" readonly>
+                    </div>
+                    <div class="col-md-12">
+                        <label class="labels">User Name</label>
+                        <input type="text" class="form-control" placeholder="Username" th:value="${cookieValue.value}" readonly>
+                    </div>
+                    <div class="col-md-12">
+                        <label class="labels">Email ID</label>
+                        <input type="text" class="form-control" placeholder="enter email id" th:value="${email}" readonly>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-12">
+                        <label class="labels">PhoneNumber</label>
+                        <input type="text" class="form-control" placeholder="enter phone number" th:value="${phone}" readonly>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-7 border-right">
-                <div class="p-3 bg-white profile" id="person-profile">
+            <div class="p-3 bg-white mt-3 profile" id="acc-setting">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-right">Password</h4>
+                    <i id="edit-profile" class="bi bi-pencil-square edit" onclick="accSetting()"></i>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-12">
+                        <label class="labels">Password</label>
+                        <input type="password" class="form-control" placeholder="enter password" value="khang123" readonly>
+                    </div>
+                </div>
+            </div>
+            <form action="PeronalProfile.html">
+                <div class="p-3 bg-white profile mt-200" id="update-profile">
                     <div class="d-flex justify-content-between mb-3">
-                        <h4>Personal Profile</h4>
-                        <i id="edit-profile" class="bi bi-pencil-square edit" onclick="editProfile()"></i>
+                        <h4>Update Profile</h4>
+                        <a th:href="@{/personProfile}"><i class="bi bi-caret-left-fill"></i>Back</a>
                     </div>
                     <div class="row mt-2">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <label class="labels">Name</label>
-                            <input type="text" class="form-control" placeholder="first name" value="Nguyen khang" readonly>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="labels">Date of birth</label>
-                            <input type="date" class="form-control" value="1999-02-10" placeholder="Date of birth" readonly>
+                            <input type="text" class="form-control" placeholder="first name" th:value="${name}">
                         </div>
                         <div class="col-md-12">
                             <label class="labels">User Name</label>
-                            <input type="text" class="form-control" placeholder="Username" value="Nguyenkhang" readonly>
+                            <input type="text" class="form-control" placeholder="Username" th:value="${cookieValue.value}">
                         </div>
                         <div class="col-md-12">
                             <label class="labels">Email ID</label>
-                            <input type="text" class="form-control" placeholder="enter email id" value="nguyenkhang@gmail.com" readonly>
+                            <input type="text" class="form-control" placeholder="enter email id" th:value="${email}">
                         </div>
                     </div>
                     <div class="row mt-3">
                         <div class="col-md-12">
                             <label class="labels">PhoneNumber</label>
-                            <input type="text" class="form-control" placeholder="enter phone number" value="0974080793" readonly>
-                        </div>
-                        <div class="col-md-12">
-                            <label class="labels">Address</label>
-                            <input type="text" class="form-control" placeholder="enter address" value="Thach That - Ha Noi" readonly>
+                            <input type="text" class="form-control" placeholder="enter phone number" th:value="${phone}">
                         </div>
                     </div>
+                    <div class="mt-2 text-center">
+                        <button class="btn btn-primary profile-button rounded-pill" type="submit">Save Profile</button>
+                    </div>
                 </div>
-                <div class="p-3 bg-white mt-3 profile" id="acc-setting">
+            </form>
+            <form action="PeronalProfile.html">
+                <div class="p-3 bg-white profile mt-500" id="acc-update">
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h4 class="text-right">Password</h4>
-                        <i id="edit-profile" class="bi bi-pencil-square edit" onclick="accSetting()"></i>
+                        <h4 class="text-right">Change Password</h4>
+                        <a th:href="@{/personProfile}"><i class="bi bi-caret-left-fill"></i>Back</a>
                     </div>
                     <div class="row mt-3">
-                        <div class="col-md-12">
-                            <label class="labels">Password</label>
-                            <input type="password" class="form-control" placeholder="enter password" value="khang123" readonly>
+                        <div class="col-md-2"> </div>
+                        <div class="col-md-8">
+                            <label class="labels">Current Password</label>
+                            <input type="password" class="form-control">
                         </div>
+                        <div class="col-md-2"> </div>
+                        <div class="col-md-2"></div>
+                        <div class="col-md-8">
+                            <label class="labels mt-4">New Password</label>
+                            <input type="password" class="form-control">
+                        </div>
+                        <div class="col-md-2"> </div>
+                        <div class="col-md-2"> </div>
+                        <div class="col-md-8">
+                            <label class="labels mt-4">Re-New Password</label>
+                            <input type="password" class="form-control">
+                        </div>
+                    </div>
+                    <div class="mt-2 text-center">
+                        <button class="btn btn-primary profile-button rounded-pill" type="submit">Change Account</button>
                     </div>
                 </div>
-                <form action="PeronalProfile.html">
-                    <div class="p-3 bg-white profile mt-200" id="update-profile">
-                        <div class="d-flex justify-content-between mb-3">
-                            <h4>Update Profile</h4>
-                            <a href="PeronalProfile.html"><i class="bi bi-caret-left-fill"></i>Back</a>
-                        </div>
-                        <div class="row mt-2">
-                            <div class="col-md-6">
-                                <label class="labels">Name</label>
-                                <input type="text" class="form-control" placeholder="first name" value="Nguyen khang">
-                            </div>
-                            <div class="col-md-6">
-                                <label class="labels">Date of birth</label>
-                                <input type="date" class="form-control" value="1999-02-10" placeholder="Date of birth">
-                            </div>
-                            <div class="col-md-12">
-                                <label class="labels">User Name</label>
-                                <input type="text" class="form-control" placeholder="Username" value="Nguyenkhang">
-                            </div>
-                            <div class="col-md-12">
-                                <label class="labels">Email ID</label>
-                                <input type="text" class="form-control" placeholder="enter email id" value="nguyenkhang@gmail.com">
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-md-12">
-                                <label class="labels">PhoneNumber</label>
-                                <input type="text" class="form-control" placeholder="enter phone number" value="0974080793">
-                            </div>
-                            <div class="col-md-12">
-                                <label class="labels">Address</label>
-                                <input type="text" class="form-control" placeholder="enter address" value="Thach That - Ha Noi">
-                            </div>
-                        </div>
-                        <div class="mt-2 text-center">
-                            <button class="btn btn-primary profile-button rounded-pill" type="submit">Save Profile</button>
-                        </div>
-                    </div>
-                </form>
-                <form action="PeronalProfile.html">
-                    <div class="p-3 bg-white profile mt-500" id="acc-update">
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h4 class="text-right">Change Password</h4>
-                            <a href="PeronalProfile.html"><i class="bi bi-caret-left-fill"></i>Back</a>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-md-2"> </div>
-                            <div class="col-md-8">
-                                <label class="labels">Current Password</label>
-                                <input type="password" class="form-control" placeholder="Username" value="Nguyenkhang">
-                            </div>
-                            <div class="col-md-2"> </div>
-                            <div class="col-md-2"></div>
-                            <div class="col-md-8">
-                                <label class="labels mt-4">New Password</label>
-                                <input type="password" class="form-control" placeholder="Username" value="Nguyenkhang">
-                            </div>
-                            <div class="col-md-2"> </div>
-                            <div class="col-md-2"> </div>
-                            <div class="col-md-8">
-                                <label class="labels mt-4">Re-New Password</label>
-                                <input type="password" class="form-control" placeholder="Username" value="Nguyenkhang">
-                            </div>
-                        </div>
-                        <div class="mt-2 text-center">
-                            <button class="btn btn-primary profile-button rounded-pill" type="submit">Change Account</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
+            </form>
         </div>
     </div>
+</div>
 </body>
 <script src="assets/js/personalProfile.js"></script>
 </html>

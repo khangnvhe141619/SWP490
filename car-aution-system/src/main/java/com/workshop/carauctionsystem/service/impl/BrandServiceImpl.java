@@ -39,20 +39,18 @@ public class BrandServiceImpl implements BrandService {
     }
 
     @Override
-    public Brand findById(Long id) throws NotFoundException {
+    public Brand findById(Long id) {
         Optional<Brand> optional = brandRepository.findById(id);
         Brand brand = null;
         if(optional.isPresent()){
             brand = optional.get();
-        }else {
-            throw new NotFoundException("Could not find any with ID" + id);
         }
         return brand;
-
     }
 
     @Override
     public Page<Brand> findAllOrderById(Pageable pageable) {
+
         return brandRepository.findAllOrderById(pageable);
     }
 }

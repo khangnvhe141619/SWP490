@@ -1,29 +1,28 @@
-package com.workshop.carauctionsystem.entity;
+package com.workshop.carautionsystem.entity;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
-import javax.validation.constraints.Pattern;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 @Data
 @Entity
-@Table(name = "brand")
-public class Brand {
+@ToString
+@Table(name = "image")
 
+public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
-    @Pattern(regexp = "[a-zA-Z]+",message = "Name not null and no number")
-    @Column(name = "brandname")
-    private String brandName;
+    @ManyToOne
+    @JoinColumn(name = "carid")
+    private Car carId;
 
     @Column(name = "imgpath")
     private String imgPath;
-
 }

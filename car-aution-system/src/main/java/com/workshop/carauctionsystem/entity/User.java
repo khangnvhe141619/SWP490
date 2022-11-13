@@ -24,7 +24,7 @@ public class User implements Serializable {
     private String userName;
     @Column(name = "password")
     private String password;
-    @Column(name = "fullName")
+    @Column(name = "fullname")
     private String fullName;
     @Column(name = "email")
     private String email;
@@ -34,10 +34,11 @@ public class User implements Serializable {
     private String avatar;
     @Column(name = "enabled")
     private int enabled;
-    @Column(name = "createAt")
-    private Timestamp createAt;
+    @Column(name = "createdat")
+    private Timestamp createdAt;
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "user_role",joinColumns = @JoinColumn(name = "userId", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "roleId", referencedColumnName = "id"))
+    @JoinTable(name = "user_role",joinColumns = @JoinColumn(name = "userid", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "roleid", referencedColumnName = "id"))
     private Collection<Role> roles;
 
 }
