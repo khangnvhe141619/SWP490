@@ -6,6 +6,7 @@ import com.workshop.carauctionsystem.repository.NewsRepository;
 import com.workshop.carauctionsystem.service.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +30,7 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
-    public void delete(Long id) throws NotFoundException {
+    public void delete(int id) throws NotFoundException {
         Long count = newsRepo.countById(id);
         if(count == null || count == 0){
             throw new NotFoundException("Could not find any with ID" + id);
@@ -38,7 +39,7 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
-    public News findById(Long id){
+    public News findById(int id){
         Optional<News> optional = newsRepo.findById(id);
         News news = null;
         if(optional.isPresent()){
@@ -51,4 +52,23 @@ public class NewsServiceImpl implements NewsService {
     public Page<News> findAllOrderById(Pageable pageable) {
         return newsRepo.findAllOrderById(pageable);
     }
+    @Override
+    public Page<News> findPaginated(int pageNo, int pageSize) {
+
+        Pageable pageable = PageRequest.of(pageNo-1,pageSize);
+        return newsRepo.findAll(pageable);
+
+    }
+
+    @Override
+    public News getNewsById(int id) {
+        return newsRepo.findNewsById(id);
+    }
+
+    @Override
+    public Page<News> getTop5(int pageable) {
+        Pageable page = PageRequest.of(0,5);
+        return newsRepo.getTop5(page);
+    }
+
 }
