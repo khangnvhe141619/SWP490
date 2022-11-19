@@ -26,13 +26,23 @@ public class UserServiceImpl implements UserService {
     private UserResponsitory userResponsitory;
 
     @Override
-    public Optional<User> login(String username, String password) {
+    public User login(String username, String password) {
         return userResponsitory.findUserByUserNameAndPassword(username, password);
     }
 
     @Override
-    public Optional<User> findUserByName(String username) {
+    public User findUserByName(String username) {
         return userResponsitory.findUserByUserName(username);
+    }
+
+    @Override
+    public User findUserById(int id) {
+        return userResponsitory.findUserById(id);
+    }
+
+    @Override
+    public void updateUserById(String fullName, String userName, String phone, String email, int id){
+        userResponsitory.updateUserById(fullName, userName, phone, email, id);
     }
 
     @Autowired

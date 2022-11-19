@@ -44,14 +44,17 @@ public class UserController {
     @PostMapping(value = {"/login"})
     public ModelAndView login(@ModelAttribute(name = "setUser") User user, Model model, @CookieValue(value = "setUser", defaultValue = "") String setUser,
                               HttpServletRequest request, HttpServletResponse response){
-        Optional<User> u =  service.login(user.getUserName(),user.getPassword());
-        System.out.println(u);
+        User u =  service.login(user.getUserName(),user.getPassword());
         ModelAndView view = new ModelAndView();
-        if(u.isPresent()){
+        if(u != null){
             setUser = user.getUserName();
             Cookie cookie = new Cookie("setUser", setUser);
+            String setUserId = String.valueOf(u.getId());
+            System.out.println(setUserId);
+            Cookie cookie2 = new Cookie("setUserId", setUserId);
             cookie.setMaxAge(24 * 60 * 60);
             response.addCookie(cookie);
+            response.addCookie(cookie2);
             model.addAttribute("cookieValue", cookie);
             model.addAttribute("check", true);
             view.setViewName("redirect:/home");

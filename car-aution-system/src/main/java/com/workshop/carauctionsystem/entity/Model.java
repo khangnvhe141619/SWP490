@@ -21,7 +21,7 @@ public class Model {
     @JoinColumn(name = "brandid")
     private Brand brandId;
 
-    @Column(name = "modelName")
+    @Column(name = "modelname")
     private String modelName;
 
     @OneToOne
