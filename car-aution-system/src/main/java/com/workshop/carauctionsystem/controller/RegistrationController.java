@@ -32,8 +32,10 @@ public class RegistrationController {
     UserRepository userRepository;
     @Autowired
     private ApplicationEventPublisher eventPublisher;
+
     @Autowired
     private Environment env;
+
     @Autowired
     private JavaMailSender mailSender;
 
@@ -117,7 +119,7 @@ public class RegistrationController {
 
     @PostMapping("/emailExist")
     public ResponseEntity<ResponseObject> isEmailExisted(HttpServletRequest request, @RequestParam("email") String email) {
-        boolean _email = userService.isEmailExist(email);
+        boolean _email = userService.findByEmail(email) != null ? true : false;
         if (_email) {
             return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject("ok", "Email existed!", null));
         }
@@ -126,7 +128,7 @@ public class RegistrationController {
 
     @PostMapping("/usernameExist")
     public ResponseEntity<ResponseObject> isUsernameExist(HttpServletRequest request, @RequestParam("username") String username) {
-        boolean _username = userService.isUsernameExist(username);
+        boolean _username = userService.findByUsername(username) != null ? true : false;
         if (_username) {
             return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject("ok", "Username existed!", null));
         }

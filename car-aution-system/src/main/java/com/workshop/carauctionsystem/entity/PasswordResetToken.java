@@ -1,49 +1,51 @@
 package com.workshop.carauctionsystem.entity;
 
-
 import javax.persistence.*;
 import java.util.Calendar;
 import java.util.Date;
 
 @Entity
-@Table(name = "verificationtoken")
-public class VerificationToken {
+@Table(name = "passwordresettoken")
+public class PasswordResetToken {
     private static final int EXPIRATION = 60 * 24;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
     private int id;
-    @Column(name = "expiryDate")
-    private Date expiryDate;
     @Column(name = "token")
     private String token;
+    @Column(name = "expiryDate")
+    private Date expiryDate;
     @OneToOne(targetEntity = User.class, fetch = FetchType.EAGER)
-    @JoinColumn(nullable = false, name = "userId", foreignKey = @ForeignKey(name = "verificationtoken_userid_foreign"), referencedColumnName = "id")
+    @JoinColumn(nullable = false, name = "userId", foreignKey = @ForeignKey(name = "passwordresettoken_userid_foreign"), referencedColumnName = "id")
     private User user;
 
-
-    public VerificationToken() {
+    public PasswordResetToken() {
+        super();
     }
 
-    public VerificationToken(String token, User user) {
+    public PasswordResetToken(final String token) {
+        super();
+        this.token = token;
+        this.expiryDate = calculateExpiryDate(EXPIRATION);
+    }
+
+    public PasswordResetToken(final String token, final User user) {
+        super();
         this.token = token;
         this.user = user;
         this.expiryDate = calculateExpiryDate(EXPIRATION);
     }
 
+    //
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getToken() {
         return token;
     }
 
-    public void setToken(String token) {
+    public void setToken(final String token) {
         this.token = token;
     }
 
@@ -51,7 +53,7 @@ public class VerificationToken {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(final User user) {
         this.user = user;
     }
 
@@ -59,7 +61,7 @@ public class VerificationToken {
         return expiryDate;
     }
 
-    public void setExpiryDate(Date expiryDate) {
+    public void setExpiryDate(final Date expiryDate) {
         this.expiryDate = expiryDate;
     }
 
@@ -73,15 +75,5 @@ public class VerificationToken {
     public void updateToken(final String token) {
         this.token = token;
         this.expiryDate = calculateExpiryDate(EXPIRATION);
-    }
-
-    @Override
-    public String toString() {
-        return "VerificationToken{" +
-                "id=" + id +
-                ", token='" + token + '\'' +
-                ", user=" + user +
-                ", expiryDate=" + expiryDate +
-                '}';
     }
 }

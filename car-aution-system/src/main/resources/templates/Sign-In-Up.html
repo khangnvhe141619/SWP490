@@ -85,12 +85,12 @@
           </a>
         </div>
       </form>
-      <form action="#" class="sign-up-form" id="forgot">
+      <form th:action="@{/forgotPassword}" method="post" class="sign-up-form" id="forgot">
         <h2 class="title">Forgot Password</h2>
         <p class="text">Enter the email address associated with your account and we'll send you a link to reset your password.</p>
         <div class="input-field">
           <i class="fas fa-envelope"></i>
-          <input type="email" placeholder="Email" />
+          <input id="email" type="email" th:name="email" placeholder="Email" required/>
         </div>
         <input type="submit" class="btn" value="Send" />
       </form>

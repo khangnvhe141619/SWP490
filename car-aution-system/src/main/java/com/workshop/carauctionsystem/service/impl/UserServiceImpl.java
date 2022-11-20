@@ -1,9 +1,11 @@
 package com.workshop.carauctionsystem.service.impl;
 
+import com.workshop.carauctionsystem.entity.PasswordResetToken;
 import com.workshop.carauctionsystem.entity.User;
 import com.workshop.carauctionsystem.entity.VerificationToken;
 import com.workshop.carauctionsystem.exception.UserAlreadyExistException;
 import com.workshop.carauctionsystem.model.UserDTO;
+import com.workshop.carauctionsystem.repository.PasswordResetTokenRepository;
 import com.workshop.carauctionsystem.repository.RoleRepository;
 import com.workshop.carauctionsystem.repository.UserRepository;
 import com.workshop.carauctionsystem.repository.VerificationTokenRepository;
@@ -23,17 +25,18 @@ import java.util.*;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
-	
-	@Autowired
-    private VerificationTokenRepository verificationTokenRepository;
 
     @Autowired
+    private VerificationTokenRepository verificationTokenRepository;
+    @Autowired
+    private PasswordResetTokenRepository passwordTokenRepo;
+    @Autowired
     private RoleRepository roleRepository;
-	
+
     @Autowired
     private PasswordEncoder passwordEncoder;
-	
-	@Bean
+
+    @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
@@ -44,8 +47,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findUserByName(String username) {
+    public User findByUsername(String username) {
         return userRepository.findUserByUserName(username);
+    }
+
+    @Override
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 
     @Override
@@ -54,10 +62,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateUserById(String fullName, String userName, String phone, String email, int id){
+    public void updateUserById(String fullName, String userName, String phone, String email, int id) {
         userRepository.updateUserById(fullName, userName, phone, email, id);
     }
-    
+
     @Override
     public User getUser(String verificationToken) {
         final VerificationToken token = verificationTokenRepository.findByToken(verificationToken);
@@ -71,14 +79,9 @@ public class UserServiceImpl implements UserService {
     public void saveRegisteredUser(User user) {
         userRepository.save(user);
     }
-    @Override
+
     public boolean isEmailExist(String email) {
         return userRepository.findByEmail(email) != null;
-    }
-
-    @Override
-    public boolean isUsernameExist(String username) {
-        return userRepository.findByUserName(username) != null;
     }
 
     @Override
@@ -101,7 +104,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void createVerificationTokenForUser(User user, String token) {
+    public void saveVerificationTokenForUser(User user, String token) {
         VerificationToken myToken = new VerificationToken(token, user);
         verificationTokenRepository.save(myToken);
     }
@@ -118,5 +121,27 @@ public class UserServiceImpl implements UserService {
                 .toString());
         vToken = verificationTokenRepository.save(vToken);
         return vToken;
+    }
+
+    @Override
+    public void savePasswordResetTokenForUser(User user, String token) {
+        PasswordResetToken myToken = new PasswordResetToken(token, user);
+        passwordTokenRepo.save(myToken);
+    }
+
+    @Override
+    public PasswordResetToken getPasswordResetToken(String token) {
+        return passwordTokenRepo.findByToken(token);
+    }
+
+    @Override
+    public User getUserByPasswordResetToken(String token) {
+        return passwordTokenRepo.findByToken(token).getUser();
+    }
+
+    @Override
+    public void changePassword(User user, String password) {
+        user.setPassword(passwordEncoder.encode(password));
+        userRepository.save(user);
     }
 }
