@@ -27,7 +27,7 @@ public class UserController {
     @Autowired
     UserResponsitory userResponsitory;
     @GetMapping("/login")
-    public ModelAndView ridirectLogin(){
+    public ModelAndView redirectLogin(){
         ModelAndView view = new ModelAndView();
         view.setViewName("Sign-In-Up");
         return view;
@@ -38,7 +38,7 @@ public class UserController {
         Cookie cookie = new Cookie("setUser", "");
         cookie.setMaxAge(0);
         response.addCookie(cookie);
-        return ridirectLogin();
+        return redirectLogin();
     }
 
     @PostMapping(value = {"/login"})
