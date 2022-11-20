@@ -8,11 +8,16 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface NewsRepository extends PagingAndSortingRepository<News,Long> {
+public interface NewsRepository extends PagingAndSortingRepository<News,Integer> {
 
-    public Long countById(Long id);
+    public Long countById(int id);
 
     @Query(nativeQuery = true, value = "select * from news order by id desc")
     public Page<News> findAllOrderById(Pageable pageable);
+
+    News findNewsById (int id);
+    @Query("SELECT n FROM News n order by n.createAt desc ")
+    Page<News> getTop5(Pageable pageable);
+
 
 }

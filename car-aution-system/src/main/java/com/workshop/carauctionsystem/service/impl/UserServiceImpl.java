@@ -23,30 +23,46 @@ import java.util.*;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
-
-
-    @Override
-    public Optional<User> findUserByName(String username) {
-        return userRepository.findUserByUserName(username);
-    }
-
-    @Autowired
+	
+	@Autowired
     private VerificationTokenRepository verificationTokenRepository;
 
     @Autowired
     private RoleRepository roleRepository;
+	
     @Autowired
     private PasswordEncoder passwordEncoder;
+	
+	@Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Override
+    public User login(String username, String password) {
+        return userResponsitory.findUserByUserNameAndPassword(username, password);
+    }
+
+    @Override
+    public User findUserByName(String username) {
+        return userResponsitory.findUserByUserName(username);
+    }
+
+    @Override
+    public User findUserById(int id) {
+        return userResponsitory.findUserById(id);
+    }
+
+    @Override
+    public void updateUserById(String fullName, String userName, String phone, String email, int id){
+        userResponsitory.updateUserById(fullName, userName, phone, email, id);
+    }
 
     @Override
     public Optional<User> login(String username, String password) {
         return userRepository.findUserByUserNameAndPassword(username, passwordEncoder.encode(password));
     }
-    @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
+    
     @Override
     public User getUser(String verificationToken) {
         final VerificationToken token = verificationTokenRepository.findByToken(verificationToken);

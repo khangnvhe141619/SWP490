@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.sql.Time;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -29,9 +31,6 @@ public class Room {
     @Column(name = "roomname")
     private String roomName;
 
-    @Column(name = "roomtime")
-    private String roomTime;
-
     @Column(name = "createdat")
     private String createdAt;
 
@@ -40,6 +39,21 @@ public class Room {
 
     @Column(name = "createdby")
     private String createdBy;
+
+    @Column(name = "opendate")
+    private Date openDate;
+
+    @Column(name = "starttime")
+    private Time startTime;
+
+    @Column(name = "endtime")
+    private Time endTime;
+
+    @Column(name = "ticketnumber")
+    private int ticketNumber;
+
+    @Column(name = "ticketprice")
+    private int ticketPrice;
 
     @Column(name = "imgpath")
     private String imgPath;

@@ -302,7 +302,7 @@
         </div>
             </section>
           <!-- Modal -->
-          <div class="modal fade" th:id="'bd-example-modal-lg'+*{listRoom.carId}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="width: 100%">
+          <div th:id="'bd-example-modal-lg'+*{listRoom.carId}" class="modal fade"  tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="width: 100%">
             <div class="modal-dialog modal-lg">
               <div class="modal-content"  style="width: 100%">
                 <div class="modal-header">
@@ -353,7 +353,7 @@
                         </p>
                         <p class="border-top border-bottom">
                           <span class="h6">Ticket:</span>
-                          <span class="result">50$</span>
+                          <span class="result" th:text="${listRoom.ticketPrice}"></span>
                         </p>
                       </div>
                       <div class="col-md-5 ms-2">
@@ -367,11 +367,11 @@
                         </p>
                         <p class="border-top border-bottom">
                           <span class="h6">Start:</span>
-                          <span class="result">09:00:00 20/10/2022</span>
+                          <span class="result" th:text="${listRoom.startTime}"></span>
                         </p>
                         <p class="border-top border-bottom">
                           <span class="h6">End:</span>
-                          <span class="result">09:30:00 20/10/2022</span>
+                          <span class="result" th:text="${listRoom.endTime}"></span>
                         </p>
 
                       </div>
