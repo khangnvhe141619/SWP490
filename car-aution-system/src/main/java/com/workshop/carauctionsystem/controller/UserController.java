@@ -1,7 +1,7 @@
 package com.workshop.carauctionsystem.controller;
 
 import com.workshop.carauctionsystem.entity.User;
-import com.workshop.carauctionsystem.repository.UserResponsitory;
+import com.workshop.carauctionsystem.repository.UserRepository;
 import com.workshop.carauctionsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -25,9 +25,9 @@ public class UserController {
     UserService service;
 
     @Autowired
-    UserResponsitory userResponsitory;
+    UserRepository userRepository;
     @GetMapping("/login")
-    public ModelAndView ridirectLogin(){
+    public ModelAndView redirectLogin(){
         ModelAndView view = new ModelAndView();
         view.setViewName("Sign-In-Up");
         return view;
@@ -38,7 +38,7 @@ public class UserController {
         Cookie cookie = new Cookie("setUser", "");
         cookie.setMaxAge(0);
         response.addCookie(cookie);
-        return ridirectLogin();
+        return redirectLogin();
     }
 
     @PostMapping(value = {"/login"})

@@ -2,9 +2,10 @@ package com.workshop.carauctionsystem.service.impl;
 
 import com.workshop.carauctionsystem.entity.User;
 import com.workshop.carauctionsystem.entity.VerificationToken;
+import com.workshop.carauctionsystem.exception.UserAlreadyExistException;
 import com.workshop.carauctionsystem.model.UserDTO;
 import com.workshop.carauctionsystem.repository.RoleRepository;
-import com.workshop.carauctionsystem.repository.UserResponsitory;
+import com.workshop.carauctionsystem.repository.UserRepository;
 import com.workshop.carauctionsystem.repository.VerificationTokenRepository;
 import com.workshop.carauctionsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,25 +15,19 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.sql.Timestamp;
+import java.util.*;
 
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {
     @Autowired
-    private UserResponsitory userResponsitory;
+    private UserRepository userRepository;
 
-    @Override
-    public Optional<User> login(String username, String password) {
-        return userResponsitory.findUserByUserNameAndPassword(username, password);
-    }
 
     @Override
     public Optional<User> findUserByName(String username) {
-        return userResponsitory.findUserByUserName(username);
+        return userRepository.findUserByUserName(username);
     }
 
     @Autowired
@@ -43,6 +38,10 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Override
+    public Optional<User> login(String username, String password) {
+        return userRepository.findUserByUserNameAndPassword(username, passwordEncoder.encode(password));
+    }
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -59,19 +58,35 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void saveRegisteredUser(User user) {
-        userResponsitory.save(user);
+        userRepository.save(user);
+    }
+    @Override
+    public boolean isEmailExist(String email) {
+        return userRepository.findByEmail(email) != null;
     }
 
     @Override
-    public User registerNewUser(UserDTO userDTO) {
+    public boolean isUsernameExist(String username) {
+        return userRepository.findByUserName(username) != null;
+    }
+
+    @Override
+    public User registerNewUserAccount(UserDTO userDTO) {
+        if (isEmailExist(userDTO.getEmail())) {
+            throw new UserAlreadyExistException("There is an account with that email address: " + userDTO.getEmail());
+        }
         User user = new User();
         user.setUserName(userDTO.getUsername());
         user.setFullName(userDTO.getFullName());
         user.setEmail(userDTO.getEmail());
         user.setPhone(userDTO.getPhone());
         user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+        user.setAvatar(userDTO.getAvatar());
         user.setRoles(Arrays.asList(roleRepository.findByName("USER_ROLE")));
-        return userResponsitory.save(user);
+        Date date = new Date();
+        user.setCreatedAt(new Timestamp(date.getTime()));
+        user.setAddressWallet(userDTO.getAddressWallet());
+        return userRepository.save(user);
     }
 
     @Override
