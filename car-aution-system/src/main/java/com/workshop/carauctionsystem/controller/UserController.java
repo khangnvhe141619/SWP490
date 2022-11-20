@@ -1,7 +1,7 @@
 package com.workshop.carauctionsystem.controller;
 
 import com.workshop.carauctionsystem.entity.User;
-import com.workshop.carauctionsystem.repository.UserResponsitory;
+import com.workshop.carauctionsystem.repository.UserRepository;
 import com.workshop.carauctionsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -25,7 +25,7 @@ public class UserController {
     UserService service;
 
     @Autowired
-    UserResponsitory userResponsitory;
+    UserRepository userRepository;
     @GetMapping("/login")
     public ModelAndView redirectLogin(){
         ModelAndView view = new ModelAndView();

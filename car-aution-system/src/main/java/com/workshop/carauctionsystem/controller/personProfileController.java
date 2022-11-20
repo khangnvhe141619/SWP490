@@ -1,7 +1,7 @@
 package com.workshop.carauctionsystem.controller;
 
 import com.workshop.carauctionsystem.entity.User;
-import com.workshop.carauctionsystem.repository.UserResponsitory;
+import com.workshop.carauctionsystem.repository.UserRepository;
 import com.workshop.carauctionsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.Cookie;
+import java.util.Optional;
+
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -23,7 +25,7 @@ public class personProfileController {
     UserService service;
 
     @Autowired
-    UserResponsitory userResponsitory;
+    UserRepository userRepository;
 
     @GetMapping(value = {"/personProfile"})
     public String getPersonProfile( User user, @CookieValue(value = "setUserId") int setUserId, Model model){

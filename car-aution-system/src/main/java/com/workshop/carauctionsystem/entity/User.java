@@ -34,6 +34,8 @@ public class User implements Serializable {
     private String avatar;
     @Column(name = "enabled")
     private int enabled;
+    @Column(name = "addresswallet")
+    private String addressWallet;
     @Column(name = "createdat")
     private Timestamp createdAt;
     @ManyToMany(fetch = FetchType.EAGER)

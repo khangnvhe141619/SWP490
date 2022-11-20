@@ -18,7 +18,11 @@ public interface UserService {
 
     void saveRegisteredUser(User user);
 
-    public User registerNewUser(UserDTO userDTO);
+    boolean isEmailExist(String email);
+
+    boolean isUsernameExist(String username);
+
+    public User registerNewUserAccount(UserDTO userDTO);
 
     void createVerificationTokenForUser(User user, String token);
 
