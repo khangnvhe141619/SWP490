@@ -55,16 +55,16 @@ CREATE TABLE `car` (
   `description` longtext NOT NULL,
   `upBoundPrice` int NOT NULL,
   `downBoundPrice` int NOT NULL,
-  `modelId` int NOT NULL,
+  `modelspecId` int NOT NULL,
   `status` int NOT NULL,
   `createdBy` int NOT NULL,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `car_modelid_foreign` (`modelId`),
+  KEY `car_modelid_foreign` (`modelspecId`),
   KEY `car_createby_foreign` (`createdBy`),
   CONSTRAINT `car_createby_foreign` FOREIGN KEY (`createdBy`) REFERENCES `user` (`id`),
-  CONSTRAINT `car_modelid_foreign` FOREIGN KEY (`modelId`) REFERENCES `model` (`id`)
+  CONSTRAINT `car_modelspecid_foreign` FOREIGN KEY (`modelspecId`) REFERENCES `modelspecification` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -209,7 +209,6 @@ CREATE TABLE `model` (
   `id` int NOT NULL AUTO_INCREMENT,
   `brandId` int NOT NULL,
   `modelName` varchar(255) NOT NULL,
-  `modelSpecificationId` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `model_brandid_foreign` (`brandId`),
   CONSTRAINT `model_brandid_foreign` FOREIGN KEY (`brandId`) REFERENCES `brand` (`id`)
@@ -222,7 +221,7 @@ CREATE TABLE `model` (
 
 LOCK TABLES `model` WRITE;
 /*!40000 ALTER TABLE `model` DISABLE KEYS */;
-INSERT INTO `model` VALUES (1,4,'E-Class',1),(2,4,'C-Class',1),(3,4,'S-Class',1),(4,4,'G-Class',4),(5,1,'LUX SA2.0',4),(6,1,'Lux A2.0',1),(7,1,'Fadil',2),(8,2,'Mazda 3',1),(9,2,'Mazda CX-5',4),(10,3,'Camry',1),(11,3,'Corolla Altis',1),(12,3,'Fortuner',4),(13,3,'Land Cruiser Prado',4),(14,3,'Vios ',1),(15,5,'LX',4),(16,5,'LS',1),(17,5,'ES',1),(18,6,'Ford Ranger',12),(19,7,'Accent',1),(20,7,'Santa Fe',4),(21,7,'Tucson',14),(22,7,'Elantra',1),(23,7,'Grand i10',2),(24,8,'718 Cayman',8),(25,8,'911 Carrera',8),(26,8,'911 Turbo',8),(27,8,'Taycan',1),(28,8,'Panamera',1),(29,9,'CR-V',4),(30,9,'Accord',1),(31,9,'City',1),(32,9,'Civic',1),(33,10,'Mulsanne',1),(34,10,'Flying ',1),(35,10,'Continental ',7),(36,10,'Bentayga',14),(37,11,'Series 3',1),(38,11,'Series 5',1),(39,11,'Series 6',1),(40,11,'Series 7',1),(41,11,'X Series',14),(42,11,'M Series',1),(43,11,' i8',8),(44,12,'A class',1),(45,12,'Q class',4),(46,12,'R8',8),(47,12,'S8',1),(48,12,'TT',7),(49,14,'488 Pista',8),(50,14,'SF90 Stradale',8),(51,14,'488GTB',8),(52,14,'F8 Tributo',8),(53,14,'812 Superfast',8),(54,15,'Urus',14),(55,15,'Huracan',8),(56,15,'Aventador',8),(57,15,'Sian',8),(58,16,'Cullinan',4),(59,16,'Ghost',1),(60,16,'Phantom',1);
+INSERT INTO `model` VALUES (1,4,'E-Class'),(2,4,'C-Class'),(3,4,'S-Class'),(4,4,'G-Class'),(5,1,'LUX SA2.0'),(6,1,'Lux A2.0'),(7,1,'Fadil'),(8,2,'Mazda 3'),(9,2,'Mazda CX-5'),(10,3,'Camry'),(11,3,'Corolla Altis'),(12,3,'Fortuner'),(13,3,'Land Cruiser Prado'),(14,3,'Vios '),(15,5,'LX'),(16,5,'LS'),(17,5,'ES'),(18,6,'Ford Ranger'),(19,7,'Accent'),(20,7,'Santa Fe'),(21,7,'Tucson'),(22,7,'Elantra'),(23,7,'Grand i10'),(24,8,'718 Cayman'),(25,8,'911 Carrera'),(26,8,'911 Turbo'),(27,8,'Taycan'),(28,8,'Panamera'),(29,9,'CR-V'),(30,9,'Accord'),(31,9,'City'),(32,9,'Civic'),(33,10,'Mulsanne'),(34,10,'Flying '),(35,10,'Continental '),(36,10,'Bentayga'),(37,11,'Series 3'),(38,11,'Series 5'),(39,11,'Series 6'),(40,11,'Series 7'),(41,11,'X Series'),(42,11,'M Series'),(43,11,' i8'),(44,12,'A class'),(45,12,'Q class'),(46,12,'R8'),(47,12,'S8'),(48,12,'TT'),(49,14,'488 Pista'),(50,14,'SF90 Stradale'),(51,14,'488GTB'),(52,14,'F8 Tributo'),(53,14,'812 Superfast'),(54,15,'Urus'),(55,15,'Huracan'),(56,15,'Aventador'),(57,15,'Sian'),(58,16,'Cullinan'),(59,16,'Ghost'),(60,16,'Phantom');
 /*!40000 ALTER TABLE `model` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -234,10 +233,11 @@ DROP TABLE IF EXISTS `modelspecification`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `modelspecification` (
+	`id` int NOT NULL AUTO_INCREMENT,
   `modelId` int NOT NULL,
   `name` varchar(255) NOT NULL,
   `seatNumber` int NOT NULL,
-  PRIMARY KEY (`modelId`),
+  PRIMARY KEY (`id`),
   CONSTRAINT `modelspecification_modelid_foreign` FOREIGN KEY (`modelId`) REFERENCES `model` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -248,7 +248,7 @@ CREATE TABLE `modelspecification` (
 
 LOCK TABLES `modelspecification` WRITE;
 /*!40000 ALTER TABLE `modelspecification` DISABLE KEYS */;
-INSERT INTO `modelspecification` VALUES (1,'Sedan',5),(2,'Hatchback',5),(3,'Sedan',4),(4,'SUV',7),(6,'CUV',7),(7,'Coupe ',4),(8,'Coupe ',2),(9,'MVP',7),(10,'Convertible ',2),(11,'Convertible ',4),(12,'Pickup ',5),(13,'Limousine',12),(14,'SUV',5);
+INSERT INTO `modelspecification` (`id` ,`modelId`, `name`, `seatNumber`) VALUES (1, 1,'Sedan',5),(2, 2,'Hatchback',5),(3, 3,'Sedan',4),(4, 4,'SUV',7),(5, 6,'CUV',7),(6, 7,'Coupe ',4),(7, 8,'Coupe ',2),(8, 9,'MVP',7),(9, 10,'Convertible ',2),(10, 11,'Convertible ',4),(11, 12,'Pickup ',5),(12, 13,'Limousine',12),(13, 14,'SUV',5),(20, 20,'Limousine',12),(27, 27,'Convertible ',4),(37, 37,'SUV',4),(52, 52,'Coupe ',2),(55, 55,'Coupe ',4);
 /*!40000 ALTER TABLE `modelspecification` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -578,4 +578,3 @@ ADD COLUMN `ticketPrice` INT NOT NULL AFTER `ticketNumber`,
 ADD COLUMN `imgPath` VARCHAR(255) NOT NULL AFTER `ticketPrice`;
 ALTER TABLE `swp490_cab`.`user` 
 ADD COLUMN `addressWallet` VARCHAR(255) NULL AFTER `createdAt`;
--- Dump completed on 2022-11-03 23:09:16
