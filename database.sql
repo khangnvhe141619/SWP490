@@ -576,5 +576,6 @@ ADD COLUMN `endTime` TIME NOT NULL AFTER `startTime`,
 ADD COLUMN `ticketNumber` INT NOT NULL AFTER `endTime`,
 ADD COLUMN `ticketPrice` INT NOT NULL AFTER `ticketNumber`,
 ADD COLUMN `imgPath` VARCHAR(255) NOT NULL AFTER `ticketPrice`;
-
+ALTER TABLE `swp490_cab`.`user` 
+ADD COLUMN `addressWallet` VARCHAR(255) NULL AFTER `createdAt`;
 -- Dump completed on 2022-11-03 23:09:16
