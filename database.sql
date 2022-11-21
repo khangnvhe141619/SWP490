@@ -630,3 +630,11 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2022-11-21 16:55:41
+ALTER TABLE `swp490_cab`.`room` 
+ADD COLUMN `openDate` DATE NOT NULL AFTER `createdBy`,
+ADD COLUMN `startTime` TIME NOT NULL AFTER `openDate`,
+ADD COLUMN `endTime` TIME NOT NULL AFTER `startTime`,
+ADD COLUMN `ticketNumber` INT NOT NULL AFTER `endTime`,
+ADD COLUMN `ticketPrice` INT NOT NULL AFTER `ticketNumber`;
+ALTER TABLE `swp490_cab`.`user` 
+ADD COLUMN `addressWallet` VARCHAR(255) NULL AFTER `createdAt`;
