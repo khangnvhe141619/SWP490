@@ -3,6 +3,7 @@ package com.workshop.carauctionsystem.controller;
 
 import com.workshop.carauctionsystem.entity.Brand;
 import com.workshop.carauctionsystem.exception.NotFoundException;
+import com.workshop.carauctionsystem.model.BrandModel;
 import com.workshop.carauctionsystem.service.impl.BrandServiceImpl;
 import com.workshop.carauctionsystem.validate.Validate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,15 +13,13 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
+import java.util.Map;
 
 @Controller
 public class BrandController {
@@ -28,13 +27,16 @@ public class BrandController {
     @Autowired
     BrandServiceImpl brandService;
 
-    @Autowired
-    Validate validate;
-
     @GetMapping("/brand")
-    public ModelAndView showList(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "id") String id) {
+    //get list brand by page
+    public ModelAndView showList(@RequestParam(defaultValue = "0") int page,
+                                 @RequestParam(defaultValue = "id") String id,
+                                 @RequestParam(defaultValue = "") String search,
+                                 Model model) {
         ModelAndView modelAndView = null;
-        Page<Brand> list = brandService.findAllOrderById(PageRequest.of(page, 5, Sort.by(id)));
+        //get list brand by page and sort by id desc
+        model.addAttribute("brandModel", new BrandModel());
+        Page<Brand> list = brandService.findAllOrderByName(PageRequest.of(page, 5, Sort.by(id)), search);
         if (!list.isEmpty()) {
             modelAndView = new ModelAndView("admin/listBrand");
             modelAndView.addObject("brands", list);
@@ -44,37 +46,27 @@ public class BrandController {
         return modelAndView;
     }
 
-    @GetMapping("/brand/create")
-    public ModelAndView showFormCreate() {
-        ModelAndView modelAndView = null;
-        try {
-            modelAndView = new ModelAndView("test");
-            modelAndView.addObject("brand", new Brand());
-            return modelAndView;
-        } catch (Exception e) {
-            modelAndView = new ModelAndView("page404");
-            return modelAndView;
-        }
-    }
-
     @PostMapping("brand/create")
-    public String create(@Valid @ModelAttribute(value = "brand") Brand brand,
-                         BindingResult bindingResult, @RequestParam MultipartFile upImg,
-                         RedirectAttributes ra, Model model) {
-        validate.validate(brand, bindingResult);
-        if (bindingResult.hasFieldErrors()) {
-            return "test";
-        }
+    public String create(@ModelAttribute(value = "brandModel") BrandModel brandModel,
+                         @RequestParam MultipartFile upImg, RedirectAttributes ra) {
         try {
             String nameFile = upImg.getOriginalFilename();
             FileCopyUtils.copy(upImg.getBytes(), new File("E:\\DoAn\\SWP490\\car-aution-system\\src\\main\\resources\\static\\assets\\hoang/" + nameFile));
+            Brand brand = new Brand();
+            brand.setBrandName(brandModel.getName());
+            Validate validateName = new Validate();
+            if (validateName.checkDuplicateBrand(brandModel.getName(), brandService.getAllBrand())) {
+                ra.addFlashAttribute("fail", "This car brand already exists");
+                return "redirect:/brand";
+            }
+            brand.setStatus(Long.valueOf(1));
             brand.setImgPath("/hoang/" + nameFile);
             brandService.saveBrand(brand);
-            ra.addFlashAttribute("message", "The brand has been saved successfully");
+            ra.addFlashAttribute("success", "The brand has been saved successfully");
             return "redirect:/brand";
         } catch (IOException e) {
-            model.addAttribute("message", "Must upload a image");
-            return "test";
+            ra.addFlashAttribute("fail", "Must upload a image");
+            return "redirect:/brand";
         }
     }
 
@@ -85,44 +77,39 @@ public class BrandController {
             brandService.delete(id);
         } catch (NotFoundException e) {
             ra.addFlashAttribute("message", e.getMessage());
+            return "page404";
         }
+        ra.addFlashAttribute("success", "The brand has been deleted successfully");
         return "redirect:/brand";
     }
 
-    @GetMapping("/brand/edit/{id}")
-    public String showFormUpdate(@PathVariable(value = "id") Long id, Model model, RedirectAttributes ra) throws NotFoundException {
-        Brand brand = brandService.findById(id);
-        if (brand != null) {
-            model.addAttribute("brand", brand);
-            return "update";
-        } else {
-            throw new NotFoundException("Could not find any with ID");
-        }
-    }
 
     @PostMapping("brand/edit")
-    public String update(@Valid @ModelAttribute(value = "brand") Brand brand,
-                         BindingResult bindingResult, @RequestParam MultipartFile upImg, @RequestParam Long id,
-                         RedirectAttributes ra) {
+    public String update(@RequestParam MultipartFile upImg, RedirectAttributes ra,
+                         @RequestParam Map<String, String> requestMap) {
+
+        Long id = Long.parseLong(requestMap.get("id"));
+        String name = requestMap.get("name");
         String nameFile = upImg.getOriginalFilename();
         Brand brandId = brandService.findById(id);
-        brand.setImgPath(brandId.getImgPath());
         try {
-            if(!brand.getBrandName().equals(brandId.getBrandName())){
-                validate.validate(brand, bindingResult);
-                if (bindingResult.hasFieldErrors()) {
-                    return "update";
+            if (!name.toLowerCase().equals(brandId.getBrandName().toLowerCase())) {
+                Validate validateName = new Validate();
+                if (validateName.checkDuplicateBrand(name, brandService.getAllBrand())) {
+                    ra.addFlashAttribute("fail", "This car brand already exists");
+                    return "redirect:/brand";
                 }
             }
-
+            //brandId.setBrandName(name);
             FileCopyUtils.copy(upImg.getBytes(), new File("E:\\DoAn\\SWP490\\car-aution-system\\src\\main\\resources\\static\\assets\\hoang/" + nameFile));
-            brand.setImgPath("/hoang/" + nameFile);
-            brandService.saveBrand(brand);
+            String img = "/hoang/" + nameFile;
+            brandService.updateBrand(name, img, id);
         } catch (IOException e) {
-            brand.setImgPath(brandId.getImgPath());
-            brandService.saveBrand(brand);
+            //  brandId.setImgPath(brandId.getImgPath());
+            String img = brandId.getImgPath();
+            brandService.updateBrand(name, img, id);
         }
-        ra.addFlashAttribute("message", "The brand has been saved successfully");
+        ra.addFlashAttribute("success", "The brand has been saved successfully");
         return "redirect:/brand";
     }
 

@@ -20,7 +20,7 @@ public class ModelSpecification {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "modelid")
+    @Column(name = "id")
     private Long id;
 
     @Pattern(regexp = "[a-zA-Z]+",message = "Name not null and no number")
@@ -30,6 +30,8 @@ public class ModelSpecification {
     @Min(value = 2, message = "Min 2 max 32")
     @Max(value = 32, message = "Min 2 max 32")
     @Column(name = "seatnumber")
-    private Long seatNumber;
+    private int seatNumber;
 
+    @Column(name = "status")
+    private int status;
 }

@@ -12,8 +12,10 @@ public interface BrandService {
 
     List<Brand> getAllBrand();
     public void saveBrand(Brand brand);
+    public void updateBrand(String name,String img,Long id);
     public void delete(Long id) throws NotFoundException;
     public Brand findById(Long id) throws NotFoundException;
     public Page<Brand> findAllOrderById(Pageable pageable);
+    public Page<Brand> findAllOrderByName(Pageable pageable,String name);
 
 }

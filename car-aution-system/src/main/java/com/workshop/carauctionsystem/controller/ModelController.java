@@ -1,20 +1,15 @@
 package com.workshop.carauctionsystem.controller;
 
 import com.workshop.carauctionsystem.entity.ModelCar;
-import com.workshop.carauctionsystem.entity.ModelSpecification;
 import com.workshop.carauctionsystem.exception.NotFoundException;
 import com.workshop.carauctionsystem.service.impl.ModelServiceImpl;
 import com.workshop.carauctionsystem.validate.Validate;
-import com.workshop.carauctionsystem.validate.Validate1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.FileCopyUtils;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -25,9 +20,6 @@ import javax.validation.Valid;
 public class ModelController {
     @Autowired
     ModelServiceImpl modelService;
-
-    @Autowired
-    Validate validate;
 
     @GetMapping("/model")
     public ModelAndView showList(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "id") String id) {
@@ -60,7 +52,7 @@ public class ModelController {
                          @RequestParam Long idModelSpec,
                          RedirectAttributes ra, Model model) {
         try {
-            Validate1 validateName = new Validate1();
+            Validate validateName = new Validate();
             if( validateName.checkDuplicateModel(modelCar.getModelName(),
                     modelCar.getBrandId().getId(), modelService.getAllModel())){
                 model.addAttribute("message","Model exist");
@@ -101,7 +93,7 @@ public class ModelController {
     public String update(@Valid @ModelAttribute(value = "model") ModelCar modelCar,
                          @RequestParam Long id, RedirectAttributes ra,Model model) {
         try {
-            Validate1 validateName = new Validate1();
+            Validate validateName = new Validate();
             if( validateName.checkDuplicateModel(modelCar.getModelName(), modelCar.getBrandId().getId(),
                     modelService.getAllModel())){
                 model.addAttribute("message","Model exist");

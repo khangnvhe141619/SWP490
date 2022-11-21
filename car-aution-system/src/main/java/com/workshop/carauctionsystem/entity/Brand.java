@@ -3,13 +3,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 @Data
 @Entity
 @Table(name = "brand")
@@ -26,4 +26,6 @@ public class Brand {
     @Column(name = "imgpath")
     private String imgPath;
 
+    @Column(name = "status")
+    private Long status;
 }
