@@ -28,8 +28,9 @@ CREATE TABLE `brand` (
   `id` int NOT NULL AUTO_INCREMENT,
   `brandName` varchar(255) NOT NULL,
   `imgPath` varchar(255) NOT NULL,
+  `status` bit(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +39,7 @@ CREATE TABLE `brand` (
 
 LOCK TABLES `brand` WRITE;
 /*!40000 ALTER TABLE `brand` DISABLE KEYS */;
-INSERT INTO `brand` VALUES (1,'VINFAST','img'),(2,'MAZDA','img'),(3,'TOYOTA','img'),(4,'MERCEDES-BENZ','img'),(5,'LEXUS','img'),(6,'FORD','img'),(7,'HYUNDAI','img'),(8,'PORSCHE','img'),(9,'HONDA','img'),(10,'BENTLEY','img'),(11,'BMW','img'),(12,'AUDI','img'),(13,'BUGATTI','img'),(14,'FERRARI','img'),(15,'LAMBORGHINI','img'),(16,'ROLLS-ROYCE','img');
+INSERT INTO `brand` VALUES (1,'VINFAST','/hoang/vinfast.jpg',_binary ''),(2,'MAZDA','/hoang/mazda.jpg',_binary ''),(3,'TOYOTA','/hoang/toyota.png',_binary ''),(4,'Mercedes-Benz','/hoang/Mercedes_Benz.jpg',_binary ''),(5,'LEXUS','/hoang/lexus.png',_binary ''),(6,'FORD','/hoang/ford.jpg',_binary ''),(7,'HYUNDAI','/hoang/huyndai.jpg',_binary ''),(8,'PORSCHE','/hoang/porsche.jpg',_binary ''),(9,'HONDA','/hoang/honda.jpg',_binary ''),(10,'BENTLEY','/hoang/bentlay.png',_binary ''),(11,'BMW','/hoang/bmw.png',_binary ''),(12,'AUDI','/hoang/audi.jpg',_binary ''),(13,'BUGATTI','/hoang/bugati.png',_binary ''),(14,'FERRARI','/hoang/client-3.png',_binary ''),(15,'LAMBORGHINI','/hoang/client-1.png',_binary ''),(16,'ROLLS-ROYCE','/hoang/rollroyce.jpg',_binary ''),(17,'MASERATI','/hoang/images.png',_binary ''),(25,'Chevrolet','/hoang/chevrolet.jpg',_binary ''),(72,'Hoang','/hoang/rollroyce.jpg',_binary '\0'),(73,'Hoang','/hoang/bentlay.png',_binary '\0');
 /*!40000 ALTER TABLE `brand` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -61,10 +62,12 @@ CREATE TABLE `car` (
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `car_modelid_foreign` (`modelId`),
-  KEY `car_createby_foreign` (`createdBy`),
+  KEY `FKt5hnpbk4vw85s1skfua1k72c8` (`createdBy`),
+  KEY `FK5vblw4pdpgrbn3xusfabxmyd0` (`modelId`),
   CONSTRAINT `car_createby_foreign` FOREIGN KEY (`createdBy`) REFERENCES `user` (`id`),
-  CONSTRAINT `car_modelid_foreign` FOREIGN KEY (`modelId`) REFERENCES `model` (`id`)
+  CONSTRAINT `car_modelid_foreign` FOREIGN KEY (`modelId`) REFERENCES `model` (`id`),
+  CONSTRAINT `FK5vblw4pdpgrbn3xusfabxmyd0` FOREIGN KEY (`modelId`) REFERENCES `model` (`id`),
+  CONSTRAINT `FKt5hnpbk4vw85s1skfua1k72c8` FOREIGN KEY (`createdBy`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -124,16 +127,11 @@ DROP TABLE IF EXISTS `favorite`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `favorite` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `userId` int NOT NULL,
-  `carId` int NOT NULL,
-  `createdAt` datetime NOT NULL,
-  `number` int NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `favorite_userid_foreign` (`userId`),
-  KEY `favorite_carid_foreign` (`carId`),
-  CONSTRAINT `favorite_carid_foreign` FOREIGN KEY (`carId`) REFERENCES `car` (`id`),
-  CONSTRAINT `favorite_userid_foreign` FOREIGN KEY (`userId`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `createdat` datetime DEFAULT NULL,
+  `number` int DEFAULT NULL,
+  `userid` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -143,6 +141,34 @@ CREATE TABLE `favorite` (
 LOCK TABLES `favorite` WRITE;
 /*!40000 ALTER TABLE `favorite` DISABLE KEYS */;
 /*!40000 ALTER TABLE `favorite` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `favoritedto`
+--
+
+DROP TABLE IF EXISTS `favoritedto`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `favoritedto` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `carid` int DEFAULT NULL,
+  `carname` varchar(255) DEFAULT NULL,
+  `createdat` datetime DEFAULT NULL,
+  `imgpath` varchar(255) DEFAULT NULL,
+  `number` int DEFAULT NULL,
+  `userid` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `favoritedto`
+--
+
+LOCK TABLES `favoritedto` WRITE;
+/*!40000 ALTER TABLE `favoritedto` DISABLE KEYS */;
+/*!40000 ALTER TABLE `favoritedto` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -175,6 +201,28 @@ LOCK TABLES `gamerecord` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `hibernate_sequence`
+--
+
+DROP TABLE IF EXISTS `hibernate_sequence`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `hibernate_sequence` (
+  `next_val` bigint DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `hibernate_sequence`
+--
+
+LOCK TABLES `hibernate_sequence` WRITE;
+/*!40000 ALTER TABLE `hibernate_sequence` DISABLE KEYS */;
+INSERT INTO `hibernate_sequence` VALUES (1);
+/*!40000 ALTER TABLE `hibernate_sequence` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `image`
 --
 
@@ -183,10 +231,11 @@ DROP TABLE IF EXISTS `image`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `image` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `carId` int NOT NULL,
-  `imgPath` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `imgpath` varchar(255) DEFAULT NULL,
+  `carid` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK3lwukq6yfu75edrx8l035ji3a` (`carid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -210,8 +259,12 @@ CREATE TABLE `model` (
   `brandId` int NOT NULL,
   `modelName` varchar(255) NOT NULL,
   `modelSpecificationId` int NOT NULL,
+  `status` bit(1) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `model_brandid_foreign` (`brandId`),
+  KEY `FKeln7t5w71rojd0bj3r6q65p5` (`modelSpecificationId`),
+  KEY `FKf36eyn60g4tlx4w9ldv2gmipu` (`brandId`),
+  CONSTRAINT `FKeln7t5w71rojd0bj3r6q65p5` FOREIGN KEY (`modelSpecificationId`) REFERENCES `modelspecification` (`id`),
+  CONSTRAINT `FKf36eyn60g4tlx4w9ldv2gmipu` FOREIGN KEY (`brandId`) REFERENCES `brand` (`id`),
   CONSTRAINT `model_brandid_foreign` FOREIGN KEY (`brandId`) REFERENCES `brand` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -222,7 +275,7 @@ CREATE TABLE `model` (
 
 LOCK TABLES `model` WRITE;
 /*!40000 ALTER TABLE `model` DISABLE KEYS */;
-INSERT INTO `model` VALUES (1,4,'E-Class',1),(2,4,'C-Class',1),(3,4,'S-Class',1),(4,4,'G-Class',4),(5,1,'LUX SA2.0',4),(6,1,'Lux A2.0',1),(7,1,'Fadil',2),(8,2,'Mazda 3',1),(9,2,'Mazda CX-5',4),(10,3,'Camry',1),(11,3,'Corolla Altis',1),(12,3,'Fortuner',4),(13,3,'Land Cruiser Prado',4),(14,3,'Vios ',1),(15,5,'LX',4),(16,5,'LS',1),(17,5,'ES',1),(18,6,'Ford Ranger',12),(19,7,'Accent',1),(20,7,'Santa Fe',4),(21,7,'Tucson',14),(22,7,'Elantra',1),(23,7,'Grand i10',2),(24,8,'718 Cayman',8),(25,8,'911 Carrera',8),(26,8,'911 Turbo',8),(27,8,'Taycan',1),(28,8,'Panamera',1),(29,9,'CR-V',4),(30,9,'Accord',1),(31,9,'City',1),(32,9,'Civic',1),(33,10,'Mulsanne',1),(34,10,'Flying ',1),(35,10,'Continental ',7),(36,10,'Bentayga',14),(37,11,'Series 3',1),(38,11,'Series 5',1),(39,11,'Series 6',1),(40,11,'Series 7',1),(41,11,'X Series',14),(42,11,'M Series',1),(43,11,' i8',8),(44,12,'A class',1),(45,12,'Q class',4),(46,12,'R8',8),(47,12,'S8',1),(48,12,'TT',7),(49,14,'488 Pista',8),(50,14,'SF90 Stradale',8),(51,14,'488GTB',8),(52,14,'F8 Tributo',8),(53,14,'812 Superfast',8),(54,15,'Urus',14),(55,15,'Huracan',8),(56,15,'Aventador',8),(57,15,'Sian',8),(58,16,'Cullinan',4),(59,16,'Ghost',1),(60,16,'Phantom',1);
+INSERT INTO `model` VALUES (1,4,'E-Class',1,_binary ''),(2,4,'C-Class',1,_binary ''),(3,4,'S-Class',1,_binary ''),(4,4,'G-Class',4,_binary ''),(5,1,'LUX SA2.0',4,_binary ''),(6,1,'Lux A2.0',1,_binary ''),(7,1,'Fadil',2,_binary ''),(8,2,'Mazda 3',1,_binary ''),(9,2,'Mazda CX-5',4,_binary ''),(10,3,'Camry',1,_binary ''),(11,3,'Corolla Altis',1,_binary ''),(12,3,'Fortuner',4,_binary ''),(13,3,'Land Cruiser Prado',4,_binary ''),(14,3,'Vios ',1,_binary ''),(15,5,'LX',4,_binary ''),(16,5,'LS',1,_binary ''),(17,5,'ES',1,_binary ''),(18,6,'Ford Ranger',12,_binary ''),(19,7,'Accent',1,_binary ''),(20,7,'Santa Fe',4,_binary ''),(21,7,'Tucson',14,_binary ''),(22,7,'Elantra',1,_binary ''),(23,7,'Grand i10',2,_binary ''),(24,8,'718 Cayman',8,_binary ''),(25,8,'911 Carrera',8,_binary ''),(26,8,'911 Turbo',8,_binary ''),(27,8,'Taycan',1,_binary ''),(28,8,'Panamera',1,_binary ''),(29,9,'CR-V',4,_binary ''),(30,9,'Accord',1,_binary ''),(31,9,'City',1,_binary ''),(32,9,'Civic',1,_binary ''),(33,10,'Mulsanne',1,_binary ''),(34,10,'Flying ',1,_binary ''),(35,10,'Continental ',7,_binary ''),(36,10,'Bentayga',14,_binary ''),(37,11,'Series 3',1,_binary ''),(38,11,'Series 5',1,_binary ''),(39,11,'Series 6',1,_binary ''),(40,11,'Series 7',1,_binary ''),(41,11,'X Series',14,_binary ''),(42,11,'M Series',1,_binary ''),(43,11,' i8',8,_binary ''),(44,12,'A class',1,_binary ''),(45,12,'Q class',4,_binary ''),(46,12,'R8',8,_binary ''),(47,12,'S8',1,_binary ''),(48,12,'TT',7,_binary ''),(49,14,'488 Pista',8,_binary ''),(50,14,'SF90 Stradale',8,_binary ''),(51,14,'488GTB',8,_binary ''),(52,14,'F8 Tributo',8,_binary ''),(53,14,'812 Superfast',8,_binary ''),(54,15,'Urus',14,_binary ''),(55,15,'Huracan',8,_binary ''),(56,15,'Aventador',8,_binary ''),(57,15,'Sian',8,_binary ''),(58,16,'Cullinan',4,_binary ''),(59,16,'Ghost',1,_binary ''),(60,16,'Phantom',1,_binary '');
 /*!40000 ALTER TABLE `model` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -234,12 +287,12 @@ DROP TABLE IF EXISTS `modelspecification`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `modelspecification` (
-  `modelId` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `seatNumber` int NOT NULL,
-  PRIMARY KEY (`modelId`),
-  CONSTRAINT `modelspecification_modelid_foreign` FOREIGN KEY (`modelId`) REFERENCES `model` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `status` bit(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -248,7 +301,7 @@ CREATE TABLE `modelspecification` (
 
 LOCK TABLES `modelspecification` WRITE;
 /*!40000 ALTER TABLE `modelspecification` DISABLE KEYS */;
-INSERT INTO `modelspecification` VALUES (1,'Sedan',5),(2,'Hatchback',5),(3,'Sedan',4),(4,'SUV',7),(6,'CUV',7),(7,'Coupe ',4),(8,'Coupe ',2),(9,'MVP',7),(10,'Convertible ',2),(11,'Convertible ',4),(12,'Pickup ',5),(13,'Limousine',12),(14,'SUV',5);
+INSERT INTO `modelspecification` VALUES (1,'Sedan',5,_binary ''),(2,'Hatchback',5,_binary ''),(3,'Sedan',4,_binary ''),(4,'SUV',7,_binary ''),(6,'CUV',7,_binary ''),(7,'Coupe ',4,_binary ''),(8,'Coupe ',2,_binary ''),(9,'MVP',7,_binary ''),(10,'Convertible ',2,_binary ''),(11,'Convertible ',4,_binary ''),(12,'Pickup ',5,_binary ''),(13,'Limousine',12,_binary ''),(14,'SUV',5,_binary '');
 /*!40000 ALTER TABLE `modelspecification` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -266,7 +319,11 @@ CREATE TABLE `news` (
   `shortDescribe` varchar(2000) NOT NULL,
   `describe` longtext NOT NULL,
   `createAt` datetime NOT NULL,
-  `img` varchar(255) DEFAULT NULL,
+  `img` varchar(255) NOT NULL,
+  `describe1` longtext,
+  `describe2` longtext,
+  `describe3` longtext,
+  `describe4` longtext,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -277,7 +334,7 @@ CREATE TABLE `news` (
 
 LOCK TABLES `news` WRITE;
 /*!40000 ALTER TABLE `news` DISABLE KEYS */;
-INSERT INTO `news` VALUES (1,'2023 BMW iX Review: The beauty is on the inside','JOEL STOCKSDALE','Great performance, space and an gorgeous interior make for an excellent flagship SUV','Pros: Exquisite interior design, superb performance, long electric range, comfortable rideCons: Polarizing exterior styling, no third row of seats, desirable driving assists are options. The 2023 BMW iX SUV is leading its brand’s latest wave of electric cars. It makes a statement anywhere it goes with its controversial exterior design, but get past that, and you\'ll discover a beautifully crafted luxury SUV that\'s comfortable to cruise in and surprisingly engaging when driven hard. The interior is where the iX really shines, with modern, airy design that\'s unlike anything on the market, let alone the BMW line-up. It also has the best implementation of the brand\'s current infotainment system, showcasing how good the system can be, when it\'s running well. It\'s also extremely spacious for occupants and cargo, in particular with more carrying space than its closest competitors, and just shy of the Tesla Model X. The ride quality is among the best available from BMW, and extremely good against the competition. It favors the firm side, but that, along with reasonably good steering and a talkative chassis make it fun to drive. The extra power of the iX M60 only adds to the fun. And with ranges exceeding 300 miles on the regular xDrive50 models, you can have fun driving it for long periods of time without having to stop for a charge. Its only major drawbacks are the aforementioned odd styling, a lack of a third-row seat option (although Tesla\'s and Mercedes’ are of questionable use), as well as hiding many features behind options. In particular, simple adaptive cruise control is an extra-cost option, which is somewhat galling when it\'s becoming commonplace on far more affordable cars.But all-in-all, the iX is a luxury electric crossover that feels genuinely special and practical, particularly for the price. If you\'re in the market, it\'s a must-see.','2022-11-02 07:02:56','img'),(2,'2023 BMW M2 gets full range of M Performance parts','RONAN GLON','The catalog includes body kits, wheels, and suspension parts','Unveiled in October 2022, the new 2023 BMW M2 is already eligible to receive a wide selection of factory-developed M Performance parts. The list of add-ons announced by the Munich-based carmaker includes carbon fiber trim, forged wheels, and a lighter exhaust system. BMW M leveraged its five decades of racing experience to give future M2 owners numerous customization options. Starting with the outside, the company designed a carbon fiber body kit that includes a front splitter, inserts for the front air intakes, side skirts, a rear spoiler, and a rear diffuser. M Performance titanium and carbon fiber exhaust tips and a red M-branded tow strap add a finishing touch to the look. Speaking of the exhaust, BMW M created a system that consists of stainless-steel front pipes and a titanium rear section. It weighs over 17 pounds less than the stock setup and includes electronically-controlled flaps. BMW promises it unlocks \"distinct, racing car acoustics.\" Handling is one of BMW M\'s claims to fame, and the M Performance suspension system was designed to make the new M2 even sharper to drive on and off the track. It adds height-adjustable spring cups to the front and rear axles that let drivers lower the ride height by nearly half an inch. These parts can be paired with 20-inch front and 21-inch rear forged wheels available in M Frozen Gold Bronze or M Jet Black. Buyers who want an M-themed interior can add carbon fiber and Alcantara trim, Alcantara-upholstered knee pads, carbon fiber seatback covers for the M Sport seats, and an M Performance steering wheel. Carbon fiber shift paddles and door sill plates are offered as well. None of the M Performance parts increase the engine\'s output, so enthusiasts who want to dial in more power will need to turn to the aftermarket. Stock, the M2 is powered by a twin-turbocharged, 3.0-liter straight-six rated at 453 horsepower and 406 pound-feet of torque. The engine spins the rear wheels via a six-speed manual transmission, though an eight-speed automatic is offered at an extra cost. The aforementioned parts will be available to order when M2 deliveries begin in April 2023. Pricing hasn\'t been announced yet.','2022-11-02 07:02:56','img'),(3,'Lexus recalls 4,200 NX crossovers due to missing welds','RONAN GLON','Fewer than 1% of the recalled units are missing spot-welds near the front shock mounts','Lexus is recalling about 4,200 units of the 2022 NX due to missing spot-welds. Announced in April 2022, the campaign includes the NX250, the NX350, the NX350h, and the NX450h+, and the Japanese company has asked its dealers to stop selling the vehicles in their inventory.Documents published by the National Highway Traffic Safety Administration (NHTSA) explain that some spot-welds might have been missed during the production process. They\'re located around the mounting areas for the front shock absorbers. Leaving out these welds can cause some of the other welds and the surrounding panels to weaken or crack over time, which could in turn make it possible for the front shock absorbers to separate from their mounting area. This would increase the risk of a crash by causing the driver to lose control of the vehicle. The recall includes 4,215 examples of the NX, though Lexus estimates that fewer than 1% of those are missing welds. It will begin notifying owners of potentially affected vehicles by mail on June 6, 2022. They\'ll be asked to take their NX to an authorized dealer so that a mechanic can check for missing welds. Lexus is still developing a solution to the problem. In the meantime, it has asked its dealers to stop selling the NXs potentially affected by the recall that are still in inventories across the nation, though as of writing only 12 units have been identified. Weld-related recalls are mercifully rare but not unheard of. In 2019, Subaru recalled 2,107 new Outback and Legacy models due to faulty welds below the cowl panel, and 293 units of the Ascent were recalled in 2018 because they were missing a series of spot welds on the B-pillar. At the time, the company explained that the 293 crossovers without the proper welds would be destroyed and replaced.','2022-11-02 07:02:56','img'),(4,'2022 Audi RS 7 Exclusive Edition is limited to just 23 cars','ZAC PALMER','You\'ll pay $166,495 for this special version of the RS 7 Sportback','This is the 2022 Audi RS 7 Exclusive Edition, and it sure is exclusive. Audi says it’s only going to make 23 RS 7s in this spec, so if you’re into the rare, this could be the RS 7 to pursue.So, what do you get with the Exclusive Edition? The main draw is a unique Mamba Black pearl paint that presents as black with blue undertones. We suspect that the paint will speak for itself much better in person than these limited photos do. You also get Sepang Blue stitching throughout the interior. Those blue accents can be found on the door armrests, center console trim, upper door panels, upper dashboard, seats and floor mats. Audi says that various controls in the cabin are adorned in Sepang Blue braiding, too.Beyond the black paint and blue interior accents, this RS 7 comes decked out with virtually every performance option you can spec. That means it has the ceramic brake package (with blue-painted calipers), the Dynamic Ride Control suspension and the Sport Exhaust with black-finished exhaust tips. The 4.0-liter twin-turbo V8 is the same, and it continues to output 591 horsepower and 590 pound-feet of torque.Audi makes both its Carbon Optic package and Black Optic package standard for the Exclusive Edition. This means it has blacked-out badges and trim, along with a carbon fiber spoiler, diffuser and mirror caps. It’s also fitted with 22-inch wheels wrapped in 285-section-width summer performance tires. Lastly, the interior gets the Audi Exclusive extended leather package that covers as many surfaces as possible in black leather.The starting price for the Exclusive Edition is $166,495. Again, only 23 will be produced in this spec, and Audi expects them to ship sometime in late summer.','2022-11-02 07:02:56','img'),(5,'Porsche 718 Cayman GT4 runs naked in the snow','REESE COUNTS','This should be the fastest version of the 718 yet','It\'s been awhile since we\'ve seen pictures of the upcoming Porsche 718 Cayman GT4. Previous spy photos showed an rough prototype testing at the Nürburgring. In these new images, a far more polished car appears to be undergoing some winter testing. Most of the Porsche prototypes we see are nearly naked ( just look at this 718 Boxster Spyder), but this GT4 is more exposed than most. Don\'t expect too much to change before production.Like the last Cayman GT4, expect this new car to be the end-all-be-all of the 718 platform. If the wing didn\'t give it away, just look at the aggressive front splitter or at the snow-covered diffuser. This car isn\'t screwing around. Like the last GT4, the front bumper draws influence from the current 911 GT3. The only thing that looks missing is some additional bodywork around the side air intakes.Expect less weight and more power, though what rests at the heart has not yet been determined. Rumors continue to suggest that the GT4 will swap in a flat-six in place of the 718\'s turbo flat-four, but that\'s simply hope and speculation. What\'s almost a given is that the GT4 will retain a manual transmission.The car has been in development for a while, so don\'t expect to wait too much longer before the reveal. The Geneva Motor Show is coming up in just a few weeks, so we might get lucky there.','2022-11-02 07:02:56','img'),(6,'Toyota Land Cruiser 300-series gets life-size Lego build','BEN HSU','It\'s comprised of 440,000 bricks and weighs 4,520 pounds.','Whenever a hot car debuts nowadays, the inevitable life-size Lego build follows soon after. Like Nürburgring lap times for supercars, it\'s practically an expected part of the vehicle launch routine. The latest vehicle to get the treatment is the not-for-America 300-series Toyota Land Cruiser. The build was commissioned by Al-Futtaim Motors, the exclusive Toyota importer for the the United Arab Emirates. According to a short video about the project, it took a team of 12 individuals 2,688 hours to complete the 1:1 scale sculpture. A total of 440,000 Lego bricks were used in the build, and the finished Cruiser weighs approximately 4,520 pounds, or about 1,000 lighter than the actual 5,600-pound truck. Everything, including the windows, tires and little Toyota oval logos found throughout the car, are made from Lego bricks. The headlights and taillights are even illuminated, backlit from some kind of interior light source. Built around a simple steel frame for rigidity, it measures about 195 inches long, 78 inches wide and 76 inches tall. In the shopping center where it\'s on display, a real 300-series Land Cruiser parks beside it. While the Land Cruiser isn\'t sold here, Toyota has promised us a Lexus LX 600 variant with all the off-road prowess the chassis promises. Under the hood will reside a twin-turbo 3.5-liter V6 making 409 horsepower and 479 pound-feet of torque as its only engine option; the Cruiser\'s diesel and 4.0-liter naturally aspirated V6 aren\'t coming. In the rest of the world the 300-series has been well received as a proper evolution of Toyota\'s legendary off-roader, so hopefully that presages good things for the Lexus. The Land Cruiser follows in the fine tradition of other life-size Lego builds. Past unrelated projects have sprouted up all over the globe, and the plastic brick subject matter has included a Formula One car, Lamborghini Sian, Ferrari SF70H, Bugatti Chiron, Toyota Camry, McLaren Senna, Chevy Silverado Trail Boss and Toyota Supra.','2022-11-02 07:02:56','img'),(7,'Next-gen Mercedes C 63 AMG to get plug-in hybrid four-cylinder','JONATHON RAMSEY','Tuned version of the 416-hp four-pot in the A 45 S with hybrid help and AWD','Autocar reports that the next-generation Mercedes-AMG C 63 will give up its membership to the V8 club and become a four-cylinder plug-in hybrid. You read that correctly. The news isn\'t exactly new, it only adds more confirmation to what\'s been whispered thrice before. In April 2018, Mercedes-AMG boss Tobias Möers told CarAdvice that Affalterbach\'s take on Mercedes\' bestselling sedan would go hybrid and all-wheel drive. He foreshadowed the four-cylinder sucker-punch by saying, \"[We] have to be creative, and I\'m chasing performance, and that\'s not strictly linked to the number of cylinders.\" In May this year, a German site specializing in Mercedes rumors predicted the four-cylinder hybrid with 476 horsepower in base trim and a 48-volt electrical architecture. Then, in another Möers interview piece at the Frankfurt Motor Show, Motor Trend mentioned the 416-hp 2.0-liter four-cylinder in the current A 45 S and CLA 45 S, and wrote, \"Expect to see a version powering a future 2021 Mercedes-Benz C-Class AMG model.\" The C-Class AMG got so good that it\'s been showing the segment superstar BMW M3/M4 how a sport sedan and coupe should be done, part of that master class coming via the sound and gravitas conveyed by the 4.0-liter twin-turbo V8. The M177 AMG V8 makes 469 hp and 479 pound-feet of torque in standard trim, 503 hp and 516 lb-ft in S trim. No matter if the W206 C 63 AMG matches those numbers, or, more likely, exceeds them, plenty of AMG fans will be gutted by their champion falling two cylinders behind the next-gen M3 and adopting economy-car displacement specs.  Nevertheless, we\'re told the coming hot C will be the first use-case for the electrified 2.0-liter M139 four-cylinder in the C 63, and eventually the C 43 and all AMG GLC variants; today\'s C 43 employs the M276 3.0-liter twin-turbo V6. They\'ll pull the 48-volt integrated starter motor hooked up to the M256 inline-six cylinder in the CLS 53 AMG that can supply an additional 22 hp and 184 lb-ft. Tuning for the coming C 63 AMG will draw more horsepower from the electric motor, though, and get a larger capacity battery as well as more comprehensive energy recuperation. The nine-speed AMG MCT Speedshift automatic is expected to handle shifting duty. If that German site is correct about a base model with 476 hp, that would add seven horses compared to the current car. Autocar says the top trim \"will match\" the current S trim\'s 503 hp, while upping torque to 553 lb-ft. Even with the same or slightly elevated numbers, dynamic benefits would come from less weight over the front axle and a powertrain with better front-rear balance. All-wheel drive will be a non-negotiable option, but one using the same rear-bias adjustability found in the current E 63 AMG. As for bodystyles, Autocar says the full-fat wagon will retire, leaving just sedan, coupe and convertible styles for the C 63 AMG, the wagon only available in C 43 AMG trim. We\'ve about two years to wait, with the series production redesigned C-Class due next year as a 2021 model, the AMG versions following the year after.','2022-11-02 07:02:56','img'),(8,'2023 Bentley Bentayga EWB Azure First Edition on sale for one year','JONATHON RAMSEY','Diamond illumination, exclusive wheels, and badges come standard','The 2023 Bentley Bentayga EWB has added a third flavor. Above the standard spec, the Azure trim adds distinguishing features like elongated quilting and perforation on the numerous leather surfaces, jeweled caps for the fuel and oil fillers, fancier wheels, and Azure badging. For the first model year of production the craftspeople at Crewe will build an Azure First Edition trim. The First Edition makes normally optional frills like Bentley Diamond Illumination and the Naim for Bentley stereo standard equipment. That stereo pumps 1,720 watts of playlist through 20 speakers. There are also a heated steering wheel, folding picnic tables, and additional driver assistance systems  The cabin is sewn up with exclusive contrast stitching and embroidery, and of course there\'s First Edition badging outside, on the C-pillar, and inside on the seats. Should the customer decide that isn\'t enough advertising, buyers can request handcrafted metal overlays. This version of the SUV shows off brighter grilles in the lower bumper and sits on 22-inch, 10-spoke, directional wheels, an inch larger than the hoops on the standard Bentayga.  The Bentayga EWB marks the return of the Azure name for the first time since 2010, and the Bentayga\'s second First Edition after the 2017 Bentayga W12 which was limited to 608 units. The W12, by the way, is said to be forbidden to the EWB. Pricing hasn\'t been announced, but since the EWB starts at around $230,000 and Bentley\'s already said it expects \"that people will option them beyond $300,000,\" the Azure First Edition can be expected to push that well higher.','2022-11-02 07:02:56','img');
+INSERT INTO `news` VALUES (1,'Pure-electric iX4 said to be on track','Jonathon Ramsey','Gas-powered BMW X4 might be dead after this generation','BMW Blog said it tapped its insiders for details on the next-generation gas-powered BMW X4, and heard that there might not be one. A longtime insider on Bimmerpost reports the same news, that the model codenamed G46 \"may have been cancelled.\" And checking the Automotive News future product pipeline returns this, \"Production of the U.S.-made model could end in late 2025 with no replacement planned, according to AutoForecast Solutions.\"','2022-11-02 07:02:56','img','Supposedly, the original plan was for the clamshell crossover to mimic the split headed to the 3 Series lineup, with an ICE-powered 3 Series range on an evolution of BMW\'s Cluster Architecture (CLAR), and pure-electric variants of the 3\'er on the coming Neue Klasse architecture developed just for EVs. For the 3 Series, the electric sedan could resurrect the i3 name, the electric crossover would be the iX3.','The iX4 remains on track. BMW Blog suspects the automaker\'s accountants couldn\'t justify the spend on a new version of the gas-powered X4, though. The raw sales data we see isn\'t sufficient to make judgements. X4 sales have been climbing in the states, reaching 10,620 units in the U.S. last year, and 33% more than that in Europe. The X3 sold about 156,000 units in the U.S. and Europe last year compared to the X4\'s roughly 26,000. At the beginning of this year we heard that BMW could eliminate the 4 Series and 8 Series for a reborn 6 Series lineup. So in addition to the massive expense of electrification forcing ruthless decisions, there are clearly other, larger ideas in play.','The first Neue Klasse model is due in 2025, presumed to be the new i3 and iX3. The iX4 is anticipated the following year. They will take advantage of BMW\'s Gen6 batteries with cylindrical cells that are less expensive to produce and create fewer carbon emissions in production, increase vehicle range by 30% compared to BMW\'s current prismatic cells, weigh up to 20% less, and raise charging speeds to 270 kW. ','If the supplier source who spoke to Inside EVs can be believed, we won\'t need to wait for 2025 for more big X4 news. The supplier said it would be providing parts for two new electric crossovers with quad-motor setups. One would be an iX3, the other an iX4, the supplier adding that \"other code designations\" suggest these could be proper M versions of standard electric crossovers. Curioser and curioser.'),(2,'2023 BMW M2 gets full range of M Performance parts','RONAN GLON','The catalog includes body kits, wheels, and suspension parts','Unveiled in October 2022, the new 2023 BMW M2 is already eligible to receive a wide selection of factory-developed M Performance parts. The list of add-ons announced by the Munich-based carmaker includes carbon fiber trim, forged wheels, and a lighter exhaust system.BMW M leveraged its five decades of racing experience to give future M2 owners numerous customization options. Starting with the outside, the company designed a carbon fiber body kit that includes a front splitter, inserts for the front air intakes, side skirts, a rear spoiler, and a rear diffuser. M Performance titanium and carbon fiber exhaust tips and a red M-branded tow strap add a finishing touch to the look.','2022-11-02 07:02:56','img','Speaking of the exhaust, BMW M created a system that consists of stainless-steel front pipes and a titanium rear section. It weighs over 17 pounds less than the stock setup and includes electronically-controlled flaps. BMW promises it unlocks \"distinct, racing car acoustics.\"','Handling is one of BMW M\'s claims to fame, and the M Performance suspension system was designed to make the new M2 even sharper to drive on and off the track. It adds height-adjustable spring cups to the front and rear axles that let drivers lower the ride height by nearly half an inch. These parts can be paired with 20-inch front and 21-inch rear forged wheels available in M Frozen Gold Bronze or M Jet Black.Buyers who want an M-themed interior can add carbon fiber and Alcantara trim, Alcantara-upholstered knee pads, carbon fiber seatback covers for the M Sport seats, and an M Performance steering wheel. Carbon fiber shift paddles and door sill plates are offered as well.','None of the M Performance parts increase the engine\'s output, so enthusiasts who want to dial in more power will need to turn to the aftermarket. Stock, the M2 is powered by a twin-turbocharged, 3.0-liter straight-six rated at 453 horsepower and 406 pound-feet of torque. The engine spins the rear wheels via a six-speed manual transmission, though an eight-speed automatic is offered at an extra cost.','The aforementioned parts will be available to order when M2 deliveries begin in April 2023. Pricing hasn\'t been announced yet.'),(3,'Apple lends prestige to a new Mercedes-Benz music system','Stephen Williams','The high-end package, with 31 loudspeakers, features Apple Music\'s Spatial Audio','Not often does Apple offer its name to products or technologies that emerge from beyond the walls of Fortress Cupertino. Could a partnership with Mercedes-Benz signal the start of something new?','2022-11-02 07:02:56','img','Mercedes’ new audio system unveiled this past weekend centers on the integration of Apple Music’s Spatial Audio with Dolby Atmos surround — a music enhancement generally heard in headphone-listening environments — in selected (and optional) Burmester audio systems. Plans are to offer the components initially in the Mercedes-Maybach S-Class, the S-Class as well as the EQE, EQE SUV, EQS and EQS SUV. No prices for the options were announced.','Also partnering in the project is the Universal Music Group, one of the world’s leading music publishers.According to Mercedes, the Dolby tech “empowers musicians and audio engineers to place discrete audio elements or objects in a three-dimensional sound field, which goes beyond the capabilities of standard stereo productions. The system adapts to any playback environment, meaning fans can listen to music with unparalleled clarity that matches the artist\'s original vision in the studio.”','We would expect no less from 31 speakers in a Maybach, powered by a pair of amps churning out 1,750 watts. Imagine Keith Richards cranking guitar through 31 speakers in an enclosed car cockpit.Almost three out of four music consumers say that they listen mostly in a car, says Mercedes Chairman Ola Källenius. ”Through this exceptional partnership, we are giving our customers the extraordinary in-car audio experience they expect from Mercedes-Benz,” he said. “Both Apple and UMG share our vision and values and, together with Dolby, we will create a seamless and unique experience for our customers.\"','Partnerships between automakers and audio companies have become common in recent years, and there have been mixed results from systems attempting to create a \"surround sound\" experience that goes beyond stereo. Bose put its systems into General Motors cars decades ago, and others followed, including Bowers & Wilkins, JBL and even the legendary McIntosh. Most recently, famed Italian speaker designer Sonon faber found a home in Maserati\'s new Grecale, and British speaker maker KEF is working with Lotus.'),(4,'It\'s powered by a production-based Coyote V8 engine','ZAC PALMER','2024 Ford Mustang dons a racing suit for Australia\'s Supercars series','Ford announced six track-bound variants of the 2024 Mustang developed for a wide range of series, but that\'s not all the Blue Oval has up its sleeve. It unveiled a racing-ready model online that was designed to compete in Australia\'s popular Supercars series starting in 2023.','2022-11-02 07:02:56','img','Introduced at the Mount Panorama track in New South Wales, the first racing version of the seventh-generation Mustang was developed by Ford Performance and homologation team Dick Johnson Racing. It complies with the Gen3 regulations that will come into effect in 2023, so it\'s relatively close to the street-legal model in terms of overall design. It nonetheless gains a full body kit that includes a front splitter, side skirts, a massive rear spoiler and a wide air diffuser, and it rides on 18-inch center-locking wheels wrapped by Dunlop Sport Maxx tires.','The resemblance is only skin-deep. Engineers used carbon fiber extensively to keep weight in check and stripped the production car\'s interior. They then added a full roll cage, a racing seat, a quick-release steering wheel and a digital instrument cluster, among other parts.','Ford hasn\'t released much in the way of technical specifications. It claims that power comes from a \"production-based\" Coyote V8 engine, though a peek under the hood reveals numerous modifications including a carbon fiber air intake system and aluminum radiator. And, the engine exhales through a new exhaust system that features a pair of cool-looking outlets that poke through the driver-side side skirt.','Australian enthusiasts will get the chance to see the Mustang in action for the first time during the 2022 Bathurst 1000. The coupe won\'t participate in the race; it will hit the track for a couple of demonstration laps. Its competition debut is scheduled for 2023. The list of teams that will race it include Dick Johnson Racing, Tickford Racing, Grove Racing, Blanchard Racing Team and Walkinshaw Andretti United.'),(5,'Honda Prologue electric SUV previewed with first official photo','REESE COUNTS','Here\'s the first Honda EV to come from its collaboration with GM','Honda has talked about its EV collaboration with GM for a long while now, but today we finally get our first glimpse of something physical to come from it. And by physical, we mean a computer rendering.This is the first official photo of the Honda Prologue, which Honda intends to launch in 2024. When it comes to seeing Honda products before they are officially launched in prototype or production form, this is a rather early sneak peek — Honda tends to keep its products close to its vest. Unfortunately, the single photo of the Prologue you’re looking at here is the meat of the news today. But even left at that, it allows us a neat little preview of this SUV.','2022-11-02 07:02:56','img','The Prologue is the result of a collaboration between designers in Honda’s Los Angeles design studio and back in Japan. Conceptually, the idea was to make an SUV that looked modern and fresh, but also looks comfortable in a showroom of existing Honda vehicles. Honda says that aerodynamics were a huge focus of the project, because better aero means more range and reduced cabin wind noise. As a result, Honda says it ended up with simple, clean surfaces for its body lines.',' “As the project leader for the exterior design of the Honda Prologue, it was very exciting to work with a young team of designers with new capabilities to create an SUV with clean, simple lines and a strong influence from our global EV models, including the Honda E,” said Jiro Ikeda, exterior design leader. “We balanced that with a neo-rugged look that you see in our current lineup, to ensure Prologue represents a true Honda EV.”','You’ll notice in the single photo that the Prologue has a long wheelbase, short front overhang and meaty-looking tires. There’s an opening for air to pass through the lower portion of the bumper, but there’s no dramatic grille. It has a relatively narrow black band of a shield that runs across the front of the car, and this piece contains both the headlights on the edges and the Honda logo front and center. Lots of black-painted accents all over give this silver car a classy and eye-catching two-tone look, and the oversize wheels are drawing a lot of attention to themselves in this photo. Lastly, we’ll point out that the charging port is prominently placed in the front fender.In Honda’s presentation to media, it said that the first priority for Prologue sales will be Zero Emission Vehicle (ZEV) states, but expect it to roll it out elsewhere soon after. Honda didn’t say exactly where it will produce the Prologue yet, but says it will be able to assemble the vehicle in its own facilities. Following the launch of the Prologue, Honda says the first EVs built on its own in-house Honda e:Architecture will arrive in 2026.','To support the Prologue and future EVs, Honda says it’s going to be installing Level 2 and fast-charging stations in dealerships across the country. Honda also showed us a few photos of a new design language for dealers, below. The white and blue color scheme remains, but the building itself looks far more modern and futuristic than Honda’s current dealers. Before all you eagle-eyed commenters point it out in the pictures, yes, we also see the Euro market Honda HR-V/Japan market Honda Vezel in the photos of a U.S.-intent dealership.'),(6,'Toyota Land Cruiser 300-series gets life-size Lego build','BEN HSU','It\'s comprised of 440,000 bricks and weighs 4,520 pounds.','Whenever a hot car debuts nowadays, the inevitable life-size Lego build follows soon after. Like Nürburgring lap times for supercars, it\'s practically an expected part of the vehicle launch routine. The latest vehicle to get the treatment is the not-for-America 300-series Toyota Land Cruiser. The build was commissioned by Al-Futtaim Motors, the exclusive Toyota importer for the the United Arab Emirates.','2022-11-02 07:02:56','img','According to a short video about the project, it took a team of 12 individuals 2,688 hours to complete the 1:1 scale sculpture. A total of 440,000 Lego bricks were used in the build, and the finished Cruiser weighs approximately 4,520 pounds, or about 1,000 lighter than the actual 5,600-pound truck. Everything, including the windows, tires and little Toyota oval logos found throughout the car, are made from Lego bricks. The headlights and taillights are even illuminated, backlit from some kind of interior light source. Built around a simple steel frame for rigidity, it measures about 195 inches long, 78 inches wide and 76 inches tall.','In the shopping center where it\'s on display, a real 300-series Land Cruiser parks beside it. While the Land Cruiser isn\'t sold here, Toyota has promised us a Lexus LX 600 variant with all the off-road prowess the chassis promises. Under the hood will reside a twin-turbo 3.5-liter V6 making 409 horsepower and 479 pound-feet of torque as its only engine option; the Cruiser\'s diesel and 4.0-liter naturally aspirated V6 aren\'t coming. ','In the rest of the world the 300-series has been well received as a proper evolution of Toyota\'s legendary off-roader, so hopefully that presages good things for the Lexus. The Land Cruiser follows in the fine tradition of other life-size Lego builds. Past unrelated projects have sprouted up all over the globe, and the plastic brick subject matter has included a Formula One car, Lamborghini Sian, Ferrari SF70H, Bugatti Chiron, Toyota Camry, McLaren Senna, Chevy Silverado Trail Boss and Toyota Supra.',NULL),(7,'2024 Mercedes-AMG C 63 S E Performance makes 671 horsepower','JONATHON RAMSEY','Plug-in hybrid has the most powerful four-cylinder ever produced','The V8-powered Mercedes-AMG C 63 is going away, and that\'s definitely sad. But to make up for it, the 2024 Mercedes-AMG C 63 S E Performance is offering a lot more power. The turbocharged, plug-in hybrid four-cylinder now makes a combined output of 671 horsepower and 752 pound-feet of torque. Those are increases of 168 horsepower and 236 pound-feet of torque.','2022-11-02 07:02:56','img','Making this power is a combination of the highest-output M139l engine yet and a rear-mounted electric motor with a two-speed transmission. The engine, while similar to what\'s used in the C 43, gets a bigger version of the electrically-assisted turbo to make 469 horsepower and 402 pound-feet of torque, making it the most potent four-cylinder in the world. That engine sends power through a nine-speed automatic to the rear axle where the electric motor is. The electric motor makes 201 horsepower and has a two-speed transmission itself, which changes gear around 87 mph. The electric motor also features an electronically-controlled limited-slip differential. Power can be sent either to the rear wheels or back up to the front, enabling all-wheel drive in gas, hybrid or electric driving scenarios. The all-wheel drive system does have a drift mode, like other AMG models. Performance is impressive with a claimed 3.3-second time to hit 60 mph, and top speed of 174 mph (standard top speed is electronically limited to 155 mph).','The C 63 S E Performance is a plug-in hybrid, but just barely. It has the same 6.1-kWh capacity as the AMG GT 63 S E Performance 4-Door. In that model, it provides just 7 miles of range. The C 63\'s smaller size might get it a little more range, but likely very little. The battery weighs 196 pounds and features liquid cooling, with coolant running between every single cell. The battery will also power the C 63 to 81 mph without the engine kicking in.Naturally, AMG made chassis upgrades, too. The suspension uses steel springs with electronically adjustable shocks. Four-wheel steering is standard, as are steel brakes with six-piston calipers up front and single-piston units at the rear. Interestingly, the C 63 S is 3.3 inches longer overall compared to a regular C-Class sedan, and its wheelbase is longer by 0.4 inch. Width is also 3 inches greater. Wheels are 19 inches as standard, but 20-inch wheels are available as options.','And of course, the C 63 S E Performance looks meaner, too, with a redesigned front fascia, new hood vent, side skirts, rear bumper with diffuser and a rear spoiler. The interior gets AMG-specific trim and sport seats, with even more aggressive seats available optionally. New display readouts are included, too for the car\'s hybrid functions. Pricing and availability of this hot C-Class have not yet been announced. With a model year of 2024, we would expect it to launch sometime in the coming year.',NULL),(8,'It\'s a sedan inspired by a van inspired by a spaceship','JONATHON RAMSEY','2023 Hyundai Grandeur (Azera) revealed with futuristic makeover for overseas markets','Hyundai\'s American division deep-sixed the Azera after the 2017 model year, but the big sedan lives on in several overseas markets. Known as the Grandeur in some countries, including its home market of Korea, it enters its seventh generation with a futuristic exterior design that will leave no one indifferent.','2022-11-02 07:02:56','img','Up front, the new Azera borrows styling cues from the head-turning Staria introduced in 2021 — a sedan influenced by a van inspired by a spaceship is admittedly a difficult plot to follow, but bear with us. The front end is relatively low and flat, and it\'s characterized by a massive grille flanked by a pair of rectangular headlights. The thin LED strip above the grille accentuates the Azera\'s width and illustrates Hyundai\'s Seamless Horizon design language. Out back, this approach to design brings an elegant curved trunk lid and a second strip of LEDs.','Designers bucked the \"four-door coupe\" trend and gave the Azera a relatively upright roof line that clears up a generous amount of interior space. The sheet metal begins to slope towards the trunk above the rear wheels, and this created space for a third side window. Hyundai notes that this feature is a tribute to the original Grandeur, which made its debut in 1986 as a badge-engineered Mitsubishi Debonair.','The cabin reflects Hyundai\'s ongoing upmarket shift, both in terms of the materials used and in terms of technology. The driver faces a steering wheel inspired by the one fitted to the original Grandeur and a digital instrument cluster connected to the infotainment system\'s touchscreen. Look closely and you\'ll spot some cool design details: South Korea\'s approach to design notably inspired the pattern on the door panels. Real wood trim, aluminum accents, and naturally-dyed leather upholstery add a finishing touch to the upscale look and feel.','Hyundai hasn\'t released technical specifications, though we\'re guessing the engine palette will include four- and six-cylinder units. Front-wheel drive will come standard, and all-wheel drive will likely be offered at an extra cost in some markets. More details about the 2023 Hyundai Azera will emerge in the coming months and deliveries are scheduled to start in the second half of 2023 — but not in the United States. Nothing suggests the Azera will make a comeback here, where crossovers and SUVs represent the bulk of Hyundai\'s sales.');
 /*!40000 ALTER TABLE `news` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -290,12 +347,12 @@ DROP TABLE IF EXISTS `passwordresettoken`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `passwordresettoken` (
   `id` int NOT NULL,
-  `token` varchar(255) NOT NULL,
-  `expiryDate` datetime NOT NULL,
-  `userId` int NOT NULL,
-  KEY `passwordresettoken_userid_foreign` (`userId`),
-  CONSTRAINT `passwordresettoken_userid_foreign` FOREIGN KEY (`userId`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `expiry_date` datetime DEFAULT NULL,
+  `token` varchar(255) DEFAULT NULL,
+  `user_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `passwordresettoken_userid_foreign` (`user_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -316,9 +373,9 @@ DROP TABLE IF EXISTS `role`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `role` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `roleName` varchar(255) NOT NULL,
+  `rolename` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -327,7 +384,6 @@ CREATE TABLE `role` (
 
 LOCK TABLES `role` WRITE;
 /*!40000 ALTER TABLE `role` DISABLE KEYS */;
-INSERT INTO `role` VALUES (1,'Admin'),(2,'Admin Car'),(3,'Admin Room'),(4,'User');
 /*!40000 ALTER TABLE `role` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -347,9 +403,11 @@ CREATE TABLE `room` (
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
   `createdBy` int NOT NULL,
+  `imgpath` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `room_carid_foreign` (`carId`),
   KEY `room_typeroomid_foreign` (`typeRoomId`),
+  KEY `FKdgcd3aoxm5w6scd8hupsjo1pq` (`carId`),
+  CONSTRAINT `FKdgcd3aoxm5w6scd8hupsjo1pq` FOREIGN KEY (`carId`) REFERENCES `car` (`id`),
   CONSTRAINT `room_carid_foreign` FOREIGN KEY (`carId`) REFERENCES `car` (`id`),
   CONSTRAINT `room_typeroomid_foreign` FOREIGN KEY (`typeRoomId`) REFERENCES `typeroom` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -516,13 +574,11 @@ DROP TABLE IF EXISTS `user_role`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user_role` (
-  `userId` int NOT NULL,
-  `roleId` int NOT NULL,
-  PRIMARY KEY (`userId`,`roleId`),
-  KEY `user_role_roleid_foreign` (`roleId`),
-  CONSTRAINT `user_role_roleid_foreign` FOREIGN KEY (`roleId`) REFERENCES `role` (`id`),
-  CONSTRAINT `user_role_userid_foreign` FOREIGN KEY (`userId`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `userid` int NOT NULL,
+  `roleid` int NOT NULL,
+  KEY `FKbo5ik0bthje7hum554xb17ry6` (`roleid`),
+  KEY `FKd0xwi6psywvnj59btfns0alnm` (`userid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -531,7 +587,6 @@ CREATE TABLE `user_role` (
 
 LOCK TABLES `user_role` WRITE;
 /*!40000 ALTER TABLE `user_role` DISABLE KEYS */;
-INSERT INTO `user_role` VALUES (1,1),(2,2),(3,3),(4,4);
 /*!40000 ALTER TABLE `user_role` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -544,12 +599,12 @@ DROP TABLE IF EXISTS `verificationtoken`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `verificationtoken` (
   `id` int NOT NULL,
-  `token` varchar(255) NOT NULL,
-  `expiryDate` datetime NOT NULL,
-  `userId` int NOT NULL,
-  KEY `verificationtoken_userid_foreign` (`userId`),
-  CONSTRAINT `verificationtoken_userid_foreign` FOREIGN KEY (`userId`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `expiry_date` datetime DEFAULT NULL,
+  `token` varchar(255) DEFAULT NULL,
+  `user_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `verificationtoken_userid_foreign` (`user_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -560,6 +615,10 @@ LOCK TABLES `verificationtoken` WRITE;
 /*!40000 ALTER TABLE `verificationtoken` DISABLE KEYS */;
 /*!40000 ALTER TABLE `verificationtoken` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Dumping routines for database 'swp490_cab'
+--
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -569,12 +628,13 @@ UNLOCK TABLES;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2022-11-21 16:55:41
 ALTER TABLE `swp490_cab`.`room` 
 ADD COLUMN `openDate` DATE NOT NULL AFTER `createdBy`,
 ADD COLUMN `startTime` TIME NOT NULL AFTER `openDate`,
 ADD COLUMN `endTime` TIME NOT NULL AFTER `startTime`,
 ADD COLUMN `ticketNumber` INT NOT NULL AFTER `endTime`,
-ADD COLUMN `ticketPrice` INT NOT NULL AFTER `ticketNumber`,
-ADD COLUMN `imgPath` VARCHAR(255) NOT NULL AFTER `ticketPrice`;
-
--- Dump completed on 2022-11-03 23:09:16
+ADD COLUMN `ticketPrice` INT NOT NULL AFTER `ticketNumber`;
+ALTER TABLE `swp490_cab`.`user` 
+ADD COLUMN `addressWallet` VARCHAR(255) NULL AFTER `createdAt`;

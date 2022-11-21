@@ -29,4 +29,5 @@ public class ModelCar {
     @OneToOne
     @JoinColumn(name = "modelspecificationid")
     private ModelSpecification modelSpecificationId;
+
 }

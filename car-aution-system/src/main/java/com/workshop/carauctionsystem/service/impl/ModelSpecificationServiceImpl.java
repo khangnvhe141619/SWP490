@@ -15,7 +15,6 @@ import java.util.Optional;
 @Service
 public class ModelSpecificationServiceImpl implements ModelSpecificationService {
 
-
     @Autowired
     ModelSpecificationRepository modelSpecRepo;
 
@@ -29,28 +28,33 @@ public class ModelSpecificationServiceImpl implements ModelSpecificationService 
         modelSpecRepo.save(modelSpec);
     }
 
+    @Override
+    public void updateModelSpec(String name, int seatNumber, Long id) {
+        modelSpecRepo.update(name,seatNumber,id);
+    }
 
     @Override
     public void delete(Long id) throws NotFoundException {
-        Long count = modelSpecRepo.countById(id);
-        if(count == null || count == 0){
-            throw new NotFoundException("Could not find any with ID" + id);
-        }
         modelSpecRepo.deleteById(id);
     }
 
     @Override
-    public ModelSpecification findById(Long id) throws NotFoundException {
+    public ModelSpecification findById(Long id) {
         Optional<ModelSpecification> optional = modelSpecRepo.findById(id);
-        ModelSpecification modelSpec = null;
-        if(optional.isPresent()){
-            modelSpec = optional.get();
-        }
-        return modelSpec;
+        return optional.get();
     }
 
     @Override
     public Page<ModelSpecification> findAllOrderById(Pageable pageable) {
         return modelSpecRepo.findAllOrderById(pageable);
+    }
+
+    @Override
+    public Page<ModelSpecification> findAllOrderByName(Pageable pageable, String name) {
+        if(name != null){
+            return modelSpecRepo.findAllByModelSpecName(pageable,name);
+        }else {
+            return modelSpecRepo.findAllOrderById(pageable);
+        }
     }
 }

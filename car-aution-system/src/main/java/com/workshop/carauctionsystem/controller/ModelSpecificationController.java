@@ -2,32 +2,38 @@ package com.workshop.carauctionsystem.controller;
 
 import com.workshop.carauctionsystem.entity.ModelSpecification;
 import com.workshop.carauctionsystem.exception.NotFoundException;
-import com.workshop.carauctionsystem.service.ModelSpecificationService;
-import com.workshop.carauctionsystem.validate.Validate1;
+import com.workshop.carauctionsystem.model.ModelSpecieModel;
+import com.workshop.carauctionsystem.service.impl.ModelSpecificationServiceImpl;
+import com.workshop.carauctionsystem.validate.Validate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import javax.validation.Valid;
+import java.util.Map;
 
 @Controller
 public class ModelSpecificationController {
 
     @Autowired
-    ModelSpecificationService modelSpecService;
+    ModelSpecificationServiceImpl modelSpecService;
 
     @GetMapping("/modelSpec")
-    public ModelAndView showList(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "id") String id) {
+    public ModelAndView showList(@RequestParam(defaultValue = "0") int page,
+                                 @RequestParam(defaultValue = "id") String id,
+                                 @RequestParam(defaultValue = "") String search,
+                                 Model model) {
         ModelAndView modelAndView = null;
-        Page<ModelSpecification> list = modelSpecService.findAllOrderById(PageRequest.of(page, 5, Sort.by(id)));
+        model.addAttribute("modelSpecieModel", new ModelSpecieModel());
+        Page<ModelSpecification> list = modelSpecService.findAllOrderByName(PageRequest.of(page, 5, Sort.by(id)), search);
         if (!list.isEmpty()) {
-            modelAndView = new ModelAndView("listModelSpec");
+            modelAndView = new ModelAndView("admin/listModelSpec");
             modelAndView.addObject("modelSpecs", list);
         } else {
             modelAndView = new ModelAndView("page404");
@@ -35,34 +41,26 @@ public class ModelSpecificationController {
         return modelAndView;
     }
 
-    @GetMapping("/modelSpec/create")
-    public ModelAndView showFormCreate() {
-        ModelAndView modelAndView = null;
-        try {
-            modelAndView = new ModelAndView("fromCreateModelSpec");
-            modelAndView.addObject("modelSpecs", new ModelSpecification());
-            return modelAndView;
-        } catch (Exception e) {
-            modelAndView = new ModelAndView("page404");
-            return modelAndView;
-        }
-    }
 
     @PostMapping("modelSpec/create")
-    public String create(@Valid @ModelAttribute(value = "modelSpec") ModelSpecification modelSpec,
-                         RedirectAttributes ra, Model model) {
+    public String create(@ModelAttribute(value = "modelSpecieModel") ModelSpecieModel modelSpecieModel,
+                         RedirectAttributes ra) {
         try {
-            Validate1 validateName = new Validate1();
-            if( validateName.checkDuplicateModelSpec(modelSpec.getNameType(), modelSpec.getSeatNumber(), modelSpecService.getAllModelSpecification())){
-                model.addAttribute("message","ModelSpecification exist");
-                return "fromCreateModelSpec";
+            ModelSpecification modelSpec = new ModelSpecification();
+            modelSpec.setNameType(modelSpecieModel.getNameType());
+            Validate validateName = new Validate();
+            if (validateName.checkDuplicateModelSpec(modelSpecieModel.getNameType(), modelSpecieModel.getSeatNumber(), modelSpecService.getAllModelSpecification())) {
+                ra.addFlashAttribute("fail", "ModelSpecification exist");
+                return "redirect:/modelSpec";
             }
+            modelSpec.setSeatNumber(modelSpecieModel.getSeatNumber());
+            modelSpec.setStatus(1);
             modelSpecService.saveModelSpecification(modelSpec);
-            ra.addFlashAttribute("message", "The ModelSpecification has been saved successfully");
-            return "redirect:/modelSpecs";
+            ra.addFlashAttribute("success", "The ModelSpecification has been saved successfully");
+            return "redirect:/modelSpec";
         } catch (Exception e) {
-            model.addAttribute("message", "Add ModelSpecification Failed");
-            return "page404";
+            ra.addFlashAttribute("fail", "Add ModelSpecification Failed");
+            return "redirect:/modelSpec";
         }
     }
 
@@ -72,38 +70,33 @@ public class ModelSpecificationController {
             modelSpecService.delete(id);
         } catch (NotFoundException e) {
             ra.addFlashAttribute("message", e.getMessage());
-        }
-        return "redirect:/brand";
-    }
-
-    @GetMapping("/modelSpec/edit/{id}")
-    public String showFormUpdate(@PathVariable(value = "id") Long id, Model model, RedirectAttributes ra) throws NotFoundException {
-        ModelSpecification modelSpec = modelSpecService.findById(id);
-        if (modelSpec != null) {
-            model.addAttribute("modelSpec", modelSpec);
-            return "fromUpdateModelSpec";
-        } else {
-            throw new NotFoundException("Could not find any with ID");
-        }
-    }
-
-    @PostMapping("modelSpec/edit")
-    public String update(@Valid @ModelAttribute(value = "modelSpec") ModelSpecification modelSpec,
-                         BindingResult bindingResult, @RequestParam Long id,
-                         RedirectAttributes ra,Model model) {
-        try {
-            Validate1 validateName = new Validate1();
-            if( validateName.checkDuplicateModelSpec(modelSpec.getNameType(), modelSpec.getSeatNumber(), modelSpecService.getAllModelSpecification())){
-                model.addAttribute("message","ModelSpecification exist");
-                return "fromCreateModelSpec";
-            }
-            modelSpecService.saveModelSpecification(modelSpec);
-        } catch (Exception e) {
-            model.addAttribute("message", "Add ModelSpecification Failed");
             return "page404";
         }
-        ra.addFlashAttribute("message", "The ModelSpecification has been saved successfully");
-        return "redirect:/modelSpecs";
+        ra.addFlashAttribute("success", "The ModelSpecification has been deleted successfully");
+        return "redirect:/modelSpec";
+    }
+
+
+    @PostMapping("modelSpec/edit")
+    public String update(@RequestParam Map<String, String> requestMap,
+                         RedirectAttributes ra, Model model) {
+        Long id = Long.parseLong(requestMap.get("id"));
+        String name = requestMap.get("nameType");
+        int seatNumber = Integer.parseInt(requestMap.get("seatNumber"));
+        ModelSpecification brandId = modelSpecService.findById(id);
+        try {
+            Validate validateName = new Validate();
+            if (validateName.checkDuplicateModelSpec(name, seatNumber, modelSpecService.getAllModelSpecification())) {
+                ra.addFlashAttribute("fail", "ModelSpecification exist");
+                return "redirect:/modelSpec";
+            }
+            modelSpecService.updateModelSpec(name, seatNumber, id);
+        } catch (Exception e) {
+            ra.addFlashAttribute("fail", "Update ModelSpecification Failed");
+            return "redirect:/modelSpec";
+        }
+        ra.addFlashAttribute("success", "The ModelSpecification has been saved successfully");
+        return "redirect:/modelSpec";
     }
 
 

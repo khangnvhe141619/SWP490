@@ -29,27 +29,33 @@ public class BrandServiceImpl implements BrandService {
     }
 
     @Override
+    public void updateBrand(String name,String img,Long id) {
+        brandRepository.update(name,img,id);
+    }
+
+    @Override
     public void delete(Long id) throws NotFoundException {
-        Long count = brandRepository.countById(id);
-        if(count == null || count == 0){
-            throw new NotFoundException("Could not find any with ID" + id);
-        }
-        brandRepository.deleteById(id);
+        brandRepository.delete(id);
 
     }
 
     @Override
     public Brand findById(Long id) {
         Optional<Brand> optional = brandRepository.findById(id);
-        Brand brand = null;
-        if(optional.isPresent()){
-            brand = optional.get();
-        }
-        return brand;
+        return optional.get();
     }
 
     @Override
     public Page<Brand> findAllOrderById(Pageable pageable) {
         return brandRepository.findAllOrderById(pageable);
+    }
+
+    @Override
+    public Page<Brand> findAllOrderByName(Pageable pageable,String name) {
+        if (name != null) {
+            return brandRepository.findAllByBrandName(pageable, name);
+        }else {
+            return brandRepository.findAllOrderById(pageable);
+        }
     }
 }
