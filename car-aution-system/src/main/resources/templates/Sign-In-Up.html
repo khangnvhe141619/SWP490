@@ -8,7 +8,9 @@
           crossorigin="anonymous"
   ></script>
   <link rel="stylesheet" th:href="@{assets/css/Sign-In-Up.css}" />
-  <title>Sign in & Sign up Form</title>
+  <script th:src="@{assets/js/pwstrength.js}"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <title>Sign in & Sign up</title>
 </head>
 <body>
 <div class="container">
@@ -45,25 +47,31 @@
           </a>
         </div>
       </form>
-      <form action="#" class="sign-up-form" id="signup" onsubmit="check()">
+      <form th:action="@{/registration}" th:object="${UserDTO}" class="sign-up-form" method="POST" id="signup">
         <h2 class="title">Sign up</h2>
         <div class="input-field">
           <i class="fas fa-user"></i>
-          <input type="text" placeholder="Username" />
+          <input id="usernameR" type="text" placeholder="Username" name="username" required onkeyup="isUsernameExistedAjax()"/>
+          <span id="usernameError" class="alert alert-danger col-sm-4" style="display:none"></span>
         </div>
         <div class="input-field">
           <i class="fas fa-envelope"></i>
-          <input type="email" placeholder="Email" />
+          <input id="emailR" type="email" placeholder="Email" name="email" required onkeyup="isEmailExistedAjax()"/>
+          <span id="emailError" class="alert alert-danger col-sm-4" style="display:none"></span>
         </div>
         <div class="input-field">
           <i class="fas fa-lock"></i>
-          <input class="password" type="password" placeholder="Password" />
+          <input id="passwordR" class="password" type="password" placeholder="Password" name="password" required/>
+          <span id="passwordError" class="alert alert-danger col-sm-4" style="display:none"></span>
         </div>
         <div class="input-field">
           <i class="fas fa-lock"></i>
-          <input class="repassword" type="password" placeholder="Re-Password" />
+          <input id="repasswordR" class="repassword" type="password" placeholder="Re-Password" name="repassword" required/>
+          <div>
+            <span id="globalError" class="alert alert-danger col-sm-12" style="display:none"></span>
+          </div>
         </div>
-        <input type="submit" class="btn" value="Sign up" />
+        <input type="submit" id="registerBtn" class="btn" value="Sign up" />
         <p class="social-text">Connect with us</p>
         <div class="social-media">
           <a href="#" class="social-icon fb">
@@ -77,12 +85,12 @@
           </a>
         </div>
       </form>
-      <form action="#" class="sign-up-form" id="forgot">
+      <form th:action="@{/forgotPassword}" method="post" class="sign-up-form" id="forgot">
         <h2 class="title">Forgot Password</h2>
         <p class="text">Enter the email address associated with your account and we'll send you a link to reset your password.</p>
         <div class="input-field">
           <i class="fas fa-envelope"></i>
-          <input type="email" placeholder="Email" />
+          <input id="email" type="email" th:name="email" placeholder="Email" required/>
         </div>
         <input type="submit" class="btn" value="Send" />
       </form>
@@ -118,5 +126,106 @@
   </div>
 </div>
 <script th:src="@{assets/js/Sign-In-Up.js}"></script>
+<script th:inline="javascript">
+  var serverContext = [[@{/}]];
+    $(document).ready(function () {
+      $('form').submit(function (event) {
+        register(event);
+      });
+      $(":password").keyup(function(){
+        if($("#passwordR").val() != $("#repasswordR").val()){
+          $("#globalError").show().html("Password does not match!");
+        }else{
+          $("#globalError").hide().html("");
+        }
+      });
+
+      options = {
+        common: {minChar:8},
+        ui: {
+          showVerdictsInsideProgressBar:true,
+          showErrors:true,
+          errorMessages:{
+            wordLength: /*[[#{error.wordLength}]]*/,
+            wordNotEmail: /*[[#{error.wordNotEmail}]]*/,
+            wordSequences: /*[[#{error.wordSequences}]]*/,
+            wordLowercase: /*[[#{error.wordLowercase}]]*/,
+            wordUppercase: /*[[#{error.wordUppercase}]]*/,
+            wordOneNumber: /*[[#{error.wordOneNumber}]]*/,
+            wordOneSpecialChar: /*[[#{error.wordOneSpecialChar}]]*/
+          }
+        }
+      };
+      $('#passwordR').pwstrength();
+    }),
+
+  function register(event){
+    event.preventDefault();
+    $("alert").html("").hide();
+
+    if($("#passwordR").val() != $("#repasswordR").val()){
+      $("#globalError").show().html("Password does not!");
+      return;
+    }
+
+  }
+  console.log(serverContext);
+    function isEmailExistedAjax() {
+      // get the form values
+      var email = $("#emailR").val();
+
+      $.ajax({
+        type: "POST",
+        url: serverContext + "emailExist?email=" + email,
+        data: 'email:' + email,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (response) {
+          // we have the response
+          if (response.status == "ok") {
+            $("#emailError").show().html(response.message);
+            disableBtn();
+          } else if (response.status == "no") {
+            $("#emailError").show().html(response.message);
+            ableBtn();
+          }
+        },
+        error: function(e){
+          alert('Error: ' + e);
+        }
+      });
+    }
+  function disableBtn() {
+    document.getElementById("registerBtn").disabled  = true;
+  }
+  function ableBtn() {
+    document.getElementById("registerBtn").disabled  = false;
+  }
+    function isUsernameExistedAjax() {
+      // get the form values
+      var username = $("#usernameR").val();
+      $.ajax({
+        type: "POST",
+        url: serverContext + "usernameExist?username=" + username,
+        data: 'username:' + username,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (response) {
+          // we have the response
+          if (response.status == "ok") {
+            $("#usernameError").show().html(response.message);
+            disableBtn();
+          } else if (response.status == "no") {
+            $("#usernameError").show().html(response.message);
+            ableBtn();
+          }
+        },
+        error: function(e){
+          alert('Error: ' + e);
+        }
+      });
+    }
+</script>
+
 </body>
 </html>

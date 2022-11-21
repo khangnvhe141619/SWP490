@@ -32,7 +32,7 @@
                         <li><a class="nav-link scrollto " href="home.html">About Us</a></li>
                     </ul>
                     <a href="connectWallet.html" style="background-color: rgb(66, 180, 66); padding-right: 30px;" class="connectwallet">Connect wallet</a>
-                    <a th:href="@{/personProfile}"><i class="bi bi-person-circle" style="font-size: 30px;"></i><i th:text="${cookieValue.value}"></i></a>
+                    <a th:href="@{/personProfile}"><i class="bi bi-person-circle" style="font-size: 30px;"></i><i th:text="${username}"></i></a>
                 </nav>
             </div>
         </div>
@@ -56,7 +56,7 @@
                 <a th:href="@{/logout}" class="font-weight-bold mt-50 mb-5 h5 text-black">Logout</a>
             </div>
         </div>
-        <div class="col-md-7 border-right">
+        <div class="col-md-7 border-right personProfile">
             <div class="p-3 bg-white profile" id="person-profile">
                 <div class="d-flex justify-content-between mb-3">
                     <h4>Personal Profile</h4>
@@ -69,7 +69,7 @@
                     </div>
                     <div class="col-md-12">
                         <label class="labels">User Name</label>
-                        <input type="text" class="form-control" placeholder="Username" th:value="${cookieValue.value}" readonly>
+                        <input type="text" class="form-control" placeholder="Username" th:value="${username}" readonly>
                     </div>
                     <div class="col-md-12">
                         <label class="labels">Email ID</label>
@@ -86,7 +86,7 @@
             <div class="p-3 bg-white mt-3 profile" id="acc-setting">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h4 class="text-right">Password</h4>
-                    <i id="edit-profile" class="bi bi-pencil-square edit" onclick="accSetting()"></i>
+                    <i class="bi bi-pencil-square edit" onclick="accSetting()"></i>
                 </div>
                 <div class="row mt-3">
                     <div class="col-md-12">
@@ -95,7 +95,7 @@
                     </div>
                 </div>
             </div>
-            <form action="PeronalProfile.html">
+            <form th:action="@{/personProfile/update}" th:object="${User}" method="post">
                 <div class="p-3 bg-white profile mt-200" id="update-profile">
                     <div class="d-flex justify-content-between mb-3">
                         <h4>Update Profile</h4>
@@ -104,21 +104,21 @@
                     <div class="row mt-2">
                         <div class="col-md-12">
                             <label class="labels">Name</label>
-                            <input type="text" class="form-control" placeholder="first name" th:value="${name}">
+                            <input type="text" class="form-control" placeholder="first name" th:value="${name}" name="fullName">
                         </div>
                         <div class="col-md-12">
                             <label class="labels">User Name</label>
-                            <input type="text" class="form-control" placeholder="Username" th:value="${cookieValue.value}">
+                            <input type="text" class="form-control" placeholder="Username" th:value="${username}" name="userName">
                         </div>
                         <div class="col-md-12">
                             <label class="labels">Email ID</label>
-                            <input type="text" class="form-control" placeholder="enter email id" th:value="${email}">
+                            <input type="text" class="form-control" placeholder="enter email id" th:value="${email}" name="email">
                         </div>
                     </div>
                     <div class="row mt-3">
                         <div class="col-md-12">
                             <label class="labels">PhoneNumber</label>
-                            <input type="text" class="form-control" placeholder="enter phone number" th:value="${phone}">
+                            <input type="text" class="form-control" placeholder="enter phone number" th:value="${phone}" name="phone">
                         </div>
                     </div>
                     <div class="mt-2 text-center">

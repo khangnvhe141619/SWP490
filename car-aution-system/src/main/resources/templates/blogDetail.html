@@ -1,176 +1,142 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
     <title>CAB Auction</title>
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link href="assets/img/favicon.png" rel="icon">
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700"
-        rel="stylesheet">
-    <link href="assets/vendor/animate.css/animate.min.css" rel="stylesheet">
-    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-    <link href="assets/css/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/blog.css">
+    <link th:rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link th:href="@{/assets/img/favicon.png}" rel="icon">
+    <link th:href="@{/assets/img/apple-touch-icon.png}" th:rel="apple-touch-icon">
+    <link th:href="@{/assets/css/news.css}"
+          th:rel="stylesheet">
+    <link th:href="@{/assets/vendor/animate.css/animate.min.css}" th:rel="stylesheet">
+    <link th:href="@{/assets/vendor/aos/aos.css}" th:rel="stylesheet">
+    <link th:href="@{/assets/vendor/bootstrap/css/bootstrap.min.css}" th:rel="stylesheet">
+    <link th:href="@{/assets/vendor/bootstrap-icons/bootstrap-icons.css}" th:rel="stylesheet">
+    <link th:href="@{/assets/vendor/glightbox/css/glightbox.min.css}" th:rel="stylesheet">
+    <link th:href="@{/assets/vendor/swiper/swiper-bundle.min.css}" th:rel="stylesheet">
+    <link th:href="@{/assets/css/style.css}" th:rel="stylesheet">
+    <link th:rel="stylesheet" th:href="@{/static/assets/css/blog.css}">
 </head>
 
 <body>
-    <header id="header" class="fixed-top d-flex align-items-center header-transparent bg-black">
-        <div class="container-fluid">
-          <div class="row justify-content-center align-items-center">
+<header id="header" class="fixed-top d-flex align-items-center header-transparent bg-black">
+    <div class="container-fluid">
+        <div class="row justify-content-center align-items-center">
             <div class="col-xl-11 d-flex align-items-center justify-content-between">
-              <h1 class="logo"><a href="home.html">CAB Auction</a></h1>
-              <nav id="navbar" class="navbar">
-                <ul>
-                  <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-                  
-                  <li><a class="nav-link scrollto" href="home.html">Brand</a></li>
-                  <li><a class="nav-link scrollto " href="home.html">Auction Room</a></li>
-                  <li><a class="nav-link scrollto" href="blog.html">News</a></li>
-                  <li><a class="nav-link scrollto" href="guideline.html">Guideline</a></li>
-                  <li><a class="nav-link scrollto " href="home.html">About Us</a></li>
-                </ul>
-                <a href="connectWallet.html" style="background-color: rgb(66, 180, 66); padding-right: 30px;" class="connectwallet">Connect wallet</a>
-                <a href="PeronalProfile.html"><i class="bi bi-person-circle" style="font-size: 30px;"></i></a>
-              </nav>
+                <h1 class="logo"><a href="home.html">CAB Auction</a></h1>
+                <nav id="navbar" class="navbar">
+                    <ul>
+                        <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+
+                        <li><a class="nav-link scrollto" href="home.html">Brand</a></li>
+                        <li><a class="nav-link scrollto " href="home.html">Auction Room</a></li>
+                        <li><a class="nav-link scrollto" href="blog.html">News</a></li>
+                        <li><a class="nav-link scrollto" href="guideline.html">Guideline</a></li>
+                        <li><a class="nav-link scrollto " href="home.html">About Us</a></li>
+                    </ul>
+                    <a href="connectWallet.html" style="background-color: rgb(66, 180, 66); padding-right: 30px;" class="connectwallet">Connect wallet</a>
+                    <a href="PeronalProfile.html"><i class="bi bi-person-circle" style="font-size: 30px;"></i></a>
+                </nav>
             </div>
-          </div>
-    
         </div>
-      </header>
-    <div class="container mt-200 mb-5">
-        <div class="row">
-            <div class="col-md-1"></div>
-            <div class="col-md-7">
-                <h4>News</h4>
-                <p></a> <a href="#" class="py-3"> Thomson Smith - April 18,2016 </a></p>
-                <h1>Hãng xe VinFast mang gì đến Paris Motor Show 2022</h1>
-                <h5>Sau 4 năm kể từ lần xuất hiện đầu tiên trước thế giới tại Paris Motor Show 2018, VinFast sẽ quay trở
-                    lại Paris Motor Show 2022 với một vị thế hoàn toàn khác.</h5>
-                <p>Ngày 17/10/2022, Triển lãm Paris Motor Show 2022 sẽ chính thức khai mạc với giới truyền thông, báo
-                    chí, trước khi mở cửa đón công chúng kể từ ngày 18/10/2022.</p>
-                <p><img src="assets/img/news1.jpg"></p>
-                <p>Lần đầu tiên, công chúng Pháp sẽ được chiêm ngưỡng và trải nghiệm các mẫu SUV điện cao cấp của
-                    VinFast với phân khúc trải rộng từ B đến E.</p>
 
-                   <p> VinFast sẽ mang đến Paris Motor Show 2022 bốn mẫu xe VF 6, VF 7, VF 8, VF 9. Đây cũng là lần đầu
-                    tiên VinFast chính thức giới thiệu các sản phẩm xe điện tới thị trường Pháp.</p>
+    </div>
+</header>
+<div class="container mt-200 mb-5">
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-7" th:each="ls:${lsdetails}">
+            <h4>News</h4>
+            </a> <a href="#" class="py-3"> <p th:text="${ls.getAuthor()}"></p> </a>
+            <h1 th:text="${ls.getTitle()}"></h1>
+            <h5 th:text="${ls.getShortDescribe()}"></h5>
+            <p th:text="${ls.getCreateAt()}"></p>
+            <p><img th:src="${ls.getImg()}"></p>
+            <p th:text="${ls.getDescribe()}"></p>
+        </div>
+        <div class="col-md-3">
+            <h4>Latest news</h4>
+            <div class="right-content flex-column d-flex" th:each="top:${top5}">
+                <a class="pe-auto" href="#"><p th:text="${top.getTitle()}"></p></a>
 
-                    <p>Trong đó, VF 6, VF 7 lần lượt là các mẫu SUV hạng B và C được VinFast và Torino Design hợp tác thiết
-                    kế. VF 8 và VF 9 là 2 mẫu SUV điện đầu tiên ra mắt thị trường toàn cầu, được chắp bút bởi
-                    Pininfarina. Cả 4 mẫu xe đều đi cùng với chính sách bảo hành 10 năm, một trong những chính sách tốt
-                    nhất trên toàn cầu hiện tại.</p>
-                <p>Lần đầu tiên, công chúng Pháp sẽ được chiêm ngưỡng và trải nghiệm các mẫu SUV điện cao cấp của
-                    VinFast với phân khúc trải rộng từ B đến E.</p>
-
-                   <p> VinFast sẽ mang đến Paris Motor Show 2022 bốn mẫu xe VF 6, VF 7, VF 8, VF 9. Đây cũng là lần đầu
-                    tiên VinFast chính thức giới thiệu các sản phẩm xe điện tới thị trường Pháp.</p>
-
-                    <p>Trong đó, VF 6, VF 7 lần lượt là các mẫu SUV hạng B và C được VinFast và Torino Design hợp tác thiết
-                    kế. VF 8 và VF 9 là 2 mẫu SUV điện đầu tiên ra mắt thị trường toàn cầu, được chắp bút bởi
-                    Pininfarina. Cả 4 mẫu xe đều đi cùng với chính sách bảo hành 10 năm, một trong những chính sách tốt
-                    nhất trên toàn cầu hiện tại.</p>
-                <p>Lần đầu tiên, công chúng Pháp sẽ được chiêm ngưỡng và trải nghiệm các mẫu SUV điện cao cấp của
-                    VinFast với phân khúc trải rộng từ B đến E.</p>
-
-                   <p> VinFast sẽ mang đến Paris Motor Show 2022 bốn mẫu xe VF 6, VF 7, VF 8, VF 9. Đây cũng là lần đầu
-                    tiên VinFast chính thức giới thiệu các sản phẩm xe điện tới thị trường Pháp.</p>
-
-                    <p>Trong đó, VF 6, VF 7 lần lượt là các mẫu SUV hạng B và C được VinFast và Torino Design hợp tác thiết
-                    kế. VF 8 và VF 9 là 2 mẫu SUV điện đầu tiên ra mắt thị trường toàn cầu, được chắp bút bởi
-                    Pininfarina. Cả 4 mẫu xe đều đi cùng với chính sách bảo hành 10 năm, một trong những chính sách tốt
-                    nhất trên toàn cầu hiện tại.</p>
-            </div>
-            <div class="col-md-3">
-                <h4>Latest news</h4>
-                <div class="right-content flex-column d-flex">
-                    <a class="pe-auto" href="#">Cường "Đô La" drift khét mù trên chiếc Porsche hơn 20 tỷ đồng</a>
-                    <a class="pe-auto" href="#">Cường "Đô La" drift khét mù trên chiếc Porsche hơn 20 tỷ đồng</a>
-                    <a class="pe-auto" href="#">Cường "Đô La" drift khét mù trên chiếc Porsche hơn 20 tỷ đồng</a>
-                    <a class="pe-auto" href="#">Cường "Đô La" drift khét mù trên chiếc Porsche hơn 20 tỷ đồng</a>
-                    <a class="pe-auto" href="#">Cường "Đô La" drift khét mù trên chiếc Porsche hơn 20 tỷ đồng</a>
-                </div>
             </div>
         </div>
     </div>
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-            class="bi bi-arrow-up-short"></i></a>
-    <footer id="footer">
-        <div class="footer-top">
-            <div class="container">
-                <div class="row">
+</div>
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+        class="bi bi-arrow-up-short"></i></a>
+<footer id="footer">
+    <div class="footer-top">
+        <div class="container">
+            <div class="row">
 
-                    <div class="col-lg-3 col-md-6 footer-info">
-                        <h3>CAB Auction</h3>
-                    </div>
+                <div class="col-lg-3 col-md-6 footer-info">
+                    <h3>CAB Auction</h3>
+                </div>
 
-                    <div class="col-lg-3 col-md-6 footer-links">
-                        <h4>Useful Links</h4>
-                        <ul>
-                            <li><i class="bi bi-chevron-right"></i> <a href="#">Home</a></li>
-                            <li><i class="bi bi-chevron-right"></i> <a href="#">About us</a></li>
-                            <li><i class="bi bi-chevron-right"></i> <a href="#">Services</a></li>
-                            <li><i class="bi bi-chevron-right"></i> <a href="#">Terms of service</a></li>
-                            <li><i class="bi bi-chevron-right"></i> <a href="#">Privacy policy</a></li>
-                        </ul>
-                    </div>
+                <div class="col-lg-3 col-md-6 footer-links">
+                    <h4>Useful Links</h4>
+                    <ul>
+                        <li><i class="bi bi-chevron-right"></i> <a href="#">Home</a></li>
+                        <li><i class="bi bi-chevron-right"></i> <a href="#">About us</a></li>
+                        <li><i class="bi bi-chevron-right"></i> <a href="#">Services</a></li>
+                        <li><i class="bi bi-chevron-right"></i> <a href="#">Terms of service</a></li>
+                        <li><i class="bi bi-chevron-right"></i> <a href="#">Privacy policy</a></li>
+                    </ul>
+                </div>
 
-                    <div class="col-lg-3 col-md-6 footer-contact">
-                        <h4>Contact Us</h4>
-                        <p>
-                            FPT <br>
-                            Thach Hoa Thach That<br>
-                            Ha Noi<br>
-                            <strong>Phone:</strong> +84 3213212<br>
-                            <strong>Email:</strong> cabauction@gmail.com<br>
-                        </p>
+                <div class="col-lg-3 col-md-6 footer-contact">
+                    <h4>Contact Us</h4>
+                    <p>
+                        FPT <br>
+                        Thach Hoa Thach That<br>
+                        Ha Noi<br>
+                        <strong>Phone:</strong> +84 3213212<br>
+                        <strong>Email:</strong> cabauction@gmail.com<br>
+                    </p>
 
-                        <div class="social-links">
-                            <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-                            <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-                            <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-                            <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-                            <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
-                        </div>
-
-                    </div>
-
-                    <div class="col-lg-3 col-md-6 footer-newsletter">
-                        <h4>Our Newsletter</h4>
-                        <form action="" method="post">
-                            <input type="email" name="email"><input type="submit" value="Subscribe">
-                        </form>
+                    <div class="social-links">
+                        <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                        <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
                     </div>
 
                 </div>
-            </div>
-        </div>
 
-        <div class="container">
-            <div class="copyright">
-                &copy; Copyright <strong>BizPage</strong>. All Rights Reserved
-            </div>
-            <div class="credits">
+                <div class="col-lg-3 col-md-6 footer-newsletter">
+                    <h4>Our Newsletter</h4>
+                    <form action="" method="post">
+                        <input type="email" name="email"><input type="submit" value="Subscribe">
+                    </form>
+                </div>
+
             </div>
         </div>
-    </footer>
-    <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-    <script src="assets/vendor/aos/aos.js"></script>
-    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-    <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-    <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
-    <script src="assets/vendor/php-email-form/validate.js"></script>
-    <script src="assets/js/main.js"></script>
-    <script src="assets/js/main.js"></script>
+    </div>
+
+    <div class="container">
+        <div class="copyright">
+            &copy; Copyright <strong>BizPage</strong>. All Rights Reserved
+        </div>
+        <div class="credits">
+        </div>
+    </div>
+</footer>
+<script th:src="@{/assets/vendor/purecounter/purecounter_vanilla.js}"></script>
+<script th:src="@{/assets/vendor/aos/aos.js}"></script>
+<script th:src="@{/assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/assets/vendor/glightbox/js/glightbox.min.js}"></script>
+<script th:src="@{/assets/vendor/isotope-layout/isotope.pkgd.min.js}"></script>
+<script th:src="@{/assets/vendor/swiper/swiper-bundle.min.js}"></script>
+<script th:src="@{/assets/vendor/waypoints/noframework.waypoints.js}"></script>
+<script th:src="@{/assets/vendor/php-email-form/validate.js}"></script>
+<script th:src="@{/assets/js/main.js}"></script>
+<script th:src="@{/assets/js/main.js}"></script>
 </body>
 
 </html>

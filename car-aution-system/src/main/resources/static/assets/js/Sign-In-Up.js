@@ -33,7 +33,3 @@ isBool = true;
             isBool = true;
         }
     }
-
-    function check(){
-        alert(repassword + " " + password);
-      }

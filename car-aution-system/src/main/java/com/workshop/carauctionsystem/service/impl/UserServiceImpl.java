@@ -1,10 +1,13 @@
 package com.workshop.carauctionsystem.service.impl;
 
+import com.workshop.carauctionsystem.entity.PasswordResetToken;
 import com.workshop.carauctionsystem.entity.User;
 import com.workshop.carauctionsystem.entity.VerificationToken;
+import com.workshop.carauctionsystem.exception.UserAlreadyExistException;
 import com.workshop.carauctionsystem.model.UserDTO;
+import com.workshop.carauctionsystem.repository.PasswordResetTokenRepository;
 import com.workshop.carauctionsystem.repository.RoleRepository;
-import com.workshop.carauctionsystem.repository.UserResponsitory;
+import com.workshop.carauctionsystem.repository.UserRepository;
 import com.workshop.carauctionsystem.repository.VerificationTokenRepository;
 import com.workshop.carauctionsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,38 +17,53 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.sql.Timestamp;
+import java.util.*;
 
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {
     @Autowired
-    private UserResponsitory userResponsitory;
-
-    @Override
-    public Optional<User> login(String username, String password) {
-        return userResponsitory.findUserByUserNameAndPassword(username, password);
-    }
-
-    @Override
-    public Optional<User> findUserByName(String username) {
-        return userResponsitory.findUserByUserName(username);
-    }
+    private UserRepository userRepository;
 
     @Autowired
     private VerificationTokenRepository verificationTokenRepository;
-
+    @Autowired
+    private PasswordResetTokenRepository passwordTokenRepo;
     @Autowired
     private RoleRepository roleRepository;
+
     @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Override
+    public User login(String username, String password) {
+        return userRepository.findUserByUserNameAndPassword(username, password);
+    }
+
+    @Override
+    public User findByUsername(String username) {
+        return userRepository.findUserByUserName(username);
+    }
+
+    @Override
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
+    @Override
+    public User findUserById(int id) {
+        return userRepository.findUserById(id);
+    }
+
+    @Override
+    public void updateUserById(String fullName, String userName, String phone, String email, int id) {
+        userRepository.updateUserById(fullName, userName, phone, email, id);
     }
 
     @Override
@@ -59,23 +77,34 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void saveRegisteredUser(User user) {
-        userResponsitory.save(user);
+        userRepository.save(user);
+    }
+
+    public boolean isEmailExist(String email) {
+        return userRepository.findByEmail(email) != null;
     }
 
     @Override
-    public User registerNewUser(UserDTO userDTO) {
+    public User registerNewUserAccount(UserDTO userDTO) {
+        if (isEmailExist(userDTO.getEmail())) {
+            throw new UserAlreadyExistException("There is an account with that email address: " + userDTO.getEmail());
+        }
         User user = new User();
         user.setUserName(userDTO.getUsername());
         user.setFullName(userDTO.getFullName());
         user.setEmail(userDTO.getEmail());
         user.setPhone(userDTO.getPhone());
         user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+        user.setAvatar(userDTO.getAvatar());
         user.setRoles(Arrays.asList(roleRepository.findByName("USER_ROLE")));
-        return userResponsitory.save(user);
+        Date date = new Date();
+        user.setCreatedAt(new Timestamp(date.getTime()));
+        user.setAddressWallet(userDTO.getAddressWallet());
+        return userRepository.save(user);
     }
 
     @Override
-    public void createVerificationTokenForUser(User user, String token) {
+    public void saveVerificationTokenForUser(User user, String token) {
         VerificationToken myToken = new VerificationToken(token, user);
         verificationTokenRepository.save(myToken);
     }
@@ -92,5 +121,27 @@ public class UserServiceImpl implements UserService {
                 .toString());
         vToken = verificationTokenRepository.save(vToken);
         return vToken;
+    }
+
+    @Override
+    public void savePasswordResetTokenForUser(User user, String token) {
+        PasswordResetToken myToken = new PasswordResetToken(token, user);
+        passwordTokenRepo.save(myToken);
+    }
+
+    @Override
+    public PasswordResetToken getPasswordResetToken(String token) {
+        return passwordTokenRepo.findByToken(token);
+    }
+
+    @Override
+    public User getUserByPasswordResetToken(String token) {
+        return passwordTokenRepo.findByToken(token).getUser();
+    }
+
+    @Override
+    public void changePassword(User user, String password) {
+        user.setPassword(passwordEncoder.encode(password));
+        userRepository.save(user);
     }
 }

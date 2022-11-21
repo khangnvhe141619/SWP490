@@ -1,5 +1,6 @@
 package com.workshop.carauctionsystem.service;
 
+import com.workshop.carauctionsystem.entity.PasswordResetToken;
 import com.workshop.carauctionsystem.entity.User;
 import com.workshop.carauctionsystem.entity.VerificationToken;
 import com.workshop.carauctionsystem.model.UserDTO;
@@ -8,18 +9,27 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
-    public Optional<User> login (String username, String password);
+    public User login (String username, String password);
 
-    Optional<User> findUserByName (String username);
+    public User findByUsername (String username);
+    public User findByEmail(String email);
+    public User findUserById (int id);
+
+    void updateUserById(String fullName, String userName, String phone, String email, int id);
     User getUser(String verificationToken);
 
     void saveRegisteredUser(User user);
 
-    public User registerNewUser(UserDTO userDTO);
+    public User registerNewUserAccount(UserDTO userDTO);
 
-    void createVerificationTokenForUser(User user, String token);
+    void saveVerificationTokenForUser(User user, String token);
 
     VerificationToken getVerificationToken(String verificationToken);
 
     VerificationToken generateNewVerificationToken(String token);
+    void savePasswordResetTokenForUser(User user, String token);
+    PasswordResetToken getPasswordResetToken(String token);
+    User getUserByPasswordResetToken(String token);
+
+    void changePassword(User user, String password);
 }

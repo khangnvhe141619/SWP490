@@ -1,7 +1,7 @@
 package com.workshop.carauctionsystem.controller;
 
 import com.workshop.carauctionsystem.entity.User;
-import com.workshop.carauctionsystem.repository.UserResponsitory;
+import com.workshop.carauctionsystem.repository.UserRepository;
 import com.workshop.carauctionsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -25,9 +25,9 @@ public class UserController {
     UserService service;
 
     @Autowired
-    UserResponsitory userResponsitory;
+    UserRepository userRepository;
     @GetMapping("/login")
-    public ModelAndView ridirectLogin(){
+    public ModelAndView redirectLogin(){
         ModelAndView view = new ModelAndView();
         view.setViewName("Sign-In-Up");
         return view;
@@ -38,20 +38,23 @@ public class UserController {
         Cookie cookie = new Cookie("setUser", "");
         cookie.setMaxAge(0);
         response.addCookie(cookie);
-        return ridirectLogin();
+        return redirectLogin();
     }
 
     @PostMapping(value = {"/login"})
     public ModelAndView login(@ModelAttribute(name = "setUser") User user, Model model, @CookieValue(value = "setUser", defaultValue = "") String setUser,
                               HttpServletRequest request, HttpServletResponse response){
-        Optional<User> u =  service.login(user.getUserName(),user.getPassword());
-        System.out.println(u);
+        User u =  service.login(user.getUserName(),user.getPassword());
         ModelAndView view = new ModelAndView();
-        if(u.isPresent()){
+        if(u != null){
             setUser = user.getUserName();
             Cookie cookie = new Cookie("setUser", setUser);
+            String setUserId = String.valueOf(u.getId());
+            System.out.println(setUserId);
+            Cookie cookie2 = new Cookie("setUserId", setUserId);
             cookie.setMaxAge(24 * 60 * 60);
             response.addCookie(cookie);
+            response.addCookie(cookie2);
             model.addAttribute("cookieValue", cookie);
             model.addAttribute("check", true);
             view.setViewName("redirect:/home");
