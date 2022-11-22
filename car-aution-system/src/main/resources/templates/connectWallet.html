@@ -50,7 +50,7 @@
             <div class="contant text-center m-5">
               <h1>Connect wallet</h1>
               <p>Connect with your available wallet or create new wallet to join our marketplace</p>
-              <a id="connectButton" href="https://metamask.io/"><img src="assets/img/MetaMask_Fox.svg.png">Login with MetaMark</a>
+              <button id="connectButton" onclick="connectButton"><img src="assets/img/MetaMask_Fox.svg.png">Login with MetaMark</button>
               <div><img class="line" src="assets/img/line.jpg"></div>
             <h5>We do not own your private keys and cannot access your funds without your confirmation.</h5>
             </div>  
@@ -59,17 +59,39 @@
       </div>
     </div>
   </section>
+  <script type="module">
+    import { ethers } from "ethers";
+    import {
+      useAccount,
+      useConnect,
+      useDisconnect,
+    } from 'wagmi'
+    import { MetaMaskConnector } from 'wagmi/connectors/metaMask'
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+
+    const connectButton = document.getElementById("connectButton");
+
+    connectButton.addEventListener("click", () => {
+      const { address, isConnected } = useAccount();
+      const { connect } = useConnect({
+        connector: new MetaMaskConnector(),
+      })
+      const { disconnect } = useDisconnect();
+      const connectwalletHandler = async () => {
+        let signer = await provider.getSigner();
+        let userAddress =await signer.getAddress();
+        connect();
+      };
+      const disconnectwalletHandler = async () => {
+        if (isConnected) {
+          disconnect();
+        }
+      };
+    })
+
+  </script>
+  <script src="/assets/js/connectWallet.js"></script>
 <script>
-  const connectButton = document.getElementById("connectButton");
-
-  connectButton.addEventListener("click", () => {
-    if (typeof window.ethereum !== "undefined") {
-      console.log("MetaMask installed")
-    } else {
-      window.open("https://metamask.io/download/", "_blank");
-    }
-  })
-
 </script>
 </body>
 

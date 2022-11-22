@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -14,7 +14,7 @@
     <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="assets/css/PersonalProfile.css" rel="stylesheet">
-
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 </head>
 
 <body style="background: url(/assets/img/about-bg1.png);">
@@ -140,8 +140,7 @@
                     </div>
                 </div>
             </form>
-            <form th:action="@{/personProfile/changePassword}" th:object="${User}" method="post"
-                  onsubmit="return verifyPassword()">
+            <form th:action="@{/personProfile/changePassword}" th:object="${User}" method="post">
                 <div class="p-3 bg-white profile mt-500" id="acc-update">
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <h4 class="text-right">Change Password</h4>
@@ -151,9 +150,8 @@
                         <div class="col-md-2"></div>
                         <div class="col-md-8">
                             <label class="labels">Current Password</label>
-                            <input id="password" type="password" class="form-control" name="currentPassword"
-                                   required onkeyup="isPasswordExistedAjax()"/>
-                            <span id="emailError" class="alert alert-danger col-sm-4" style="display:none"></span>
+                            <input id="currentPassword" type="password" class="form-control" name="currentPassword" required onkeyup="isPassAjax()"/>
+                            <span id="passError" class="alert alert-danger col-sm-4" style="display:none"></span>
                         </div>
                         <div class="col-md-2"></div>
                         <div class="col-md-2"></div>
@@ -168,6 +166,9 @@
                             <input id="rePass" type="password" class="form-control" name="rePassword" required="required">
                             <span id="message2" style="color:red"> </span>
                         </div>
+                        <div class="col-md-8">
+                            <input type="hidden" name="id" id="idU" class="form-control" placeholder="id" th:value="${INFOR.id}" readonly>
+                        </div>
                     </div>
                     <div class="mt-2 text-center">
                         <button id="btnChange" class="btn btn-primary profile-button rounded-pill" type="submit">Change Account
@@ -178,49 +179,31 @@
         </div>
     </div>
 </div>
-</body>
 <script src="assets/js/personalProfile.js"></script>
 <script th:inline="javascript">
-    var serverContext = [[@{/}]];
-        $(document).ready(function () {
-            $('form').submit(function (event) {
-                register(event);
-            });
-        }),
-        function register(event){
-            event.preventDefault();
-            $("alert").html("").hide();
-        }
-        console.log(serverContext);
-    function isPasswordExistedAjax() {
-        var pass = $("#password").val();
-
+    function isPassAjax() {
+        var passU = $("#currentPassword").val();
+        var idU = $("#idU").val();
+        console.log(passU);
+        console.log(idU);
         $.ajax({
             type: "POST",
-            url: serverContext + "passExist?pass=" + pass,
-            data: 'pass:' + pass,
+            url: "http://localhost:8080/passExist?setUserId=" + idU + "&currentPassword=" + passU,
+            data: 'pass:' + passU,
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (response) {
-                // we have the response
                 if (response.status == "ok") {
-                    $("#emailError").show().html(response.message);
-                    disableBtn();
+                    $("#passError").show().html(response.message);
                 } else if (response.status == "no") {
-                    $("#emailError").show().html(response.message);
-                    ableBtn();
+                    $("#passError").show().html(response.message);
                 }
             },
-            error: function(e){
+            error: function (e) {
                 alert('Error: ' + e);
             }
         });
     }
-    function disableBtn() {
-        document.getElementById("btnChange").disabled  = true;
-    }
-    function ableBtn() {
-        document.getElementById("btnChange").disabled  = false;
-    }
 </script>
+</body>
 </html>

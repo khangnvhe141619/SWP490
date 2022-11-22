@@ -71,7 +71,7 @@ public class ResetPasswordController {
     }
 
     @GetMapping("/user/changePassword")
-    public ModelAndView changePassword(final HttpServletRequest request, @RequestParam("id") int id, @RequestParam("token") String token) {
+    public ModelAndView changePassword(@RequestParam("id") int id, @RequestParam("token") String token) {
         ModelAndView view = new ModelAndView();
         PasswordResetToken passToken = userService.getPasswordResetToken(token);
         if (passToken == null || passToken.getUser().getId() != id) {
@@ -93,7 +93,7 @@ public class ResetPasswordController {
     }
 
     @PostMapping("/user/savePassword")
-    public ModelAndView savePassword(HttpServletRequest request, @RequestParam("token") String token, @RequestParam("password") String password) {
+    public ModelAndView savePassword(@RequestParam("token") String token, @RequestParam("password") String password) {
         ModelAndView view = new ModelAndView();
         User user = userService.getUserByPasswordResetToken(token);
         userService.changePassword(user, password);
