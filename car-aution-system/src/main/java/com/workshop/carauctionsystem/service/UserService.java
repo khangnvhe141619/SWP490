@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
-    public User login (String username, String password);
+    public User login (String username);
     public User findByUsername (String username);
     public User findByEmail(String email);
     public User findUserById (int id);

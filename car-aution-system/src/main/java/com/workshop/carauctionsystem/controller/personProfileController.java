@@ -4,6 +4,7 @@ import com.workshop.carauctionsystem.entity.User;
 import com.workshop.carauctionsystem.repository.UserRepository;
 import com.workshop.carauctionsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -76,11 +77,12 @@ public class personProfileController {
 
     @PostMapping(value = "/personProfile/changePassword")
     public ModelAndView changePassword(@RequestParam(name = "currentPassword", required = false) String password,
-                                       @RequestParam(name = "newPassword", required = false) String repass,
-                                       @CookieValue(value = "setUserId") int setUser, Model model){
-        User u = service.checkPassword(setUser, password);
-        if(u != null){
-            service.changePassword(setUser, repass);
+                                       @RequestParam(name = "newPassword", required = false) String newPass,
+                                       @CookieValue(value = "setUserId") int setUserId, Model model){
+        User u=  service.findUserById(setUserId);
+        boolean checkPass = BCrypt.checkpw(password, u.getPassword());
+        if(u != null && checkPass){
+            service.changePassword(setUserId, newPass);
         }
         ModelAndView view = new ModelAndView();
         view.setViewName("redirect:/personProfile");

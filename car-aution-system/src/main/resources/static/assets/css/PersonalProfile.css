@@ -267,9 +267,9 @@ a{
   display: block;
 }  
 
-/*#update-profile, #acc-update{*/
-/*  display: none;*/
-/*}*/
+#update-profile, #acc-update{
+  display: none;
+}
 
 .personProfile{
   margin-top: 80px;

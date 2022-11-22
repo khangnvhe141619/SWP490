@@ -41,10 +41,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User login(String username, String password) {
-        return userRepository.findUserByUserNameAndPassword(username, password);
+    public User login(String username) {
+        return userRepository.findUserByUserName(username);
     }
-
     @Override
     public User findByUsername(String username) {
         return userRepository.findUserByUserName(username);
@@ -67,7 +66,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void changePassword(int id, String newPass) {
-        userRepository.changePasswordById(id, newPass);
+        userRepository.changePasswordById(id, passwordEncoder.encode(newPass));
     }
 
     @Override
