@@ -127,11 +127,16 @@ DROP TABLE IF EXISTS `favorite`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `favorite` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `createdat` datetime DEFAULT NULL,
-  `number` int DEFAULT NULL,
-  `userid` int DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `userId` int NOT NULL,
+  `carId` int NOT NULL,
+  `createdAt` datetime NOT NULL,
+  `number` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `favorite_userid_foreign` (`userId`),
+  KEY `favorite_carid_foreign` (`carId`),
+  CONSTRAINT `favorite_carid_foreign` FOREIGN KEY (`carId`) REFERENCES `car` (`id`),
+  CONSTRAINT `favorite_userid_foreign` FOREIGN KEY (`userId`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
