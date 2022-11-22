@@ -42,10 +42,9 @@ public class ResetPasswordController {
     private Environment env;
 
     @GetMapping("/forgotPassword")
-    public String showRegistrationForm(final HttpServletRequest request) {
-        return "Sign-in-Up";
+    public String showRegistrationForm() {
+        return "Sign-In-Up";
     }
-
     @PostMapping("/forgotPassword")
     public ModelAndView resetPassword(HttpServletRequest request, @RequestParam("email") String email) {
         User user = userRepository.findByEmail(email);
