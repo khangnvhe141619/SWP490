@@ -1,9 +1,12 @@
 package com.workshop.carauctionsystem.controller;
 
 import com.workshop.carauctionsystem.entity.User;
+import com.workshop.carauctionsystem.model.ResponseObject;
 import com.workshop.carauctionsystem.repository.UserRepository;
 import com.workshop.carauctionsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -87,5 +91,20 @@ public class personProfileController {
         ModelAndView view = new ModelAndView();
         view.setViewName("redirect:/personProfile");
         return view;
+    }
+
+    private String getAppUrl(HttpServletRequest request) {
+        return "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
+    }
+    @PostMapping("/passExist")
+    public ResponseEntity<ResponseObject> isPassExisted(HttpServletRequest request,
+                                                        @CookieValue(value = "setUserId") int setUserId,
+                                                        @RequestParam("currentPassword") String pass) {
+        User u=  service.findUserById(setUserId);
+        boolean checkPass = BCrypt.checkpw(pass, u.getPassword());
+        if (u != null && checkPass) {
+            return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject("ok", "Pass existed!", null));
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject("no", "Valid pass!", null));
     }
 }

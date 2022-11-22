@@ -151,7 +151,9 @@
                         <div class="col-md-2"></div>
                         <div class="col-md-8">
                             <label class="labels">Current Password</label>
-                            <input id="password" type="password" class="form-control" name="currentPassword" required="required">
+                            <input id="password" type="password" class="form-control" name="currentPassword"
+                                   required onkeyup="isPasswordExistedAjax()"/>
+                            <span id="emailError" class="alert alert-danger col-sm-4" style="display:none"></span>
                         </div>
                         <div class="col-md-2"></div>
                         <div class="col-md-2"></div>
@@ -168,7 +170,7 @@
                         </div>
                     </div>
                     <div class="mt-2 text-center">
-                        <button class="btn btn-primary profile-button rounded-pill" type="submit">Change Account
+                        <button id="btnChange" class="btn btn-primary profile-button rounded-pill" type="submit">Change Account
                         </button>
                     </div>
                 </div>
@@ -178,4 +180,47 @@
 </div>
 </body>
 <script src="assets/js/personalProfile.js"></script>
+<script th:inline="javascript">
+    var serverContext = [[@{/}]];
+        $(document).ready(function () {
+            $('form').submit(function (event) {
+                register(event);
+            });
+        }),
+        function register(event){
+            event.preventDefault();
+            $("alert").html("").hide();
+        }
+        console.log(serverContext);
+    function isPasswordExistedAjax() {
+        var pass = $("#password").val();
+
+        $.ajax({
+            type: "POST",
+            url: serverContext + "passExist?pass=" + pass,
+            data: 'pass:' + pass,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                // we have the response
+                if (response.status == "ok") {
+                    $("#emailError").show().html(response.message);
+                    disableBtn();
+                } else if (response.status == "no") {
+                    $("#emailError").show().html(response.message);
+                    ableBtn();
+                }
+            },
+            error: function(e){
+                alert('Error: ' + e);
+            }
+        });
+    }
+    function disableBtn() {
+        document.getElementById("btnChange").disabled  = true;
+    }
+    function ableBtn() {
+        document.getElementById("btnChange").disabled  = false;
+    }
+</script>
 </html>
