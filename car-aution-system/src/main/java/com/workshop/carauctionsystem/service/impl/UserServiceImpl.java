@@ -25,7 +25,6 @@ import java.util.*;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
-
     @Autowired
     private VerificationTokenRepository verificationTokenRepository;
     @Autowired
@@ -59,6 +58,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findUserById(int id) {
         return userRepository.findUserById(id);
+    }
+
+    @Override
+    public User checkPassword(int id, String pass) {
+        return userRepository.findUserByIdAndPassword(id, pass);
+    }
+
+    @Override
+    public void changePassword(int id, String newPass) {
+        userRepository.changePasswordById(id, newPass);
     }
 
     @Override
