@@ -17,7 +17,7 @@
 
 </head>
 
-<body style="background: url(assets/img/about-bg1.png);">
+<body style="background: url(/assets/img/about-bg1.png);">
 <header id="header" class="fixed-top d-flex align-items-center header-transparent bg-black">
     <div class="container-fluid">
         <div class="row justify-content-center align-items-center">
@@ -51,11 +51,11 @@
                 <span class="text-black-50">Nguyenkhang@gmail.com</span>
             </div>
             <div class="d-flex flex-column text-center">
-                <a href="myActive.html" class="font-weight-bold h5 text-black">My Active</a>
-                <a href="PeronalProfile.html" class="font-weight-bold mt-50 h5 text-black">Personal Profile</a>
+                <a th:href="@{/myActive.html}" class="font-weight-bold h5 text-black">My Active</a>
+                <a th:href="@{/personProfile}" class="font-weight-bold mt-50 h5 text-black">Personal Profile</a>
                 <a href="winningBids.html" class="font-weight-bold mt-50 h5 text-black">Winning Bids</a>
-                <a href="myFavorite.html" class="font-weight-bold mt-50 mb-5 h5  text-info">My Favorite</a>
-
+                <a th:href="@{/myFavorite}" class="font-weight-bold mt-50 mb-5 h5 text-info">My Favorite</a>
+                <a th:href="@{/logout}" class="font-weight-bold mt-50 mb-5 h5 text-black">Logout</a>
             </div>
         </div>
         <div class="col-md-7 border-right">
@@ -66,7 +66,7 @@
                 <div class="row">
                     <div th:each="listFavorite:${listFavorite}" class="col-md-6 winning-bids text-center">
                         <img th:src="${listFavorite.imgPath}" class="rounded">
-                        <i class="bi bi-star-fill text-warning"></i>
+                        <a th:href="@{'/myFavorite/' + ${listFavorite.id}}"><i class="bi bi-star-fill text-warning"></i></a>
                         <h5 th:text="${listFavorite.carName}"></h5>
                         <p>Item Favorite</p>
                     </div>
