@@ -7,4 +7,7 @@ import java.util.List;
 
 public interface FavoriteService {
     public List<FavoriteDTO> listAllFavorite(int id);
+
+    public void deleteFavorite(int id);
+
 }

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -23,6 +24,14 @@ public class FavoriteController {
         List<FavoriteDTO> favorite = favoriteService.listAllFavorite(setUserId);
         model.addAttribute("listFavorite", favorite);
         view.setViewName("myFavorite");
+        return view;
+    }
+
+    @GetMapping("/myFavorite/{id}")
+    public ModelAndView redirectUnFavorite(@PathVariable("id") int id){
+        favoriteService.deleteFavorite(id);
+        ModelAndView view = new ModelAndView();
+        view.setViewName("redirect:/myFavorite");
         return view;
     }
 }

@@ -4,6 +4,7 @@ import com.workshop.carauctionsystem.entity.User;
 import com.workshop.carauctionsystem.repository.UserRepository;
 import com.workshop.carauctionsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -44,9 +45,10 @@ public class UserController {
     @PostMapping(value = {"/login"})
     public ModelAndView login(@ModelAttribute(name = "setUser") User user, Model model, @CookieValue(value = "setUser", defaultValue = "") String setUser,
                               HttpServletRequest request, HttpServletResponse response){
-        User u =  service.login(user.getUserName(),user.getPassword());
+        User u =  service.login(user.getUserName());
         ModelAndView view = new ModelAndView();
-        if(u != null){
+        boolean checkPass = BCrypt.checkpw(user.getPassword(), u.getPassword());
+        if(u != null && checkPass){
             setUser = user.getUserName();
             Cookie cookie = new Cookie("setUser", setUser);
             String setUserId = String.valueOf(u.getId());
