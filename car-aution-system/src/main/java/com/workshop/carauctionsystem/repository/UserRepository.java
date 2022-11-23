@@ -19,6 +19,9 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Modifying
     @Query(value = "update user u set u.fullname = :fullName, u.username = :userName, u.phone = :phone, u.email = :email where u.id = :id", nativeQuery = true)
     public void updateUserById(String fullName, String userName, String phone, String email, int id);
+    @Modifying
+    @Query(nativeQuery = true, value = "UPDATE `swp490_cab`.`user` SET `password` = :pass WHERE (`id` = :id);")
+    public void changePasswordById(int id, String pass);
 
     @Query(nativeQuery = true, value = "select * from user where user.enabled = 0")
     public Page<User> ListUserBan(Pageable pageable);

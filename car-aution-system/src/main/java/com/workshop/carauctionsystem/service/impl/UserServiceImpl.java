@@ -63,11 +63,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User checkPassword(int id, String pass) {
-        return userRepository.findUserByIdAndPassword(id, pass);
-    }
-
-    @Override
     public void changePassword(int id, String newPass) {
         userRepository.changePasswordById(id, passwordEncoder.encode(newPass));
     }
