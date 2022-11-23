@@ -91,7 +91,7 @@ DROP TABLE IF EXISTS `carspecification`;
 CREATE TABLE `carspecification` (
   `id` int NOT NULL AUTO_INCREMENT,
   `carId` int NOT NULL,
-  `manufactering` varchar(255) NOT NULL,
+  `manufacturing` varchar(255) NOT NULL,
   `status` varchar(255) NOT NULL,
   `km_driven` int NOT NULL,
   `gear` varchar(255) NOT NULL,
@@ -568,7 +568,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'viethoang1','123','Viet Hoang','0122333444','viethoang1@gmail.com','img',0,'2022-11-02 07:02:56'),(2,'viethoang2','123','Viet Hoang','0166232333','viethoang2@gmail.com','img',0,'2022-11-02 07:02:56'),(3,'viethoang3','123','Viet Hoang','0966812311','viethoang3@gmail.com','img',0,'2022-11-02 07:02:56'),(4,'viethoang','123','Viet Hoang','0234123123','viethoang42gmail.com','img',0,'2022-11-02 07:02:56');
+INSERT INTO `user` VALUES (1,'viethoang1','$10$Kr9bEuihI1iPYZL2lSR5w.n47LowWVGpuLqQQeqRlaagl.zr8r6.u','Viet Hoang','0122333444','viethoang1@gmail.com','img',1,'2022-11-02 07:02:56'),(2,'viethoang2','$10$Kr9bEuihI1iPYZL2lSR5w.n47LowWVGpuLqQQeqRlaagl.zr8r6.u','Viet Hoang','0166232333','viethoang2@gmail.com','img',1,'2022-11-02 07:02:56'),(3,'viethoang3','$10$Kr9bEuihI1iPYZL2lSR5w.n47LowWVGpuLqQQeqRlaagl.zr8r6.u','Viet Hoang','0966812311','viethoang3@gmail.com','img',1,'2022-11-02 07:02:56'),(4,'viethoang','$10$Kr9bEuihI1iPYZL2lSR5w.n47LowWVGpuLqQQeqRlaagl.zr8r6.u','Viet Hoang','0234123123','viethoang42gmail.com','img',1,'2022-11-02 07:02:56');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 

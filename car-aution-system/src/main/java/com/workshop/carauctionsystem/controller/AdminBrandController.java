@@ -112,6 +112,4 @@ public class AdminBrandController {
         ra.addFlashAttribute("success", "The brand has been saved successfully");
         return "redirect:/brand";
     }
-
-
 }
