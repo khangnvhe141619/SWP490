@@ -49,6 +49,11 @@ public class UserController {
         ModelAndView view = new ModelAndView();
         boolean checkPass = BCrypt.checkpw(user.getPassword(), u.getPassword());
         if(u != null && checkPass){
+            if(u.getEnabled() == 0){
+                model.addAttribute("checkUserBan", true);
+                view.setViewName("Sign-In-Up");
+                return view;
+            }
             setUser = user.getUserName();
             Cookie cookie = new Cookie("setUser", setUser);
             String setUserId = String.valueOf(u.getId());
