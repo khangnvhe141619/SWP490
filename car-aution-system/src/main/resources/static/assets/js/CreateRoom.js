@@ -8,40 +8,8 @@ function model(){
         element.innerHTML = option; 
         return option; 
     }
-    if(ele == 1){
-        let option ='';
-        option += `<option value="BX">BMW X Class</option>`
-        option += `<option value="B3">BMW 3 Series</option>`
-        option += `<option value="B5">BMW 5 Series</option>`
-        option += `<option value="B7">BMW 7 Series</option>`
-        element.innerHTML = option; 
-        return option; 
-    }
-    if(ele == 2){
-        let option ='';
-        option += `<option value="VL">Vinfat Lux</option>`
-        option += `<option value="VE">Vinfat Evo</option>`
-        option += `<option value="VF">Vinfat Fadil</option>`
-        element.innerHTML = option; 
-        return option; 
-    }
-    if(ele == 3){
-        let option ='';
-        option += `<option value="AA">Audi A Class</option>`
-        option += `<option value="AQ">Audi Q Class</option>`
-        option += `<option value="AR">Audi RS Class</option>`
-        element.innerHTML = option; 
-        return option; 
-    }
-    if(ele == 6){
-        let option ='';
-        option += `<option value="MC">Mercedes-Benz C Class</option>`
-        option += `<option value="ME">Mercedes-Benz E Class</option>`
-        option += `<option value="MS">Mercedes-Benz S Class</option>`
-        element.innerHTML = option; 
-        return option; 
-    }
 }
+
 
 var modal = document.getElementById("myModal");
 var eye = document.getElementById("eye");

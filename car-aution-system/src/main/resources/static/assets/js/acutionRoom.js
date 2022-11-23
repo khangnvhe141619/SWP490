@@ -103,11 +103,15 @@ function yourPrice() {
         error += `Please do not leave the price blank or equal to 0`;
         element2.innerHTML = error;
     } else {
-        document.getElementById('error').remove();
-        h5 += `<h5>${document.getElementById("inputPrie").value} CAB</h5>`;
-        document.getElementById('btnBid').setAttribute('onclick', '');
-        document.getElementById('btnBid').setAttribute('style', 'background-color: #c0c0c0;');
-        element.innerHTML = h5;
-        return h5;
+        if(confirm("Are you sure you want to bid?")==true){
+            document.getElementById('error').remove();
+            h5 += `<h5>${document.getElementById("inputPrie").value} CAB</h5>`;
+            document.getElementById('btnBid').setAttribute('onclick', '');
+            document.getElementById('btnBid').setAttribute('style', 'background-color: #c0c0c0;');
+            element.innerHTML = h5;
+            return h5;
+        }else{
+            return null;
+        }
     }
 }

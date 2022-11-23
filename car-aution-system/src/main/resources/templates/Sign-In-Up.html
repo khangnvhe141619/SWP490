@@ -19,6 +19,7 @@
       <form th:action="@{/login}" th:object="${User}" method="post" class="sign-in-form" id="signin">
         <h2 class="title">Sign in</h2>
         <p th:if="${invalidCredentials}" style="color: red">Username or password is wrong</p>
+        <p th:if="${checkUserBan}" style="color: red">Account has been banned or not activated !!!</p>
         <div class="input-field">
           <i class="fas fa-user"></i>
           <input type="text" placeholder="Username" name="userName"/>
