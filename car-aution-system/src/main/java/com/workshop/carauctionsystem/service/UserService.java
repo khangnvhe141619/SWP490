@@ -16,7 +16,6 @@ public interface UserService {
     public User findByUsername (String username);
     public User findByEmail(String email);
     public User findUserById (int id);
-    public User checkPassword(int id, String pass);
     public void changePassword(int id, String newPass);
     void updateUserById(String fullName, String userName, String phone, String email, int id);
     User getUser(String verificationToken);
