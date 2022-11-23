@@ -22,7 +22,7 @@ import java.io.IOException;
 import java.util.Map;
 
 @Controller
-public class BrandController {
+public class AdminBrandController {
 
     @Autowired
     BrandServiceImpl brandService;

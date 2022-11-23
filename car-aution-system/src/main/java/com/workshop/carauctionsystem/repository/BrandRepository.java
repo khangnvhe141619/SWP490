@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Repository
 public interface BrandRepository extends PagingAndSortingRepository<Brand, Long> {
@@ -19,6 +20,9 @@ public interface BrandRepository extends PagingAndSortingRepository<Brand, Long>
 
     @Query(nativeQuery = true, value = "select * from brand where brand.brandName like %?1% and brand.status = 1 order by id desc")
     public Page<Brand> findAllByBrandName(Pageable pageable, String brandName);
+
+    @Query(nativeQuery = true, value = "select * from brand where brand.status = 1 order by id desc")
+    public List<Brand> findAllByStatus();
 
     @Modifying
     @Query(nativeQuery = true,value = "update brand set brandName = ?1,imgPath = ?2 where id = ?3")

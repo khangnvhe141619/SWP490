@@ -91,7 +91,7 @@
                                 class="fa fa-user icon-wrap"></span> <span class="mini-click-non">User</span></a>
                         <ul class="submenu-angle" aria-expanded="false">
                             <li><a href="listUser.html"><span class="mini-sub-pro">All Users</span></a></li>
-                            <li><a href="listBannedUser.html"><span class="mini-sub-pro">All Banned Users</span></a>
+                            <li><a th:href="@{/userban}"><span class="mini-sub-pro">All Banned Users</span></a>
                             </li>
                         </ul>
                     </li>
@@ -118,28 +118,23 @@
                         </ul>
                     </li>
                     <li>
-                        <a class="has-arrow" href="listModel.html" aria-expanded="false"><span
-                                class="glyphicon glyphicon-th-large icon-wrap"></span> <span class="mini-click-non">Model</span></a>
+                        <a class="has-arrow" th:href="@{/model}" aria-expanded="false"><span class="glyphicon glyphicon-th-large icon-wrap"></span> <span class="mini-click-non">Model</span></a>
                         <ul class="submenu-angle" aria-expanded="false">
-                            <li><a href="listModel.html"><span class="mini-sub-pro">All Model</span></a></li>
-                            <li><a th:href="@{/modelSpec}"><span
-                                    class="mini-sub-pro">All Model Specification</span></a></li>
+                            <li><a th:href="@{/model}"><span class="mini-sub-pro">All Model</span></a></li>
+                            <li><a th:href="@{/modelSpec}"><span class="mini-sub-pro">All Model Specification</span></a></li>
                         </ul>
                     </li>
                     <li>
-                        <a class="has-arrow" href="listNews.html" aria-expanded="false"><span
+                        <a class="has-arrow" th:href="@{/news}" aria-expanded="false"><span
                                 class="fa fa-newspaper-o icon-wrap"></span> <span class="mini-click-non">News</span></a>
                         <ul class="submenu-angle" aria-expanded="false">
                             <li><a th:href="@{/news}"><span class="mini-sub-pro">All News</span></a></li>
                         </ul>
                     </li>
                     <li>
-                        <a class="has-arrow" href="#" aria-expanded="false"><span
-                                class="fa fa-gamepad icon-wrap"></span> <span
-                                class="mini-click-non">Game Play</span></a>
+                        <a class="has-arrow" href="#" aria-expanded="false"><span class="fa fa-gamepad icon-wrap"></span> <span class="mini-click-non">Game Play</span></a>
                         <ul class="submenu-angle" aria-expanded="false">
-                            <li><a href="#"><span class="mini-sub-pro">Game </span></a></li>
-                            <li><a href="#"><span class="mini-sub-pro">Play </span></a></li>
+                            <li><a href="#"><span class="mini-sub-pro">Game Play</span></a></li>
                         </ul>
                     </li>
                     <li>
@@ -196,8 +191,7 @@
                                                 <ul role="menu"
                                                     class="dropdown-header-top author-log dropdown-menu animated zoomIn">
 
-                                                    <li><a href="#"><span
-                                                            class="edu-icon edu-locked author-log-ic"></span>Log Out</a>
+                                                    <li><a href="#"><span class="edu-icon edu-locked author-log-ic"></span>Log Out</a>
                                                     </li>
                                                 </ul>
                                             </li>
@@ -227,35 +221,35 @@
                                         <ul id="demoevent" class="collapse dropdown-header-top">
                                             <li><a href="listUser.html">All Users</a>
                                             </li>
-                                            <li><a href="listBannedUser.html">All Banned Users</a>
+                                            <li><a th:href="@{/userban}">All Banned Users</a>
                                             </li>
                                         </ul>
                                     </li>
                                     <li><a data-toggle="collapse" data-target="#demopro" href="#">Car <span
                                             class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                                        <ul id="demopro" class="collapse dropdown-header-top">
+                                        <ul class="collapse dropdown-header-top">
                                             <li><a href="listCar.html">All Cars</a>
                                             </li>
                                         </ul>
                                     </li>
                                     <li><a data-toggle="collapse" data-target="#demopro" th:href="@{/brand}">Brand <span
                                             class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                                        <ul id="demopro" class="collapse dropdown-header-top">
+                                        <ul class="collapse dropdown-header-top">
                                             <li><a th:href="@{/brand}">All Brands</a>
                                             </li>
                                         </ul>
                                     </li>
                                     <li><a data-toggle="collapse" data-target="#demopro" href="#">Auction Room <span
                                             class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                                        <ul id="demopro" class="collapse dropdown-header-top">
+                                        <ul class="collapse dropdown-header-top">
                                             <li><a href="listAuction.html">All Auction Room</a>
                                             </li>
                                         </ul>
                                     </li>
                                     <li><a data-toggle="collapse" data-target="#demopro" href="#">Model <span
                                             class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                                        <ul id="demopro" class="collapse dropdown-header-top">
-                                            <li><a href="listModel.html">All Model</a>
+                                        <ul class="collapse dropdown-header-top">
+                                            <li><a th:href="@{/model}">All Model</a>
                                             </li>
                                             <li><a th:href="@{/modelSpec}">All Model Specification</a>
                                             </li>
@@ -263,21 +257,19 @@
                                     </li>
                                     <li><a data-toggle="collapse" data-target="#demopro" href="#">News <span
                                             class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                                        <ul id="demopro" class="collapse dropdown-header-top">
+                                        <ul class="collapse dropdown-header-top">
                                             <li><a th:href="@{/news}">All News</a></li>
-                                            <li><a href="create-news.html">Create New News</a></li>
                                         </ul>
                                     </li>
                                     <li><a data-toggle="collapse" data-target="#demopro" href="#">Game Play<span
                                             class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                                        <ul id="demopro" class="collapse dropdown-header-top">
-                                            <li><a href="#">Game</a></li>
-                                            <li><a href="#">Play</a></li>
+                                        <ul class="collapse dropdown-header-top">
+                                            <li><a href="#">Game Play</a></li>
                                         </ul>
                                     </li>
                                     <li><a data-toggle="collapse" data-target="#demopro" href="#">Wishlist<span
                                             class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                                        <ul id="demopro" class="collapse dropdown-header-top">
+                                        <ul class="collapse dropdown-header-top">
                                             <li><a href="wishlist.html">All</a></li>
                                         </ul>
                                     </li>
@@ -396,9 +388,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-default"
-                                                                data-dismiss="modal">Cancel
-                                                        </button>
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                                                         <button type="submit" class="btn btn-primary">Update</button>
                                                     </div>
                                                 </form>

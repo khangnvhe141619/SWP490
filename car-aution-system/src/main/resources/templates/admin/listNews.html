@@ -232,28 +232,28 @@
                                     </li>
                                     <li><a data-toggle="collapse" data-target="#demopro" href="#">Car <span
                                             class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                                        <ul id="demopro" class="collapse dropdown-header-top">
+                                        <ul class="collapse dropdown-header-top">
                                             <li><a href="listCar.html">All Cars</a>
                                             </li>
                                         </ul>
                                     </li>
                                     <li><a data-toggle="collapse" data-target="#demopro" href="#">Brand <span
                                             class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                                        <ul id="demopro" class="collapse dropdown-header-top">
+                                        <ul class="collapse dropdown-header-top">
                                             <li><a th:href="@{/brand}">All Brands</a>
                                             </li>
                                         </ul>
                                     </li>
                                     <li><a data-toggle="collapse" data-target="#demopro" href="#">Auction Room <span
                                             class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                                        <ul id="demopro" class="collapse dropdown-header-top">
+                                        <ul class="collapse dropdown-header-top">
                                             <li><a href="listAuction.html">All Auction Room</a>
                                             </li>
                                         </ul>
                                     </li>
                                     <li><a data-toggle="collapse" data-target="#demopro" href="#">Model <span
                                             class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                                        <ul id="demopro" class="collapse dropdown-header-top">
+                                        <ul class="collapse dropdown-header-top">
                                             <li><a href="listModel.html">All Model</a>
                                             </li>
                                             <li><a th:href="@{/modelSpec}">All Model Specification</a>
@@ -262,7 +262,7 @@
                                     </li>
                                     <li><a data-toggle="collapse" data-target="#demopro" href="#">News <span
                                             class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                                        <ul id="demopro" class="collapse dropdown-header-top">
+                                        <ul class="collapse dropdown-header-top">
                                             <li><a th:href="@{/news}">All News</a>
                                             </li>
                                             <li><a href="create-news.html">Create New News</a>
@@ -355,7 +355,7 @@
                                     <td th:text="${loop.count}"></td>
                                     <td th:text="${c.title}"></td>
                                     <td th:text="${c.author}"></td>
-                                    <td th:text="${c.img}"></td>
+                                    <td><img th:src="${c.img}" alt=""/></td>
                                     <td th:text="${c.createAt}"></td>
                                     <td>
                                         <button title="View" class="pd-setting-ed"><a data-toggle="modal"
@@ -381,8 +381,8 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     <div style="margin: 0 auto;" class="profile-info-inner">
-                                                        <div class="profile-img">
-                                                            <img th:src="@{admin/img/profile/user.png}" alt=""/>
+                                                        <div class="text-center">
+                                                            <img th:src="${c.img}" style="height: 300px; width: 500px" alt=""/>
                                                         </div>
                                                         </br>
                                                         <div class="profile-details-hr">
@@ -437,8 +437,7 @@
                                                     </button>
                                                     <h4 class="modal-title">Update</h4>
                                                 </div>
-                                                <form th:action="@{/news/edit}" method="post"
-                                                      enctype="multipart/form-data">
+                                                <form th:action="@{/news/edit}" method="post" enctype="multipart/form-data">
                                                     <div class="modal-body">
                                                         <div style="margin: 0 auto;" class="profile-info-inner">
                                                             <div class="profile-details-hr">
@@ -446,9 +445,7 @@
                                                                     <div class="col-sm-12 col-xs-6">
                                                                         <p><b>ID</b></p>
                                                                         <div class="form-group">
-                                                                            <input th:value="*{c.id}" name="id"
-                                                                                   type="text" class="form-control"
-                                                                                   placeholder="ID" readonly="readonly">
+                                                                            <input th:value="*{c.id}" name="id" type="text" class="form-control" placeholder="ID" readonly="readonly">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -456,9 +453,7 @@
                                                                     <div class="col-sm-12 col-xs-6">
                                                                         <p><b>Title</b></p>
                                                                         <div class="form-group">
-                                                                            <input th:value="*{c.title}" name="title"
-                                                                                   type="text" class="form-control"
-                                                                                   placeholder="Title">
+                                                                            <input th:value="*{c.title}" name="title" type="text" class="form-control" placeholder="Title">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -468,10 +463,7 @@
                                                                         <div class="address-hr">
                                                                             <p><b>Author</b></p>
                                                                             <div class="form-group">
-                                                                                <input th:value="*{c.author}"
-                                                                                       name="author" type="text"
-                                                                                       class="form-control"
-                                                                                       placeholder="Author">
+                                                                                <input th:value="*{c.author}" name="author" type="text" class="form-control" placeholder="Author">
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -479,11 +471,7 @@
                                                                         <div class="address-hr">
                                                                             <p><b>Date</b></p>
                                                                             <div class="form-group">
-                                                                                <input th:value="*{c.createAt}"
-                                                                                       name="createDate"
-                                                                                       id="createdDate"
-                                                                                       class="form-control"
-                                                                                       placeholder="Date Time">
+                                                                                <input th:value="*{c.createAt}" name="createAt" id="createdDate" class="form-control" placeholder="Date Time">
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -493,10 +481,7 @@
                                                                     <div class="col-sm-12 col-xs-6">
                                                                         <p><b>Short description</b></p>
                                                                         <div class="form-group">
-                                                                            <input th:value="*{c.shortDescribe}"
-                                                                                   name="shortDescription" type="text"
-                                                                                   class="form-control"
-                                                                                   placeholder="Short description">
+                                                                            <input th:value="*{c.shortDescribe}" name="shortDescribe" type="text" class="form-control" placeholder="Short description">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -506,29 +491,19 @@
                                                                         <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
                                                                             <p><b>Description</b></p>
                                                                             <div class="form-group res-mg-t-15">
-                                                                                <textarea th:text="*{c.describe}"
-                                                                                          name="description"
-                                                                                          placeholder="Description"></textarea>
+                                                                                <textarea th:text="*{c.describe}" th:value="*{c.describe}" name="describe" placeholder="Description"></textarea>
                                                                             </div>
                                                                             <div class="form-group res-mg-t-15">
-                                                                                <textarea th:text="*{c.describe1}"
-                                                                                          name="description"
-                                                                                          placeholder="Description"></textarea>
+                                                                                <textarea th:text="*{c.describe1}" th:value="*{c.describe1}" name="describe1" placeholder="Description"></textarea>
                                                                             </div>
                                                                             <div class="form-group res-mg-t-15">
-                                                                                <textarea th:text="*{c.describe2}"
-                                                                                          name="description"
-                                                                                          placeholder="Description"></textarea>
+                                                                                <textarea th:text="*{c.describe2}" th:value="*{c.describe2}" name="describe2" placeholder="Description"></textarea>
                                                                             </div>
                                                                             <div class="form-group res-mg-t-15">
-                                                                                <textarea th:text="*{c.describe3}"
-                                                                                          name="description"
-                                                                                          placeholder="Description"></textarea>
+                                                                                <textarea th:text="*{c.describe3}" th:value="*{c.describe3}" name="describe3" placeholder="Description"></textarea>
                                                                             </div>
                                                                             <div class="form-group res-mg-t-15">
-                                                                                <textarea th:text="*{c.describe4}"
-                                                                                          name="description"
-                                                                                          placeholder="Description"></textarea>
+                                                                                <textarea th:text="*{c.describe4}"  th:value="*{c.describe4}" name="describe4" placeholder="Description"></textarea>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -539,15 +514,8 @@
                                                                         <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
                                                                             <div class="form-group">
                                                                                 <div class="row mt-2">
-                                                                                    <div class="col-sm-7"><input
-                                                                                            name="upImg" id="upImg"
-                                                                                            type="file"
-                                                                                            class="form-control"
-                                                                                            placeholder=""></div>
-                                                                                    <div class="col-sm-5"><img
-                                                                                            th:src="${c.img}"
-                                                                                            style="width: 50%; height: 50%;"
-                                                                                            alt=""/></div>
+                                                                                    <div class="col-sm-7"><input name="upImg" id="upImg" type="file" class="form-control" placeholder=""></div>
+                                                                                    <div class="col-sm-5"><img th:src="${c.img}" style="width: 50%; height: 50%;" alt=""/></div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -557,10 +525,8 @@
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-default"
-                                                                data-dismiss="modal">Cancel
-                                                        </button>
-                                                        <button type="button" class="btn btn-primary">Update</button>
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                                        <button type="submit" class="btn btn-primary">Update</button>
                                                     </div>
                                                 </form>
                                             </div>
@@ -573,15 +539,12 @@
                         <div class="custom-pagination">
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination">
-                                    <li class="page-item" th:if="${newss.hasPrevious()}"><a class="page-link"
-                                                                                            th:href="@{/news(page=${newss.number}-1,search=${param.search})}">Previous</a>
+                                    <li class="page-item" th:if="${newss.hasPrevious()}"><a class="page-link" th:href="@{/news(page=${newss.number}-1,search=${param.search})}">Previous</a>
                                     </li>
                                     <li class="page-item"><a th:text="${newss.number} + 1"></a></li>
                                     <li class="page-item" th:if="${newss.hasNext()}"><a> / </a></li>
-                                    <li class="page-item" th:if="${newss.hasNext()}"><a
-                                            th:text="${newss.totalPages}"></a></li>
-                                    <li class="page-item" th:if="${newss.hasNext()}"><a class="page-link"
-                                                                                        th:href="@{/news(page=${newss.number}+1,search=${param.search})}">Next</a>
+                                    <li class="page-item" th:if="${newss.hasNext()}"><a th:text="${newss.totalPages}"></a></li>
+                                    <li class="page-item" th:if="${newss.hasNext()}"><a class="page-link" th:href="@{/news(page=${newss.number}+1,search=${param.search})}">Next</a>
                                     </li>
                                 </ul>
                             </nav>
@@ -605,6 +568,7 @@
                     <div class="modal-body">
                         <div style="margin: 0 auto;" class="profile-info-inner">
                             <div class="profile-details-hr">
+
                                 <div class="row">
                                     <div class="col-sm-12 col-xs-6">
                                         <p><b>Title</b></p>
@@ -658,11 +622,11 @@
                                     <div class="col-sm-12 col-xs-6">
                                         <p><b>Image </b></p>
                                         <div class="form-group">
-                                            <input name="upImg" id="upImg" type="file" class="form-control"
-                                                   placeholder="Image">
+                                            <input name="upImg"  type="file" class="form-control" placeholder="Image">
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                     </div>

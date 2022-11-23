@@ -20,7 +20,7 @@ public class BrandServiceImpl implements BrandService {
 
     @Override
     public List<Brand> getAllBrand() {
-        return (List) brandRepository.findAll();
+        return (List) brandRepository.findAllByStatus();
     }
 
     @Override
@@ -36,7 +36,6 @@ public class BrandServiceImpl implements BrandService {
     @Override
     public void delete(Long id) throws NotFoundException {
         brandRepository.delete(id);
-
     }
 
     @Override

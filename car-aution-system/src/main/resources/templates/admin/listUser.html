@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="utf-8">
@@ -81,10 +81,10 @@
             <a title="Landing Page" href="index.html" aria-expanded="false"><span class="fa fa-home icon-wrap" aria-hidden="true"></span> <span class="mini-click-non">Home</span></a>
           </li>
           <li>
-            <a class="has-arrow" href="listUser.html" aria-expanded="false"><span class="fa fa-user icon-wrap"></span> <span class="mini-click-non">User</span></a>
+            <a class="has-arrow" th:href="@{/admin/user}" aria-expanded="false"><span class="fa fa-user icon-wrap"></span> <span class="mini-click-non">User</span></a>
             <ul class="submenu-angle" aria-expanded="false">
-              <li><a href="listUser.html"><span class="mini-sub-pro">All Users</span></a></li>
-              <li><a href="listBannedUser.html"><span class="mini-sub-pro">All Banned Users</span></a></li>
+              <li><a th:href="@{/admin/user}"><span class="mini-sub-pro">All Users</span></a></li>
+              <li><a th:href="@{/userban}"><span class="mini-sub-pro">All Banned Users</span></a></li>
             </ul>
           </li>
           <li>
@@ -94,9 +94,9 @@
             </ul>
           </li>
           <li>
-            <a class="has-arrow" href="listBrand.html" aria-expanded="false"><span class="glyphicon glyphicon-menu-hamburger icon-wrap"></span> <span class="mini-click-non">Brand</span></a>
+            <a class="has-arrow" th:href="@{/brand}" aria-expanded="false"><span class="glyphicon glyphicon-menu-hamburger icon-wrap"></span> <span class="mini-click-non">Brand</span></a>
             <ul class="submenu-angle" aria-expanded="false">
-              <li><a href="listBrand.html"><span class="mini-sub-pro">All Brands</span></a></li>
+              <li><a th:href="@{/brand}"><span class="mini-sub-pro">All Brands</span></a></li>
             </ul>
           </li>
           <li>
@@ -106,23 +106,22 @@
             </ul>
           </li>
           <li>
-            <a class="has-arrow" href="listModel.html" aria-expanded="false"><span class="glyphicon glyphicon-th-large icon-wrap"></span> <span class="mini-click-non">Model</span></a>
+            <a class="has-arrow" th:href="@{/model}" aria-expanded="false"><span class="glyphicon glyphicon-th-large icon-wrap"></span> <span class="mini-click-non">Model</span></a>
             <ul class="submenu-angle" aria-expanded="false">
-              <li><a href="listModel.html"><span class="mini-sub-pro">All Model</span></a></li>
-              <li><a href="listModelSpec.html"><span class="mini-sub-pro">All Model Specification</span></a></li>
+              <li><a th:href="@{/model}"><span class="mini-sub-pro">All Model</span></a></li>
+              <li><a th:href="@{/modelSpec}"><span class="mini-sub-pro">All Model Specification</span></a></li>
             </ul>
           </li>
           <li>
-            <a class="has-arrow" href="listNews.html" aria-expanded="false"><span class="fa fa-newspaper-o icon-wrap"></span> <span class="mini-click-non">News</span></a>
+            <a class="has-arrow" th:href="@{/news}" aria-expanded="false"><span class="fa fa-newspaper-o icon-wrap"></span> <span class="mini-click-non">News</span></a>
             <ul class="submenu-angle" aria-expanded="false">
-              <li><a href="listNews.html"><span class="mini-sub-pro">All News</span></a></li>
+              <li><a th:href="@{/news}"><span class="mini-sub-pro">All News</span></a></li>
             </ul>
           </li>
           <li>
             <a class="has-arrow" href="#" aria-expanded="false"><span class="fa fa-gamepad icon-wrap"></span> <span class="mini-click-non">Game Play</span></a>
             <ul class="submenu-angle" aria-expanded="false">
-              <li><a href="#"><span class="mini-sub-pro">Game </span></a></li>
-              <li><a href="#"><span class="mini-sub-pro">Play </span></a></li>
+              <li><a href="#"><span class="mini-sub-pro">Game Play</span></a></li>
             </ul>
           </li>
           <li>
@@ -199,56 +198,50 @@
                   <li><a href="index.html">Home</a></li>
                   <li><a data-toggle="collapse" data-target="#demoevent" href="#">User <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
                     <ul id="demoevent" class="collapse dropdown-header-top">
-                      <li><a href="listUser.html">All Users</a>
+                      <li><a th:href="@{/admin/user}">All Users</a>
                       </li>
-                      <li><a href="listBannedUser.html">All Banned Users</a>
+                      <li><a th:href="@{/userban}">All Banned Users</a>
                       </li>
                     </ul>
                   </li>
                   <li><a data-toggle="collapse" data-target="#demopro" href="#">Car <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                    <ul id="demopro" class="collapse dropdown-header-top">
+                    <ul class="collapse dropdown-header-top">
                       <li><a href="listCar.html">All Cars</a>
                       </li>
                     </ul>
                   </li>
                   <li><a data-toggle="collapse" data-target="#demopro" href="#">Brand <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                    <ul id="demopro" class="collapse dropdown-header-top">
-                      <li><a href="listBrand.html">All Brands</a>
+                    <ul class="collapse dropdown-header-top">
+                      <li><a th:href="@{/brand}">All Brands</a>
                       </li>
                     </ul>
                   </li>
                   <li><a data-toggle="collapse" data-target="#demopro" href="#">Auction Room <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                    <ul id="demopro" class="collapse dropdown-header-top">
+                    <ul class="collapse dropdown-header-top">
                       <li><a href="listAuction.html">All Auction Room</a>
                       </li>
                     </ul>
                   </li>
                   <li><a data-toggle="collapse" data-target="#demopro" href="#">Model <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                    <ul id="demopro" class="collapse dropdown-header-top">
-                      <li><a href="listModel.html">All Model</a>
+                    <ul class="collapse dropdown-header-top">
+                      <li><a th:href="@{/model}">All Model</a>
                       </li>
-                      <li><a href="listModelSpec.html">All Model Specification</a>
+                      <li><a th:href="@{/modelSpec}">All Model Specification</a>
                       </li>
                     </ul>
                   </li>
                   <li><a data-toggle="collapse" data-target="#demopro" href="#">News <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                    <ul id="demopro" class="collapse dropdown-header-top">
-                      <li><a href="listNews.html">All News</a>
-                      </li>
-                      <li><a href="create-news.html">Create New News</a>
-                      </li>
+                    <ul class="collapse dropdown-header-top">
+                      <li><a th:href="@{/news}">All News</a></li>
                     </ul>
                   </li>
                   <li><a data-toggle="collapse" data-target="#demopro" href="#">Game Play<span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                    <ul id="demopro" class="collapse dropdown-header-top">
-                      <li><a href="#">Game</a>
-                      </li>
-                      <li><a href="#">Play</a>
-                      </li>
+                    <ul class="collapse dropdown-header-top">
+                      <li><a href="#">Game Play</a></li>
                     </ul>
                   </li>
                   <li><a data-toggle="collapse" data-target="#demopro" href="#">Wishlist<span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                    <ul id="demopro" class="collapse dropdown-header-top">
+                    <ul class="collapse dropdown-header-top">
                       <li><a href="wishlist.html">All</a>
                       </li>
                     </ul>
@@ -269,8 +262,8 @@
               <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                   <div class="breadcome-heading">
-                    <form role="search" class="sr-input-func">
-                      <input type="text" placeholder="Search..." class="search-int form-control">
+                    <form th:action="@{/admin/user}" method="get" role="search" class="sr-input-func">
+                      <input id="search" name="search" type="text" placeholder="Search..." class="search-int form-control">
                       <a href="#"><i class="fa fa-search"></i></a>
                     </form>
                   </div>
@@ -297,6 +290,12 @@
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
           <div class="product-status-wrap drp-lst">
             <h4>User List</h4>
+            <div th:if="${success} != null">
+              <div class="alert alert-success text-center" role="alert">[[${success}]]</div>
+            </div>
+            <div th:if="${fail} != null">
+              <div class="alert alert-danger text-center" role="alert">[[${fail}]]</div>
+            </div>
             <div class="asset-inner">
               <table>
                 <tr>
@@ -308,18 +307,18 @@
                   <th>Status</th>
                   <th>Setting</th>
                 </tr>
-                <tr>
-                  <td>1</td>
-                  <td>Sy</td>
-                  <td>John Alva</td>
-                  <td>admin@gmail.com</td>
-                  <td>01962067309</td>
+                <tr th:each="c,loop :${users}">
+                  <td th:text="${loop.count}"></td>
+                  <td th:text="${c.userName}"></td>
+                  <td th:text="${c.fullName}"></td>
+                  <td th:text="${c.email}"></td>
+                  <td th:text="${c.phone}"></td>
                   <td>
                     <button class="pd-setting">Active</button>
                   </td>
                   <td>
                     <button title="View" class="pd-setting-ed"><a href="#myModal" data-toggle="modal"><i class="fa fa-eye" aria-hidden="true"></i></a></button>
-                    <button data-toggle="tooltip" title="Ban" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                    <button data-toggle="tooltip" title="Ban" class="pd-setting-ed"><a th:href="@{/admin/user/ban/{id}(id=${c.id})}"><i class="fa fa-trash-o" aria-hidden="true"></i></a></button>
                   </td>
                 </tr>
                 </tr>
@@ -328,11 +327,11 @@
             <div class="custom-pagination">
               <nav aria-label="Page navigation example">
                 <ul class="pagination">
-                  <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                  <li class="page-item"><a class="page-link" href="#">1</a></li>
-                  <li class="page-item"><a class="page-link" href="#">2</a></li>
-                  <li class="page-item"><a class="page-link" href="#">3</a></li>
-                  <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                  <li class="page-item" th:if="${users.hasPrevious()}"><a class="page-link" th:href="@{/userban(page=${users.number}-1,search=${param.search})}">Previous</a></li>
+                  <li class="page-item"><a th:text="${users.number} + 1"></a></li>
+                  <li class="page-item" th:if="${users.hasNext()}"><a> / </a></li>
+                  <li class="page-item" th:if="${users.hasNext()}"><a th:text="${users.totalPages}"></a></li>
+                  <li class="page-item" th:if="${users.hasNext()}"><a class="page-link" th:href="@{/userban(page=${users.number}+1,search=${param.search})}">Next</a></li>
                 </ul>
               </nav>
             </div>

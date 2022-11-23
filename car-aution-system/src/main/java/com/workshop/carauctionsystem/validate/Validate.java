@@ -9,21 +9,22 @@ import java.util.List;
 public class Validate {
 
 
-    public boolean checkDuplicateModelSpec(String name,int seatNumber, List<ModelSpecification> list) {
+    public boolean checkDuplicateModelSpec(String name, int seatNumber, List<ModelSpecification> list) {
         for (ModelSpecification model : list) {
             if (name.toLowerCase().equalsIgnoreCase(model.getNameType().toLowerCase())
                     && seatNumber == model.getSeatNumber()
-                    && model.getStatus() == 1 ) {
+                    && model.getStatus() == 1) {
                 return true;
             }
         }
         return false;
     }
 
-    public boolean checkDuplicateModel(String name,Long brandId, List<ModelCar> list) {
+    public boolean checkDuplicateModel(String name, Long brandId, List<ModelCar> list) {
         for (ModelCar model : list) {
             if (name.toLowerCase().equalsIgnoreCase(model.getModelName().toLowerCase())
-                    && brandId == model.getBrandId().getId() ) {
+                    && brandId == model.getBrandId().getId()
+                    && model.getStatus() == 1) {
                 return true;
             }
         }

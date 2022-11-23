@@ -1,5 +1,6 @@
 package com.workshop.carauctionsystem.service.impl;
 
+import com.workshop.carauctionsystem.entity.Brand;
 import com.workshop.carauctionsystem.entity.ModelCar;
 import com.workshop.carauctionsystem.exception.NotFoundException;
 import com.workshop.carauctionsystem.repository.ModelRepository;
@@ -20,7 +21,7 @@ public class ModelServiceImpl implements ModelService {
 
     @Override
     public List<ModelCar> getAllModel() {
-        return (List) modelRepo.findAll();
+        return (List) modelRepo.findAllByStatus();
     }
 
     @Override
@@ -29,26 +30,37 @@ public class ModelServiceImpl implements ModelService {
     }
 
     @Override
-    public void delete(Long id) throws NotFoundException {
-        Long count = modelRepo.countById(id);
-        if(count == null || count == 0){
-            throw new NotFoundException("Could not find any with ID" + id);
-        }
-        modelRepo.deleteById(id);
+    public void updateModel(Long brandId, String modelName, Long modelSpec, Long id) {
+          modelRepo.update(brandId, modelName, modelSpec, id);
     }
 
     @Override
-    public ModelCar findById(Long id) throws NotFoundException {
-        Optional<ModelCar> optional = modelRepo.findById(id);
-        ModelCar model = null;
-        if(optional.isPresent()){
-            model = optional.get();
+    public void delete(Long id) throws NotFoundException {
+        Long count = modelRepo.countById(id);
+        if (count == null || count == 0) {
+            throw new NotFoundException("Could not find any with ID" + id);
         }
-        return model;
+        modelRepo.delete(id);
+    }
+
+    @Override
+    public ModelCar findById(Long id) {
+        Optional<ModelCar> optional = modelRepo.findById(id);
+        return  optional.get();
     }
 
     @Override
     public Page<ModelCar> findAllOrderById(Pageable pageable) {
+
         return modelRepo.findAllOrderById(pageable);
+    }
+
+    @Override
+    public Page<ModelCar> findAllOrderByName(Pageable pageable, String name) {
+        if (name != null) {
+            return modelRepo.findAllByBrandName(pageable, name);
+        } else {
+            return modelRepo.findAllOrderById(pageable);
+        }
     }
 }

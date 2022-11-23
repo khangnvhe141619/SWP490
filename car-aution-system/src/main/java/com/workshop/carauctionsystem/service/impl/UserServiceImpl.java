@@ -3,6 +3,7 @@ package com.workshop.carauctionsystem.service.impl;
 import com.workshop.carauctionsystem.entity.PasswordResetToken;
 import com.workshop.carauctionsystem.entity.User;
 import com.workshop.carauctionsystem.entity.VerificationToken;
+import com.workshop.carauctionsystem.exception.NotFoundException;
 import com.workshop.carauctionsystem.exception.UserAlreadyExistException;
 import com.workshop.carauctionsystem.model.UserDTO;
 import com.workshop.carauctionsystem.repository.PasswordResetTokenRepository;
@@ -12,6 +13,8 @@ import com.workshop.carauctionsystem.repository.VerificationTokenRepository;
 import com.workshop.carauctionsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -143,5 +146,35 @@ public class UserServiceImpl implements UserService {
     public void changePassword(User user, String password) {
         user.setPassword(passwordEncoder.encode(password));
         userRepository.save(user);
+    }
+
+    @Override
+    public Page<User> ListUserBan(Pageable pageable, String name) {
+        if (name != null) {
+            return userRepository.ListUserBan(pageable, name);
+        }else {
+            return userRepository.ListUserBan(pageable);
+        }
+    }
+
+    @Override
+    public Page<User> ListUserUnBan(Pageable pageable, String name) {
+        if (name != null) {
+            return userRepository.ListUserUnban(pageable, name);
+        }else {
+            return userRepository.ListUserUnban(pageable);
+        }
+    }
+
+    // admin
+
+    @Override
+    public void UnBanUser(Long id) throws NotFoundException {
+        userRepository.UnBanUser(id);
+    }
+
+    @Override
+    public void BanUser(Long id) throws NotFoundException{
+        userRepository.BanUser(id);
     }
 }

@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -8,60 +8,60 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- favicon
       ============================================ -->
-  <link rel="shortcut icon" type="image/x-icon" th:href="@{img/favicon.ico}">
+  <link rel="shortcut icon" type="image/x-icon" th:href="@{admin/img/favicon.ico}">
 
   <!-- Google Fonts
       ============================================ -->
   <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
   <!-- Bootstrap CSS
       ============================================ -->
-  <link rel="stylesheet" th:href="@{css/bootstrap.min.css}">
+  <link rel="stylesheet" th:href="@{admin/css/bootstrap.min.css}">
   <!-- Bootstrap CSS
     ============================================ -->
-  <link rel="stylesheet" th:href="@{css/font-awesome.min.css}">
+  <link rel="stylesheet" th:href="@{admin/css/font-awesome.min.css}">
   <!-- owl.carousel CSS
     ============================================ -->
-  <link rel="stylesheet" th:href="@{css/owl.carousel.css}">
-  <link rel="stylesheet" th:href="@{css/owl.theme.css}">
-  <link rel="stylesheet" th:href="@{css/owl.transitions.css}">
+  <link rel="stylesheet" th:href="@{admin/css/owl.carousel.css}">
+  <link rel="stylesheet" th:href="@{admin/css/owl.theme.css}">
+  <link rel="stylesheet" th:href="@{admin/css/owl.transitions.css}">
   <!-- animate CSS
     ============================================ -->
-  <link rel="stylesheet" th:href="@{css/animate.css}">
+  <link rel="stylesheet" th:href="@{admin/css/animate.css}">
   <!-- normalize CSS
     ============================================ -->
-  <link rel="stylesheet" th:href="@{css/normalize.css}">
+  <link rel="stylesheet" th:href="@{admin/css/normalize.css}">
   <!-- meanmenu icon CSS
     ============================================ -->
-  <link rel="stylesheet" th:href="@{css/meanmenu.min.css}">
+  <link rel="stylesheet" th:href="@{admin/css/meanmenu.min.css}">
   <!-- main CSS
     ============================================ -->
-  <link rel="stylesheet" th:href="@{css/main.css}">
+  <link rel="stylesheet" th:href="@{admin/css/main.css}">
   <!-- educate icon CSS
     ============================================ -->
-  <link rel="stylesheet" th:href="@{css/educate-custon-icon.css}">
+  <link rel="stylesheet" th:href="@{admin/css/educate-custon-icon.css}">
   <!-- morrisjs CSS
     ============================================ -->
-  <link rel="stylesheet" th:href="@{css/morrisjs/morris.css}">
+  <link rel="stylesheet" th:href="@{admin/css/morrisjs/morris.css}">
   <!-- mCustomScrollbar CSS
     ============================================ -->
-  <link rel="stylesheet" th:href="@{css/scrollbar/jquery.mCustomScrollbar.min.css}">
+  <link rel="stylesheet" th:href="@{admin/css/scrollbar/jquery.mCustomScrollbar.min.css}">
   <!-- metisMenu CSS
     ============================================ -->
-  <link rel="stylesheet" th:href="@{css/metisMenu/metisMenu.min.css}">
-  <link rel="stylesheet" th:href="@{css/metisMenu/metisMenu-vertical.css}">
+  <link rel="stylesheet" th:href="@{admin/css/metisMenu/metisMenu.min.css}">
+  <link rel="stylesheet" th:href="@{admin/css/metisMenu/metisMenu-vertical.css}">
   <!-- calendar CSS
     ============================================ -->
-  <link rel="stylesheet" th:href="@{css/calendar/fullcalendar.min.css}">
-  <link rel="stylesheet" th:href="@{css/calendar/fullcalendar.print.min.css}">
+  <link rel="stylesheet" th:href="@{admin/css/calendar/fullcalendar.min.css}">
+  <link rel="stylesheet" th:href="@{admin/css/calendar/fullcalendar.print.min.css}">
   <!-- style CSS
     ============================================ -->
-  <link rel="stylesheet" th:href="@{css/style.css}">
+  <link rel="stylesheet" th:href="@{admin/css/style.css}">
   <!-- responsive CSS
     ============================================ -->
-  <link rel="stylesheet" th:href="@{css/responsive.css}">
+  <link rel="stylesheet" th:href="@{admin/css/responsive.css}">
   <!-- modernizr JS
     ============================================ -->
-  <script th:src="@{js/vendor/modernizr-2.8.3.min.js}"></script>
+  <script th:src="@{admin/js/vendor/modernizr-2.8.3.min.js}"></script>
 </head>
 
 <body>
@@ -70,8 +70,8 @@
 <div class="left-sidebar-pro">
   <nav id="sidebar" class="">
     <div class="sidebar-header">
-      <a href="index.html"><img class="main-logo" th:src="@{img/logo/logo.png}" alt="" /></a>
-      <strong><a href="index.html"><img th:src="@{img/logo/logosn.png}" alt="" /></a></strong>
+      <a href="index.html"><img class="main-logo" th:src="@{admin/img/logo/logo.png}" alt="" /></a>
+      <strong><a href="index.html"><img th:src="@{admin/img/logo/logosn.png}" alt="" /></a></strong>
     </div>
     <!--Start left-scrollbar-->
     <div class="left-custom-menu-adp-wrap comment-scrollbar">
@@ -94,9 +94,9 @@
             </ul>
           </li>
           <li>
-            <a class="has-arrow" href="listBrand.html" aria-expanded="false"><span class="glyphicon glyphicon-menu-hamburger icon-wrap"></span> <span class="mini-click-non">Brand</span></a>
+            <a class="has-arrow" th:href="@{/brand}" aria-expanded="false"><span class="glyphicon glyphicon-menu-hamburger icon-wrap"></span> <span class="mini-click-non">Brand</span></a>
             <ul class="submenu-angle" aria-expanded="false">
-              <li><a href="listBrand.html"><span class="mini-sub-pro">All Brands</span></a></li>
+              <li><a th:href="@{/brand}"><span class="mini-sub-pro">All Brands</span></a></li>
             </ul>
           </li>
           <li>
@@ -106,16 +106,16 @@
             </ul>
           </li>
           <li>
-            <a class="has-arrow" href="listModel.html" aria-expanded="false"><span class="glyphicon glyphicon-th-large icon-wrap"></span> <span class="mini-click-non">Model</span></a>
+            <a class="has-arrow" th:href="@{/model}" aria-expanded="false"><span class="glyphicon glyphicon-th-large icon-wrap"></span> <span class="mini-click-non">Model</span></a>
             <ul class="submenu-angle" aria-expanded="false">
-              <li><a href="listModel.html"><span class="mini-sub-pro">All Model</span></a></li>
-              <li><a href="listModelSpec.html"><span class="mini-sub-pro">All Model Specification</span></a></li>
+              <li><a th:href="@{/model}"><span class="mini-sub-pro">All Model</span></a></li>
+              <li><a th:href="@{/modelSpec}"><span class="mini-sub-pro">All Model Specification</span></a></li>
             </ul>
           </li>
           <li>
-            <a class="has-arrow" href="listNews.html" aria-expanded="false"><span class="fa fa-newspaper-o icon-wrap"></span> <span class="mini-click-non">News</span></a>
+            <a class="has-arrow" th:href="@{/news}" aria-expanded="false"><span class="fa fa-newspaper-o icon-wrap"></span> <span class="mini-click-non">News</span></a>
             <ul class="submenu-angle" aria-expanded="false">
-              <li><a href="listNews.html"><span class="mini-sub-pro">All News</span></a></li>
+              <li><a th:href="@{/news}"><span class="mini-sub-pro">All News</span></a></li>
             </ul>
           </li>
           <li>
@@ -135,7 +135,6 @@
       </nav>
     </div>
     <!--End left-scrollbar-->
-</div>
 </nav>
 </div>
 <!-- End Left menu area -->
@@ -145,7 +144,7 @@
     <div class="row">
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="logo-pro">
-          <a href="index.html"><img class="main-logo" th:src="@{img/logo/logo.png}" alt="" /></a>
+          <a href="index.html"><img class="main-logo" th:src="@{admin/img/logo/logo.png}" alt="" /></a>
         </div>
       </div>
     </div>
@@ -170,7 +169,7 @@
                     <ul class="nav navbar-nav mai-top-nav header-right-menu">
                       <li class="nav-item">
                         <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
-                          <img th:src="@{img/profile/user.png}" alt="" />
+                          <img th:src="@{admin/img/profile/user.png}" alt="" />
                           <span class="admin-name">Prof.Anderson</span>
                           <i class="fa fa-angle-down edu-icon edu-down-arrow"></i>
                         </a>
@@ -217,7 +216,7 @@
                   </li>
                   <li><a data-toggle="collapse" data-target="#demopro" href="#">Brand <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
                     <ul id="demopro" class="collapse dropdown-header-top">
-                      <li><a href="listBrand.html">All Brands</a>
+                      <li><a th:href="@{/brand}">All Brands</a>
                       </li>
                     </ul>
                   </li>
@@ -229,15 +228,15 @@
                   </li>
                   <li><a data-toggle="collapse" data-target="#demopro" href="#">Model <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
                     <ul id="demopro" class="collapse dropdown-header-top">
-                      <li><a href="listModel.html">All Model</a>
+                      <li><a th:href="@{/model}">All Model</a>
                       </li>
-                      <li><a href="listModelSpec.html">All Model Specification</a>
+                      <li><a th:href="@{/modelSpec}">All Model Specification</a>
                       </li>
                     </ul>
                   </li>
                   <li><a data-toggle="collapse" data-target="#demopro" href="#">News <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
                     <ul id="demopro" class="collapse dropdown-header-top">
-                      <li><a href="listNews.html">All News</a>
+                      <li><a th:href="@{/news}">All News</a>
                       </li>
                       <li><a href="create-news.html">Create New News</a>
                       </li>
@@ -273,8 +272,8 @@
               <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                   <div class="breadcome-heading">
-                    <form role="search" class="sr-input-func">
-                      <input type="text" placeholder="Search..." class="search-int form-control">
+                    <form th:action="@{/model}" method="get" role="search" class="sr-input-func">
+                      <input id="search" name="search" type="text" placeholder="Search..." class="search-int form-control">
                       <a href="#"><i class="fa fa-search"></i></a>
                     </form>
                   </div>
@@ -304,33 +303,101 @@
             <div class="add-product">
               <a href="#myCreateModal" data-toggle="modal">Add New Model</a>
             </div>
+            <div th:if="${success} != null">
+              <div class="alert alert-success text-center" role="alert">[[${success}]]</div>
+            </div>
+            <div th:if="${fail} != null">
+              <div class="alert alert-danger text-center" role="alert">[[${fail}]]</div>
+            </div>
             <div class="asset-inner">
               <table>
                 <tr>
                   <th>No</th>
+                  <th>Image</th>
                   <th>Name of Brand</th>
                   <th>Name of Model</th>
+                  <th>Model Type</th>
+                  <th>Seat Number</th>
                   <th>Setting</th>
                 </tr>
-                <tr>
-                  <td>1</td>
-                  <td>Mecedes</td>
-                  <td>C class</td>
+                <tr th:each="c,loop :${models}">
+                  <td th:text="${loop.count}"></td>
+                  <td><img th:src="${c.brandId.imgPath}"/></td>
+                  <td th:text="${c.brandId.brandName}"></td>
+                  <td th:text="${c.modelName}"></td>
+                  <td th:text="${c.modelSpecificationId.nameType}"></td>
+                  <td th:text="${c.modelSpecificationId.seatNumber}"></td>
                   <td>
-                    <button title="Edit" class="pd-setting-ed"><a href="#myUpdateModal" data-toggle="modal"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></button>
-                    <button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                    <button title="Edit" class="pd-setting-ed"><a data-toggle="modal" th:attr="data-target='#myUpdateModal'+*{c.id}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></button>
+                    <button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><a th:href="@{/model/delete/{id}(id=${c.id})}"><i class="fa fa-trash-o" aria-hidden="true"></i></a></button>
                   </td>
+
+                  <!-- Start Update pop-up-->
+                  <div th:id="'myUpdateModal'+*{c.id}" class="modal fade" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          <h4 class="modal-title">Update</h4>
+                        </div>
+                        <form action="#" th:action="@{/model/edit}" method="post" enctype="multipart/form-data">
+                          <div class="modal-body">
+                            <div class="row">
+                              <div class="col-sm-12 col-xs-6">
+                                <p><b>Name of Brand</b></p>
+                                <div class="form-group">
+                                  <input th:value="*{c.id}" name="id" type="text" class="form-control" placeholder="ID" readonly="readonly">
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <p><b>Type of Model</b></p>
+                                <div class="form-group">
+                                  <select name="idModelSpec" class="form-control">
+                                    <option th:each="type : ${modelType}" th:value="${type.id}" th:text="${type.nameType} + '&ensp; -/- &ensp;' + ${type.seatNumber} + ' Seat'" th:selected="${type.id} == *{c.modelSpecificationId.id}"></option>
+                                  </select>
+                                </div>
+                              </div>
+                              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <p><b>Name of Brand</b></p>
+                                <div class="form-group">
+                                  <select name="idBrand" class="form-control">
+                                    <option th:each="brand : ${brands}" th:value="${brand.id}" th:text="${brand.brandName}" th:selected="${brand.id} == *{c.brandId.id}"></option>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-sm-12 col-xs-6">
+                                <p><b>Name of Brand</b></p>
+                                <div class="form-group">
+                                  <input th:value="*{c.modelName}" name="modelName" type="text" class="form-control" placeholder="Name">
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Update</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                  <!--End Update pop-up-->
+
                 </tr>
               </table>
             </div>
             <div class="custom-pagination">
               <nav aria-label="Page navigation example">
                 <ul class="pagination">
-                  <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                  <li class="page-item"><a class="page-link" href="#">1</a></li>
-                  <li class="page-item"><a class="page-link" href="#">2</a></li>
-                  <li class="page-item"><a class="page-link" href="#">3</a></li>
-                  <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                  <li class="page-item" th:if="${models.hasPrevious()}"><a class="page-link" th:href="@{/model(page=${models.number}-1,search=${param.search})}">Previous</a></li>
+                  <li class="page-item"><a th:text="${models.number} + 1"></a></li>
+                  <li class="page-item" th:if="${models.hasNext()}"><a> / </a></li>
+                  <li class="page-item" th:if="${models.hasNext()}"><a th:text="${models.totalPages}"></a></li>
+                  <li class="page-item" th:if="${models.hasNext()}"><a class="page-link" th:href="@{/model(page=${models.number}+1,search=${param.search})}">Next</a></li>
                 </ul>
               </nav>
             </div>
@@ -348,21 +415,33 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           <h4 class="modal-title">Create</h4>
         </div>
-        <form action="#" class="dropzone dropzone-custom needsclick add-professors" id="demo1-upload">
+        <form action="#" th:action="@{/model/create}" method="post" th:object="${modelCar}" enctype="multipart/form-data">
           <div class="modal-body">
             <div class="row">
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <p><b>Type of Model</b></p>
                 <div class="form-group">
-                  <input name="carname" type="text" class="form-control" placeholder="Category Name">
+                  <select name="idModelSpec" class="form-control">
+                    <option value="none" selected="" disabled="">Select Type</option>
+                    <option th:each="c : ${modelType}" th:value="${c.id}" th:text="${c.nameType} + '&ensp; -/- &ensp;' + ${c.seatNumber} + ' Seat'"></option>
+                  </select>
                 </div>
               </div>
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <p><b>Name of Brand</b></p>
                 <div class="form-group">
-                  <select name="brand" class="form-control">
+                  <select name="idBrand" class="form-control">
                     <option value="none" selected="" disabled="">Select Brand</option>
-                    <option value="0">Mercedes</option>
-                    <option value="1">Audi</option>
+                    <option th:each="c : ${brands}" th:value="${c.id}" th:text="${c.brandName}"></option>
                   </select>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12 col-xs-6">
+                <p><b>Name of Brand</b></p>
+                <div class="form-group">
+                  <input th:field="*{modelName}" name="modelName" id="modelName" type="text" class="form-control" placeholder="Name">
                 </div>
               </div>
             </div>
@@ -376,42 +455,7 @@
     </div>
   </div>
   <!--End Create pop-up-->
-  <!-- Start Update pop-up-->
-  <div id="myUpdateModal" class="modal fade" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title">Update</h4>
-        </div>
-        <form action="#" class="dropzone dropzone-custom needsclick add-professors" id="dem">
-          <div class="modal-body">
-            <div class="row">
-              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                <div class="form-group">
-                  <input name="carname" type="text" class="form-control" placeholder="Category Name">
-                </div>
-              </div>
-              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                <div class="form-group">
-                  <select name="brand" class="form-control">
-                    <option value="none" selected="" disabled="">Select Brand</option>
-                    <option value="0">Mercedes</option>
-                    <option value="1">Audi</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-            <button type="submit" class="btn btn-primary">Update</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-  <!--End Update pop-up-->
+
   <!--Start footer-->
   <div class="footer-copyright-area">
     <div class="container-fluid">
@@ -429,51 +473,51 @@
 
 <!-- jquery
     ============================================ -->
-<script th:src="@{js/vendor/jquery-1.12.4.min.js}"></script>
+<script th:src="@{admin/js/vendor/jquery-1.12.4.min.js}"></script>
 <!-- bootstrap JS
     ============================================ -->
-<script th:src="@{js/bootstrap.min.js}"></script>
+<script th:src="@{admin/js/bootstrap.min.js}"></script>
 <!-- wow JS
     ============================================ -->
-<script th:src="@{js/wow.min.js}"></script>
+<script th:src="@{admin/js/wow.min.js}"></script>
 <!-- price-slider JS
     ============================================ -->
-<script th:src="@{js/jquery-price-slider.js}"></script>
+<script th:src="@{admin/js/jquery-price-slider.js}"></script>
 <!-- meanmenu JS
     ============================================ -->
-<script th:src="@{js/jquery.meanmenu.js}"></script>
+<script th:src="@{admin/js/jquery.meanmenu.js}"></script>
 <!-- owl.carousel JS
     ============================================ -->
-<script th:src="@{js/owl.carousel.min.js}"></script>
+<script th:src="@{admin/js/owl.carousel.min.js}"></script>
 <!-- sticky JS
     ============================================ -->
-<script th:src="@{js/jquery.sticky.js}"></script>
+<script th:src="@{admin/js/jquery.sticky.js}"></script>
 <!-- scrollUp JS
     ============================================ -->
-<script th:src="@{js/jquery.scrollUp.min.js}"></script>
+<script th:src="@{admin/js/jquery.scrollUp.min.js}"></script>
 <!-- mCustomScrollbar JS
     ============================================ -->
-<script th:src="@{js/scrollbar/jquery.mCustomScrollbar.concat.min.js}"></script>
-<script th:src="@{js/scrollbar/mCustomScrollbar-active.js}"></script>
+<script th:src="@{admin/js/scrollbar/jquery.mCustomScrollbar.concat.min.js}"></script>
+<script th:src="@{admin/js/scrollbar/mCustomScrollbar-active.js}"></script>
 <!-- metisMenu JS
     ============================================ -->
-<script th:src="@{js/metisMenu/metisMenu.min.js}"></script>
-<script th:src="@{js/metisMenu/metisMenu-active.js}"></script>
+<script th:src="@{admin/js/metisMenu/metisMenu.min.js}"></script>
+<script th:src="@{admin/js/metisMenu/metisMenu-active.js}"></script>
 <!-- morrisjs JS
     ============================================ -->
-<script th:src="@{js/sparkline/jquery.sparkline.min.js}"></script>
-<script th:src="@{js/sparkline/jquery.charts-sparkline.js}"></script>
+<script th:src="@{admin/js/sparkline/jquery.sparkline.min.js}"></script>
+<script th:src="@{admin/js/sparkline/jquery.charts-sparkline.js}"></script>
 <!-- calendar JS
     ============================================ -->
-<script th:src="@{js/calendar/moment.min.js}"></script>
-<script th:src="@{js/calendar/fullcalendar.min.js}"></script>
-<script th:src="@{js/calendar/fullcalendar-active.js}"></script>
+<script th:src="@{admin/js/calendar/moment.min.js}"></script>
+<script th:src="@{admin/js/calendar/fullcalendar.min.js}"></script>
+<script th:src="@{admin/js/calendar/fullcalendar-active.js}"></script>
 <!-- plugins JS
     ============================================ -->
-<script th:src="@{js/plugins.js}"></script>
+<script th:src="@{admin/js/plugins.js}"></script>
 <!-- main JS
     ============================================ -->
-<script th:src="@{js/main.js}"></script>
+<script th:src="@{admin/js/main.js}"></script>
 </body>
 
 </html>

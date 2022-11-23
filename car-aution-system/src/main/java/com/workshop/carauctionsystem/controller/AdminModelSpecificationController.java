@@ -19,7 +19,7 @@ import javax.validation.Valid;
 import java.util.Map;
 
 @Controller
-public class ModelSpecificationController {
+public class AdminModelSpecificationController {
 
     @Autowired
     ModelSpecificationServiceImpl modelSpecService;

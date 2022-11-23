@@ -16,18 +16,21 @@ public class ModelCar {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @OneToOne
     @JoinColumn(name = "brandid")
     private Brand brandId;
 
     @Column(name = "modelname")
-    @Pattern(regexp = "[a-zA-Z0-9]+",message = "Name not special characters")
+    @Pattern(regexp = "[a-zA-Z0-9]+", message = "Name not special characters")
     private String modelName;
 
     @OneToOne
     @JoinColumn(name = "modelspecificationid")
     private ModelSpecification modelSpecificationId;
+
+    @Column(name = "[status]")
+    private int status;
 
 }

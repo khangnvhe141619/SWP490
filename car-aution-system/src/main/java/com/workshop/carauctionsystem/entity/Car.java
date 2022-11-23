@@ -18,7 +18,7 @@ import java.util.List;
 public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @Column(name = "carname")
     private String carName;
@@ -27,7 +27,7 @@ public class Car {
     private String description;
 
     @Column(name = "upboundprice")
-    private Long upBounPprice;
+    private Long upBoundPrice;
 
     @Column(name = "downboundprice")
     private Long downBoundPrice;
