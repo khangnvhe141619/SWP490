@@ -151,7 +151,7 @@
                         <div class="col-md-8">
                             <label class="labels">Current Password</label>
                             <input id="currentPassword" type="password" class="form-control" name="currentPassword" required onkeyup="isPassAjax()"/>
-                            <span id="passError" class="alert alert-danger col-sm-4" style="display:none"></span>
+                            <span id="passError" class="alert mt-5 p-2 rounded" style="display:none"></span>
                         </div>
                         <div class="col-md-2"></div>
                         <div class="col-md-2"></div>
@@ -164,7 +164,7 @@
                         <div class="col-md-8">
                             <label class="labels mt-4">Re-New Password</label>
                             <input id="rePass" type="password" class="form-control" name="rePassword" required="required">
-                            <span id="message2" style="color:red"> </span>
+                            <span id="globalError" class="alert-danger mt-5 p-2 rounded" style="display:none"></span>
                         </div>
                         <div class="col-md-8">
                             <input type="hidden" name="id" id="idU" class="form-control" placeholder="id" th:value="${INFOR.id}" readonly>
@@ -180,7 +180,31 @@
     </div>
 </div>
 <script src="assets/js/personalProfile.js"></script>
+<script th:src="@{assets/js/pwstrength.js}"></script>
 <script th:inline="javascript">
+    $(document).ready(function () {
+        $(":password").keyup(function(){
+            if($("#newPass").val() != $("#rePass").val()){
+                $("#globalError").show().html("Password does not match!");
+                document.getElementById("btnChange").disabled  = true;
+                return;
+            }else{
+                $("#globalError").hide().html("");
+                document.getElementById("btnChange").disabled  = false;
+            }
+        });
+        $('#newPass').pwstrength();
+    });
+
+    function register(event){
+        event.preventDefault();
+        $("alert").html("").hide();
+        if($("#passwordR").val() != $("#repasswordR").val()){
+            $("#globalError").show().html("Password does not!");
+            return;
+        }
+    }
+
     function isPassAjax() {
         var passU = $("#currentPassword").val();
         var idU = $("#idU").val();
@@ -194,15 +218,25 @@
             dataType: "json",
             success: function (response) {
                 if (response.status == "ok") {
-                    $("#passError").show().html(response.message);
+                    ableBtn();
                 } else if (response.status == "no") {
                     $("#passError").show().html(response.message);
+                    disableBtn();
                 }
             },
             error: function (e) {
                 alert('Error: ' + e);
             }
         });
+    }
+    function disableBtn() {
+        document.getElementById("btnChange").disabled  = true;
+        document.getElementById("passError").style.color = "red";
+        document.getElementById("passError").style.background = "#FF6699";
+    }
+    function ableBtn() {
+        document.getElementById("btnChange").disabled  = false;
+        document.getElementById("passError").style.display = "none";
     }
 </script>
 </body>
