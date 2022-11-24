@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 import javax.transaction.Transactional;
+import java.sql.Timestamp;
 import java.util.List;
 
 public interface CarRepository extends PagingAndSortingRepository<Car, Long> {
@@ -24,4 +25,9 @@ public interface CarRepository extends PagingAndSortingRepository<Car, Long> {
     @Query(nativeQuery = true, value = "update car set car.status = 0 where id = ?1")
     @Transactional
     public void delete(Long id);
+
+    @Modifying
+    @Query(nativeQuery = true, value = "update car set createdby = ?1, description = ?2,upboundprice = ?3,downboundprice = ?4,updatedat = ?5 where id = ?6")
+    @Transactional
+    public void update(Long createdBy, String description, Long upBoundPrice, Long downBoundPrice, Timestamp updatedAt, Long id);
 }

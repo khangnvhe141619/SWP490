@@ -180,4 +180,14 @@ public class UserServiceImpl implements UserService {
     public void BanUser(Long id) throws NotFoundException{
         userRepository.BanUser(id);
     }
+
+    @Override
+    public List<User> getRoleByAdminCar() {
+        return userRepository.getRoleByAdminCar();
+    }
+
+    @Override
+    public List<User> getRoleByAdminAuction() {
+        return userRepository.getRoleByAdminAuction();
+    }
 }

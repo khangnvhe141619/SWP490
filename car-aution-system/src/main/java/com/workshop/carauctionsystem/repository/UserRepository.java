@@ -1,5 +1,6 @@
 package com.workshop.carauctionsystem.repository;
 
+import com.workshop.carauctionsystem.entity.Role;
 import com.workshop.carauctionsystem.entity.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -8,6 +9,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
 
@@ -45,5 +47,9 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Transactional
     public void BanUser(Long id);
 
+    @Query(nativeQuery = true,value = "select * from user join user_role on user.id = user_role.userid where userid = 2")
+    public List<User> getRoleByAdminCar();
 
+    @Query(nativeQuery = true,value = "select * from user join user_role on user.id = user_role.userid where userid = 3")
+    public List<User> getRoleByAdminAuction();
 }

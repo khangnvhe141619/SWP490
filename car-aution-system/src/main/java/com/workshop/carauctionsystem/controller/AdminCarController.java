@@ -3,6 +3,8 @@ package com.workshop.carauctionsystem.controller;
 import com.workshop.carauctionsystem.entity.Car;
 import com.workshop.carauctionsystem.model.CarDTO;
 import com.workshop.carauctionsystem.service.CarService;
+import com.workshop.carauctionsystem.service.ModelService;
+import com.workshop.carauctionsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,10 +19,12 @@ import org.springframework.web.servlet.ModelAndView;
 public class AdminCarController {
     @Autowired
     CarService carService;
-//    @GetMapping("/admin/car")
-//    public String showCar(){
-//        return "admin/listCar";
-//    }
+
+    @Autowired
+    private ModelService modelService;
+
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/admin/car")
     public ModelAndView showListCar(@RequestParam(defaultValue = "0") int page,
@@ -28,6 +32,9 @@ public class AdminCarController {
                                     @RequestParam(defaultValue = "") String search, Model model) {
         ModelAndView view = new ModelAndView();
         model.addAttribute("car", new CarDTO());
+        model.addAttribute("modelCar", modelService.getAllModelByStatus());
+        model.addAttribute("createBy", userService.getRoleByAdminCar());
+
         Page<Car> lstCar = carService.findAllByCarName(PageRequest.of(page, 5, Sort.by(id)), search);
         if (!lstCar.isEmpty()) {
             view = new ModelAndView("admin/listCar");
@@ -38,4 +45,6 @@ public class AdminCarController {
         }
         return view;
     }
+
+
 }

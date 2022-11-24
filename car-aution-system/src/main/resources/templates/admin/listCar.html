@@ -162,64 +162,58 @@
                     class="mini-click-non">Home</span></a>
           </li>
           <li>
-            <a class="has-arrow" href="listUser.html" aria-expanded="false"><span
+            <a class="has-arrow" th:href="@{/admin/user}" aria-expanded="false"><span
                     class="fa fa-user icon-wrap"></span> <span class="mini-click-non">User</span></a>
             <ul class="submenu-angle" aria-expanded="false">
-              <li><a href="listUser.html"><span class="mini-sub-pro">All Users</span></a></li>
-              <li><a href="listBannedUser.html"><span class="mini-sub-pro">All Banned Users</span></a>
+              <li><a th:href="@{/admin/user}"><span class="mini-sub-pro">All Users</span></a></li>
+              <li><a th:href="@{/admin/userban}"><span class="mini-sub-pro">All Banned Users</span></a>
               </li>
             </ul>
           </li>
           <li>
-            <a class="has-arrow" href="listCar.html" aria-expanded="false"><span
+            <a class="has-arrow" th:href="@{/admin/car}" aria-expanded="false"><span
                     class="fa fa-automobile icon-wrap"></span> <span
                     class="mini-click-non">Car</span></a>
             <ul class="submenu-angle" aria-expanded="false">
-              <li><a href="listCar.html"><span class="mini-sub-pro">All Cars</span></a></li>
+              <li><a th:href="@{/admin/car}"><span class="mini-sub-pro">All Cars</span></a></li>
             </ul>
           </li>
           <li>
-            <a class="has-arrow" href="listBrand.html" aria-expanded="false"><span
+            <a class="has-arrow" th:href="@{/admin/brand}" aria-expanded="false"><span
                     class="glyphicon glyphicon-menu-hamburger icon-wrap"></span> <span
                     class="mini-click-non">Brand</span></a>
             <ul class="submenu-angle" aria-expanded="false">
-              <li><a href="listBrand.html"><span class="mini-sub-pro">All Brands</span></a></li>
+              <li><a th:href="@{/admin/brand}"><span class="mini-sub-pro">All Brands</span></a></li>
             </ul>
           </li>
           <li>
-            <a class="has-arrow" href="listAuction.html" aria-expanded="false"><span
-                    class="fa fa-window-maximize icon-wrap"></span> <span class="mini-click-non">Auction
-                                    Room</span></a>
+            <a class="has-arrow" th:href="@{/admin/auctionroom}" aria-expanded="false"><span class="fa fa-window-maximize icon-wrap"></span> <span class="mini-click-non">AuctionRoom</span></a>
             <ul class="submenu-angle" aria-expanded="false">
-              <li><a href="listAuction.html"><span class="mini-sub-pro">All Auction Room</span></a>
+              <li><a th:href="@{/admin/auctionroom}"><span class="mini-sub-pro">All Auction Room</span></a>
               </li>
             </ul>
           </li>
           <li>
-            <a class="has-arrow" href="listModel.html" aria-expanded="false"><span
+            <a class="has-arrow" th:href="@{/admin/model}" aria-expanded="false"><span
                     class="glyphicon glyphicon-th-large icon-wrap"></span> <span
                     class="mini-click-non">Model</span></a>
             <ul class="submenu-angle" aria-expanded="false">
-              <li><a href="listModel.html"><span class="mini-sub-pro">All Model</span></a></li>
-              <li><a href="listModelSpec.html"><span class="mini-sub-pro">All Model
-                                            Specification</span></a></li>
+              <li><a th:href="@{/admin/model}"><span class="mini-sub-pro">All Model</span></a></li>
+              <li><a th:href="@{/admin/modelSpec}"><span class="mini-sub-pro">All ModelSpecification</span></a></li>
             </ul>
           </li>
           <li>
-            <a class="has-arrow" href="listNews.html" aria-expanded="false"><span
+            <a class="has-arrow" th:href="@{/admin/news}" aria-expanded="false"><span
                     class="fa fa-newspaper-o icon-wrap"></span> <span
                     class="mini-click-non">News</span></a>
             <ul class="submenu-angle" aria-expanded="false">
-              <li><a href="listNews.html"><span class="mini-sub-pro">All News</span></a></li>
+              <li><a th:href="@{/admin/news}"><span class="mini-sub-pro">All News</span></a></li>
             </ul>
           </li>
           <li>
-            <a class="has-arrow" href="#" aria-expanded="false"><span
-                    class="fa fa-gamepad icon-wrap"></span> <span class="mini-click-non">Game
-                                    Play</span></a>
+            <a class="has-arrow" href="#" aria-expanded="false"><span class="fa fa-gamepad icon-wrap"></span> <span class="mini-click-non">Game Play</span></a>
             <ul class="submenu-angle" aria-expanded="false">
-              <li><a href="#"><span class="mini-sub-pro">Game </span></a></li>
-              <li><a href="#"><span class="mini-sub-pro">Play </span></a></li>
+              <li><a href="#"><span class="mini-sub-pro">Game Play</span></a></li>
             </ul>
           </li>
           <li>
@@ -307,58 +301,51 @@
                   <li><a data-toggle="collapse" data-target="#demoevent" href="#">User <span
                           class="admin-project-icon edu-icon edu-down-arrow"></span></a>
                     <ul id="demoevent" class="collapse dropdown-header-top">
-                      <li><a href="listUser.html">All Users</a>
+                      <li><a th:href="@{/admin/user}">All Users</a>
                       </li>
-                      <li><a href="listBannedUser.html">All Banned Users</a>
+                      <li><a th:href="@{/admin/userban}">All Banned Users</a>
                       </li>
                     </ul>
                   </li>
-                  <li><a data-toggle="collapse" data-target="#demopro" href="#">Car <span
+                  <li><a data-toggle="collapse" data-target="#demopro" th:href="@{/admin/car}">Car <span
                           class="admin-project-icon edu-icon edu-down-arrow"></span></a>
                     <ul id="demopro1" class="collapse dropdown-header-top">
-                      <li><a href="listCar.html">All Cars</a>
+                      <li><a th:href="@{/admin/car}">All Cars</a>
                       </li>
                     </ul>
                   </li>
-                  <li><a data-toggle="collapse" data-target="#demopro" href="#">Brand <span
+                  <li><a data-toggle="collapse" data-target="#demopro" th:href="@{/admin/brand}">Brand <span
                           class="admin-project-icon edu-icon edu-down-arrow"></span></a>
                     <ul id="demopro2" class="collapse dropdown-header-top">
-                      <li><a href="listBrand.html">All Brands</a>
-                      </li>
+                      <li><a th:href="@{/admin/brand}">All Brands</a></li>
                     </ul>
                   </li>
-                  <li><a data-toggle="collapse" data-target="#demopro" href="#">Auction Room <span
+                  <li><a data-toggle="collapse" data-target="#demopro" th:href="@{/admin/auctionroom}">Auction Room <span
                           class="admin-project-icon edu-icon edu-down-arrow"></span></a>
                     <ul id="demopro3" class="collapse dropdown-header-top">
-                      <li><a href="listAuction.html">All Auction Room</a>
+                      <li><a th:href="@{/admin/auctionroom}">All Auction Room</a>
                       </li>
                     </ul>
                   </li>
                   <li><a data-toggle="collapse" data-target="#demopro" href="#">Model <span
                           class="admin-project-icon edu-icon edu-down-arrow"></span></a>
                     <ul id="demopro4" class="collapse dropdown-header-top">
-                      <li><a href="listModel.html">All Model</a>
+                      <li><a th:href="@{/admin/model}">All Model</a>
                       </li>
-                      <li><a href="listModelSpec.html">All Model Specification</a>
+                      <li><a th:href="@{/admin/modelSpec}">All Model Specification</a>
                       </li>
                     </ul>
                   </li>
-                  <li><a data-toggle="collapse" data-target="#demopro" href="#">News <span
+                  <li><a data-toggle="collapse" data-target="#demopro" th:href="@{/admin/news}">News <span
                           class="admin-project-icon edu-icon edu-down-arrow"></span></a>
                     <ul id="demopro5" class="collapse dropdown-header-top">
-                      <li><a href="listNews.html">All News</a>
-                      </li>
-                      <li><a href="create-news.html">Create New News</a>
-                      </li>
+                      <li><a th:href="@{/admin/news}">All News</a></li>
                     </ul>
                   </li>
                   <li><a data-toggle="collapse" data-target="#demopro" href="#">Game Play<span
                           class="admin-project-icon edu-icon edu-down-arrow"></span></a>
                     <ul id="demopro6" class="collapse dropdown-header-top">
-                      <li><a href="#">Game</a>
-                      </li>
-                      <li><a href="#">Play</a>
-                      </li>
+                      <li><a href="#">Game Play</a></li>
                     </ul>
                   </li>
                   <li><a data-toggle="collapse" data-target="#demopro" href="#">Wishlist<span
@@ -420,25 +407,20 @@
               <div th:if="${#lists.isEmpty(cars)}">
                 <h6 style="color: red;" th:text="${lst_empty}"></h6>
               </div>
-              <div th:unless="${not #lists.isEmpty(cars)}">
                 <table>
                   <tr>
                     <th>No</th>
                     <th>Car Name</th>
+                    <th>Year of Make</th>
                     <th>Setting</th>
                   </tr>
                   <tr th:each="c,loop :${cars}">
                     <td th:text="${loop.count}"></td>
                     <td th:text="${c.carName}"></td>
                     <td>
-                      <button title="View" class="pd-setting-ed"><a th:attr="data-target='#myViewModal'+*{c.id}"
-                                                                    data-toggle="modal"><i class="fa fa-eye"
-                                                                                           aria-hidden="true"></i></a></button>
-                      <button title="Edit" class="pd-setting-ed"><a href="#myUpdateModal"
-                                                                    data-toggle="modal"><i class="fa fa-pencil-square-o"
-                                                                                           aria-hidden="true"></i></a></button>
-                      <button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><i
-                              class="fa fa-trash-o" aria-hidden="true"></i></button>
+                      <button title="View" class="pd-setting-ed"><a th:attr="data-target='#myViewModal'+*{c.id}" data-toggle="modal"><i class="fa fa-eye" aria-hidden="true"></i></a></button>
+                      <button title="Edit" class="pd-setting-ed"><a href="#myUpdateModal" data-toggle="modal"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></button>
+                      <button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
                     </td>
                     <!-- Start View pop-up-->
                     <div th:id="'myViewModal'+*{c.id}" class="modal fade" tabindex="-1" role="dialog">
@@ -699,7 +681,7 @@
                   aria-hidden="true">&times;</span></button>
           <h4 class="modal-title">Create</h4>
         </div>
-        <form action="#" class="dropzone dropzone-custom needsclick add-professors" id="demo1-upload">
+        <form action="#" class="dropzone dropzone-custom needsclick add-professors" >
           <div class="modal-body">
             <div style="margin: 0 auto;" class="profile-info-inner">
               <div class="profile-details-hr">
@@ -757,9 +739,9 @@
                   </div>
                   <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
                     <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
-                      <p><b>Img</p>
+                      <p><b>Img</b></p>
                       <div class="form-group">
-                        <input name="carImg" id="img" multiple="" type="file"
+                        <input name="carImg" multiple="" type="file"
                                class="form-control upload__inputfile" placeholder="">
                       </div>
                     </div>
@@ -859,7 +841,7 @@
                   </div>
                   <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
                     <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
-                      <p><b>Img</p>
+                      <p><b>Img</b></p>
                       <div class="form-group">
                         <input name="carImg" id="img" multiple="" type="file"
                                class="form-control upload__inputfile" placeholder="">

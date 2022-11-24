@@ -1,6 +1,5 @@
 package com.workshop.carauctionsystem.controller;
 
-import com.workshop.carauctionsystem.entity.Brand;
 import com.workshop.carauctionsystem.entity.News;
 import com.workshop.carauctionsystem.exception.NotFoundException;
 import com.workshop.carauctionsystem.model.NewsModel;
@@ -27,7 +26,7 @@ public class AdminNewsController {
     @Autowired
     NewsServiceImpl newsService;
 
-    @GetMapping("/news")
+    @GetMapping("/admin/news")
     public ModelAndView showList(@RequestParam(defaultValue = "0") int page,
                                  @RequestParam(defaultValue = "id") String id,
                                  @RequestParam(defaultValue = "") String search,
@@ -44,7 +43,7 @@ public class AdminNewsController {
         return modelAndView;
     }
 
-    @PostMapping("news/create")
+    @PostMapping("admin/news/create")
     public String create(@ModelAttribute(value = "newsModel") NewsModel newsModel,
                          @RequestParam MultipartFile upImg, RedirectAttributes ra) {
         try {
@@ -65,14 +64,14 @@ public class AdminNewsController {
             news.setImg("/hoang/" + nameFile);
             newsService.saveNews(news);
             ra.addFlashAttribute("success", "The news has been saved successfully");
-            return "redirect:/news";
+            return "redirect:/admin/news";
         } catch (IOException e) {
             ra.addFlashAttribute("fail", "Must upload a image");
-            return "redirect:/news";
+            return "redirect:/admin/news";
         }
     }
 
-    @PostMapping("news/edit")
+    @PostMapping("/admin/news/edit")
     public String update(@ModelAttribute(value = "newss") News news,
                          @RequestParam MultipartFile upImg,
                          @RequestParam Long id,
@@ -88,10 +87,10 @@ public class AdminNewsController {
             newsService.saveNews(news);
         }
         ra.addFlashAttribute("success", "The brand has been saved successfully");
-        return "redirect:/news";
+        return "redirect:/admin/news";
     }
 
-    @GetMapping("/news/delete/{id}")
+    @GetMapping("/admin/news/delete/{id}")
     public String deleteNews(@PathVariable(value = "id") Long id, RedirectAttributes ra) {
         try {
             newsService.delete(id);
@@ -100,6 +99,6 @@ public class AdminNewsController {
             return "page404";
         }
         ra.addFlashAttribute("success", "The News has been deleted successfully");
-        return "redirect:/news";
+        return "redirect:/admin/news";
     }
 }
