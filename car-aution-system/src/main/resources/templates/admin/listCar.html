@@ -420,16 +420,18 @@
               <div th:if="${#lists.isEmpty(cars)}">
                 <h6 style="color: red;" th:text="${lst_empty}"></h6>
               </div>
-              <div th:unless="${not #lists.isEmpty(cars)}">
                 <table>
                   <tr>
                     <th>No</th>
                     <th>Car Name</th>
+                    <th>Model Name</th>
                     <th>Setting</th>
                   </tr>
+                  <tr th:unless="${not #lists.isEmpty(cars)}">
                   <tr th:each="c,loop :${cars}">
                     <td th:text="${loop.count}"></td>
                     <td th:text="${c.carName}"></td>
+                    <td th:text="${c.modelId.modelName}"></td>
                     <td>
                       <button title="View" class="pd-setting-ed"><a th:attr="data-target='#myViewModal'+*{c.id}"
                                                                     data-toggle="modal"><i class="fa fa-eye"
@@ -456,12 +458,12 @@
                                   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <div class="product-payment-inner-st">
                                       <ul id="myTabedu1" class="tab-review-design">
-                                        <li class="active"><a href="#CAR">Car</a></li>
-                                        <li><a href="#SPEC"> Specification</a></li>
-                                        <li><a href="#SAFETY">Safety System</a></li>
+                                        <li class="active"><a  th:attr="data-target='#CAR'+*{c.id}">Car</a></li>
+                                        <li><a  th:attr="data-target='#SPEC'+*{c.id}"> Specification</a></li>
+                                        <li><a  th:attr="data-target='#SAFETY'+*{c.id}">Safety System</a></li>
                                       </ul>
                                       <div id="myTabContent" class="tab-content custom-product-edit">
-                                        <div class="product-tab-list tab-pane fade active in" id="CAR">
+                                        <div class="product-tab-list tab-pane fade active in" th:id="'CAR'+*{c.id}" >
                                           <div class="row">
                                             <div style="margin: 0 auto;" class="profile-info-inner">
                                               <div class="profile-img">
@@ -471,46 +473,40 @@
                                                 <div class="row">
                                                   <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
                                                     <div class="address-hr biography">
-                                                      <p><b>Car Name</b><br /> Fly Zend</p>
-                                                    </div>
-                                                  </div>
-                                                  <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-                                                    <div class="address-hr biography">
-                                                      <p><b>Model</b><br /> Fly Zend</p>
+                                                      <p><b>Car Name</b> <br />
+                                                        <span th:text="${c.carName}"></span></p>
                                                     </div>
                                                   </div>
                                                 </div>
                                                 <div class="row">
                                                   <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                                     <div class="address-hr biography">
-                                                      <p><b>Model</b><br /> Fly Zend</p>
+                                                      <p><b>Model</b><br />
+                                                        <span th:text="${c.modelId.modelName}"></span></p>
                                                     </div>
                                                   </div>
                                                 </div>
                                                 <div class="row">
                                                   <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                                     <div class="address-hr biography">
-                                                      <p><b>Up price </b><br /> Fly Zend</p>
+                                                      <p><b>Up price </b><br />
+                                                        <span th:text="${c.upBoundPrice}"></span></p>
                                                     </div>
                                                   </div>
                                                 </div>
                                                 <div class="row">
                                                   <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                                     <div class="address-hr biography">
-                                                      <p><b>Down price </b><br /> Fly Zend</p>
+                                                      <p><b>Down price </b><br />
+                                                        <span th:text="${c.downBoundPrice}"></span></p>
                                                     </div>
                                                   </div>
                                                 </div>
                                                 <div class="row">
                                                   <div class="col-lg-12">
                                                     <div class="content-profile">
-                                                      <p><b>Description</b><br /></p>
-                                                      <p>Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt.Cras
-                                                        dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.</p>
-                                                      <p>Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt.Cras
-                                                        dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.</p>
-                                                      <p>Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt.Cras
-                                                        dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.</p>
+                                                      <p><b>Description</b><br />
+                                                        <span th:text="${c.description}"></span></p>
                                                     </div>
                                                   </div>
                                                 </div>
@@ -518,84 +514,95 @@
                                             </div>
                                           </div>
                                         </div>
-                                        <div class="product-tab-list tab-pane fade" id="SPEC">
-                                          <div class="row">
+                                        <div class="product-tab-list tab-pane fade" th:id="'SPEC'+*{c.id}" >
+                                          <div class="row">.;
                                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                               <div class="review-content-section">
                                                 <div class="row">
                                                   <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                                     <div class="address-hr biography">
-                                                      <p><b>Maufacturer</b><br /> Vin</p>
+                                                      <p><b>Maufacturer</b><br />
+                                                        <span th:text="${c.carSpec.stream().findFirst().get().manufacturing}"></span></p>
                                                     </div>
                                                   </div>
                                                 </div>
                                                 <div class="row">
                                                   <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                                     <div class="address-hr biography">
-                                                      <p><b>Status</b><br /> Old</p>
+                                                      <p><b>Status</b><br />
+                                                        <span th:text="${c.carSpec.stream().findFirst().get().status}"></span></p>
                                                     </div>
                                                   </div>
                                                 </div>
                                                 <div class="row">
                                                   <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                                     <div class="address-hr biography">
-                                                      <p><b>Km driven</b><br /> 12000</p>
+                                                      <p><b>Km driven</b><br />
+                                                        <span th:text="${c.carSpec.stream().findFirst().get().km_driven}"></span></p>
                                                     </div>
                                                   </div>
                                                 </div>
                                                 <div class="row">
                                                   <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                                     <div class="address-hr biography">
-                                                      <p><b>Gear</b><br /> UK</p>
+                                                      <p><b>Gear</b><br />
+                                                        <span th:text="${c.carSpec.stream().findFirst().get().gear}"></span></p>
                                                     </div>
                                                   </div>
                                                 </div>
                                                 <div class="row">
                                                   <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                                     <div class="address-hr biography">
-                                                      <p><b>Fuel</b><br /> UK</p>
+                                                      <p><b>Fuel</b><br />
+                                                        <span th:text="${c.carSpec.stream().findFirst().get().fuel}"></span></p>
                                                     </div>
                                                   </div>
                                                 </div>
                                                 <div class="row">
                                                   <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                                     <div class="address-hr biography">
-                                                      <p><b>Fuel Consumption</b><br /> UK</p>
+                                                      <p><b>Fuel Consumption</b><br />
+                                                        <span th:text="${c.carSpec.stream().findFirst().get().fuelConsumption}"></span></p>
                                                     </div>
                                                   </div>
                                                 </div>
                                                 <div class="row">
                                                   <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                                     <div class="address-hr biography">
-                                                      <p><b>Outer Color</b><br /> UK</p>
+                                                      <p><b>Outer Color</b><br />
+                                                        <span th:text="${c.carSpec.stream().findFirst().get().outerColor}"></span></p>
                                                     </div>
                                                   </div>
                                                 </div>
                                                 <div class="row">
                                                   <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                                     <div class="address-hr biography">
-                                                      <p><b>Inner Color</b><br /> UK</p>
+                                                      <p><b>Inner Color</b><br />
+                                                        <span th:text="${c.carSpec.stream().findFirst().get().innerColor}"></span></p>
                                                     </div>
                                                   </div>
                                                 </div>
                                                 <div class="row">
                                                   <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                                     <div class="address-hr biography">
-                                                      <p><b>Overall Dimension</b><br /> UK</p>
+                                                      <p><b>Overall Dimension</b><br />
+                                                        <span th:text="${c.carSpec.stream().findFirst().get().overallDimension}"></span></p>
                                                     </div>
                                                   </div>
                                                 </div>
                                                 <div class="row">
                                                   <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                                     <div class="address-hr biography">
-                                                      <p><b>Drive</b><br /> UK</p>
+                                                      <p><b>Drive</b><br />
+                                                        <span th:text="${c.carSpec.stream().findFirst().get().drive}"></span></p>
                                                     </div>
                                                   </div>
                                                 </div>
                                                 <div class="row">
                                                   <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                                     <div class="address-hr biography">
-                                                      <p><b>Year of make </b><br /> UK</p>
+                                                      <p><b>Year of make </b><br />
+                                                        <span th:text="${c.carSpec.stream().findFirst().get().yearOfMake}"></span></p>
                                                     </div>
                                                   </div>
                                                 </div>
@@ -603,49 +610,47 @@
                                             </div>
                                           </div>
                                         </div>
-                                        <div class="product-tab-list tab-pane fade" id="SAFETY">
+                                        <div class="product-tab-list tab-pane fade" th:id="'SAFETY'+*{c.id}" >
                                           <div class="row">
                                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                               <div class="review-content-section">
                                                 <div class="row">
                                                   <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                                     <div class="address-hr biography">
-                                                      <p><b>Air bag</b><br /> 1</p>
+                                                      <p><b>Air bag</b><br />
+                                                        <span th:text="${c.safeSys.stream().findFirst().get().air_bag}"></span></p>
                                                     </div>
                                                   </div>
                                                 </div>
                                                 <div class="row">
                                                   <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                                     <div class="address-hr biography">
-                                                      <p><b>ABS brake</b><br /> ok</p>
+                                                      <p><b>ABS brake</b><br />
+                                                        <span th:text="${c.safeSys.stream().findFirst().get().abs_brake}"></span></p>
                                                     </div>
                                                   </div>
                                                 </div>
                                                 <div class="row">
                                                   <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                                     <div class="address-hr biography">
-                                                      <p><b>Speed controll</b><br /> 12000</p>
+                                                      <p><b>Speed control</b><br />
+                                                        <span th:text="${c.safeSys.stream().findFirst().get().speedControl}"></span></p>
                                                     </div>
                                                   </div>
                                                 </div>
                                                 <div class="row">
                                                   <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                                     <div class="address-hr biography">
-                                                      <p><b>Tire pressure</b><br /> UK</p>
+                                                      <p><b>Tire pressure</b><br />
+                                                        <span th:text="${c.safeSys.stream().findFirst().get().tirePressure}"></span></p>
                                                     </div>
                                                   </div>
                                                 </div>
-
                                                 <div class="row">
                                                   <div class="col-lg-12">
                                                     <div class="content-profile">
                                                       <p><b>Other description </b><br /></p>
-                                                      <p>Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt.Cras
-                                                        dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.</p>
-                                                      <p>Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt.Cras
-                                                        dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.</p>
-                                                      <p>Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt.Cras
-                                                        dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.</p>
+                                                      <span th:text="${c.safeSys.stream().findFirst().get().otherdescription}"></span></p>
                                                     </div>
                                                   </div>
                                                 </div>
@@ -668,8 +673,9 @@
                     </div>
                     <!--End View pop-up-->
                   </tr>
+                  </tr>
                 </table>
-              </div>
+
             </div>
             <div th:if="${not #lists.isEmpty(cars)}">
               <div class="custom-pagination">

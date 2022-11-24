@@ -1,8 +1,7 @@
 package com.workshop.carauctionsystem.service.impl;
 
-import com.workshop.carauctionsystem.entity.Brand;
 import com.workshop.carauctionsystem.entity.Car;
-import com.workshop.carauctionsystem.entity.Image;
+import com.workshop.carauctionsystem.model.CarDTO;
 import com.workshop.carauctionsystem.repository.CarRepository;
 import com.workshop.carauctionsystem.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +19,18 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public Page<Car> findAllByCarName(Pageable pageable, String name) {
-        if(name!=null){
+        if (name != null) {
             return carRepository.findAllByCarName(pageable, name);
-        }else{
+        } else {
             return carRepository.findAllActiveCar(pageable);
         }
+    }
+
+    @Override
+    public List<Car> findAllDTO() {
+        List<Car> lc=carRepository.fetchAllCar();
+        lc.forEach(l -> System.out.println(l));
+        return lc;
     }
 
 

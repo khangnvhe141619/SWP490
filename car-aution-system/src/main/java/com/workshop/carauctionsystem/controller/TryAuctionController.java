@@ -20,6 +20,9 @@ public class TryAuctionController {
     public String showAuction(){
         return "auctionRoom";
     }
-
+    @GetMapping("/connect")
+    public String showAuction1(){
+        return "connectWallet";
+    }
 
 }
