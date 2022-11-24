@@ -20,7 +20,7 @@ public class ModelServiceImpl implements ModelService {
     private ModelRepository modelRepo;
 
     @Override
-    public List<ModelCar> getAllModel() {
+    public List<ModelCar> getAllModelByStatus() {
         return (List) modelRepo.findAllByStatus();
     }
 

@@ -35,4 +35,7 @@ public interface UserService {
     Page<User> ListUserUnBan(Pageable pageable,String name);
     void UnBanUser(Long id) throws NotFoundException;
     void BanUser(Long id) throws NotFoundException;
+    public List<User> getRoleByAdminCar();
+    public List<User> getRoleByAdminAuction();
+
 }

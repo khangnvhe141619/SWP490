@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 import javax.transaction.Transactional;
+import java.sql.Timestamp;
 import java.util.List;
 
 public interface CarRepository extends PagingAndSortingRepository<Car, Long> {
@@ -29,6 +30,7 @@ public interface CarRepository extends PagingAndSortingRepository<Car, Long> {
             "where car.carName like %?1% and c.status = 1 \n" +
             "order by createdAt desc")
     public Page<Car> findAllByCarName(Pageable pageable, String carName);
+
     @Modifying
     @Query(nativeQuery = true, value = "update car set car.status = 0 where id = ?1")
     @Transactional
@@ -38,7 +40,13 @@ public interface CarRepository extends PagingAndSortingRepository<Car, Long> {
             "from car c \n" +
             "join carspecification cs on c.id = cs.carId \n" +
             "join safetysystem st on c.id = st.carId \n" +
-            "where c.status = 1\n" )
+            "where c.status = 1\n")
     public List<Car> fetchAllCar();
+
+
+    @Modifying
+    @Query(nativeQuery = true, value = "update car set createdby = ?1, description = ?2,upboundprice = ?3,downboundprice = ?4,updatedat = ?5 where id = ?6")
+    @Transactional
+    public void update(Long createdBy, String description, Long upBoundPrice, Long downBoundPrice, Timestamp updatedAt, Long id);
 
 }

@@ -34,7 +34,7 @@ public class AdminModelController {
     @Autowired
     private ModelSpecificationServiceImpl modelSpecService;
 
-    @GetMapping("/model")
+    @GetMapping("/admin/model")
     public ModelAndView showList(@RequestParam(defaultValue = "0") int page,
                                  @RequestParam(defaultValue = "id") String id,
                                  @RequestParam(defaultValue = "") String search,
@@ -53,7 +53,7 @@ public class AdminModelController {
         return modelAndView;
     }
 
-    @PostMapping("model/create")
+    @PostMapping("/adminmodel/create")
     public String create(@ModelAttribute(value = "modelCar") ModelCarModel modelCarModel,
                          @RequestParam Long idModelSpec,
                          @RequestParam Long idBrand,
@@ -72,24 +72,23 @@ public class AdminModelController {
             Validate validateExit = new Validate();
             String modelName = modelCarModel.getModelName();
             Long brandId = idBrand;
-            System.out.println(modelName + "---" + brandId);
 
-            if (validateExit.checkDuplicateModel(modelName,brandId,modelService.getAllModel())){
+            if (validateExit.checkDuplicateModel(modelName,brandId,modelService.getAllModelByStatus())){
                 ra.addFlashAttribute("fail", "This Car Model already exists");
-                return "redirect:/model";
+                return "redirect:/admin/model";
             }
 
             modelService.saveModel(modelCar);
             ra.addFlashAttribute("success", "The Car Model has been saved successfully");
-            return "redirect:/model";
+            return "redirect:/admin/model";
         } catch (Exception e) {
             ra.addFlashAttribute("fail", "Add New Car Model Failed");
-            return "redirect:/model";
+            return "redirect:/admin/model";
         }
     }
 
 
-    @GetMapping("/model/delete/{id}")
+    @GetMapping("/admin/model/delete/{id}")
     public String deleteModel(@PathVariable(value = "id") Long id, RedirectAttributes ra) {
         try {
             modelService.delete(id);
@@ -98,10 +97,10 @@ public class AdminModelController {
             return "page404";
         }
         ra.addFlashAttribute("success", "The Model Car has been deleted successfully");
-        return "redirect:/model";
+        return "redirect:/admin/model";
     }
 
-    @PostMapping("model/edit")
+    @PostMapping("/admin/model/edit")
     public String update(@RequestParam Map<String, String> requestMap,
                          RedirectAttributes ra) {
 
@@ -114,17 +113,17 @@ public class AdminModelController {
         try {
             Validate validateName = new Validate();
             if (!modelName.toLowerCase().equals(modelId.getModelName().toLowerCase())) {
-                if (validateName.checkDuplicateModel(modelName, idBrand, modelService.getAllModel())) {
+                if (validateName.checkDuplicateModel(modelName, idBrand, modelService.getAllModelByStatus())) {
                     ra.addFlashAttribute("fail", "Model exist");
-                    return "redirect:/model";
+                    return "redirect:/admin/model";
                 }
             }
             modelService.updateModel(idBrand, modelName, idModelSpec, id);
             ra.addFlashAttribute("success", "The Car Model has been saved successfully");
-            return "redirect:/model";
+            return "redirect:/admin/model";
         } catch (Exception e) {
             ra.addFlashAttribute("fail", "Update New Car Model Failed");
-            return "redirect:/model";
+            return "redirect:/admin/model";
         }
     }
 }

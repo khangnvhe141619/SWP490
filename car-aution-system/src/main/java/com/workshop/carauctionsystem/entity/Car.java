@@ -7,7 +7,7 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.List;
+
 import java.util.Set;
 
 @AllArgsConstructor
@@ -24,7 +24,7 @@ public class Car {
     @Column(name = "carname")
     private String carName;
 
-    @Column(name = "description")
+    @Column(name = "[description]")
     private String description;
 
     @Column(name = "upboundprice")

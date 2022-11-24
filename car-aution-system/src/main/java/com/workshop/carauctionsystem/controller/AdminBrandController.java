@@ -27,7 +27,7 @@ public class AdminBrandController {
     @Autowired
     BrandServiceImpl brandService;
 
-    @GetMapping("/brand")
+    @GetMapping("/admin/brand")
     //get list brand by page
     public ModelAndView showList(@RequestParam(defaultValue = "0") int page,
                                  @RequestParam(defaultValue = "id") String id,
@@ -46,7 +46,7 @@ public class AdminBrandController {
         return modelAndView;
     }
 
-    @PostMapping("brand/create")
+    @PostMapping("admin/brand/create")
     public String create(@ModelAttribute(value = "brandModel") BrandModel brandModel,
                          @RequestParam MultipartFile upImg, RedirectAttributes ra) {
         try {
@@ -57,21 +57,21 @@ public class AdminBrandController {
             Validate validateName = new Validate();
             if (validateName.checkDuplicateBrand(brandModel.getName(), brandService.getAllBrand())) {
                 ra.addFlashAttribute("fail", "This car brand already exists");
-                return "redirect:/brand";
+                return "redirect:/admin/brand";
             }
             brand.setStatus(Long.valueOf(1));
             brand.setImgPath("/hoang/" + nameFile);
             brandService.saveBrand(brand);
             ra.addFlashAttribute("success", "The brand has been saved successfully");
-            return "redirect:/brand";
+            return "redirect:/admin/brand";
         } catch (IOException e) {
             ra.addFlashAttribute("fail", "Must upload a image");
-            return "redirect:/brand";
+            return "redirect:/admin/brand";
         }
     }
 
 
-    @GetMapping("/brand/delete/{id}")
+    @GetMapping("/admin/brand/delete/{id}")
     public String deleteBrand(@PathVariable(value = "id") Long id, RedirectAttributes ra) {
         try {
             brandService.delete(id);
@@ -80,11 +80,11 @@ public class AdminBrandController {
             return "page404";
         }
         ra.addFlashAttribute("success", "The brand has been deleted successfully");
-        return "redirect:/brand";
+        return "redirect:/admin/brand";
     }
 
 
-    @PostMapping("brand/edit")
+    @PostMapping("admin/brand/edit")
     public String update(@RequestParam MultipartFile upImg, RedirectAttributes ra,
                          @RequestParam Map<String, String> requestMap) {
 
@@ -97,7 +97,7 @@ public class AdminBrandController {
                 Validate validateName = new Validate();
                 if (validateName.checkDuplicateBrand(name, brandService.getAllBrand())) {
                     ra.addFlashAttribute("fail", "This car brand already exists");
-                    return "redirect:/brand";
+                    return "redirect:/admin/brand";
                 }
             }
             //brandId.setBrandName(name);
@@ -110,6 +110,6 @@ public class AdminBrandController {
             brandService.updateBrand(name, img, id);
         }
         ra.addFlashAttribute("success", "The brand has been saved successfully");
-        return "redirect:/brand";
+        return "redirect:/admin/brand";
     }
 }

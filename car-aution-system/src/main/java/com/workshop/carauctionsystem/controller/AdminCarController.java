@@ -6,6 +6,8 @@ import com.workshop.carauctionsystem.model.ResponseObject;
 import com.workshop.carauctionsystem.service.BrandService;
 import com.workshop.carauctionsystem.service.CarService;
 import com.workshop.carauctionsystem.service.ModelService;
+
+import com.workshop.carauctionsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -24,15 +26,21 @@ import java.util.List;
 public class AdminCarController {
     @Autowired
     CarService carService;
+
     @Autowired
     BrandService brandService;
 
     @Autowired
     ModelService modelService;
+
 //    @GetMapping("/admin/car")
 //    public String showCar(){
 //        return "admin/listCar";
 //    }
+
+    @Autowired
+    private UserService userService;
+
 
     @GetMapping("/admin/car")
     public ModelAndView showListCar(@RequestParam(defaultValue = "0") int page,
@@ -40,8 +48,12 @@ public class AdminCarController {
                                     @RequestParam(defaultValue = "") String search, Model model) {
         ModelAndView view = new ModelAndView();
         model.addAttribute("car", new CarDTO());
+
         model.addAttribute("brands", brandService.getAllBrand());
-        model.addAttribute("models", modelService.getAllModel());
+
+        model.addAttribute("modelCar", modelService.getAllModelByStatus());
+        model.addAttribute("createBy", userService.getRoleByAdminCar());
+
 
         Page<Car> lstCar = carService.findAllByCarName(PageRequest.of(page, 5, Sort.by(id)), search);
 
@@ -54,6 +66,7 @@ public class AdminCarController {
         }
         return view;
     }
+
 //    @GetMapping("/car/all")
 //    public ResponseEntity<ResponseObject> getCar(){
 //        List<Car> lc=carService.findAllDTO();
@@ -62,4 +75,5 @@ public class AdminCarController {
 //        }
 //        return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject("no", "Valid!", null));
 //    }
+
 }

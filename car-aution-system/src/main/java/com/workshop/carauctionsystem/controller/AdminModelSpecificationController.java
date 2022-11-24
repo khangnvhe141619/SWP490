@@ -24,7 +24,7 @@ public class AdminModelSpecificationController {
     @Autowired
     ModelSpecificationServiceImpl modelSpecService;
 
-    @GetMapping("/modelSpec")
+    @GetMapping("/admin/modelSpec")
     public ModelAndView showList(@RequestParam(defaultValue = "0") int page,
                                  @RequestParam(defaultValue = "id") String id,
                                  @RequestParam(defaultValue = "") String search,
@@ -42,7 +42,7 @@ public class AdminModelSpecificationController {
     }
 
 
-    @PostMapping("modelSpec/create")
+    @PostMapping("/admin/modelSpec/create")
     public String create(@ModelAttribute(value = "modelSpecieModel") ModelSpecieModel modelSpecieModel,
                          RedirectAttributes ra) {
         try {
@@ -51,20 +51,20 @@ public class AdminModelSpecificationController {
             Validate validateName = new Validate();
             if (validateName.checkDuplicateModelSpec(modelSpecieModel.getNameType(), modelSpecieModel.getSeatNumber(), modelSpecService.getAllModelSpecification())) {
                 ra.addFlashAttribute("fail", "ModelSpecification exist");
-                return "redirect:/modelSpec";
+                return "redirect:/admin/modelSpec";
             }
             modelSpec.setSeatNumber(modelSpecieModel.getSeatNumber());
             modelSpec.setStatus(1);
             modelSpecService.saveModelSpecification(modelSpec);
             ra.addFlashAttribute("success", "The ModelSpecification has been saved successfully");
-            return "redirect:/modelSpec";
+            return "redirect:/admin/modelSpec";
         } catch (Exception e) {
             ra.addFlashAttribute("fail", "Add ModelSpecification Failed");
-            return "redirect:/modelSpec";
+            return "redirect:/admin/modelSpec";
         }
     }
 
-    @GetMapping("/modelSpec/delete/{id}")
+    @GetMapping("/admin/modelSpec/delete/{id}")
     public String deleteModelSpec(@PathVariable(value = "id") Long id, RedirectAttributes ra) {
         try {
             modelSpecService.delete(id);
@@ -73,11 +73,11 @@ public class AdminModelSpecificationController {
             return "page404";
         }
         ra.addFlashAttribute("success", "The ModelSpecification has been deleted successfully");
-        return "redirect:/modelSpec";
+        return "redirect:/admin/modelSpec";
     }
 
 
-    @PostMapping("modelSpec/edit")
+    @PostMapping("/admin/modelSpec/edit")
     public String update(@RequestParam Map<String, String> requestMap,
                          RedirectAttributes ra, Model model) {
         Long id = Long.parseLong(requestMap.get("id"));
@@ -88,15 +88,15 @@ public class AdminModelSpecificationController {
             Validate validateName = new Validate();
             if (validateName.checkDuplicateModelSpec(name, seatNumber, modelSpecService.getAllModelSpecification())) {
                 ra.addFlashAttribute("fail", "ModelSpecification exist");
-                return "redirect:/modelSpec";
+                return "redirect:/admin/modelSpec";
             }
             modelSpecService.updateModelSpec(name, seatNumber, id);
         } catch (Exception e) {
             ra.addFlashAttribute("fail", "Update ModelSpecification Failed");
-            return "redirect:/modelSpec";
+            return "redirect:/admin/modelSpec";
         }
         ra.addFlashAttribute("success", "The ModelSpecification has been saved successfully");
-        return "redirect:/modelSpec";
+        return "redirect:/admin/modelSpec";
     }
 
 

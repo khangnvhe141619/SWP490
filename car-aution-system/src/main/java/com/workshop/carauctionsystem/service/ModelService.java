@@ -12,7 +12,8 @@ import java.util.List;
 
 public interface ModelService {
 
-    List<ModelCar> getAllModel();
+
+    List<ModelCar> getAllModelByStatus();
     public void saveModel(ModelCar model);
     public void updateModel(Long brandId,String modelName,Long modelSpec, Long id);
     public void delete(Long id) throws NotFoundException;
