@@ -64,7 +64,7 @@ public class AdminCarController {
 
     @GetMapping("/car/all")
     public ResponseEntity<ResponseObject> getCar(){
-        List<Car> lc=carService.findAllDTO();
+        List<Car> lc = carService.findAllDTO();
         if (!lc.isEmpty()) {
             return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject("ok", "Existed!", null));
         }

@@ -15,19 +15,16 @@ import java.util.List;
 public interface CarRepository extends PagingAndSortingRepository<Car, Long> {
 
 
-    @Query(nativeQuery = true, value = "select * \n" +
-            "from car c \n" +
-            "join carspecification cs on c.id = cs.carId \n" +
-            "join safetysystem st on c.id = st.carId \n" +
-            "where c.status = 1")
+    @Query(nativeQuery = true, value = "select * from car \n" +
+            "where car.status = 1 \n" +
+            "order by createdAt desc")
     public Page<Car> findAllActiveCar(Pageable pageable);
 
-    @Query(nativeQuery = true, value = "select * \n" +
-            "from car c \n" +
-            "join carspecification cs on c.id = cs.carId \n" +
-            "join safetysystem st on c.id = st.carId \n" +
-            "where c.status = 1 and c.carName like %?1%")
+    @Query(nativeQuery = true, value = "select * from car \n" +
+            "where car.status = 1 and car.carName like %?1%\n" +
+            "order by createdAt desc")
     public Page<Car> findAllByCarName(Pageable pageable, String carName);
+
     public Long countById(Long id);
     @Modifying
     @Query(nativeQuery = true, value = "update car set car.status = 0 where id = ?1")
