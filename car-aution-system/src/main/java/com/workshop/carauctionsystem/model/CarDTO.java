@@ -1,7 +1,6 @@
 package com.workshop.carauctionsystem.model;
 
-import com.workshop.carauctionsystem.entity.ModelCar;
-import com.workshop.carauctionsystem.entity.User;
+
 import lombok.*;
 
 import javax.persistence.Column;

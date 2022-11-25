@@ -33,11 +33,6 @@ public class AdminCarController {
     @Autowired
     ModelService modelService;
 
-//    @GetMapping("/admin/car")
-//    public String showCar(){
-//        return "admin/listCar";
-//    }
-
     @Autowired
     private UserService userService;
 
@@ -67,13 +62,13 @@ public class AdminCarController {
         return view;
     }
 
-//    @GetMapping("/car/all")
-//    public ResponseEntity<ResponseObject> getCar(){
-//        List<Car> lc=carService.findAllDTO();
-//        if (!lc.isEmpty()) {
-//            return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject("ok", "Existed!", null));
-//        }
-//        return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject("no", "Valid!", null));
-//    }
+    @GetMapping("/car/all")
+    public ResponseEntity<ResponseObject> getCar(){
+        List<Car> lc=carService.findAllDTO();
+        if (!lc.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject("ok", "Existed!", null));
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject("no", "Valid!", null));
+    }
 
 }
