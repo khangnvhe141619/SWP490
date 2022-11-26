@@ -129,7 +129,7 @@ public class AdminCarController {
             if(carID != null){
                 SafetySystem safetySystem = new SafetySystem();
                 safetySystem.setCarId(car);
-                safetySystem.setAir_bag(safetyDTO.getAir_bad());
+                safetySystem.setAir_bag(safetyDTO.getAir_bag());
                 safetySystem.setAbs_brake(safetyDTO.getAbs_brake());
                 safetySystem.setSpeedControl(safetyDTO.getSpeedControl());
                 safetySystem.setTirePressure(safetyDTO.getTirePressure());
