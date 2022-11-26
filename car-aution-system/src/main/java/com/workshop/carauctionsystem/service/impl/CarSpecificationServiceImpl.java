@@ -15,4 +15,9 @@ public class CarSpecificationServiceImpl implements CarSpecificationService {
     public void saveCarSpecification(CarSpecification carSpecification) {
         carSpecRepo.save(carSpecification);
     }
+
+    @Override
+    public CarSpecification getAllByCarId(Long id) {
+        return carSpecRepo.findAllByCarId(id);
+    }
 }

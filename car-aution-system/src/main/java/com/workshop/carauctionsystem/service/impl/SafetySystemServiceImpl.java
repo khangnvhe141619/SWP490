@@ -6,6 +6,8 @@ import com.workshop.carauctionsystem.service.SafetySystemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class SafetySystemServiceImpl implements SafetySystemService {
     @Autowired
@@ -13,5 +15,10 @@ public class SafetySystemServiceImpl implements SafetySystemService {
     @Override
     public void saveSafetySystem(SafetySystem safetySystem) {
         safetyRepo.save(safetySystem);
+    }
+
+    @Override
+    public List<SafetySystem> getAllSafetySystem(Long carId) {
+        return safetyRepo.findAllByCarId(carId);
     }
 }
