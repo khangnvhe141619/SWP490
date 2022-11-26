@@ -1,8 +1,9 @@
 package com.workshop.carauctionsystem.entity;
 
-import lombok.*;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -10,16 +11,14 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-
 @Entity
 @Table(name = "carspecification")
 public class CarSpecification {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "carid")
-    @Fetch(FetchMode.JOIN)
     private Car carId;
     @Column(name = "manufacturing")
     private String manufacturing;

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RestController
@@ -29,7 +30,7 @@ public class HomeController {
     BrandService brandService;
 
     @GetMapping("/home")
-    public ModelAndView redirectHome(@CookieValue(value = "setUser", defaultValue = "") String setUser, Model model){
+    public ModelAndView redirectHome(@CookieValue(value = "setUser") String setUser, Model model){
         Cookie cookie = new Cookie("setUser", setUser);
         model.addAttribute("cookieValue", cookie);
         if(cookie.getValue().equals("")){

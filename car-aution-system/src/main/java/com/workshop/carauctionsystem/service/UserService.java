@@ -18,6 +18,7 @@ public interface UserService {
     public User findUserById (int id);
     public void changePassword(int id, String newPass);
     void updateUserById(String fullName, String userName, String phone, String email, int id);
+    public List<User> listUserByRoom();
     User getUser(String verificationToken);
     void saveRegisteredUser(User user);
     public User registerNewUserAccount(UserDTO userDTO);

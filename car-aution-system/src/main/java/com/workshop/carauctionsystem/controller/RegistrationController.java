@@ -69,7 +69,7 @@ public class RegistrationController {
         Random generator = new Random();
         ModelAndView mav = new ModelAndView();
         try {
-            userDTO.setAvatar("img/profile/user.png");
+            userDTO.setAvatar("user.png");
             userDTO.setPhone("099999999");
             userDTO.setFullName("User" + generator.nextInt(100));
             userDTO.setAddressWallet("empty");

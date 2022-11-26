@@ -26,4 +26,5 @@ public interface CarService {
     public void delete(Long id) throws NotFoundException;
 
     public ModelCar findById(Long id) throws NotFoundException;
+    public Car getAllCarById(Long id);
 }

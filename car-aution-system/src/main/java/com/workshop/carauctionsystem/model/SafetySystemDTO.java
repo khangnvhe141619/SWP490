@@ -13,7 +13,7 @@ public class SafetySystemDTO {
 
     private Car carId;
 
-    private String air_bad;
+    private String air_bag;
 
     private String abs_brake;
 

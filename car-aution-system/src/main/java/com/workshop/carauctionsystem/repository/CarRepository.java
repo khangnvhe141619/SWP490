@@ -43,5 +43,6 @@ public interface CarRepository extends PagingAndSortingRepository<Car, Long> {
     @Query(nativeQuery = true, value = "update car set createdby = ?1, description = ?2,upboundprice = ?3,downboundprice = ?4,updatedat = ?5 where id = ?6")
     @Transactional
     public void update(Long createdBy, String description, Long upBoundPrice, Long downBoundPrice, Timestamp updatedAt, Long id);
-
+    @Query(nativeQuery = true, value = "SELECT * FROM car WHERE id = :id")
+    public Car getAllCarById(Long id);
 }

@@ -1,8 +1,9 @@
 package com.workshop.carauctionsystem.entity;
 
-import lombok.*;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -16,11 +17,10 @@ public class SafetySystem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "carid")
-    @Fetch(FetchMode.JOIN)
     private Car carId;
-    @Column(name = "air_bad")
+    @Column(name = "air_bag")
     private String air_bag;
     @Column(name = "abs_brake")
     private String abs_brake;

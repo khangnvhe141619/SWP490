@@ -17,7 +17,7 @@
 
 </head>
 
-<body style="background: url(assets/img/about-bg1.png);">
+<body style="background: url(/assets/img/about-bg1.png);">
     <header id="header" class="fixed-top d-flex align-items-center header-transparent bg-black">
         <div class="container-fluid">
           <div class="row justify-content-center align-items-center">
@@ -51,9 +51,10 @@
                 </div>
                 <div class="d-flex flex-column text-center">
                     <a href="myActive.html" class="font-weight-bold h5 text-black">My Active</a>
-                    <a href="PeronalProfile.html" class="font-weight-bold mt-50 h5 text-black">Personal Profile</a>
-                    <a href="winningBids.html" class="font-weight-bold mt-50 h5  text-info">Winning Bids</a>
-                    <a href="myFavorite.html" class="font-weight-bold mt-50 mb-5 h5 text-black">My Favorite</a>
+                    <a th:href="@{/personProfile}" class="font-weight-bold mt-50 h5 text-black">Personal Profile</a>
+                    <a th:href="@{/winningBids}" class="font-weight-bold mt-50 h5  text-info">Winning Bids</a>
+                    <a th:href="@{/myFavorite}" class="font-weight-bold mt-50 mb-5 h5 text-black">My Favorite</a>
+                    <a th:href="@{/logout}" class="font-weight-bold mt-50 mb-5 h5 text-black">Logout</a>
                 </div>
             </div>
             <div class="col-md-7 border-right">
@@ -62,44 +63,10 @@
                         <h4>Winning Bids</h4>
                     </div>
                     <div class="row mt-3">
-                        <div class="col-md-6 winning-bids text-center">
-                            <img src="assets/img/car/03.png">
+                        <div th:each="roomDetailPlayerList:${roomDetailPlayerList}" class="col-md-6 winning-bids text-center">
+                            <img th:src="${roomDetailPlayerList.roomId.imgPath}">
                             <i class="bi bi-star-fill position-absolute"></i>
-                            <h5>Mercedes-Benz C200</h5>
-                            <p>Items Won</p>
-                        </div>
-                        <div class="col-md-6 winning-bids text-center">
-                            <img src="assets/img/car/04.png">
-                            <i class="bi bi-star-fill position-absolute"></i>
-                            <h5>Mercedes-Benz C300</h5>
-                            <p>Items Won</p>
-                        </div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-md-6 winning-bids text-center">
-                            <img src="assets/img/car/03.png">
-                            <i class="bi bi-star-fill position-absolute"></i>
-                            <h5>Mercedes-Benz C200</h5>
-                            <p>Items Won</p>
-                        </div>
-                        <div class="col-md-6 winning-bids text-center">
-                            <img src="assets/img/car/04.png">
-                            <i class="bi bi-star-fill position-absolute"></i>
-                            <h5>Mercedes-Benz C300</h5>
-                            <p>Items Won</p>
-                        </div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-md-6 winning-bids text-center">
-                            <img src="assets/img/car/03.png">
-                            <i class="bi bi-star-fill position-absolute"></i>
-                            <h5>Mercedes-Benz C200</h5>
-                            <p>Items Won</p>
-                        </div>
-                        <div class="col-md-6 winning-bids text-center">
-                            <img src="assets/img/car/04.png">
-                            <i class="bi bi-star-fill position-absolute"></i>
-                            <h5>Mercedes-Benz C300</h5>
+                            <h5 th:text="${roomDetailPlayerList.roomId.roomName}"></h5>
                             <p>Items Won</p>
                         </div>
                     </div>

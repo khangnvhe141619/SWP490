@@ -33,4 +33,6 @@ public interface ModelRepository extends PagingAndSortingRepository<ModelCar, Lo
 
     @Query(nativeQuery = true, value = "select * from model where model.status = 1 order by id desc")
     public List<ModelCar> findAllByStatus();
+
+
 }

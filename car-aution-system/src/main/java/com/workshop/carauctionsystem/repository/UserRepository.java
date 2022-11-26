@@ -52,4 +52,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     @Query(nativeQuery = true,value = "select * from user join user_role on user.id = user_role.userid where userid = 3")
     public List<User> getRoleByAdminAuction();
+
+    @Query(nativeQuery = true, value = "select * from user join roomdetailplayer on user.id = roomdetailplayer.userId where roomdetailplayer.roomId = 1")
+    public List<User> listUserByRoom();
 }
