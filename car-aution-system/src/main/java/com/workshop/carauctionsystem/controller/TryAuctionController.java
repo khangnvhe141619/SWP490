@@ -9,6 +9,9 @@ public class TryAuctionController {
     public String showAuction(){
         return "index";
     }
-
+    @GetMapping("/connect")
+    public String showAuction1(){
+        return "connectWallet";
+    }
 
 }

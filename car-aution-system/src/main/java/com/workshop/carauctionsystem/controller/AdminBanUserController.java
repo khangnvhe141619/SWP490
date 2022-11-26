@@ -23,7 +23,7 @@ public class AdminBanUserController {
     @Autowired
     UserServiceImpl userService;
 
-    @GetMapping("/userban")
+    @GetMapping("/admin/userban")
     public ModelAndView showList(@RequestParam(defaultValue = "0") int page,
                                  @RequestParam(defaultValue = "id") String id,
                                  @RequestParam(defaultValue = "") String search,
@@ -39,7 +39,7 @@ public class AdminBanUserController {
         return modelAndView;
     }
 
-    @GetMapping("/userban/unban/{id}")
+    @GetMapping("/admin/userban/unban/{id}")
     public String deleteBrand(@PathVariable(value = "id") Long id, RedirectAttributes ra) {
         try {
             userService.UnBanUser(id);
@@ -48,6 +48,6 @@ public class AdminBanUserController {
             return "page404";
         }
         ra.addFlashAttribute("success", "Unban User successfully");
-        return "redirect:/userban";
+        return "redirect:/admin/userban";
     }
 }

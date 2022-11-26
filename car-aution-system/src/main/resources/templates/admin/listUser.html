@@ -84,19 +84,19 @@
             <a class="has-arrow" th:href="@{/admin/user}" aria-expanded="false"><span class="fa fa-user icon-wrap"></span> <span class="mini-click-non">User</span></a>
             <ul class="submenu-angle" aria-expanded="false">
               <li><a th:href="@{/admin/user}"><span class="mini-sub-pro">All Users</span></a></li>
-              <li><a th:href="@{/userban}"><span class="mini-sub-pro">All Banned Users</span></a></li>
+              <li><a th:href="@{/admin/userban}"><span class="mini-sub-pro">All Banned Users</span></a></li>
             </ul>
           </li>
           <li>
-            <a class="has-arrow" href="listCar.html" aria-expanded="false"><span class="fa fa-automobile icon-wrap"></span> <span class="mini-click-non">Car</span></a>
+            <a class="has-arrow" th:href="@{/admin/car}" aria-expanded="false"><span class="fa fa-automobile icon-wrap"></span> <span class="mini-click-non">Car</span></a>
             <ul class="submenu-angle" aria-expanded="false">
-              <li><a href="listCar.html"><span class="mini-sub-pro">All Cars</span></a></li>
+              <li><a th:href="@{/admin/car}"><span class="mini-sub-pro">All Cars</span></a></li>
             </ul>
           </li>
           <li>
-            <a class="has-arrow" th:href="@{/brand}" aria-expanded="false"><span class="glyphicon glyphicon-menu-hamburger icon-wrap"></span> <span class="mini-click-non">Brand</span></a>
+            <a class="has-arrow" th:href="@{/admin/brand}" aria-expanded="false"><span class="glyphicon glyphicon-menu-hamburger icon-wrap"></span> <span class="mini-click-non">Brand</span></a>
             <ul class="submenu-angle" aria-expanded="false">
-              <li><a th:href="@{/brand}"><span class="mini-sub-pro">All Brands</span></a></li>
+              <li><a th:href="@{/admin/brand}"><span class="mini-sub-pro">All Brands</span></a></li>
             </ul>
           </li>
           <li>
@@ -106,16 +106,16 @@
             </ul>
           </li>
           <li>
-            <a class="has-arrow" th:href="@{/model}" aria-expanded="false"><span class="glyphicon glyphicon-th-large icon-wrap"></span> <span class="mini-click-non">Model</span></a>
+            <a class="has-arrow" th:href="@{/admin/model}" aria-expanded="false"><span class="glyphicon glyphicon-th-large icon-wrap"></span> <span class="mini-click-non">Model</span></a>
             <ul class="submenu-angle" aria-expanded="false">
-              <li><a th:href="@{/model}"><span class="mini-sub-pro">All Model</span></a></li>
-              <li><a th:href="@{/modelSpec}"><span class="mini-sub-pro">All Model Specification</span></a></li>
+              <li><a th:href="@{/admin/model}"><span class="mini-sub-pro">All Model</span></a></li>
+              <li><a th:href="@{/admin/modelSpec}"><span class="mini-sub-pro">All Model Specification</span></a></li>
             </ul>
           </li>
           <li>
-            <a class="has-arrow" th:href="@{/news}" aria-expanded="false"><span class="fa fa-newspaper-o icon-wrap"></span> <span class="mini-click-non">News</span></a>
+            <a class="has-arrow" th:href="@{/admin/news}" aria-expanded="false"><span class="fa fa-newspaper-o icon-wrap"></span> <span class="mini-click-non">News</span></a>
             <ul class="submenu-angle" aria-expanded="false">
-              <li><a th:href="@{/news}"><span class="mini-sub-pro">All News</span></a></li>
+              <li><a th:href="@{/admin/news}"><span class="mini-sub-pro">All News</span></a></li>
             </ul>
           </li>
           <li>
@@ -200,19 +200,19 @@
                     <ul id="demoevent" class="collapse dropdown-header-top">
                       <li><a th:href="@{/admin/user}">All Users</a>
                       </li>
-                      <li><a th:href="@{/userban}">All Banned Users</a>
+                      <li><a th:href="@{/admin/userban}">All Banned Users</a>
                       </li>
                     </ul>
                   </li>
                   <li><a data-toggle="collapse" data-target="#demopro" href="#">Car <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
                     <ul class="collapse dropdown-header-top">
-                      <li><a href="listCar.html">All Cars</a>
+                      <li><a th:href="@{/admin/car}">All Cars</a>
                       </li>
                     </ul>
                   </li>
                   <li><a data-toggle="collapse" data-target="#demopro" href="#">Brand <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
                     <ul class="collapse dropdown-header-top">
-                      <li><a th:href="@{/brand}">All Brands</a>
+                      <li><a th:href="@{/admin/brand}">All Brands</a>
                       </li>
                     </ul>
                   </li>
@@ -224,15 +224,15 @@
                   </li>
                   <li><a data-toggle="collapse" data-target="#demopro" href="#">Model <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
                     <ul class="collapse dropdown-header-top">
-                      <li><a th:href="@{/model}">All Model</a>
+                      <li><a th:href="@{/admin/model}">All Model</a>
                       </li>
-                      <li><a th:href="@{/modelSpec}">All Model Specification</a>
+                      <li><a th:href="@{/admin/modelSpec}">All Model Specification</a>
                       </li>
                     </ul>
                   </li>
                   <li><a data-toggle="collapse" data-target="#demopro" href="#">News <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
                     <ul class="collapse dropdown-header-top">
-                      <li><a th:href="@{/news}">All News</a></li>
+                      <li><a th:href="@{/admin/news}">All News</a></li>
                     </ul>
                   </li>
                   <li><a data-toggle="collapse" data-target="#demopro" href="#">Game Play<span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
@@ -327,11 +327,11 @@
             <div class="custom-pagination">
               <nav aria-label="Page navigation example">
                 <ul class="pagination">
-                  <li class="page-item" th:if="${users.hasPrevious()}"><a class="page-link" th:href="@{/userban(page=${users.number}-1,search=${param.search})}">Previous</a></li>
+                  <li class="page-item" th:if="${users.hasPrevious()}"><a class="page-link" th:href="@{/admin/user(page=${users.number}-1,search=${param.search})}">Previous</a></li>
                   <li class="page-item"><a th:text="${users.number} + 1"></a></li>
                   <li class="page-item" th:if="${users.hasNext()}"><a> / </a></li>
                   <li class="page-item" th:if="${users.hasNext()}"><a th:text="${users.totalPages}"></a></li>
-                  <li class="page-item" th:if="${users.hasNext()}"><a class="page-link" th:href="@{/userban(page=${users.number}+1,search=${param.search})}">Next</a></li>
+                  <li class="page-item" th:if="${users.hasNext()}"><a class="page-link" th:href="@{/admin/user(page=${users.number}+1,search=${param.search})}">Next</a></li>
                 </ul>
               </nav>
             </div>

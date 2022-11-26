@@ -7,7 +7,8 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.List;
+
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,7 +24,7 @@ public class Car {
     @Column(name = "carname")
     private String carName;
 
-    @Column(name = "description")
+    @Column(name = "[description]")
     private String description;
 
     @Column(name = "upboundprice")
@@ -48,4 +49,13 @@ public class Car {
 
     @Column(name = "updatedat")
     private Timestamp updatedAt;
+
+//    @OneToMany(targetEntity = CarSpecification.class, mappedBy = "id",orphanRemoval = false,fetch = FetchType.LAZY)
+//    private Set<CarSpecification>  carSpec;
+//
+//    @OneToMany(targetEntity = SafetySystem.class, mappedBy = "id",orphanRemoval = false,fetch = FetchType.LAZY)
+//    private Set<SafetySystem> safeSys;
+//
+//    @OneToMany(targetEntity = SafetySystem.class, mappedBy = "id",orphanRemoval = false,fetch = FetchType.LAZY)
+//    private Set<Image> imgCar;
 }

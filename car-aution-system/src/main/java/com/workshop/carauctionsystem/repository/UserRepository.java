@@ -1,6 +1,6 @@
 package com.workshop.carauctionsystem.repository;
 
-import com.workshop.carauctionsystem.entity.RoomDetailPlayer;
+import com.workshop.carauctionsystem.entity.Role;
 import com.workshop.carauctionsystem.entity.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -25,9 +25,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Query(nativeQuery = true, value = "UPDATE `swp490_cab`.`user` SET `password` = :pass WHERE (`id` = :id);")
     public void changePasswordById(int id, String pass);
 
-    @Query(nativeQuery = true, value = "select * from user join roomdetailplayer on user.id = roomdetailplayer.userId where roomdetailplayer.roomId = 1")
-    public List<User> listUserByRoom();
-
     @Query(nativeQuery = true, value = "select * from user where user.enabled = 0")
     public Page<User> ListUserBan(Pageable pageable);
 
@@ -50,5 +47,12 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Transactional
     public void BanUser(Long id);
 
+    @Query(nativeQuery = true,value = "select * from user join user_role on user.id = user_role.userid where userid = 2")
+    public List<User> getRoleByAdminCar();
 
+    @Query(nativeQuery = true,value = "select * from user join user_role on user.id = user_role.userid where userid = 3")
+    public List<User> getRoleByAdminAuction();
+
+    @Query(nativeQuery = true, value = "select * from user join roomdetailplayer on user.id = roomdetailplayer.userId where roomdetailplayer.roomId = 1")
+    public List<User> listUserByRoom();
 }
