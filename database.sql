@@ -497,7 +497,7 @@ DROP TABLE IF EXISTS `safetysystem`;
 CREATE TABLE `safetysystem` (
   `id` int NOT NULL AUTO_INCREMENT,
   `carId` int NOT NULL,
-  `air_bad` varchar(255) NOT NULL,
+  `air_bag` varchar(255) NOT NULL,
   `abs_brake` varchar(255) NOT NULL,
   `speedControl` varchar(255) NOT NULL,
   `tirePressure` varchar(255) NOT NULL,
@@ -693,4 +693,3 @@ INSERT INTO `swp490_cab`.`favorite` (`id`, `userId`, `carId`, `createdAt`, `numb
 INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('1', '1', 'assets/img/Vinfast/e1.jpg');
 INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('2', '1', 'assets/img/Vinfast/v1.jpg');
 INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('3', '2', 'assets/img/Mer/m1.jpg');
-
