@@ -1,14 +1,19 @@
 package com.workshop.carauctionsystem.model;
 
 import com.workshop.carauctionsystem.entity.Car;
+import lombok.*;
 
-
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+@Getter
+@Setter
 public class SafetySystemDTO {
     private Long id;
 
     private Car carId;
 
-    private String air_bad;
+    private String air_bag;
 
     private String abs_brake;
 
@@ -16,5 +21,5 @@ public class SafetySystemDTO {
 
     private String tirePressure;
 
-    private String otherdescription;
+    private String otherDescription;
 }

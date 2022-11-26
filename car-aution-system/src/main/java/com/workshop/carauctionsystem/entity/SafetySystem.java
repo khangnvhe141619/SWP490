@@ -29,6 +29,6 @@ public class SafetySystem {
     @Column(name = "tirepressure")
     private String tirePressure;
     @Column(name = "otherdescription")
-    private String otherdescription;
+    private String otherDescription;
 
 }

@@ -6,16 +6,13 @@ import com.workshop.carauctionsystem.service.CarSpecificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
-
 @Service
-@Transactional
 public class CarSpecificationServiceImpl implements CarSpecificationService {
     @Autowired
-    CarSpecificationRepository carSpecificationRepository;
+    private CarSpecificationRepository carSpecRepo;
 
     @Override
-    public CarSpecification getAllByCarId(Long id) {
-        return carSpecificationRepository.findAllByCarId(id);
+    public void saveCarSpecification(CarSpecification carSpecification) {
+        carSpecRepo.save(carSpecification);
     }
 }

@@ -1,11 +1,16 @@
 package com.workshop.carauctionsystem.model;
 
 import com.workshop.carauctionsystem.entity.Car;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+@Getter
+@Setter
 public class CarSpecificationDTO {
     private Long id;
 
