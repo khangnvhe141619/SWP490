@@ -20,8 +20,8 @@ public class CarSpecification {
     @OneToOne
     @JoinColumn(name = "carid")
     private Car carId;
-    @Column(name = "manufactering")
-    private String manufactering;
+    @Column(name = "manufacturing")
+    private String manufacturing;
     @Column(name = "status")
     private String status;
     @Column(name = "km_driven")

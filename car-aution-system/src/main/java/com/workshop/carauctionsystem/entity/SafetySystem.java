@@ -20,8 +20,8 @@ public class SafetySystem {
     @OneToOne
     @JoinColumn(name = "carid")
     private Car carId;
-    @Column(name = "air_bad")
-    private String air_bad;
+    @Column(name = "air_bag")
+    private String air_bag;
     @Column(name = "abs_brake")
     private String abs_brake;
     @Column(name = "speedcontrol")
