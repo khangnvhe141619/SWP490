@@ -403,6 +403,12 @@
             <div class="add-product">
               <a href="#myCreateModal" data-toggle="modal">Create New Car</a>
             </div>
+            <div th:if="${success} != null">
+              <div class="alert alert-success text-center" role="alert">[[${success}]]</div>
+            </div>
+            <div th:if="${fail} != null">
+              <div class="alert alert-danger text-center" role="alert">[[${fail}]]</div>
+            </div>
             <div class="asset-inner">
               <div th:if="${#lists.isEmpty(cars)}">
                 <h6 style="color: red;" th:text="${lst_empty}"></h6>
@@ -537,7 +543,7 @@
                                                   </div>
                                                 </div>
                                                 <div class="row">
-                                                  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                                  <div class="col-sm-12 col-xs-6">
                                                     <div class="address-hr biography">
                                                       <p><b>Fuel</b><br/>
                                                         <span th:text="${c.carSpec.stream().findFirst().get().fuel}"></span></p>
@@ -579,7 +585,7 @@
                                                 <div class="row">
                                                   <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                                     <div class="address-hr biography">
-                                                      <p><b>Drive</b><br />
+                                                      <p><b>Wheel Drive</b><br />
                                                         <span th:text="${c.carSpec.stream().findFirst().get().drive}"></span></p>
                                                     </div>
                                                   </div>
@@ -636,7 +642,7 @@
                                                   <div class="col-lg-12">
                                                     <div class="content-profile">
                                                       <p><b>Other description </b><br /></p>
-                                                      <span th:text="${c.safeSys.stream().findFirst().get().otherdescription}"></span></p>
+                                                      <span th:text="${c.safeSys.stream().findFirst().get().otherDescription}"></span></p>
                                                     </div>
                                                   </div>
                                                 </div>
@@ -691,17 +697,23 @@
                   aria-hidden="true">&times;</span></button>
           <h4 class="modal-title">Create</h4>
         </div>
-        <form action="#" class="dropzone dropzone-custom needsclick add-professors" >
+        <form action="#" th:action="@{/admin/car/create}" method="post">
           <div class="modal-body">
             <div style="margin: 0 auto;" class="profile-info-inner">
               <div class="profile-details-hr">
+                <div class="row">
+                  <div class="col-sm-12 col-xs-6">
+                  <div class="address-hr">
+                    <h3>Create Car</h3>
+                  </div>
+                  </div>
+                </div>
                 <div class="row">
                   <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
                     <div class="address-hr">
                       <p><b>Car Name</b></p>
                       <div class="form-group">
-                        <input name="name" type="text" class="form-control"
-                               placeholder="Car Name">
+                        <input th:field="*{CarDTO.carName}" name="name" type="text" class="form-control" placeholder="Car Name">
                       </div>
                     </div>
                   </div>
@@ -709,11 +721,9 @@
                     <div class="address-hr">
                       <p><b>Model</b></p>
                       <div class="form-group">
-                        <select name="model" class="form-control">
-                          <option value="none" selected="" disabled="">Select Model
-                          </option>
-                          <option value="0">Mercedes</option>
-                          <option value="1">Audi</option>
+                        <select name="modelId" class="form-control">
+                          <option value="none" selected="" disabled="">Select Model</option>
+                          <option th:each="c : ${modelCar}" th:value="${c.id}" th:text="${c.modelName}"></option>
                         </select>
                       </div>
                     </div>
@@ -724,7 +734,7 @@
                     <div class="address-hr">
                       <p><b>Up Price</b></p>
                       <div class="form-group">
-                        <input name="up" type="text" class="form-control" placeholder="Up">
+                        <input th:field="*{CarDTO.upBoundPrice}" name="up" type="text" class="form-control" placeholder="Up">
                       </div>
                     </div>
                   </div>
@@ -732,8 +742,7 @@
                     <div class="address-hr">
                       <p><b>Down Bound Price</b></p>
                       <div class="form-group">
-                        <input name="down" type="text" class="form-control"
-                               placeholder="Down">
+                        <input th:field="*{CarDTO.downBoundPrice}" name="down" type="text" class="form-control" placeholder="Down">
                       </div>
                     </div>
                   </div>
@@ -743,20 +752,176 @@
                     <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
                       <p><b>Description</b></p>
                       <div class="form-group res-mg-t-15">
-                        <textarea name="description" placeholder="Description"></textarea>
+                        <textarea th:field="*{CarDTO.description}" id="description" name="description" placeholder="Description"></textarea>
                       </div>
                     </div>
                   </div>
                   <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
                     <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
-                      <p><b>Img</b></p>
+                      <p><b>Create By</b></p>
                       <div class="form-group">
-                        <input name="carImg" multiple="" type="file"
-                               class="form-control upload__inputfile" placeholder="">
+                        <select name="createById" class="form-control">
+                          <option value="none" selected="" disabled="">Create By</option>
+                          <option th:each="c : ${createBy}" th:value="${c.id}" th:text="${c.userName}"></option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div><hr>
+                <div class="row">
+                  <div class="col-sm-12 col-xs-6">
+                    <div class="address-hr">
+                      <p><h3>Specifications of Car</h3></p>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                    <div class="address-hr">
+                      <p><b>Maufacturer</b></p>
+                      <div class="form-group">
+                        <input th:field="*{CarSpecDTO.manufacturing}" name="maufacturer" type="text" class="form-control" placeholder="Maufacturer">
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+                <div class="row">
+                  <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                    <div class="address-hr">
+                      <p><b>Km driven</b></p>
+                      <div class="form-group">
+                        <input th:field="*{CarSpecDTO.km_driven}" name="km_driven" type="text" class="form-control" placeholder="Km driven">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                    <div class="address-hr">
+                      <p><b>Gear</b></p>
+                      <div class="form-group">
+                        <input th:field="*{CarSpecDTO.gear}" name="gear" type="text" class="form-control" placeholder="Gear">
                       </div>
                     </div>
                   </div>
                 </div>
+
+                <div class="row">
+                  <div class="col-sm-12 col-xs-6">
+                      <p><b>Fuel</b></p>
+                      <div class="form-group">
+                        <input th:field="*{CarSpecDTO.fuel}" name="fuel" type="text" class="form-control" placeholder="Fuel">
+                      </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                    <div class="address-hr">
+                      <p><b>Overall Dimension</b></p>
+                      <div class="form-group">
+                        <input th:field="*{CarSpecDTO.overallDimension}" name="overallDimension" type="text" class="form-control" placeholder="Overall Dimension">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                    <div class="address-hr">
+                      <p><b>Fuel Consumption</b></p>
+                      <div class="form-group">
+                        <input th:field="*{CarSpecDTO.fuelConsumption}" name="fuelConsumption" type="text" class="form-control" placeholder="Fuel Consumption">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                    <div class="address-hr">
+                      <p><b>Outer Color</b></p>
+                      <div class="form-group">
+                        <input th:field="*{CarSpecDTO.outerColor}" name="outerColor" type="text" class="form-control" placeholder="Outer Color">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                    <div class="address-hr">
+                      <p><b>Inner Color</b></p>
+                      <div class="form-group">
+                        <input th:field="*{CarSpecDTO.innerColor}" name="innerColor" type="text" class="form-control" placeholder="Inner Color">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                    <div class="address-hr">
+                      <p><b>Wheel Drive</b></p>
+                      <div class="form-group">
+                        <input th:field="*{CarSpecDTO.drive}" name="drive" type="text" class="form-control" placeholder="Wheel Drive">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                    <div class="address-hr">
+                      <p><b>Year of Make</b></p>
+                      <div class="form-group">
+                        <input th:field="*{CarSpecDTO.yearOfMake}" name="yearOfMake" type="text" class="form-control" placeholder="Year of Make">
+                      </div>
+                    </div>
+                  </div>
+                </div><hr>
+                <div class="row">
+                  <div class="col-sm-12 col-xs-6">
+                    <div class="address-hr">
+                      <p><h3>Safety System</h3></p>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                    <div class="address-hr">
+                      <p><b>Air bag</b></p>
+                      <div class="form-group">
+                        <input th:field="*{Safety.air_bad}" name="air_bag" type="text" class="form-control" placeholder="Air Bag">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                    <div class="address-hr">
+                      <p><b>ABS brake</b></p>
+                      <div class="form-group">
+                        <input th:field="*{Safety.abs_brake}" name="abs_brake" type="text" class="form-control" placeholder="ABS Brake">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                    <div class="address-hr">
+                      <p><b>Speed Control</b></p>
+                      <div class="form-group">
+                        <input th:field="*{Safety.speedControl}" name="speedControl" type="text" class="form-control" placeholder="Speed Control">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                    <div class="address-hr">
+                      <p><b>Tire Pressure</b></p>
+                      <div class="form-group">
+                        <input th:field="*{Safety.tirePressure}" name="tirePressure" type="text" class="form-control" placeholder="Tire Pressure">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-12 col-xs-6">
+                    <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
+                      <p><b>Description</b></p>
+                      <div class="form-group res-mg-t-15">
+                        <textarea th:field="*{Safety.otherDescription}" id="otherDescription" name="otherDescription" placeholder="Other Description"></textarea>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
                 <div class="row">
                   <div class="col-sm-12 col-xs-6 col-lg-6 col-md-12">
                     <div class="container">
@@ -777,7 +942,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-primary">Create</button>
+            <button type="submit" class="btn btn-primary">Create</button>
           </div>
         </form>
       </div>
