@@ -1,5 +1,6 @@
 package com.workshop.carauctionsystem.repository;
 
+import com.workshop.carauctionsystem.entity.RoomDetailPlayer;
 import com.workshop.carauctionsystem.entity.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -8,6 +9,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
 
@@ -22,6 +24,9 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Modifying
     @Query(nativeQuery = true, value = "UPDATE `swp490_cab`.`user` SET `password` = :pass WHERE (`id` = :id);")
     public void changePasswordById(int id, String pass);
+
+    @Query(nativeQuery = true, value = "select * from user join roomdetailplayer on user.id = roomdetailplayer.userId where roomdetailplayer.roomId = 1")
+    public List<User> listUserByRoom();
 
     @Query(nativeQuery = true, value = "select * from user where user.enabled = 0")
     public Page<User> ListUserBan(Pageable pageable);

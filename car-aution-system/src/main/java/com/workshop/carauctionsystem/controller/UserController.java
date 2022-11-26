@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
 @RestController
@@ -44,7 +45,7 @@ public class UserController {
 
     @PostMapping(value = {"/login"})
     public ModelAndView login(@ModelAttribute(name = "setUser") User user, Model model, @CookieValue(value = "setUser", defaultValue = "") String setUser,
-                              HttpServletRequest request, HttpServletResponse response){
+                              HttpServletRequest request, HttpServletResponse response, HttpSession session){
         User u =  service.login(user.getUserName());
         ModelAndView view = new ModelAndView();
         boolean checkPass = BCrypt.checkpw(user.getPassword(), u.getPassword());
@@ -55,13 +56,15 @@ public class UserController {
                 return view;
             }
             setUser = user.getUserName();
+            String avatar = u.getAvatar();
             Cookie cookie = new Cookie("setUser", setUser);
             String setUserId = String.valueOf(u.getId());
-            System.out.println(setUserId);
             Cookie cookie2 = new Cookie("setUserId", setUserId);
             cookie.setMaxAge(24 * 60 * 60);
             response.addCookie(cookie);
             response.addCookie(cookie2);
+            session.setAttribute("username", setUser);
+            session.setAttribute("avatar", avatar);
             model.addAttribute("cookieValue", cookie);
             model.addAttribute("check", true);
             view.setViewName("redirect:/home");

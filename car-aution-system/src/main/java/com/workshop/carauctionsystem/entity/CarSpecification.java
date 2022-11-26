@@ -18,10 +18,10 @@ public class CarSpecification {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @OneToOne
-    @JoinColumn(name = "carId")
+    @JoinColumn(name = "carid")
     private Car carId;
-    @Column(name = "manufacturing")
-    private String manufacturing;
+    @Column(name = "manufactering")
+    private String manufactering;
     @Column(name = "status")
     private String status;
     @Column(name = "km_driven")
@@ -30,16 +30,16 @@ public class CarSpecification {
     private String gear;
     @Column(name = "fuel")
     private String fuel;
-    @Column(name = "fuelConsumption")
+    @Column(name = "fuelconsumption")
     private String fuelConsumption;
-    @Column(name = "outerColor")
+    @Column(name = "outercolor")
     private String outerColor;
-    @Column(name = "innerColor")
+    @Column(name = "innercolor")
     private String innerColor;
-    @Column(name = "overallDimensions")
+    @Column(name = "overalldimensions")
     private String overallDimension;
     @Column(name = "drive")
     private String drive;
-    @Column(name = "yearOfMake")
+    @Column(name = "yearofmake")
     private String yearOfMake;
 }

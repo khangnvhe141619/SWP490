@@ -24,4 +24,7 @@ public interface CarRepository extends PagingAndSortingRepository<Car, Long> {
     @Query(nativeQuery = true, value = "update car set car.status = 0 where id = ?1")
     @Transactional
     public void delete(Long id);
+
+    @Query(nativeQuery = true, value = "SELECT * FROM car WHERE id = :id")
+    public Car getAllCarById(Long id);
 }

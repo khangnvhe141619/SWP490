@@ -9,4 +9,6 @@ import java.util.List;
 
 public interface CarService {
     public Page<Car> findAllByCarName(Pageable pageable, String name);
+
+    public Car getAllCarById(Long id);
 }

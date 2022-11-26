@@ -18,17 +18,17 @@ public class SafetySystem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @OneToOne
-    @JoinColumn(name = "carId")
+    @JoinColumn(name = "carid")
     private Car carId;
     @Column(name = "air_bad")
     private String air_bad;
     @Column(name = "abs_brake")
     private String abs_brake;
-    @Column(name = "speedControl")
+    @Column(name = "speedcontrol")
     private String speedControl;
-    @Column(name = "tirePressure")
+    @Column(name = "tirepressure")
     private String tirePressure;
-    @Column(name = "otherDescription")
+    @Column(name = "otherdescription")
     private String otherdescription;
 
 }

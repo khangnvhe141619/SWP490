@@ -73,6 +73,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<User> listUserByRoom() {
+        return userRepository.listUserByRoom();
+    }
+
+    @Override
     public User getUser(String verificationToken) {
         final VerificationToken token = verificationTokenRepository.findByToken(verificationToken);
         if (token != null) {

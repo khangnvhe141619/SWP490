@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html>
+<title>Room</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link th:href="@{/assets/img/favicon.png}" rel="icon">
+<link th:href="@{/assets/img/apple-touch-icon.png}" th:rel="apple-touch-icon">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700"
+      rel="stylesheet">
+<link th:href="@{/assets/vendor/animate.css/animate.min.css}" th:rel="stylesheet">
+<link th:href="@{/assets/vendor/aos/aos.css}" th:rel="stylesheet">
+<link th:href="@{/assets/vendor/bootstrap/css/bootstrap.min.css}" th:rel="stylesheet">
+<link th:href="@{/assets/vendor/bootstrap-icons/bootstrap-icons.css}" th:rel="stylesheet">
+<link th:href="@{/assets/vendor/glightbox/css/glightbox.min.css}" th:rel="stylesheet">
+<link th:href="@{/assets/vendor/swiper/swiper-bundle.min.css}" th:rel="stylesheet">
+<link th:href="@{/assets/css/style.css}" th:rel="stylesheet">
+<script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+<link th:href="@{/assets/css/auctionRoom.css}" rel="stylesheet">
+<link th:href="@{/assets/css/chat.css}" rel="stylesheet">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+<body style="background: url('/assets/img/about-bg1.png');">
+<header id="header" class="fixed-top d-flex align-items-center header-transparent">
+    <div class="container-fluid">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-xl-11 d-flex align-items-center justify-content-between">
+                <h1 class="logo"><a href="home.html">CAB Auction</a></h1>
+                <nav id="navbar" class="navbar">
+                    <ul>
+                        <li><a class="nav-link scrollto active" href="Home.html">Home</a></li>
+                        <li><a class="nav-link scrollto" href="home.html">Brand</a></li>
+                        <li><a class="nav-link scrollto " href="home.html">Auction Room</a></li>
+                        <li><a class="nav-link scrollto" href="blog.html">News</a></li>
+                        <li><a class="nav-link scrollto" href="guideline.html">Guideline</a></li>
+                        <li><a class="nav-link scrollto " href="home.html">About Us</a></li>
+                    </ul>
+                    <a href="connectWallet.html" style="background-color: rgb(66, 180, 66); padding-right: 30px;"
+                       class="connectwallet">Connect wallet</a>
+                    <a href="PeronalProfile.html"><i class="bi bi-person-circle" style="font-size: 30px;"></i></a>
+                </nav>
+            </div>
+        </div>
+
+    </div>
+</header>
+
+<div class="content">
+    <div class="w3-content" style="margin-top: 80px">
+        <div th:each="imageList:${imageList}" style="margin: 0px 50px 0px 50px;">
+            <img class="mySlides" th:src="@{'/'+${imageList.imgPath}}" style="width: 100%; margin-top: 200px">
+        </div>
+        <div class="w3-row-padding w3-section">
+            <div th:each="imageList:${imageList}" class="w3-col s2">
+                <img class="demo w3-opacity w3-hover-opacity-off " th:src="@{'/'+${imageList.imgPath}}"
+                     style="width:100%;cursor:pointer; height: 100px;" onclick="currentDiv(1)">
+            </div>
+        </div>
+    </div>
+    <div class="container mt-200">
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-7 border-right">
+                <div class="p-3 profile" id="person-profile">
+                    <div class="d-flex justify-content-between mb-3">
+                        <h1>The Breeze Zodiac IX</h1>
+                    </div>
+                    <div class="row mt-3 room-info pt-3 rounded ">
+                        <div class="col-md-2 winning-bids"></div>
+                        <div class="col-md-4 winning-bids">
+                            <h3 class="mb-5">Current Price</h3>
+                            <h5><span>From: </span><span>700</span><span> CAB</span></h5>
+                            <h5>Your Bid</h5>
+                        </div>
+                        <div class="col-md-4 winning-bids">
+                            <h3 class="text-success mb-5">***</h3>
+                            <h5><span>To: </span><span>1000</span><span> CAB</span></h5>
+                            <div class="yourPrice" style="color: crimson; "></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-3 bg-white border-bottom border-top">
+                    <div class="row mt-3">
+                        <div class="col-md-2 active-bids">
+                            <img th:src="@{/assets/img/logo-bid.png}">
+                        </div>
+                        <div class="col-md-7 align-self-center">
+                            <span class="error" id="error" style="color: red; font-size: 12px;"></span>
+                            <input id="inputPrie" type="number" placeholder="Enter you bid amount" class="w-100 rounded-pill p-3" >
+                            <input id="roomId" style="display:none;" th:value="${roomId}">
+                        </div>
+                        <div class="col-md-3 align-self-center">
+                            <button id="btnBid" class="btn rounded-pill Larger shadow" type="button" onclick="isPassAjax1()"
+                                    style="background-color: #04af04; color: #fff">Submit A Bid</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 border-right rounded h-25" style="background-color: #f5f5f5;">
+                <div class="d-flex flex-column align-items-center text-center m-3 my-5 border-bottom pb-3">
+                    <div id="clock">
+                        <h5>This Auction Ends in:</h5>
+                        <div id="time">
+                            <div>
+                                <span id="hours">00</span><span>Hours</span>
+                            </div>
+                            <div>
+                                <span id="minutes">00</span><span>Minutes</span>
+                            </div>
+                            <div>
+                                <span id="seconds">00</span><span>Seconds</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-4"><img th:src="@{/assets/img/icon1.png}"></div>
+                    <div class="col-md-6 border-right">
+                        <div>
+                            <span class="font-weight-bold h3 text-black">61</span>
+                        </div>
+                        <div>
+                            <span>Active Bidders</span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-4"><img th:src="@{/assets/img/icon3.png}"></div>
+                    <div class="col-md-6 border-right">
+                        <div>
+                            <span class="font-weight-bold h3 text-black">74</span>
+                        </div>
+                        <div>
+                            <span>Total Bids</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div style="margin-left: 200px; margin-right: 200px; margin-top: 20px;" class="tabbar-room">
+            <button class="tablink" onclick="openPage('Home', this, '#04befe')" id="defaultOpen"><img
+                    th:src="@{/assets/img/description.png}">Description</button>
+            <button class="tablink" onclick="openPage('News', this, '#04befe')"><img
+                    th:src="@{/assets/img/delivery.png}">Specifications</button>
+            <button class="tablink" onclick="openPage('Contact', this, '#04befe')"><img
+                    th:src="@{/assets/img/guide.png}">Guideline</button>
+            <button class="tablink" onclick="openPage('About', this, '#04befe')"><img
+                    th:src="@{/assets/img/boxchat.png}">Box
+                chat</button>
+        </div>
+        <div>
+            <div id="Home" class="tabcontent" style="margin-left: 200px; margin-right: 200px;">
+                <div>
+                    <table class="table table-striped mt-4">
+                        <tr>
+                            <td class="fw-bold">Brand</td>
+                            <td style="border-right: 1px solid #afafaf;" th:text="${car.modelId.brandId.brandName}"></td>
+                            <td class="fw-bold">Seat Number</td>
+                            <td th:text="${car.modelId.modelSpecificationId.seatNumber}">/td>
+                        </tr>
+                        <tr>
+                            <td class="fw-bold">Model</td>
+                            <td style="border-right: 1px solid #afafaf;" th:text="${car.modelId.modelName}"></td>
+                            <td class="fw-bold">Model Specification</td>
+                            <td th:text="${car.modelId.modelSpecificationId.nameType}"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div>
+                    <h2>Description</h2>
+                    <p class="h5" th:text="${room.carId.description}"></p>
+                </div>
+                <div th:each="safetySystemList:${safetySystemList}">
+                    <table class="table table-striped mt-4">
+                        <tr>
+                            <td class="fw-bold">Air Bad</td>
+                            <td style="border-right: 1px solid #afafaf;" th:text="${safetySystemList.air_bad}"></td>
+                            <td class="fw-bold">ABS Brake</td>
+                            <td th:text="${safetySystemList.air_bad}"></td>
+                        </tr>
+                        <tr>
+                            <td class="fw-bold">Speed Control</td>
+                            <td style="border-right: 1px solid #afafaf;" th:text="${safetySystemList.speedControl}"></td>
+                            <td class="fw-bold">Tire Pressure</td>
+                            <td th:text="${safetySystemList.tirePressure}"></td>
+                        </tr>
+                    </table>
+                    <div>
+                        <h2>Other Description</h2>
+                        <p class="h5" th:text="${safetySystemList.otherdescription}"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="News" class="tabcontent" style="margin-left: 200px; margin-right: 200px;">
+                <h3>Car Specification</h3>
+                <table class="table table-striped">
+                    <tbody>
+                    <tr>
+                        <td class="fw-bold">Manufacturing</td>
+                        <td th:text="${carSpecification.manufactering}"></td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold">Status</td>
+                        <td th:text="${carSpecification.status}"></td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold">Km Driven</td>
+                        <td th:text="${carSpecification.km_driven}"></td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold">Gear</td>
+                        <td th:text="${carSpecification.gear}"></td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold">Fuel</td>
+                        <td th:text="${carSpecification.fuel}"></td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold">Fuel Consumption</td>
+                        <td th:text="${carSpecification.fuelConsumption}"></td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold">Outer Color</td>
+                        <td th:text="${carSpecification.outerColor}"></td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold">Inner Color</td>
+                        <td th:text="${carSpecification.innerColor}"></td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold">Overall Dimension</td>
+                        <td th:text="${carSpecification.overallDimension}"></td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold">Driver</td>
+                        <td th:text="${carSpecification.drive}"></td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold">Year Of Make</td>
+                        <td th:text="${carSpecification.yearOfMake}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="Contact" class="tabcontent"
+                 style="margin-left: 200px; margin-right: 200px;">
+                <h3>Before You Bid</h3>
+                <p>Keep in mind that you may start placing bids only once your account is activated (e. you have
+                    submitted the documents required to complete registration and received an email from us
+                    confirming
+                    that your account is now active). If you'd like to place bids higher than $1,200, also remember
+                    to
+                    add a deposit or upgrade to Premier beforehand..</p>
+                <h3>Joining Copart Auctions</h3>
+                <p>Once you've found the vehicles on which you'd like to bid, you can submit a preliminary bid or
+                    join a
+                    live online auction!</p>
+                <p>You don't need to be logged in to view an auction, but you will need a Basic or Premier
+                    Membership to
+                    place a bid. Sign in or register here. Once you're signed in, click on the Auctions tab to see a
+                    list of Today's Auctions, where you can jump directly into ongoing live online auctions, and the
+                    Auctions Calendar to view future auctions. There are a handful of other entry points for
+                    auctions as
+                    well, includin the Copart homepage. Member Dashboard and individual Location pages</p>
+                <p>Ultimately, you'll be directed to the Auctions Dashboard, where Basic and Premier Members can add
+                    as
+                    many auctions as are running at that particular time (non-Members and Registered Guests may only
+                    view one auction at a time). The Auctions Dashboard is where you car minimize or maximize
+                    auction
+                    windows and even place bids. Reorganize your Auctions Dashboard using the customization
+                    drag-and-drop feature, and experience Copart auctions the way you prefer. Copart's Auction
+                    Dashboard
+                    is powered by our revolutionary VB3 platform</p>
+            </div>
+
+            <div id="About" class="tabcontent">
+                <div class="container mt-4">
+                    <div id="username-page">
+                        <div class="username-page-container">
+                            <form id="usernameForm" name="usernameForm">
+                                <div class="form-group">
+                                    <input style="display: none" type="text" id="name" placeholder="Username" autocomplete="off" class="form-control" th:value="${session.username}"/>
+                                </div>
+                                <div class="form-group">
+                                    <input style="display: none" id="avatar" th:value="${session.avatar}"/>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="accent username-submit mt-5">Bắt Đầu Chat</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div id="chat-page" class="hidden rounded" style="margin-left: 310px">
+                        <div class="chat-container rounded">
+                            <div class="chat-header text-center rounded" style="width: 700px">
+                                <h2>Group Chat</h2>
+                            </div>
+                            <div class="connecting">
+                                Kết nối...
+                            </div>
+                            <ul id="messageArea">
+
+                            </ul>
+                            <form id="messageForm" name="messageForm" style="background: #dcdfe5" class="rounded-bottom">
+                                <div class="form-group mt-3">
+                                    <div class="input-group clearfix">
+                                        <input type="text" id="message" placeholder="Type a message..." autocomplete="off" class="form-control rounded"/>
+                                        <button style="margin-top: 3px" type="submit" class="primary rounded">Gửi</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div>
+        <footer id="footer">
+            <div class="footer-top">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-lg-3 col-md-6 footer-info">
+                            <h3>CAB Auction</h3>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6 footer-links">
+                            <h4>Useful Links</h4>
+                            <ul>
+                                <li><i class="bi bi-chevron-right"></i> <a href="#">Home</a></li>
+                                <li><i class="bi bi-chevron-right"></i> <a href="#">About us</a></li>
+                                <li><i class="bi bi-chevron-right"></i> <a href="#">Services</a></li>
+                                <li><i class="bi bi-chevron-right"></i> <a href="#">Terms of service</a></li>
+                                <li><i class="bi bi-chevron-right"></i> <a href="#">Privacy policy</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6 footer-contact">
+                            <h4>Contact Us</h4>
+                            <p>
+                                FPT <br>
+                                Thach Hoa Thach That<br>
+                                Ha Noi<br>
+                                <strong>Phone:</strong> +84 3213212<br>
+                                <strong>Email:</strong> cabauction@gmail.com<br>
+                            </p>
+
+                            <div class="social-links">
+                                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+                            </div>
+
+                        </div>
+
+                        <div class="col-lg-3 col-md-6 footer-newsletter">
+                            <h4>Our Newsletter</h4>
+                            <form action="" method="post">
+                                <input type="email" name="email"><input type="submit" value="Subscribe">
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="copyright">
+                    &copy; Copyright <strong>CAB Auction</strong>. All Rights Reserved
+                </div>
+                <div class="credits">
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+        class="bi bi-arrow-up-short"></i></a>
+<script th:inline="javascript">
+    function isPassAjax1() {
+
+        var bid = $("#inputPrie").val();
+        if (document.getElementById("inputPrie").value == 0 || document.getElementById("inputPrie").value == null) {
+            error += `Please do not leave the price blank or equal to 0`;
+            element2.innerHTML = error;
+        } else {
+            if(confirm("Are you sure you want to bid?")==true){
+                document.getElementById('error').remove();
+                h5 += `<h5>${document.getElementById("inputPrie").value} CAB</h5>`;
+                document.getElementById('btnBid').setAttribute('onclick', '');
+                document.getElementById('btnBid').setAttribute('style', 'background-color: #c0c0c0;');
+                element.innerHTML = h5;
+                console.log(bid);
+                $.ajax({
+                    type: "POST",
+                    url: "http://localhost:8080/insertBid?bid=" + bid,
+                    data: 'bid:' + bid,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+
+                    },
+                    error: function (e) {
+                        alert('Error: ' + e);
+                    }
+                });
+                return h5;
+            }else{
+                return null;
+            }
+        }
+    }
+</script>
+<script th:src="@{/assets/vendor/purecounter/purecounter_vanilla.js}"></script>
+<script th:src="@{/assets/vendor/aos/aos.js}"></script>
+<script th:src="@{/assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/assets/vendor/glightbox/js/glightbox.min.js}"></script>
+<script th:src="@{/assets/vendor/isotope-layout/isotope.pkgd.min.js}"></script>
+<script th:src="@{/assets/vendor/swiper/swiper-bundle.min.js}"></script>
+<script th:src="@{/assets/vendor/waypoints/noframework.waypoints.js}"></script>
+<script th:src="@{/assets/vendor/php-email-form/validate.js}"></script>
+<script th:src="@{/assets/js/main.js}"></script>
+<script th:src="@{/assets/js/main.js}"></script>
+<script th:src="@{/assets/js/acutionRoom.js}"></script>
+<script th:src="@{/assets/js/chat.js}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+</body>
+
+</html>

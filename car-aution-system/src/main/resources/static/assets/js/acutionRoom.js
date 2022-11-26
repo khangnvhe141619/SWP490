@@ -36,15 +36,16 @@ function carousel() {
 
 
 var Gio_hien_tai = 0;
-var Phut_hien_tai = 5;
-var Giay_hien_tai = 0;
+var Phut_hien_tai = 0;
+var Giay_hien_tai = 30;
 var timeout = null;
 
 function clock() {
     var gio = document.getElementById("hours");
     var phut = document.getElementById("minutes");
     var giay = document.getElementById("seconds");
-
+    var roomId = $("#roomId").val()
+    console.log(roomId)
 
     if (Giay_hien_tai === -1) {
         Phut_hien_tai -= 1;
@@ -58,7 +59,7 @@ function clock() {
 
     if (Gio_hien_tai == -1) {
         clearTimeout(timeout);
-        location.replace("http://127.0.0.1:5500/winner.html");
+        location.replace("/winPage?roomId="+roomId);
     }
 
     timeout = setTimeout(function () {
