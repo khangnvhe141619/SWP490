@@ -21,7 +21,7 @@ public class CarDTO {
     private String carName;
 
     private String manufacturing;
-    private String air_bad;
+    private String air_bag;
 //    private String description;
 //
 //    private Long upBoundPrice;
