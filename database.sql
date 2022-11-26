@@ -454,6 +454,39 @@ LOCK TABLES `roomparticipant` WRITE;
 /*!40000 ALTER TABLE `roomparticipant` ENABLE KEYS */;
 UNLOCK TABLES;
 
+
+--
+-- Table structure for table `roomdetailplayer`
+--
+
+DROP TABLE IF EXISTS `roomdetailplayer`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `roomdetailplayer` (
+	`id` int NOT NULL AUTO_INCREMENT,
+  `roomId` int NOT NULL,
+  `userId` int NOT NULL,
+  `userBid` int NOT NULL,
+  `timeBid` datetime NOT NULL,
+  `winner` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `roomdetailplayer_roomid_foreign` (`roomId`),
+  KEY `roomdetailplayer_userid_foreign` (`userId`),
+  CONSTRAINT `roomdetailplayer_roomid_foreign` FOREIGN KEY (`roomId`) REFERENCES `room` (`id`),
+  CONSTRAINT `roomdetailplayer_userid_foreign` FOREIGN KEY (`userId`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `roomparticipant`
+--
+
+LOCK TABLES `roomdetailplayer` WRITE;
+/*!40000 ALTER TABLE `roomdetailplayer` DISABLE KEYS */;
+/*!40000 ALTER TABLE `roomdetailplayer` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
 --
 -- Table structure for table `safetysystem`
 --
@@ -660,3 +693,4 @@ INSERT INTO `swp490_cab`.`favorite` (`id`, `userId`, `carId`, `createdAt`, `numb
 INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('1', '1', 'assets/img/Vinfast/e1.jpg');
 INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('2', '1', 'assets/img/Vinfast/v1.jpg');
 INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('3', '2', 'assets/img/Mer/m1.jpg');
+
