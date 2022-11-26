@@ -55,4 +55,7 @@ public class Car {
 
     @OneToMany(targetEntity = SafetySystem.class, mappedBy = "id",orphanRemoval = false,fetch = FetchType.LAZY)
     private Set<SafetySystem> safeSys;
+
+    @OneToMany(targetEntity = SafetySystem.class, mappedBy = "id",orphanRemoval = false,fetch = FetchType.LAZY)
+    private Set<Image> imgCar;
 }

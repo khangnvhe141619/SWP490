@@ -410,15 +410,19 @@
                 <table>
                   <tr>
                     <th>No</th>
-                    <th>Car Name</th>
                     <th>Model Name</th>
+                    <th>Car Name</th>
+                    <th>Color</th>
+                    <th>Year of Make</th>
                     <th>Setting</th>
                   </tr>
                   <tr th:unless="${not #lists.isEmpty(cars)}">
                   <tr th:each="c,loop :${cars}">
                     <td th:text="${loop.count}"></td>
-                    <td th:text="${c.carName}"></td>
                     <td th:text="${c.modelId.modelName}"></td>
+                    <td th:text="${c.carName}"></td>
+                    <td th:text="${c.carSpec.stream().findFirst().get().outerColor}"></td>
+                    <td th:text="${c.carSpec.stream().findFirst().get().yearOfMake}"></td>
                     <td>
                       <button title="View" class="pd-setting-ed"><a th:attr="data-target='#myViewModal'+*{c.id}" data-toggle="modal"><i class="fa fa-eye" aria-hidden="true"></i></a></button>
                       <button title="Edit" class="pd-setting-ed"><a href="#myUpdateModal" data-toggle="modal"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></button>
@@ -535,7 +539,7 @@
                                                 <div class="row">
                                                   <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                                     <div class="address-hr biography">
-                                                      <p><b>Fuel</b><br />
+                                                      <p><b>Fuel</b><br/>
                                                         <span th:text="${c.carSpec.stream().findFirst().get().fuel}"></span></p>
                                                     </div>
                                                   </div>
@@ -884,7 +888,7 @@
   </div>
   <!--End footer-->
 </div>
-
+</div>
 <!-- jquery
     ============================================ -->
 <script th:src="@{js/vendor/jquery-1.12.4.min.js}"></script>
