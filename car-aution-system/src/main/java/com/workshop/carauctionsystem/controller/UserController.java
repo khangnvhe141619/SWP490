@@ -46,8 +46,13 @@ public class UserController {
     @PostMapping(value = {"/login"})
     public ModelAndView login(@ModelAttribute(name = "setUser") User user, Model model, @CookieValue(value = "setUser", defaultValue = "") String setUser,
                               HttpServletRequest request, HttpServletResponse response, HttpSession session){
-        User u =  service.login(user.getUserName());
         ModelAndView view = new ModelAndView();
+        User u =  service.login(user.getUserName());
+        if(u == null){
+            model.addAttribute("invalidCredentials", true);
+            view.setViewName("Sign-In-Up");
+            return view;
+        }
         boolean checkPass = BCrypt.checkpw(user.getPassword(), u.getPassword());
         if(u != null && checkPass){
             if(u.getEnabled() == 0){
