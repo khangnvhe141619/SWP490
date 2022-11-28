@@ -415,7 +415,8 @@ CREATE TABLE `room` (
   KEY `FKdgcd3aoxm5w6scd8hupsjo1pq` (`carId`),
   CONSTRAINT `FKdgcd3aoxm5w6scd8hupsjo1pq` FOREIGN KEY (`carId`) REFERENCES `car` (`id`),
   CONSTRAINT `room_carid_foreign` FOREIGN KEY (`carId`) REFERENCES `car` (`id`),
-  CONSTRAINT `room_typeroomid_foreign` FOREIGN KEY (`typeRoomId`) REFERENCES `typeroom` (`id`)
+  CONSTRAINT `room_typeroomid_foreign` FOREIGN KEY (`typeRoomId`) REFERENCES `typeroom` (`id`),
+  CONSTRAINT `room_userid_foreign` FOREIGN KEY (`createdBy`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -690,6 +691,6 @@ INSERT INTO `swp490_cab`.`room` (`id`, `carId`, `typeRoomId`, `roomName`, `roomT
 INSERT INTO `swp490_cab`.`favorite` (`id`, `userId`, `carId`, `createdAt`, `number`) VALUES ('1', '1', '1', '2022-11-19 00:00:00', '1');
 INSERT INTO `swp490_cab`.`favorite` (`id`, `userId`, `carId`, `createdAt`, `number`) VALUES ('2', '1', '2', '2022-11-19 00:00:00', '2');
 INSERT INTO `swp490_cab`.`favorite` (`id`, `userId`, `carId`, `createdAt`, `number`) VALUES ('3', '2', '1', '2022-11-19 00:00:00', '3');
-INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('1', '1', 'assets/img/Vinfast/e1.jpg');
-INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('2', '1', 'assets/img/Vinfast/v1.jpg');
-INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('3', '2', 'assets/img/Mer/m1.jpg');
+INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('1', '1', '/img/Vinfast/e1.jpg');
+INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('2', '1', '/img/Vinfast/v1.jpg');
+INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('3', '2', '/img/Mer/m1.jpg');
