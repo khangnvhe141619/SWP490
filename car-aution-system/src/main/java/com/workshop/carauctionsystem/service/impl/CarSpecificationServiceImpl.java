@@ -17,6 +17,11 @@ public class CarSpecificationServiceImpl implements CarSpecificationService {
     }
 
     @Override
+    public void update(String manufacturing, String km_driven, String gear, String fuel, String fuelConsumption, String outerColor, String innerColor, String overallDimensions, String drive, String yearOfMake, Long id) {
+        carSpecRepo.update(manufacturing,km_driven,gear,fuel,fuelConsumption,outerColor,innerColor,overallDimensions,drive,yearOfMake,id);
+    }
+
+    @Override
     public CarSpecification getAllByCarId(Long id) {
         return carSpecRepo.findAllByCarId(id);
     }

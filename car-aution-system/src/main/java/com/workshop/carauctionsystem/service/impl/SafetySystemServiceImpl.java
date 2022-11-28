@@ -21,4 +21,9 @@ public class SafetySystemServiceImpl implements SafetySystemService {
     public List<SafetySystem> getAllSafetySystem(Long carId) {
         return safetyRepo.findAllByCarId(carId);
     }
+
+    @Override
+    public void update(String air_bag, String abs_brake, String speedControl, String tirePressure, String otherDescription, Long id) {
+        safetyRepo.update(air_bag,abs_brake,speedControl,tirePressure,otherDescription,id);
+    }
 }

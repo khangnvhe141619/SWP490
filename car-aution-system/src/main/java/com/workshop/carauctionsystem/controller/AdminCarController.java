@@ -1,6 +1,7 @@
 package com.workshop.carauctionsystem.controller;
 
 import com.workshop.carauctionsystem.entity.*;
+import com.workshop.carauctionsystem.exception.NotFoundException;
 import com.workshop.carauctionsystem.model.CarDTO;
 import com.workshop.carauctionsystem.model.CarSpecificationDTO;
 import com.workshop.carauctionsystem.model.ResponseObject;
@@ -16,16 +17,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class AdminCarController {
@@ -142,5 +141,64 @@ public class AdminCarController {
             ra.addFlashAttribute("fail", "Add New Car Failed");
             return "redirect:/admin/car";
         }
+    }
+
+    @PostMapping("/admin/car/edit")
+    public String update(@RequestParam Map<String, String> requestMap,
+                         RedirectAttributes ra) {
+        try {
+            Long id = Long.parseLong(requestMap.get("id"));// carId
+            String carName = requestMap.get("carName");
+            Long upBound = Long.parseLong(requestMap.get("upBound"));
+            Long downBound = Long.parseLong(requestMap.get("downBound"));
+            String description = requestMap.get("description");
+            String createdAt = requestMap.get("createdAt");
+            Long createById = Long.parseLong(requestMap.get("createById"));
+            Date date = new Date();
+            Timestamp updateAt = new Timestamp(date.getTime());
+            //saveCar
+            carService.updateCar(createById,description,upBound,downBound,updateAt,carName,id);
+
+            Long idCarSpec = Long.parseLong(requestMap.get("idCarSpec"));
+            String manufacturing = requestMap.get("manufacturing");
+            String statusSpec = "Old";
+            String km_driven = requestMap.get("km_driven");
+            String gear = requestMap.get("gear");
+            String fuel = requestMap.get("fuel");
+            String overallDimension = requestMap.get("overallDimension");
+            String fuelConsumption = requestMap.get("fuelConsumption");
+            String outerColor = requestMap.get("outerColor");
+            String innerColor = requestMap.get("innerColor");
+            String drive = requestMap.get("drive");
+            String yearOfMake = requestMap.get("yearOfMake");
+            //save carSpec
+            caeSpecService.update(manufacturing,km_driven,gear,fuel,fuelConsumption,outerColor,innerColor,overallDimension,drive,yearOfMake,idCarSpec);
+
+            Long idSafe = Long.parseLong(requestMap.get("idSafe"));
+            String air_bag = requestMap.get("air_bag");
+            String abs_brake = requestMap.get("abs_brake");
+            String speedControl = requestMap.get("speedControl");
+            String tirePressure = requestMap.get("tirePressure");
+            String otherDescription = requestMap.get("otherDescription");
+            //save safety
+            safetySystemService.update(air_bag,abs_brake,speedControl,tirePressure,otherDescription,idSafe);
+            ra.addFlashAttribute("success", "The Car has been saved successfully");
+            return "redirect:/admin/car";
+        }catch (Exception e){
+            ra.addFlashAttribute("fail", "Update Car Failed");
+            return "redirect:/admin/car";
+        }
+    }
+
+    @GetMapping("/admin/car/delete/{id}")
+    public String deleteModel(@PathVariable(value = "id") Long id, RedirectAttributes ra) {
+        try {
+            carService.delete(id);
+        } catch (NotFoundException e) {
+            ra.addFlashAttribute("message", e.getMessage());
+            return "page404";
+        }
+        ra.addFlashAttribute("success", "The Car has been deleted successfully");
+        return "redirect:/admin/car";
     }
 }
