@@ -50,12 +50,12 @@ public class Car {
     @Column(name = "updatedat")
     private Timestamp updatedAt;
 
-    @OneToMany(targetEntity = CarSpecification.class, mappedBy = "id",orphanRemoval = false,fetch = FetchType.LAZY)
-    private Set<CarSpecification>  carSpec;
+    @OneToOne(targetEntity = CarSpecification.class, mappedBy = "carId",orphanRemoval = false,fetch = FetchType.LAZY)
+    private CarSpecification  carSpec;
 
-    @OneToMany(targetEntity = SafetySystem.class, mappedBy = "id",orphanRemoval = false,fetch = FetchType.LAZY)
-    private Set<SafetySystem> safeSys;
+    @OneToOne(targetEntity = SafetySystem.class, mappedBy = "carId",orphanRemoval = false,fetch = FetchType.LAZY)
+    private SafetySystem safeSys;
 
-    @OneToMany(targetEntity = SafetySystem.class, mappedBy = "id",orphanRemoval = false,fetch = FetchType.LAZY)
+    @OneToMany(targetEntity = Image.class, mappedBy = "carId",orphanRemoval = false,fetch = FetchType.LAZY)
     private Set<Image> imgCar;
 }

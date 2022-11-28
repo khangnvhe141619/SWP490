@@ -421,8 +421,8 @@
                     <td th:text="${loop.count}"></td>
                     <td th:text="${c.modelId.modelName}"></td>
                     <td th:text="${c.carName}"></td>
-                    <td th:text="${c.carSpec.stream().findFirst().get().outerColor}"></td>
-                    <td th:text="${c.carSpec.stream().findFirst().get().yearOfMake}"></td>
+                    <td th:text="${c.carSpec.outerColor}"></td>
+                    <td th:text="${c.carSpec.yearOfMake}"></td>
                     <td>
                       <button title="View" class="pd-setting-ed"><a th:attr="data-target='#myViewModal'+*{c.id}" data-toggle="modal"><i class="fa fa-eye" aria-hidden="true"></i></a></button>
                       <button title="Edit" class="pd-setting-ed"><a href="#myUpdateModal" data-toggle="modal"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></button>
@@ -452,9 +452,16 @@
                                         <div class="product-tab-list tab-pane fade active in" th:id="'CAR'+*{c.id}" >
                                           <div class="row">
                                             <div style="margin: 0 auto;" class="profile-info-inner">
+
                                               <div class="profile-img">
-                                                <img th:src="@{img/profile/user.png}" alt="" />
-                                              </div>
+                                                <div th:if="${#sets.isEmpty(c.imgCar)}">
+                                                  <p>No image</p>
+                                                </div>
+                                                <div th:unless="${#sets.isEmpty(c.imgCar)}">
+                                                  <img th:src="${c.imgCar.stream().findFirst().get().imgPath}" alt="" />
+                                                  </div>
+                                                </div>
+
                                               <div class="profile-details-hr">
                                                 <div class="row">
                                                   <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
@@ -508,7 +515,7 @@
                                                   <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                                     <div class="address-hr biography">
                                                       <p><b>Maufacturer</b><br />
-                                                        <span th:text="${c.carSpec.stream().findFirst().get().manufacturing}"></span></p>
+                                                        <span th:text="${c.carSpec.manufacturing}"></span></p>
                                                     </div>
                                                   </div>
                                                 </div>
@@ -516,7 +523,7 @@
                                                   <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                                     <div class="address-hr biography">
                                                       <p><b>Status</b><br />
-                                                        <span th:text="${c.carSpec.stream().findFirst().get().status}"></span></p>
+                                                        <span th:text="${c.carSpec.status}"></span></p>
                                                     </div>
                                                   </div>
                                                 </div>
@@ -524,7 +531,7 @@
                                                   <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                                     <div class="address-hr biography">
                                                       <p><b>Km driven</b><br />
-                                                        <span th:text="${c.carSpec.stream().findFirst().get().km_driven}"></span></p>
+                                                        <span th:text="${c.carSpec.km_driven}"></span></p>
                                                     </div>
                                                   </div>
                                                 </div>
@@ -532,7 +539,7 @@
                                                   <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                                     <div class="address-hr biography">
                                                       <p><b>Gear</b><br />
-                                                        <span th:text="${c.carSpec.stream().findFirst().get().gear}"></span></p>
+                                                        <span th:text="${c.carSpec.gear}"></span></p>
                                                     </div>
                                                   </div>
                                                 </div>
@@ -540,7 +547,7 @@
                                                   <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                                     <div class="address-hr biography">
                                                       <p><b>Fuel</b><br/>
-                                                        <span th:text="${c.carSpec.stream().findFirst().get().fuel}"></span></p>
+                                                        <span th:text="${c.carSpec.fuel}"></span></p>
                                                     </div>
                                                   </div>
                                                 </div>
@@ -548,7 +555,7 @@
                                                   <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                                     <div class="address-hr biography">
                                                       <p><b>Fuel Consumption</b><br />
-                                                        <span th:text="${c.carSpec.stream().findFirst().get().fuelConsumption}"></span></p>
+                                                        <span th:text="${c.carSpec.fuelConsumption}"></span></p>
                                                     </div>
                                                   </div>
                                                 </div>
@@ -556,7 +563,7 @@
                                                   <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                                     <div class="address-hr biography">
                                                       <p><b>Outer Color</b><br />
-                                                        <span th:text="${c.carSpec.stream().findFirst().get().outerColor}"></span></p>
+                                                        <span th:text="${c.carSpec.outerColor}"></span></p>
                                                     </div>
                                                   </div>
                                                 </div>
@@ -564,7 +571,7 @@
                                                   <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                                     <div class="address-hr biography">
                                                       <p><b>Inner Color</b><br />
-                                                        <span th:text="${c.carSpec.stream().findFirst().get().innerColor}"></span></p>
+                                                        <span th:text="${c.carSpec.innerColor}"></span></p>
                                                     </div>
                                                   </div>
                                                 </div>
@@ -572,7 +579,7 @@
                                                   <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                                     <div class="address-hr biography">
                                                       <p><b>Overall Dimension</b><br />
-                                                        <span th:text="${c.carSpec.stream().findFirst().get().overallDimension}"></span></p>
+                                                        <span th:text="${c.carSpec.overallDimension}"></span></p>
                                                     </div>
                                                   </div>
                                                 </div>
@@ -580,7 +587,7 @@
                                                   <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                                     <div class="address-hr biography">
                                                       <p><b>Drive</b><br />
-                                                        <span th:text="${c.carSpec.stream().findFirst().get().drive}"></span></p>
+                                                        <span th:text="${c.carSpec.drive}"></span></p>
                                                     </div>
                                                   </div>
                                                 </div>
@@ -588,7 +595,7 @@
                                                   <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                                     <div class="address-hr biography">
                                                       <p><b>Year of make </b><br />
-                                                        <span th:text="${c.carSpec.stream().findFirst().get().yearOfMake}"></span></p>
+                                                        <span th:text="${c.carSpec.yearOfMake}"></span></p>
                                                     </div>
                                                   </div>
                                                 </div>
@@ -604,7 +611,7 @@
                                                   <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                                     <div class="address-hr biography">
                                                       <p><b>Air bag</b><br />
-                                                        <span th:text="${c.safeSys.stream().findFirst().get().air_bag}"></span></p>
+                                                        <span th:text="${c.safeSys.air_bag}"></span></p>
                                                     </div>
                                                   </div>
                                                 </div>
@@ -612,7 +619,7 @@
                                                   <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                                     <div class="address-hr biography">
                                                       <p><b>ABS brake</b><br />
-                                                        <span th:text="${c.safeSys.stream().findFirst().get().abs_brake}"></span></p>
+                                                        <span th:text="${c.safeSys.abs_brake}"></span></p>
                                                     </div>
                                                   </div>
                                                 </div>
@@ -620,7 +627,7 @@
                                                   <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                                     <div class="address-hr biography">
                                                       <p><b>Speed control</b><br />
-                                                        <span th:text="${c.safeSys.stream().findFirst().get().speedControl}"></span></p>
+                                                        <span th:text="${c.safeSys.speedControl}"></span></p>
                                                     </div>
                                                   </div>
                                                 </div>
@@ -628,7 +635,7 @@
                                                   <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                                     <div class="address-hr biography">
                                                       <p><b>Tire pressure</b><br />
-                                                        <span th:text="${c.safeSys.stream().findFirst().get().tirePressure}"></span></p>
+                                                        <span th:text="${c.safeSys.tirePressure}"></span></p>
                                                     </div>
                                                   </div>
                                                 </div>
@@ -636,7 +643,7 @@
                                                   <div class="col-lg-12">
                                                     <div class="content-profile">
                                                       <p><b>Other description </b><br /></p>
-                                                      <span th:text="${c.safeSys.stream().findFirst().get().otherdescription}"></span></p>
+                                                      <span th:text="${c.safeSys.otherdescription}"></span></p>
                                                     </div>
                                                   </div>
                                                 </div>
