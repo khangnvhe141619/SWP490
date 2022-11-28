@@ -1,6 +1,8 @@
 package com.workshop.carauctionsystem.model;
 
 
+import com.workshop.carauctionsystem.entity.ModelCar;
+import com.workshop.carauctionsystem.entity.User;
 import lombok.*;
 
 import javax.persistence.Column;
@@ -19,26 +21,19 @@ public class CarDTO {
     private Long id;
 
     private String carName;
-
     private String manufacturing;
-    private String air_bag;
-//    private String description;
-//
-//    private Long upBoundPrice;
-//
-//    private Long downBoundPrice;
-//
-//    private ModelCar modelId;
-//
-//    private String status;
-//
-//    private User createdBy;
-//
-//    private Timestamp createdAt;
-//
-//    private Timestamp updatedAt;
-//
-//    private CarSpecificationDTO carSpec;
-//
-//    private SafetySystemDTO safeSys;
+    private String air_bad;
+    private String description;
+
+    private Long upBoundPrice;
+    private Long downBoundPrice;
+    private ModelCar modelId;
+    private int status;
+
+    private User createdBy;
+    private Timestamp createdAt;
+    private Timestamp updatedAt;
+
+    private CarSpecificationDTO carSpec;
+    private SafetySystemDTO safeSys;
 }

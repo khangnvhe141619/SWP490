@@ -38,7 +38,7 @@ public class Car {
     private ModelCar modelId;
 
     @Column(name = "status")
-    private String status;
+    private int status;
 
     @OneToOne
     @JoinColumn(name = "createdby")

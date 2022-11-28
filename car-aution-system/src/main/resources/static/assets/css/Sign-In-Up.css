@@ -28,6 +28,21 @@ input {
   left: 0;
 }
 
+.loading{
+  position: absolute;
+  z-index: 7;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.479);
+  text-align: center;
+  display: none;
+}
+
+.loading img{
+  margin-top: 15%;
+  width: 20rem;
+}
+
 .signin-signup {
   position: absolute;
   top: 50%;

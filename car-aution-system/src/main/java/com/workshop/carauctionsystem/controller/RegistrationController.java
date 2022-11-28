@@ -121,7 +121,7 @@ public class RegistrationController {
     public ResponseEntity<ResponseObject> isEmailExisted(@RequestParam("email") String email) {
         boolean _email = userService.findByEmail(email) != null ? true : false;
         if (_email) {
-            return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject("ok", "Email existed!", null));
+            return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject("ok", "Email already exists!", null));
         }
         return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject("no", "Valid email!", null));
     }
@@ -130,7 +130,7 @@ public class RegistrationController {
     public ResponseEntity<ResponseObject> isUsernameExist(@RequestParam("username") String username) {
         boolean _username = userService.findByUsername(username) != null ? true : false;
         if (_username) {
-            return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject("ok", "Username existed!", null));
+            return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject("ok", "Username already exists!", null));
         }
         return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject("no", "Valid username!", null));
     }

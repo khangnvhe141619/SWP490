@@ -21,7 +21,7 @@ public interface CarService {
 
     public void saveCar(Car car);
 
-    public void updateCar(Long createdBy, String description, Long upBoundPrice, Long downBoundPrice, Timestamp updatedAt, Long id);
+    public void updateCar(Long createdBy, String description, Long upBoundPrice, Long downBoundPrice, Timestamp updatedAt, String carName, Long id);
 
     public void delete(Long id) throws NotFoundException;
 

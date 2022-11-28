@@ -1,9 +1,12 @@
 package com.workshop.carauctionsystem.controller;
 
 import com.workshop.carauctionsystem.entity.User;
+import com.workshop.carauctionsystem.model.ResponseObject;
 import com.workshop.carauctionsystem.repository.UserRepository;
 import com.workshop.carauctionsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -43,40 +46,36 @@ public class UserController {
         return redirectLogin();
     }
 
-    @PostMapping(value = {"/login"})
-    public ModelAndView login(@ModelAttribute(name = "setUser") User user, Model model, @CookieValue(value = "setUser", defaultValue = "") String setUser,
-                              HttpServletRequest request, HttpServletResponse response, HttpSession session){
-        ModelAndView view = new ModelAndView();
-        User u =  service.login(user.getUserName());
+    @PostMapping("/login")
+    public ResponseEntity<ResponseObject> isUsernameExist(@RequestParam("username") String username,
+                                                          @RequestParam("password") String password,
+                                                          HttpServletResponse response, HttpSession session, Model model) {
+        User u =  service.login(username);
         if(u == null){
-            model.addAttribute("invalidCredentials", true);
-            view.setViewName("Sign-In-Up");
-            return view;
+            return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject("no", "Username or password is wrong !", null));
         }
-        boolean checkPass = BCrypt.checkpw(user.getPassword(), u.getPassword());
+        boolean checkPass = BCrypt.checkpw(password, u.getPassword());
+        if(checkPass == false){
+            return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject("no", "Username or password is wrong !", null));
+        }
         if(u != null && checkPass){
             if(u.getEnabled() == 0){
-                model.addAttribute("checkUserBan", true);
-                view.setViewName("Sign-In-Up");
-                return view;
+                return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject("ban", "Account has been banned or not activated !!!", null));
             }
-            setUser = user.getUserName();
             String avatar = u.getAvatar();
-            Cookie cookie = new Cookie("setUser", setUser);
+            Cookie cookie = new Cookie("setUser", username);
             String setUserId = String.valueOf(u.getId());
             Cookie cookie2 = new Cookie("setUserId", setUserId);
             cookie.setMaxAge(24 * 60 * 60);
             response.addCookie(cookie);
             response.addCookie(cookie2);
-            session.setAttribute("username", setUser);
+            session.setAttribute("username", username);
             session.setAttribute("avatar", avatar);
             model.addAttribute("cookieValue", cookie);
             model.addAttribute("check", true);
-            view.setViewName("redirect:/home");
-            return view;
+            return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject("yes", "", null));
         }
         model.addAttribute("invalidCredentials", true);
-        view.setViewName("Sign-In-Up");
-        return view;
+        return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject("no", "Username or password is wrong !", null));
     }
 }

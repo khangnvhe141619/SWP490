@@ -43,17 +43,21 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public void saveCar(Car car) {
-
+        carRepository.save(car);
     }
 
     @Override
-    public void updateCar(Long createdBy, String description, Long upBoundPrice, Long downBoundPrice, Timestamp updatedAt, Long id) {
-
+    public void updateCar(Long createdBy, String description, Long upBoundPrice, Long downBoundPrice, Timestamp updatedAt, String carName, Long id) {
+        carRepository.update(createdBy, description, upBoundPrice, downBoundPrice, updatedAt, carName, id);
     }
 
     @Override
     public void delete(Long id) throws NotFoundException {
-
+        Long count = carRepository.countById(id);
+        if (count == null || count == 0) {
+            throw new NotFoundException("Could not find any with ID" + id);
+        }
+        carRepository.delete(id);
     }
 
     @Override
