@@ -1,12 +1,19 @@
 package com.workshop.carauctionsystem.service;
 
 import com.workshop.carauctionsystem.entity.Room;
+import com.workshop.carauctionsystem.exception.NotFoundException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 public interface RoomService {
     public List<Room> getAllRoom();
-    public List<Room> getAllRoomLimit();
     public Room getRoomById(int roomId);
-    public List<Room> getAllRoomByPage(int page);
+
+    public Page<Room> findAllByName(Pageable pageable, String roomName);
+    public void saveRoom(Room room);
+    public void update(String roomName, String startTime, String endTime, Timestamp updatedAt, int ticketPrice, int typeRoom, int createdBy, String img, int id);
+    public void delete(Long id) throws NotFoundException;
 }

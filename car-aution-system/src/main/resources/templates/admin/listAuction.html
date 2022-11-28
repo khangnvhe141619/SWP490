@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -71,59 +71,58 @@
 <div class="left-sidebar-pro">
     <nav id="sidebar" class="">
         <div class="sidebar-header">
-            <a href="index.html"><img class="main-logo" th:src="@{img/logo/logo.png}" alt="" /></a>
-            <strong><a href="index.html"><img th:src="@{img/logo/logosn.png}" alt="" /></a></strong>
+            <a th:href="@{/admin/home}"><img class="main-logo" th:src="@{img/logo/logo.png}" alt="" /></a>
+            <strong><a th:href="@{/admin/home}"><img th:src="@{img/logo/logosn.png}" alt="" /></a></strong>
         </div>
         <!--Start left-scrollbar-->
         <div class="left-custom-menu-adp-wrap comment-scrollbar">
             <nav class="sidebar-nav left-sidebar-menu-pro">
                 <ul class="metismenu" id="menu1">
                     <li>
-                        <a title="Landing Page" href="index.html" aria-expanded="false"><span class="fa fa-home icon-wrap" aria-hidden="true"></span> <span class="mini-click-non">Home</span></a>
+                        <a title="Landing Page" th:href="@{/admin/home}" aria-expanded="false"><span class="fa fa-home icon-wrap" aria-hidden="true"></span> <span class="mini-click-non">Home</span></a>
                     </li>
                     <li>
-                        <a class="has-arrow" href="listUser.html" aria-expanded="false"><span class="fa fa-user icon-wrap"></span> <span class="mini-click-non">User</span></a>
+                        <a class="has-arrow" th:href="@{/admin/user}" aria-expanded="false"><span class="fa fa-user icon-wrap"></span> <span class="mini-click-non">User</span></a>
                         <ul class="submenu-angle" aria-expanded="false">
-                            <li><a href="listUser.html"><span class="mini-sub-pro">All Users</span></a></li>
-                            <li><a href="listBannedUser.html"><span class="mini-sub-pro">All Banned Users</span></a></li>
+                            <li><a th:href="@{/admin/user}"><span class="mini-sub-pro">All Users</span></a></li>
+                            <li><a th:href="@{/admin/userban}"><span class="mini-sub-pro">All Banned Users</span></a></li>
                         </ul>
                     </li>
                     <li>
-                        <a class="has-arrow" href="listCar.html" aria-expanded="false"><span class="fa fa-automobile icon-wrap"></span> <span class="mini-click-non">Car</span></a>
+                        <a class="has-arrow" th:href="@{/admin/car}" aria-expanded="false"><span class="fa fa-automobile icon-wrap"></span> <span class="mini-click-non">Car</span></a>
                         <ul class="submenu-angle" aria-expanded="false">
-                            <li><a href="listCar.html"><span class="mini-sub-pro">All Cars</span></a></li>
+                            <li><a th:href="@{/admin/car}"><span class="mini-sub-pro">All Cars</span></a></li>
                         </ul>
                     </li>
                     <li>
-                        <a class="has-arrow" href="listBrand.html" aria-expanded="false"><span class="glyphicon glyphicon-menu-hamburger icon-wrap"></span> <span class="mini-click-non">Brand</span></a>
+                        <a class="has-arrow" th:href="@{/admin/brand}" aria-expanded="false"><span class="glyphicon glyphicon-menu-hamburger icon-wrap"></span> <span class="mini-click-non">Brand</span></a>
                         <ul class="submenu-angle" aria-expanded="false">
-                            <li><a href="listBrand.html"><span class="mini-sub-pro">All Brands</span></a></li>
+                            <li><a th:href="@{/admin/brand}"><span class="mini-sub-pro">All Brands</span></a></li>
                         </ul>
                     </li>
                     <li>
-                        <a class="has-arrow" href="listAuction.html" aria-expanded="false"><span class="fa fa-window-maximize icon-wrap"></span> <span class="mini-click-non">Auction Room</span></a>
+                        <a class="has-arrow" th:href="@{/admin/auctionroom}" aria-expanded="false"><span class="fa fa-window-maximize icon-wrap"></span> <span class="mini-click-non">Auction Room</span></a>
                         <ul class="submenu-angle" aria-expanded="false">
-                            <li><a href="listAuction.html"><span class="mini-sub-pro">All Auction Room</span></a></li>
+                            <li><a th:href="@{/admin/auctionroom}"><span class="mini-sub-pro">All Auction Room</span></a></li>
                         </ul>
                     </li>
                     <li>
-                        <a class="has-arrow" href="listModel.html" aria-expanded="false"><span class="glyphicon glyphicon-th-large icon-wrap"></span> <span class="mini-click-non">Model</span></a>
+                        <a class="has-arrow" th:href="@{/admin/model}" aria-expanded="false"><span class="glyphicon glyphicon-th-large icon-wrap"></span> <span class="mini-click-non">Model</span></a>
                         <ul class="submenu-angle" aria-expanded="false">
-                            <li><a href="listModel.html"><span class="mini-sub-pro">All Model</span></a></li>
-                            <li><a href="listModelSpec.html"><span class="mini-sub-pro">All Model Specification</span></a></li>
+                            <li><a th:href="@{/admin/model}"><span class="mini-sub-pro">All Model</span></a></li>
+                            <li><a th:href="@{/admin/modelSpec}"><span class="mini-sub-pro">All Model Specification</span></a></li>
                         </ul>
                     </li>
                     <li>
-                        <a class="has-arrow" href="listNews.html" aria-expanded="false"><span class="fa fa-newspaper-o icon-wrap"></span> <span class="mini-click-non">News</span></a>
+                        <a class="has-arrow" th:href="@{/admin/news}" aria-expanded="false"><span class="fa fa-newspaper-o icon-wrap"></span> <span class="mini-click-non">News</span></a>
                         <ul class="submenu-angle" aria-expanded="false">
-                            <li><a href="listNews.html"><span class="mini-sub-pro">All News</span></a></li>
+                            <li><a th:href="@{/admin/news}"><span class="mini-sub-pro">All News</span></a></li>
                         </ul>
                     </li>
                     <li>
                         <a class="has-arrow" href="#" aria-expanded="false"><span class="fa fa-gamepad icon-wrap"></span> <span class="mini-click-non">Game Play</span></a>
                         <ul class="submenu-angle" aria-expanded="false">
-                            <li><a href="#"><span class="mini-sub-pro">Game </span></a></li>
-                            <li><a href="#"><span class="mini-sub-pro">Play </span></a></li>
+                            <li><a href="#"><span class="mini-sub-pro">Game Play</span></a></li>
                         </ul>
                     </li>
                     <li>
@@ -145,7 +144,7 @@
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="logo-pro">
-                    <a href="index.html"><img class="main-logo" th:src="@{img/logo/logo.png}" alt="" /></a>
+                    <a th:href="@{/admin/home}"><img class="main-logo" th:src="@{img/logo/logo.png}" alt="" /></a>
                 </div>
             </div>
         </div>
@@ -199,55 +198,48 @@
                         <div class="mobile-menu">
                             <nav id="dropdown">
                                 <ul class="mobile-menu-nav">
-                                    <li><a href="index.html">Home</a></li>
+                                    <li><a th:href="@{/admin/home}">Home</a></li>
 
-                                    <li><a data-toggle="collapse" data-target="#demoevent" href="#">User <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
+                                    <li><a data-toggle="collapse" data-target="#demoevent" th:href="@{/admin/user}">User <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
                                         <ul id="demoevent" class="collapse dropdown-header-top">
-                                            <li><a href="listUser.html">All Users</a>
-                                            </li>
-                                            <li><a href="listBannedUser.html">All Banned Users</a>
+                                            <li><a th:href="@{/admin/user}">All Users</a></li>
+                                            <li><a th:href="@{/admin/userban}">All Banned Users</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a data-toggle="collapse" data-target="#demopro" th:href="@{/admin/car}">Car <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
+                                        <ul class="collapse dropdown-header-top">
+                                            <li><a th:href="@{/admin/car}">All Cars</a>
                                             </li>
                                         </ul>
                                     </li>
-                                    <li><a data-toggle="collapse" data-target="#demopro" href="#">Car <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                                        <ul id="demopro" class="collapse dropdown-header-top">
-                                            <li><a href="listCar.html">All Cars</a>
+                                    <li><a data-toggle="collapse" data-target="#demopro" th:href="@{/admin/brand}">Brand <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
+                                        <ul class="collapse dropdown-header-top">
+                                            <li><a th:href="@{/admin/brand}">All Brands</a>
                                             </li>
                                         </ul>
                                     </li>
-                                    <li><a data-toggle="collapse" data-target="#demopro" href="#">Brand <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                                        <ul id="demopro" class="collapse dropdown-header-top">
-                                            <li><a href="listBrand.html">All Brands</a>
+                                    <li><a data-toggle="collapse" data-target="#demopro" th:href="@{/admin/auctionroom}">Auction Room <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
+                                        <ul class="collapse dropdown-header-top">
+                                            <li><a th:href="@{/admin/auctionroom}">All Auction Room</a>
                                             </li>
                                         </ul>
                                     </li>
-                                    <li><a data-toggle="collapse" data-target="#demopro" href="#">Auction Room <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                                        <ul id="demopro" class="collapse dropdown-header-top">
-                                            <li><a href="listAuction.html">All Auction Room</a>
+                                    <li><a data-toggle="collapse" data-target="#demopro" th:href="@{/admin/model}">Model <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
+                                        <ul class="collapse dropdown-header-top">
+                                            <li><a th:href="@{/admin/model}">All Model</a>
                                             </li>
-                                        </ul>
-                                    </li>
-                                    <li><a data-toggle="collapse" data-target="#demopro" href="#">Model <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                                        <ul id="demopro" class="collapse dropdown-header-top">
-                                            <li><a href="listModel.html">All Model</a>
-                                            </li>
-                                            <li><a href="listModelSpec.html">All Model Specification</a>
+                                            <li><a th:href="@{/admin/modelSpec}">All Model Specification</a>
                                             </li>
                                         </ul>
                                     </li>
                                     <li><a data-toggle="collapse" data-target="#demopro" href="#">News <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                                        <ul id="demopro" class="collapse dropdown-header-top">
-                                            <li><a href="listNews.html">All News</a>
-                                            </li>
-                                            <li><a href="create-news.html">Create New News</a>
-                                            </li>
+                                        <ul class="collapse dropdown-header-top">
+                                            <li><a th:href="@{/admin/news}">All News</a></li>
                                         </ul>
                                     </li>
                                     <li><a data-toggle="collapse" data-target="#demopro" href="#">Game Play<span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                                        <ul id="demopro" class="collapse dropdown-header-top">
-                                            <li><a href="#">Game</a>
-                                            </li>
-                                            <li><a href="#">Play</a>
+                                        <ul class="collapse dropdown-header-top">
+                                            <li><a href="#">Game Play</a>
                                             </li>
                                         </ul>
                                     </li>
@@ -273,15 +265,15 @@
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                     <div class="breadcome-heading">
-                                        <form role="search" class="sr-input-func">
-                                            <input type="text" placeholder="Search..." class="search-int form-control">
+                                        <form th:action="@{/admin/auctionroom}" method="get" role="search" class="sr-input-func">
+                                            <input id="search" name="search" type="text" placeholder="Search..." class="search-int form-control">
                                             <a href="#"><i class="fa fa-search"></i></a>
                                         </form>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                     <ul class="breadcome-menu">
-                                        <li><a href="#">Home</a> <span class="bread-slash">/</span>
+                                        <li><a th:href="@{/admin/home}">Home</a> <span class="bread-slash">/</span>
                                         </li>
                                         <li><span class="bread-blod">Auction Room</span>
                                         </li>
@@ -304,6 +296,12 @@
                         <div class="add-product">
                             <a href="#myCreateModal" data-toggle="modal">Add New Auction</a>
                         </div>
+                        <div th:if="${success} != null">
+                            <div class="alert alert-success text-center" role="alert">[[${success}]]</div>
+                        </div>
+                        <div th:if="${fail} != null">
+                            <div class="alert alert-danger text-center" role="alert">[[${fail}]]</div>
+                        </div>
                         <div class="asset-inner">
                             <table>
                                 <tr>
@@ -314,28 +312,255 @@
                                     <th>Number Of Ticket</th>
                                     <th>Setting</th>
                                 </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>AAA-1</td>
-                                    <td>Mercedes C200</td>
-                                    <td>2022-01-02</td>
-                                    <td>10</td>
+                                <tr th:each="c,loop :${rooms}">
+                                    <td th:text="${loop.count}"></td>
+                                    <td th:text="${c.roomName}"></td>
+                                    <td th:text="${c.carId.carName}"></td>
+                                    <td th:text="${c.openDate}"></td>
+                                    <td th:text="${c.ticketNumber}"></td>
                                     <td>
-                                        <button title="View" class="pd-setting-ed"><a href="#myViewModal" data-toggle="modal"><i class="fa fa-eye" aria-hidden="true"></i></a></button>
-                                        <button title="Edit" class="pd-setting-ed"><a href="#myUpdateModal" data-toggle="modal"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></button>
-                                        <button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                        <button title="View" class="pd-setting-ed"><a  th:attr="data-target='#myViewModal'+*{c.id}" data-toggle="modal"><i class="fa fa-eye" aria-hidden="true"></i></a></button>
+                                        <button title="Edit" class="pd-setting-ed"><a th:attr="data-target='#myUpdateModal'+*{c.id}" data-toggle="modal"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></button>
+                                        <button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><a ><i class="fa fa-trash-o" aria-hidden="true"></i></a></button>
                                     </td>
+                                    <!-- Start View pop-up-->
+                                    <div th:id="'myViewModal'+*{c.id}" class="modal fade" tabindex="-1" role="dialog">
+                                        <div class="modal-dialog modal-lg" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                    <h4 class="modal-title">View</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div style="margin: 0 auto;" class="profile-info-inner">
+                                                        <div class="text-center">
+                                                            <img th:src="${c.imgPath}" style="height: 300px; width: 500px" alt=""/>
+                                                        </div>
+                                                        <div class="profile-details-hr">
+                                                            <div class="row">
+                                                                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                                                    <div class="address-hr">
+                                                                        <p><b>Room Name</b><br /> [[${c.roomName}]]</p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                                                    <div class="address-hr">
+                                                                        <p><b>Car Name</b><br /> [[${c.carId.carName}]]</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                                                    <div class="address-hr">
+                                                                        <p><b>Start Time</b><br /> [[${c.startTime}]]</p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                                                    <div class="address-hr">
+                                                                        <p><b>End Time</b><br /> [[${c.endTime}]]</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                                                    <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
+                                                                        <p><b>Number Ticket</b><br /> [[${c.ticketNumber}]] </p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                                                    <div class="address-hr">
+                                                                        <p><b>Open Date</b><br /> [[${c.openDate}]]</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                                                    <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
+                                                                        <p><b>Up Bound Price</b><br /> [[${c.carId.upBoundPrice}]] </p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                                                    <div class="address-hr">
+                                                                        <p><b>Down Bound Price</b><br /> [[${c.carId.downBoundPrice}]]</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-sm-12 col-xs-6">
+                                                                    <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
+                                                                        <p><b>Description</b><br /> [[${c.carId.description}]]</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                                                </div>
+                                                                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                                                    <div class="address-hr">
+                                                                        <p><b>Create By</b><br /> [[${c.createdBy.userName}]]</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--End View pop-up-->
+
+                                    <!-- Start Update pop-up-->
+                                    <div th:id="'myUpdateModal'+*{c.id}" class="modal fade" tabindex="-1" role="dialog">
+                                        <div class="modal-dialog modal-lg" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                    <h4 class="modal-title">Update</h4>
+                                                </div>
+                                                <form action="#"  th:action="@{/admin/auctionroom/edit}" method="post" enctype="multipart/form-data">
+                                                    <div class="modal-body">
+                                                        <div style="margin: 0 auto;" class="profile-info-inner">
+                                                            <div class="profile-details-hr">
+                                                                <div class="row">
+                                                                    <div class="col-sm-12 col-xs-6">
+                                                                        <p><b>ID</b></p>
+                                                                        <div class="form-group">
+                                                                            <input th:value="*{c.id}" name="id" type="text" class="form-control" placeholder="ID" readonly="readonly">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                                                        <div class="address-hr">
+                                                                            <p><b>Room Name</b></p>
+                                                                            <div class="form-group">
+                                                                                <input th:value="*{c.roomName}" name="roomName" type="text" class="form-control" placeholder="Room Name">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                                                        <div class="address-hr">
+                                                                            <p><b>Car Name</b></p>
+                                                                            <div class="form-group">
+                                                                                <select name="getIdCar" class="form-control" disabled="disabled">
+                                                                                    <option value="none" selected="" disabled="">Select Model</option>
+                                                                                    <option th:each="ca : ${cars}" th:value="${ca.id}" th:text="${ca.carName}" th:selected="${ca.id} == *{c.carId.id}"></option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                                                        <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
+                                                                            <p><b>Start Time</b></p>
+                                                                            <div class="form-group res-mg-t-15">
+                                                                                <input th:value="*{c.startTime}" name="startTime" type="time" class="form-control" placeholder="Start Time">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                                                        <div class="address-hr">
+                                                                            <p><b>End Time</b></p>
+                                                                            <div class="form-group">
+                                                                                <input th:value="*{c.endTime}" name="endTime" type="time" class="form-control" placeholder="Start Time">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                                                        <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
+                                                                            <p><b>Number Ticket</b></p>
+                                                                            <div class="form-group res-mg-t-15">
+                                                                                <input th:value="*{c.ticketNumber}" name="numTicket" type="number" class="form-control" placeholder="Ticket">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                                                        <div class="address-hr">
+                                                                            <p><b>Open Date</b></p>
+                                                                            <div class="form-group">
+                                                                                <input th:value="*{c.openDate}"  name="openDate"  class="form-control" placeholder="Start Time">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                                                        <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
+                                                                            <p><b>Created By</b></p>
+                                                                            <div class="form-group res-mg-t-15">
+                                                                                <select name="createdBy" class="form-control" >
+                                                                                    <option value="none" selected="" disabled="">Select Model</option>
+                                                                                    <option th:each="cr : ${createdBy}" th:value="${cr.id}" th:text="${cr.userName}" th:selected="${cr.id} == *{c.createdBy.id}"></option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                                                        <div class="address-hr">
+                                                                            <p><b>Type Room</b></p>
+                                                                            <div class="form-group">
+                                                                                <select name="typeRoom" class="form-control" >
+                                                                                    <option value="none" selected="" disabled="">Select Model</option>
+                                                                                    <option th:each="ro : ${roomType}" th:value="${ro.id}" th:text="${ro.typeName}" th:selected="${ro.id} == *{c.typeRoomId.id}"></option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                                                        <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
+                                                                            <p><b>Ticket Price</b></p>
+                                                                            <div class="form-group res-mg-t-15">
+                                                                                <input th:value="*{c.ticketPrice}" name="ticketPrice" type="number" class="form-control" placeholder="Ticket">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                                                        <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
+                                                                            <p><b>Image</b></p>
+                                                                            <div class="form-group">
+                                                                                <input name="upImg" type="file" class="form-control" placeholder="">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-sm-12 col-xs-6">
+                                                                        <div class="text-center">
+                                                                            <img th:src="${c.imgPath}" style="height: 300px; width: 500px" alt=""/>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                                        <button type="submit" class="btn btn-primary">Update</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--End Update pop-up-->
                                 </tr>
                             </table>
                         </div>
                         <div class="custom-pagination">
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination">
-                                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                    <li class="page-item" th:if="${rooms.hasPrevious()}"><a class="page-link" th:href="@{/admin/auctionroom(page=${rooms.number}-1,search=${param.search})}">Previous</a></li>
+                                    <li class="page-item"><a th:text="${rooms.number} + 1"></a></li>
+                                    <li class="page-item" th:if="${rooms.hasNext()}"><a >/</a></li>
+                                    <li class="page-item" th:if="${rooms.hasNext()}"><a th:text="${rooms.totalPages}"></a></li>
+                                    <li class="page-item" th:if="${rooms.hasNext()}"><a class="page-link" th:href="@{/admin/auctionroom(page=${rooms.number}+1,search=${param.search})}">Next</a></li>
                                 </ul>
                             </nav>
                         </div>
@@ -345,73 +570,7 @@
         </div>
     </div>
     <!-- End content area-->
-    <!-- Start View pop-up-->
-    <div id="myViewModal" class="modal fade" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">View</h4>
-                </div>
-                <div class="modal-body">
-                    <div style="margin: 0 auto;" class="profile-info-inner">
-                        <div class="profile-img">
-                            <img src="../img/profile/user.png" alt=""/>
-                        </div>
-                        <div class="profile-details-hr">
-                            <div class="row">
-                                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
-                                    <div class="address-hr">
-                                        <p><b>Room Name</b><br /> Fly Zend</p>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
-                                    <div class="address-hr">
-                                        <p><b>Car Name</b><br /> Mercedes C200</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
-                                    <div class="address-hr">
-                                        <p><b>Start Time</b><br /> 12:00</p>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
-                                    <div class="address-hr">
-                                        <p><b>End Time</b><br /> 12:30</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
-                                    <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
-                                        <p><b>Number Ticket</b><br /> 10</p>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
-                                    <div class="address-hr">
-                                        <p><b>Open Date</b><br /> 3/11/2022</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
-                                    <div class="address-hr">
-                                        <p><b>Create By</b><br /> KKK</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--End View pop-up-->
+
     <!-- Start Create pop-up-->
     <div id="myCreateModal" class="modal fade" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg" role="document">
@@ -420,7 +579,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title">Create</h4>
                 </div>
-                <form action="#" class="dropzone dropzone-custom needsclick add-professors" id="demo1-upload">
+                <form action="#" th:action="@{/admin/auctionroom/create}" method="post" th:object="${roomDTO}" enctype="multipart/form-data">
                     <div class="modal-body">
                         <div style="margin: 0 auto;" class="profile-info-inner">
                             <div class="profile-details-hr">
@@ -429,7 +588,7 @@
                                         <div class="address-hr">
                                             <p><b>Room Name</b></p>
                                             <div class="form-group">
-                                                <input name="roomname" type="text" class="form-control" placeholder="Room Name">
+                                                <input th:field="*{roomName}" name="roomName" type="text" class="form-control" placeholder="Room Name">
                                             </div>
                                         </div>
                                     </div>
@@ -437,10 +596,9 @@
                                         <div class="address-hr">
                                             <p><b>Car Name</b></p>
                                             <div class="form-group">
-                                                <select name="car" class="form-control">
+                                                <select name="carId" class="form-control">
                                                     <option value="none" selected="" disabled="">Select Car</option>
-                                                    <option value="0">Mercedes GLC 300</option>
-                                                    <option value="1">Audi</option>
+                                                    <option th:each="ca : ${cars}" th:value="${ca.id}" th:text="${ca.carName}"></option>
                                                 </select>
                                             </div>
                                         </div>
@@ -451,7 +609,7 @@
                                         <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
                                             <p><b>Start Time</b></p>
                                             <div class="form-group res-mg-t-15">
-                                                <input name="startTime" type="time" class="form-control" placeholder="Start Time">
+                                                <input th:field="*{startTime}" name="startTime" type="time" class="form-control" placeholder="Start Time">
                                             </div>
                                         </div>
                                     </div>
@@ -459,7 +617,7 @@
                                         <div class="address-hr">
                                             <p><b>End Time</b></p>
                                             <div class="form-group">
-                                                <input name="endTime" type="time" class="form-control" placeholder="Start Time">
+                                                <input th:field="*{endTime}" name="endTime" type="time" class="form-control" placeholder="Start Time">
                                             </div>
                                         </div>
                                     </div>
@@ -469,7 +627,50 @@
                                         <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
                                             <p><b>Number Ticket</b></p>
                                             <div class="form-group res-mg-t-15">
-                                                <input name="numTicket" type="number" class="form-control" placeholder="Ticket">
+                                                <input th:field="*{ticketNumber}" name="numTicket" type="number" class="form-control" placeholder="Ticket">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                        <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
+                                            <p><b>Ticket Price</b></p>
+                                            <div class="form-group res-mg-t-15">
+                                                <input th:field="*{ticketPrice}" name="ticketPrice" type="number" class="form-control" placeholder="Ticket">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                        <div class="address-hr">
+                                            <p><b>Type Room</b></p>
+                                            <div class="form-group">
+                                                <select name="typeRoom" class="form-control">
+                                                    <option value="none" selected="" disabled="">Select Type</option>
+                                                    <option th:each="ty : ${roomType}" th:value="${ty.id}" th:text="${ty.typeName}"></option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                        <div class="address-hr">
+                                            <p><b>Created By</b></p>
+                                            <div class="form-group">
+                                                <select name="createBy" class="form-control">
+                                                    <option value="none" selected="" disabled="">Select User</option>
+                                                    <option th:each="us : ${createdBy}" th:value="${us.id}" th:text="${us.userName}"></option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                        <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
+                                            <p><b>Img</b></p>
+                                            <div class="form-group">
+                                                <input name="upImg"  type="file" class="form-control" placeholder="">
                                             </div>
                                         </div>
                                     </div>
@@ -477,17 +678,7 @@
                                         <div class="address-hr">
                                             <p><b>Open Date</b></p>
                                             <div class="form-group">
-                                                <input name="openDate" type="date" class="form-control" placeholder="Start Time">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-12 col-xs-6">
-                                        <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
-                                            <p><b>Img</p>
-                                            <div class="form-group">
-                                                <input name="img" id="img" type="file" class="form-control" placeholder="">
+                                                <input th:field="*{openDate}" name="openDate" type="date" class="form-control" placeholder="Start Time">
                                             </div>
                                         </div>
                                     </div>
@@ -497,105 +688,14 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-primary">Create</button>
+                        <button type="submit" class="btn btn-primary">Create</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
     <!--End Create pop-up-->
-    <!-- Start Update pop-up-->
-    <div id="myUpdateModal" class="modal fade" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Create</h4>
-                </div>
-                <form action="#" class="dropzone dropzone-custom needsclick add-professors" id="demo1-upload">
-                    <div class="modal-body">
-                        <div style="margin: 0 auto;" class="profile-info-inner">
-                            <div class="profile-details-hr">
-                                <div class="row">
-                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
-                                        <div class="address-hr">
-                                            <p><b>Room Name</b></p>
-                                            <div class="form-group">
-                                                <input name="roomname" type="text" class="form-control" placeholder="Room Name">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
-                                        <div class="address-hr">
-                                            <p><b>Car Name</b></p>
-                                            <div class="form-group">
-                                                <select name="car" class="form-control">
-                                                    <option value="none" selected="" disabled="">Select Car</option>
-                                                    <option value="0">Mercedes GLC 300</option>
-                                                    <option value="1">Audi</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
-                                        <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
-                                            <p><b>Start Time</b></p>
-                                            <div class="form-group res-mg-t-15">
-                                                <input name="startTime" type="time" class="form-control" placeholder="Start Time">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
-                                        <div class="address-hr">
-                                            <p><b>End Time</b></p>
-                                            <div class="form-group">
-                                                <input name="endTime" type="time" class="form-control" placeholder="Start Time">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
-                                        <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
-                                            <p><b>Number Ticket</b></p>
-                                            <div class="form-group res-mg-t-15">
-                                                <input name="numTicket" type="number" class="form-control" placeholder="Ticket">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
-                                        <div class="address-hr">
-                                            <p><b>Open Date</b></p>
-                                            <div class="form-group">
-                                                <input name="openDate" type="date" class="form-control" placeholder="Start Time">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-12 col-xs-6">
-                                        <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
-                                            <p><b>Img</p>
-                                            <div class="form-group">
-                                                <input name="img" id="img" type="file" class="form-control" placeholder="">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-primary">Update</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <!--End Update pop-up-->
+
     <!--Start footer-->
     <div class="footer-copyright-area">
         <div class="container-fluid">
