@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,12 +18,13 @@ public class RoomDTO {
     private Car carId;
     private RoomType typeRoomId;
     private String roomName;
-    private String createdAt;
-    private String updatedAt;
+    private String roomTime;
+    private Timestamp createdAt;
+    private Timestamp updatedAt;
     private User createdBy;
-    private Date openDate;
-    private Time startTime;
-    private Time endTime;
+    private String openDate;
+    private String startTime;
+    private String endTime;
     private int ticketNumber;
     private int ticketPrice;
     private String imgPath;

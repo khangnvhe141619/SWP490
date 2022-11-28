@@ -70,59 +70,58 @@
 <div class="left-sidebar-pro">
   <nav id="sidebar" class="">
     <div class="sidebar-header">
-      <a href="index.html"><img class="main-logo" th:src="@{img/logo/logo.png}" alt="" /></a>
-      <strong><a href="index.html"><img th:src="@{img/logo/logosn.png}" alt="" /></a></strong>
+      <a th:href="@{/admin/home}"><img class="main-logo" th:src="@{img/logo/logo.png}" alt="" /></a>
+      <strong><a th:href="@{/admin/home}"><img th:src="@{img/logo/logosn.png}" alt="" /></a></strong>
     </div>
     <!--Start left-scrollbar-->
     <div class="left-custom-menu-adp-wrap comment-scrollbar">
       <nav class="sidebar-nav left-sidebar-menu-pro">
         <ul class="metismenu" id="menu1">
           <li>
-            <a title="Landing Page" href="index.html" aria-expanded="false"><span class="fa fa-home icon-wrap" aria-hidden="true"></span> <span class="mini-click-non">Home</span></a>
+            <a title="Landing Page" th:href="@{/admin/home}" aria-expanded="false"><span class="fa fa-home icon-wrap" aria-hidden="true"></span> <span class="mini-click-non">Home</span></a>
           </li>
           <li>
-            <a class="has-arrow" href="listUser.html" aria-expanded="false"><span class="fa fa-user icon-wrap"></span> <span class="mini-click-non">User</span></a>
+            <a class="has-arrow" th:href="@{/admin/user}" aria-expanded="false"><span class="fa fa-user icon-wrap"></span> <span class="mini-click-non">User</span></a>
             <ul class="submenu-angle" aria-expanded="false">
-              <li><a href="listUser.html"><span class="mini-sub-pro">All Users</span></a></li>
-              <li><a href="listBannedUser.html"><span class="mini-sub-pro">All Banned Users</span></a></li>
+              <li><a th:href="@{/admin/user}"><span class="mini-sub-pro">All Users</span></a></li>
+              <li><a th:href="@{/admin/userban}"><span class="mini-sub-pro">All Banned Users</span></a></li>
             </ul>
           </li>
           <li>
-            <a class="has-arrow" href="listCar.html" aria-expanded="false"><span class="fa fa-automobile icon-wrap"></span> <span class="mini-click-non">Car</span></a>
+            <a class="has-arrow" th:href="@{/admin/car}" aria-expanded="false"><span class="fa fa-automobile icon-wrap"></span> <span class="mini-click-non">Car</span></a>
             <ul class="submenu-angle" aria-expanded="false">
-              <li><a href="listCar.html"><span class="mini-sub-pro">All Cars</span></a></li>
+              <li><a th:href="@{/admin/car}"><span class="mini-sub-pro">All Cars</span></a></li>
             </ul>
           </li>
           <li>
-            <a class="has-arrow" href="listBrand.html" aria-expanded="false"><span class="glyphicon glyphicon-menu-hamburger icon-wrap"></span> <span class="mini-click-non">Brand</span></a>
+            <a class="has-arrow" th:href="@{/admin/brand}" aria-expanded="false"><span class="glyphicon glyphicon-menu-hamburger icon-wrap"></span> <span class="mini-click-non">Brand</span></a>
             <ul class="submenu-angle" aria-expanded="false">
-              <li><a href="listBrand.html"><span class="mini-sub-pro">All Brands</span></a></li>
+              <li><a th:href="@{/admin/brand}"><span class="mini-sub-pro">All Brands</span></a></li>
             </ul>
           </li>
           <li>
-            <a class="has-arrow" href="listAuction.html" aria-expanded="false"><span class="fa fa-window-maximize icon-wrap"></span> <span class="mini-click-non">Auction Room</span></a>
+            <a class="has-arrow" th:href="@{/admin/auctionroom}" aria-expanded="false"><span class="fa fa-window-maximize icon-wrap"></span> <span class="mini-click-non">Auction Room</span></a>
             <ul class="submenu-angle" aria-expanded="false">
-              <li><a href="listAuction.html"><span class="mini-sub-pro">All Auction Room</span></a></li>
+              <li><a th:href="@{/admin/auctionroom}"><span class="mini-sub-pro">All Auction Room</span></a></li>
             </ul>
           </li>
           <li>
-            <a class="has-arrow" href="listModel.html" aria-expanded="false"><span class="glyphicon glyphicon-th-large icon-wrap"></span> <span class="mini-click-non">Model</span></a>
+            <a class="has-arrow" th:href="@{/admin/model}" aria-expanded="false"><span class="glyphicon glyphicon-th-large icon-wrap"></span> <span class="mini-click-non">Model</span></a>
             <ul class="submenu-angle" aria-expanded="false">
-              <li><a href="listModel.html"><span class="mini-sub-pro">All Model</span></a></li>
-              <li><a href="listModelSpec.html"><span class="mini-sub-pro">All Model Specification</span></a></li>
+              <li><a th:href="@{/admin/model}"><span class="mini-sub-pro">All Model</span></a></li>
+              <li><a th:href="@{/admin/modelSpec}"><span class="mini-sub-pro">All Model Specification</span></a></li>
             </ul>
           </li>
           <li>
-            <a class="has-arrow" href="listNews.html" aria-expanded="false"><span class="fa fa-newspaper-o icon-wrap"></span> <span class="mini-click-non">News</span></a>
+            <a class="has-arrow" th:href="@{/admin/news}" aria-expanded="false"><span class="fa fa-newspaper-o icon-wrap"></span> <span class="mini-click-non">News</span></a>
             <ul class="submenu-angle" aria-expanded="false">
-              <li><a href="listNews.html"><span class="mini-sub-pro">All News</span></a></li>
+              <li><a th:href="@{/admin/news}"><span class="mini-sub-pro">All News</span></a></li>
             </ul>
           </li>
           <li>
             <a class="has-arrow" href="#" aria-expanded="false"><span class="fa fa-gamepad icon-wrap"></span> <span class="mini-click-non">Game Play</span></a>
             <ul class="submenu-angle" aria-expanded="false">
-              <li><a href="#"><span class="mini-sub-pro">Game </span></a></li>
-              <li><a href="#"><span class="mini-sub-pro">Play </span></a></li>
+              <li><a href="#"><span class="mini-sub-pro">Game Play</span></a></li>
             </ul>
           </li>
           <li>
@@ -144,7 +143,7 @@
     <div class="row">
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="logo-pro">
-          <a href="index.html"><img class="main-logo" th:src="@{img/logo/logo.png}" alt="" /></a>
+          <a th:href="@{/admin/home}"><img class="main-logo" th:src="@{img/logo/logo.png}" alt="" /></a>
         </div>
       </div>
     </div>
@@ -196,55 +195,49 @@
             <div class="mobile-menu">
               <nav id="dropdown">
                 <ul class="mobile-menu-nav">
-                  <li><a href="index.html">Home</a></li>
-                  <li><a data-toggle="collapse" data-target="#demoevent" href="#">User <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
+                  <li><a th:href="@{/admin/home}">Home</a></li>
+                  <li><a data-toggle="collapse" data-target="#demoevent" th:href="@{/admin/user}">User <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
                     <ul id="demoevent" class="collapse dropdown-header-top">
-                      <li><a href="listUser.html">All Users</a>
+                      <li><a th:href="@{/admin/user}">All Users</a>
                       </li>
-                      <li><a href="listBannedUser.html">All Banned Users</a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li><a data-toggle="collapse" data-target="#demopro" href="#">Car <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                    <ul id="demopro" class="collapse dropdown-header-top">
-                      <li><a href="listCar.html">All Cars</a>
+                      <li><a th:href="@{/admin/userban}">All Banned Users</a>
                       </li>
                     </ul>
                   </li>
-                  <li><a data-toggle="collapse" data-target="#demopro" href="#">Brand <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                    <ul id="demopro" class="collapse dropdown-header-top">
-                      <li><a href="listBrand.html">All Brands</a>
+                  <li><a data-toggle="collapse" data-target="#demopro" th:href="@{/admin/car}">Car <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
+                    <ul class="collapse dropdown-header-top">
+                      <li><a th:href="@{/admin/car}">All Cars</a>
                       </li>
                     </ul>
                   </li>
-                  <li><a data-toggle="collapse" data-target="#demopro" href="#">Auction Room <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                    <ul id="demopro" class="collapse dropdown-header-top">
-                      <li><a href="listAuction.html">All Auction Room</a>
+                  <li><a data-toggle="collapse" data-target="#demopro" th:href="@{/admin/brand}">Brand <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
+                    <ul class="collapse dropdown-header-top">
+                      <li><a th:href="@{/admin/brand}">All Brands</a>
                       </li>
                     </ul>
                   </li>
-                  <li><a data-toggle="collapse" data-target="#demopro" href="#">Model <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                    <ul id="demopro" class="collapse dropdown-header-top">
-                      <li><a href="listModel.html">All Model</a>
-                      </li>
-                      <li><a href="listModelSpec.html">All Model Specification</a>
+                  <li><a data-toggle="collapse" data-target="#demopro" th:href="@{/admin/auctionroom}">Auction Room <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
+                    <ul class="collapse dropdown-header-top">
+                      <li><a th:href="@{/admin/auctionroom}">All Auction Room</a>
                       </li>
                     </ul>
                   </li>
-                  <li><a data-toggle="collapse" data-target="#demopro" href="#">News <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                    <ul id="demopro" class="collapse dropdown-header-top">
-                      <li><a href="listNews.html">All News</a>
+                  <li><a data-toggle="collapse" data-target="#demopro" th:href="@{/admin/model}">Model <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
+                    <ul class="collapse dropdown-header-top">
+                      <li><a th:href="@{/admin/model}">All Model</a>
                       </li>
-                      <li><a href="create-news.html">Create New News</a>
+                      <li><a th:href="@{/admin/modelSpec}">All Model Specification</a>
                       </li>
+                    </ul>
+                  </li>
+                  <li><a data-toggle="collapse" data-target="#demopro" th:href="@{/admin/news}">News <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
+                    <ul class="collapse dropdown-header-top">
+                      <li><a th:href="@{/admin/news}">All News</a></li>
                     </ul>
                   </li>
                   <li><a data-toggle="collapse" data-target="#demopro" href="#">Game Play<span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                    <ul id="demopro" class="collapse dropdown-header-top">
-                      <li><a href="#">Game</a>
-                      </li>
-                      <li><a href="#">Play</a>
-                      </li>
+                    <ul class="collapse dropdown-header-top">
+                      <li><a href="#">Game Play</a></li>
                     </ul>
                   </li>
                   <li><a data-toggle="collapse" data-target="#demopro" href="#">Wishlist<span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
@@ -277,7 +270,7 @@
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                   <ul class="breadcome-menu">
-                    <li><a href="#">Home</a> <span class="bread-slash">/</span>
+                    <li><a th:href="@{/admin/home}">Home</a> <span class="bread-slash">/</span>
                     </li>
                     <li><span class="bread-blod">User</span>
                     </li>

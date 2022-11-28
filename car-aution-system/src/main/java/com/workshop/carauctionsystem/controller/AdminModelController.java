@@ -50,7 +50,7 @@ public class AdminModelController {
         return modelAndView;
     }
 
-    @PostMapping("/adminmodel/create")
+    @PostMapping("/admin/model/create")
     public String create(@ModelAttribute(value = "modelCar") ModelCarModel modelCarModel,
                          @RequestParam Long idModelSpec,
                          @RequestParam Long idBrand,
