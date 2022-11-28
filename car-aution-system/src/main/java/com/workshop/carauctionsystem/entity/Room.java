@@ -25,8 +25,9 @@ public class Room {
     @JoinColumn(name = "carid")
     private Car carId;
 
-    @Column(name = "typeroomid")
-    private String typeRoomId;
+    @OneToOne
+    @JoinColumn(name = "typeroomid")
+    private RoomType typeRoomId;
 
     @Column(name = "roomname")
     private String roomName;
@@ -37,8 +38,9 @@ public class Room {
     @Column(name = "updatedat")
     private String updatedAt;
 
-    @Column(name = "createdby")
-    private String createdBy;
+    @OneToOne
+    @JoinColumn(name = "createdby")
+    private User createdBy;
 
     @Column(name = "opendate")
     private Date openDate;

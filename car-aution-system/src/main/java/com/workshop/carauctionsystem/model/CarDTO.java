@@ -24,7 +24,6 @@ public class CarDTO {
     private String manufacturing;
     private String air_bad;
     private String description;
-
     private Long upBoundPrice;
     private Long downBoundPrice;
     private ModelCar modelId;

@@ -3,7 +3,6 @@ package com.workshop.carauctionsystem.controller;
 import com.workshop.carauctionsystem.entity.Brand;
 import com.workshop.carauctionsystem.entity.ModelCar;
 import com.workshop.carauctionsystem.entity.ModelSpecification;
-import com.workshop.carauctionsystem.entity.News;
 import com.workshop.carauctionsystem.exception.NotFoundException;
 import com.workshop.carauctionsystem.model.ModelCarModel;
 import com.workshop.carauctionsystem.service.impl.BrandServiceImpl;
@@ -19,8 +18,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import javax.validation.Valid;
 import java.util.Map;
 
 @Controller
