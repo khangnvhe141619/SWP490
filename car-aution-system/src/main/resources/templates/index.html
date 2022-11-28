@@ -25,19 +25,20 @@
     <div class="container-fluid">
         <div class="row justify-content-center align-items-center">
             <div class="col-xl-11 d-flex align-items-center justify-content-between">
-                <h1 class="logo"><a href="home.html">CAB Auction</a></h1>
+                <h1 class="logo"><a th:href="@{/home}">CAB Auction</a></h1>
                 <nav id="navbar" class="navbar">
                     <ul>
-                        <li><a class="nav-link scrollto active" href="Home.html">Home</a></li>
-                        <li><a class="nav-link scrollto" href="home.html">Brand</a></li>
-                        <li><a class="nav-link scrollto " href="home.html">Auction Room</a></li>
+                        <li><a class="nav-link scrollto active" th:href="@{/home}">Home</a></li>
+                        <li><a class="nav-link scrollto" th:href="@{/home}">Brand</a></li>
+                        <li><a class="nav-link scrollto " th:href="@{/home}">Auction Room</a></li>
                         <li><a class="nav-link scrollto" href="blog.html">News</a></li>
-                        <li><a class="nav-link scrollto" href="guideline.html">Guideline</a></li>
-                        <li><a class="nav-link scrollto " href="home.html">About Us</a></li>
+                        <li><a class="nav-link scrollto" th:href="@{/guideLine}">Guideline</a></li>
+                        <li><a class="nav-link scrollto " th:href="@{/home}">About Us</a></li>
                     </ul>
                     <a href="connectWallet.html" style="background-color: rgb(66, 180, 66); padding-right: 30px;"
                        class="connectwallet">Connect wallet</a>
-                    <a href="PeronalProfile.html"><i class="bi bi-person-circle" style="font-size: 30px;"></i></a>
+                    <a th:href="@{/personProfile}"><i class="bi bi-person-circle" style="font-size: 30px;"></i><i
+                            th:text="${username}"></i></a>
                 </nav>
             </div>
         </div>
@@ -101,6 +102,9 @@
                     <div id="clock">
                         <h5>This Auction Ends in:</h5>
                         <div id="time">
+                            <input id="diffHours" th:value="${diffHours}" style="display: none">
+                            <input id="diffMinutes" th:value="${diffMinutes}" style="display: none">
+                            <input id="diffSeconds" th:value="${diffSeconds}" style="display: none">
                             <div>
                                 <span id="hours">00</span><span>Hours</span>
                             </div>
@@ -386,24 +390,16 @@
 </div>
 <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
         class="bi bi-arrow-up-short"></i></a>
+<button  class="btn rounded-pill Larger shadow" type="button" onclick="isPassAjax1()"
+        style="background-color: #04af04; color: #fff">Submit A Bid</button>
 <script th:inline="javascript">
     function isPassAjax1() {
 
-        var bid = $("#inputPrie").val();
-        if (document.getElementById("inputPrie").value == 0 || document.getElementById("inputPrie").value == null) {
-            error += `Please do not leave the price blank or equal to 0`;
-            element2.innerHTML = error;
-        } else {
-            if(confirm("Are you sure you want to bid?")==true){
-                document.getElementById('error').remove();
-                h5 += `<h5>${document.getElementById("inputPrie").value} CAB</h5>`;
-                document.getElementById('btnBid').setAttribute('onclick', '');
-                document.getElementById('btnBid').setAttribute('style', 'background-color: #c0c0c0;');
-                element.innerHTML = h5;
+        var bid = 1;
                 console.log(bid);
                 $.ajax({
                     type: "POST",
-                    url: "http://localhost:8080/insertBid?bid=" + bid,
+                    url: "http://localhost:8080/listRoomPage?bid=" + bid,
                     data: 'bid:' + bid,
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
@@ -414,11 +410,6 @@
                         alert('Error: ' + e);
                     }
                 });
-                return h5;
-            }else{
-                return null;
-            }
-        }
     }
 </script>
 <script th:src="@{/assets/vendor/purecounter/purecounter_vanilla.js}"></script>

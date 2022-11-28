@@ -51,8 +51,9 @@ public class WinPageController {
         }
         List<RoomDetailPlayer> roomDetailPlayerList1=null;
         for (int i = 0; i<roomDetailPlayerList. size(); i++){
-            if(min + roomDetailPlayerList.get(i).getUserBid() == result){
+            if(min == Math.abs(result - roomDetailPlayerList.get(i).getUserBid())){
                 roomDetailPlayerList1 = roomDetailPlayerService.findWinner(roomDetailPlayerList.get(i).getUserBid(), roomId);
+                break;
             }
         }
         if(roomDetailPlayerList1.get(0) != null){

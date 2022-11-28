@@ -20,7 +20,7 @@ function getHome (){
 
 function onSubmitForm () {
     showLoading();
-    setTimeout(hideLoading, 3000);
+    setTimeout(hideLoading, 1000);
 
     var username = $("#username").val();
     var password2 = $("#password").val();
@@ -32,7 +32,7 @@ function onSubmitForm () {
         dataType: "json",
         success: function (response) {
             if (response.status == "yes") {
-                setTimeout(getHome, 3000);
+                setTimeout(getHome, 1000);
             } else if (response.status == "no") {
                 function message (){
                     Swal.fire({
@@ -41,7 +41,7 @@ function onSubmitForm () {
                         text: response.message,
                     });
                 }
-                setTimeout(message, 3000);
+                setTimeout(message, 1000);
 
             }else if (response.status == "ban") {
                 function message (){
@@ -51,7 +51,7 @@ function onSubmitForm () {
                         text: response.message,
                     });
                 }
-                setTimeout(message, 3000);
+                setTimeout(message, 1000);
             }
         },
         error: function(e){

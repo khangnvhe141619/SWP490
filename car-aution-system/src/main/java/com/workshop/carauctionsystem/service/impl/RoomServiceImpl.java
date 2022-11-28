@@ -20,9 +20,18 @@ public class RoomServiceImpl implements RoomService {
     public List<Room> getAllRoom() {
         return roomRepository.findAll();
     }
+    @Override
+    public List<Room> getAllRoomLimit() {
+        return roomRepository.findAllLimit();
+    }
 
     @Override
     public Room getRoomById(int roomId) {
         return roomRepository.findRoomById(roomId);
+    }
+
+    @Override
+    public List<Room> getAllRoomByPage(int page) {
+        return roomRepository.getAllRoomByTime(page);
     }
 }

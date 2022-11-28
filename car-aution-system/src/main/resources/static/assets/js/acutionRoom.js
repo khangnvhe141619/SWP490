@@ -35,9 +35,9 @@ function carousel() {
 
 
 
-var Gio_hien_tai = 0;
-var Phut_hien_tai = 0;
-var Giay_hien_tai = 30;
+var Gio_hien_tai = document.getElementById("diffHours").value;
+var Phut_hien_tai = document.getElementById("diffMinutes").value;
+var Giay_hien_tai = document.getElementById("diffSeconds").value;
 var timeout = null;
 
 function clock() {
