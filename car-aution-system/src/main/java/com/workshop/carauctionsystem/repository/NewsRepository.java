@@ -18,4 +18,10 @@ public interface NewsRepository extends PagingAndSortingRepository<News,Long> {
     @Query(nativeQuery = true, value = "select * from news where news.title like %?1% order by id desc")
     public Page<News> findAllByNewsTitle(Pageable pageable, String title);
 
+
+    News findNewsById (long id);
+    @Query("SELECT n FROM News n order by n.createAt desc ")
+    Page<News> getTop5(Pageable pageable);
+
+
 }
