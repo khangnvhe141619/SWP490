@@ -28,10 +28,10 @@
                 <h1 class="logo"><a th:href="@{/home}">CAB Auction</a></h1>
                 <nav id="navbar" class="navbar">
                     <ul>
-                        <li><a class="nav-link scrollto active" th:href="@{/home}">Home</a></li>
+                        <li><a class="nav-link scrollto" th:href="@{/home}">Home</a></li>
                         <li><a class="nav-link scrollto" th:href="@{/home}">Brand</a></li>
-                        <li><a class="nav-link scrollto " th:href="@{/home}">Auction Room</a></li>
-                        <li><a class="nav-link scrollto" href="blog.html">News</a></li>
+                        <li><a class="nav-link scrollto active" th:href="@{/auctionRoom}">Auction Room</a></li>
+                        <li><a class="nav-link scrollto " href="blog.html">News</a></li>
                         <li><a class="nav-link scrollto" th:href="@{/guideLine}">Guideline</a></li>
                         <li><a class="nav-link scrollto " th:href="@{/home}">About Us</a></li>
                     </ul>
@@ -76,7 +76,12 @@
                         <div class="col-md-4 winning-bids">
                             <h3 class="text-success mb-5">***</h3>
                             <h5><span>To: </span><span>1000</span><span> CAB</span></h5>
-                            <div class="yourPrice" style="color: crimson; "></div>
+                            <th:block th:if="${bidPrice}">
+                                <div class="yourPrice" style="color: crimson; "></div>
+                            </th:block>
+                            <th:block th:if="${bidPrice == false}">
+                                <div class="yourPrice h5" style="color: crimson;" th:text="${roomDetailPlayer}+' CAB'"></div>
+                            </th:block>
                         </div>
                     </div>
                 </div>
@@ -92,10 +97,12 @@
                             <input id="roomId" style="display:none;" th:value="${roomId}">
                         </div>
                         <div class="col-md-3 align-self-center">
-                            <button id="btnBid" class="btn rounded-pill Larger shadow" type="button"
-                                    onclick="isPassAjax1()"
-                                    style="background-color: #04af04; color: #fff">Submit A Bid
-                            </button>
+                            <th:block th:if="${bidPrice}">
+                                <button id="btnBid" class="btn rounded-pill Larger shadow" type="button" onclick="isPassAjax1()" style="background-color: #04af04; color: #fff">Submit A Bid</button>
+                            </th:block>
+                            <th:block th:if="${bidPrice == false}">
+                                <button class="btn rounded-pill Larger shadow" style="background-color: #c0c0c0; color: #fff">Submit A Bid</button>
+                            </th:block>
                         </div>
                     </div>
                 </div>

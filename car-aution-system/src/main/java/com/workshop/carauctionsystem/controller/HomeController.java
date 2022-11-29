@@ -38,9 +38,7 @@ public class HomeController {
         } else {
             model.addAttribute("check", true);
         }
-        List<Room> listRoom = service.getAllRoom();
         List<Brand> brandList = brandService.getAllBrand();
-        model.addAttribute("listRoom", listRoom);
         model.addAttribute("brandList", brandList);
         ModelAndView view = new ModelAndView();
         view.setViewName("Home");
