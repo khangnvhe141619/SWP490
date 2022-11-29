@@ -83,7 +83,6 @@ public class AuctionRoomController {
     public ResponseEntity<ResponseObject> insertBid(@RequestParam("bid") String bid,
                                                     @CookieValue(value = "setUserId") int setUserId,
                                                     HttpSession session){
-        System.out.println(bid + "AAAAAAAAAAAA");
         int bidInt = Integer.parseInt(bid);
         Date date = new Date();
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

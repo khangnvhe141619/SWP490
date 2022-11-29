@@ -185,10 +185,10 @@
         dataType: "json",
         success: function (response) {
           // we have the response
-          if (response.status == "no") {
-            $("#emailError").show().html("");
+          if (response.status == "ok") {
+            $("#emailError").show().html(response.message);
             disableBtn();
-          } else if (response.status == "ok") {
+          } else if (response.status == "no") {
             $("#emailError").show().html(response.message);
             ableBtn();
           }
@@ -215,10 +215,10 @@
         dataType: "json",
         success: function (response) {
           // we have the response
-          if (response.status == "no") {
-            $("#usernameError").show().html("");
+          if (response.status == "ok") {
+            $("#usernameError").show().html(response.message);
             disableBtn();
-          } else if (response.status == "ok") {
+          } else if (response.status == "no") {
             $("#usernameError").show().html(response.message);
             ableBtn();
           }

@@ -87,12 +87,15 @@
                         </div>
                         <div class="col-md-7 align-self-center">
                             <span class="error" id="error" style="color: red; font-size: 12px;"></span>
-                            <input id="inputPrie" type="number" placeholder="Enter you bid amount" class="w-100 rounded-pill p-3" >
+                            <input id="inputPrie" type="number" placeholder="Enter you bid amount"
+                                   class="w-100 rounded-pill p-3">
                             <input id="roomId" style="display:none;" th:value="${roomId}">
                         </div>
                         <div class="col-md-3 align-self-center">
-                            <button id="btnBid" class="btn rounded-pill Larger shadow" type="button" onclick="isPassAjax1()"
-                                    style="background-color: #04af04; color: #fff">Submit A Bid</button>
+                            <button id="btnBid" class="btn rounded-pill Larger shadow" type="button"
+                                    onclick="isPassAjax1()"
+                                    style="background-color: #04af04; color: #fff">Submit A Bid
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -146,14 +149,18 @@
     <div>
         <div style="margin-left: 200px; margin-right: 200px; margin-top: 20px;" class="tabbar-room">
             <button class="tablink" onclick="openPage('Home', this, '#04befe')" id="defaultOpen"><img
-                    th:src="@{/assets/img/description.png}">Description</button>
+                    th:src="@{/assets/img/description.png}">Description
+            </button>
             <button class="tablink" onclick="openPage('News', this, '#04befe')"><img
-                    th:src="@{/assets/img/delivery.png}">Specifications</button>
+                    th:src="@{/assets/img/delivery.png}">Specifications
+            </button>
             <button class="tablink" onclick="openPage('Contact', this, '#04befe')"><img
-                    th:src="@{/assets/img/guide.png}">Guideline</button>
+                    th:src="@{/assets/img/guide.png}">Guideline
+            </button>
             <button class="tablink" onclick="openPage('About', this, '#04befe')"><img
                     th:src="@{/assets/img/boxchat.png}">Box
-                chat</button>
+                chat
+            </button>
         </div>
         <div>
             <div id="Home" class="tabcontent" style="margin-left: 200px; margin-right: 200px;">
@@ -161,7 +168,8 @@
                     <table class="table table-striped mt-4">
                         <tr>
                             <td class="fw-bold">Brand</td>
-                            <td style="border-right: 1px solid #afafaf;" th:text="${car.modelId.brandId.brandName}"></td>
+                            <td style="border-right: 1px solid #afafaf;"
+                                th:text="${car.modelId.brandId.brandName}"></td>
                             <td class="fw-bold">Seat Number</td>
                             <td th:text="${car.modelId.modelSpecificationId.seatNumber}">/td>
                         </tr>
@@ -187,7 +195,8 @@
                         </tr>
                         <tr>
                             <td class="fw-bold">Speed Control</td>
-                            <td style="border-right: 1px solid #afafaf;" th:text="${safetySystemList.speedControl}"></td>
+                            <td style="border-right: 1px solid #afafaf;"
+                                th:text="${safetySystemList.speedControl}"></td>
                             <td class="fw-bold">Tire Pressure</td>
                             <td th:text="${safetySystemList.tirePressure}"></td>
                         </tr>
@@ -288,7 +297,8 @@
                         <div class="username-page-container">
                             <form id="usernameForm" name="usernameForm">
                                 <div class="form-group">
-                                    <input style="display: none" type="text" id="name" placeholder="Username" autocomplete="off" class="form-control" th:value="${session.username}"/>
+                                    <input style="display: none" type="text" id="name" placeholder="Username"
+                                           autocomplete="off" class="form-control" th:value="${session.username}"/>
                                 </div>
                                 <div class="form-group">
                                     <input style="display: none" id="avatar" th:value="${session.avatar}"/>
@@ -311,11 +321,14 @@
                             <ul id="messageArea">
 
                             </ul>
-                            <form id="messageForm" name="messageForm" style="background: #dcdfe5" class="rounded-bottom">
+                            <form id="messageForm" name="messageForm" style="background: #dcdfe5"
+                                  class="rounded-bottom">
                                 <div class="form-group mt-3">
                                     <div class="input-group clearfix">
-                                        <input type="text" id="message" placeholder="Type a message..." autocomplete="off" class="form-control rounded"/>
-                                        <button style="margin-top: 3px" type="submit" class="primary rounded">Gửi</button>
+                                        <input type="text" id="message" placeholder="Type a message..."
+                                               autocomplete="off" class="form-control rounded"/>
+                                        <button style="margin-top: 3px" type="submit" class="primary rounded">Gửi
+                                        </button>
                                     </div>
                                 </div>
                             </form>
@@ -390,16 +403,26 @@
 </div>
 <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
         class="bi bi-arrow-up-short"></i></a>
-<button  class="btn rounded-pill Larger shadow" type="button" onclick="isPassAjax1()"
-        style="background-color: #04af04; color: #fff">Submit A Bid</button>
+<button class="btn rounded-pill Larger shadow" type="button" onclick="isPassAjax1()"
+        style="background-color: #04af04; color: #fff">Submit A Bid
+</button>
 <script th:inline="javascript">
     function isPassAjax1() {
-
-        var bid = 1;
+        var bid = $("#inputPrie").val();
+        if (document.getElementById("inputPrie").value == 0 || document.getElementById("inputPrie").value == null) {
+            error += `Please do not leave the price blank or equal to 0`;
+            element2.innerHTML = error;
+        } else {
+            if (confirm("Are you sure you want to bid?") == true) {
+                document.getElementById('error').remove();
+                h5 += `<h5>${document.getElementById("inputPrie").value} CAB</h5>`;
+                document.getElementById('btnBid').setAttribute('onclick', '');
+                document.getElementById('btnBid').setAttribute('style', 'background-color: #c0c0c0;');
+                element.innerHTML = h5;
                 console.log(bid);
                 $.ajax({
                     type: "POST",
-                    url: "http://localhost:8080/listRoomPage?bid=" + bid,
+                    url: "http://localhost:8080/insertBid?bid=" + bid,
                     data: 'bid:' + bid,
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
@@ -410,6 +433,11 @@
                         alert('Error: ' + e);
                     }
                 });
+                return h5;
+            } else {
+                return null;
+            }
+        }
     }
 </script>
 <script th:src="@{/assets/vendor/purecounter/purecounter_vanilla.js}"></script>
