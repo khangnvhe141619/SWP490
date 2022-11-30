@@ -1,49 +1,70 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>CAB Auction</title>
-
+    <link rel="stylesheet" th:href="@{assets/css/Sign-In-Up.css}" />
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700"
           rel="stylesheet">
-    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="../vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
     <link href="../css/style.css" rel="stylesheet">
     <link href="../css/connectWallet.css" rel="stylesheet">
+    <title>Sign in & Sign up</title>
 </head>
-<body style="background: url('/assets/img/bg-room.png');">
-<header id="header" class="fixed-top d-flex align-items-center header-transparent bg-black">
-    <div class="container-fluid">
-        <div class="row justify-content-center align-items-center">
-            <div class="col-xl-11 d-flex align-items-center justify-content-between">
-                <h1 class="logo"><a href="home.html">CAB Auction</a></h1>
-                <nav id="navbar" class="navbar">
-                    <ul>
-                        <li><a class="nav-link scrollto active" href="Home.html">Home</a></li>
-                        <li><a class="nav-link scrollto" href="home.html">Brand</a></li>
-                        <li><a class="nav-link scrollto " href="home.html">Auction Room</a></li>
-                        <li><a class="nav-link scrollto" href="blog.html">News</a></li>
-                        <li><a class="nav-link scrollto" href="guideline.html">Guideline</a></li>
-                        <li><a class="nav-link scrollto " href="home.html">About Us</a></li>
-                    </ul>
-                    <a href="connectWallet.html" style="background-color: rgb(66, 180, 66); padding-right: 30px;" class="connectwallet">Connect
-                        wallet</a>
-                    <a href="PeronalProfile.html"><i class="bi bi-person-circle" style="font-size: 30px;"></i></a>
-                </nav>
+<style>
+    .container:before {
+        content: "";
+        position: absolute;
+        height: 2000px;
+        width: 2000px;
+        top: -10%;
+        right: 2%;
+        transform: translateY(-50%);
+        background-image: linear-gradient(-45deg, #4481eb 0%, #04befe 100%);
+        transition: 1.8s ease-in-out;
+        border-radius: 50%;
+        z-index: 6;
+    }
+    .btn.transparent {
+        margin: 0;
+        background: none;
+        border: 2px solid #fff;
+        width: 150px;
+        height: 41px;
+        font-weight: 600;
+        font-size: 0.8rem;
+    }
+    .panels-container {
+        position: absolute;
+        height: 100%;
+        width: 1700px;
+        top: 0;
+        left: 300px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+</style>
+<body>
+<div class="container text-center">
+    <div class="panels-container">
+        <div class="panel left-panel">
+            <div class="content">
+                <section class="content" style="margin-top: 10%;">
+                    <div class="row">
+                        <h1 class="col-sm-9 alert alert-success" th:text="${message_regSuccess}" style="color:white; font-size: 40px">success</h1>
+
+                    </div>
+                </section>
+                <button class="btn transparent" id="sign-up-btn">
+                    <a th:href="@{/login}" style="color:white;"><i class="bi bi-arrow-left"></i> Back to login</a>
+                </button>
             </div>
+            <img src="assets/img/log.svg" class="image" alt="" />
+
         </div>
+
     </div>
-</header>
-<section class="content" style="margin-top: 10%;">
-    <div class="container">
-        <div class="row">
-            <h1 class="col-sm-9 alert alert-success" th:text="${message_regSuccess}">success</h1>
-            <a th:href="@{/login}"><i class="bi bi-arrow-left"></i>Back to login</a>
-        </div>
-    </div>
-</section>
+</div>
 </body>
 </html>
