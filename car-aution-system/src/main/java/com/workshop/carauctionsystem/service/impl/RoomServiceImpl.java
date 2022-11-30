@@ -6,6 +6,7 @@ import com.workshop.carauctionsystem.repository.RoomRepository;
 import com.workshop.carauctionsystem.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -56,6 +57,12 @@ public class RoomServiceImpl implements RoomService {
 //            throw new NotFoundException("Could not find any with ID" + id);
 //        }
 //        roomRepository.delete(id);
+    }
+
+    @Override
+    public Page<Room> getListRoom(int pageNo, int pageSize) {
+        Pageable roomPage = PageRequest.of(pageNo-1,pageSize);
+        return roomRepository.getListRoom(roomPage);
     }
 
 

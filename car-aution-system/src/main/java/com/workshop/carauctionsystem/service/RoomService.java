@@ -16,4 +16,5 @@ public interface RoomService {
     public void saveRoom(Room room);
     public void update(String roomName, String startTime, String endTime, Timestamp updatedAt, int ticketPrice, int typeRoom, int createdBy, String img, int id);
     public void delete(Long id) throws NotFoundException;
+    public Page<Room> getListRoom(int pageNo, int pageSize);
 }

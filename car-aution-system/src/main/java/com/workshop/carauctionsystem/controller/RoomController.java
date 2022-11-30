@@ -4,6 +4,7 @@ import com.workshop.carauctionsystem.entity.*;
 import com.workshop.carauctionsystem.model.ResponseObject;
 import com.workshop.carauctionsystem.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
@@ -36,7 +37,22 @@ public class RoomController {
     @Autowired
     UserService userService;
 
-
+    @GetMapping("/autionRoom")
+    public ModelAndView redirect(){
+        return getListRoom(1);
+    }
+    @GetMapping("/lsautionRoom/{pageNo1}")
+    public ModelAndView getListRoom(@PathVariable(value = "pageNo1") int pageNo){
+        ModelAndView view = new ModelAndView();
+        int pageSize = 6;
+        Page<Room> page = roomService.getListRoom(pageNo, pageSize);
+        List<Room> listRoom = page.getContent();
+        view.addObject("pageNo", pageNo);
+        view.addObject("total", page.getTotalPages());
+        view.addObject("list", listRoom);
+        view.setViewName("auctionRoom");
+        return view;
+    }
 
     @GetMapping("/auctionRoom/{id}")
     public ModelAndView redirectAuctionRoom(@PathVariable int id, Model model,
