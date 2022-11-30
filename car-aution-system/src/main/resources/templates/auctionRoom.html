@@ -22,6 +22,7 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <link href="assets/css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/CreateRoom.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 </head>
 
 <body>
@@ -123,7 +124,25 @@
                         </figure>
                         <div class="portfolio-info">
                             <h4><a th:href="@{'/auctionRoom/'+${listRoom.id}}" th:text="${listRoom.roomName}"></a></h4>
-                            <p th:text="'Giá vé: '+${listRoom.ticketPrice}+' CAB'"></p>
+                            <div class="row">
+                                <p class="col-sm-6" th:text="'Giá vé: '+${listRoom.ticketPrice}+' CAB'" style="color: black"></p>
+                                <span class="col-sm-1"></span>
+                                <span th:id="${listRoom.id} + 'A'"  class="col-sm-5">
+                                    <th:block th:if ="${checkList}">
+                                        <th:block th:each="favoriteList:${favoriteList}">
+                                            <th:block th:if ="${favoriteList.carId.id} == ${listRoom.carId.id}">
+                                                <a>Remove Favorite  <i style="color: #FF6600" th:id="${listRoom.id}" th:attr="onclick=|star('${listRoom.id}','${listRoom.carId.id}',1)|"  class="bi bi-star-fill"></i></a>
+                                            </th:block>
+                                            <th:block th:unless ="${favoriteList.carId.id} == ${listRoom.carId.id}">
+                                                <a class="col-sm-6">Add Favorite  <i th:id="${listRoom.id}" th:attr="onclick=|star('${listRoom.id}','${listRoom.carId.id}',0)|"  class="bi bi-star-fill"></i></a>
+                                            </th:block>
+                                        </th:block>
+                                    </th:block>
+                                    <th:block th:if ="${checkList} == false">
+                                        <a class="col-sm-5">Add Favorite  <i th:id="${listRoom.id}" th:attr="onclick=|star('${listRoom.id}','${listRoom.carId.id}',0)|"  class="bi bi-star-fill"></i></a>
+                                    </th:block>
+                                    </span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -281,23 +300,37 @@
 
 <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
         class="bi bi-arrow-up-short"></i></a>
-<script>
-    $(document).ready(function () {
-        $("#elements").change(function () {
-            var id = $("#elements").val();
+<script th:inline="javascript">
+    function star(roomId, carId, check) {
+        if (check == 0) {
+            document.getElementById(roomId).style.color = '#FF6600';
+            document.getElementById(roomId+"A").innerHTML = "<a>Remove Favorite  <i style=\"color: #FF6600\" th:id=\"${listRoom.id}\" th:attr=\"onclick=|star('${listRoom.id}','${listRoom.carId.id}',1)|\"  class=\"bi bi-star-fill\"></i></a>\n";
             $.ajax({
-                type: "POST",
-                url: "http://localhost:8080/selectModel?brandId=" + brandId,
-                data: 'brandId:' + brandId,
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-            });
-        });
-    });
+                type: "post",
+                url: "addFavorite/?carId=" + carId,
+                data: {
+                    carId: carId,
+                },
+                success: function () {
+
+                }
+            })
+        } else {
+            document.getElementById(roomId).style.color = 'gray';
+            document.getElementById(roomId+"A").innerHTML = "<a class=\"col-sm-5\">Add Favorite  <i th:id=\"${listRoom.id}\" th:attr=\"onclick=|star('${listRoom.id}','${listRoom.carId.id}',0)|\"  class=\"bi bi-star-fill\"></i></a>";
+            $.ajax({
+                type: "post",
+                url: "removeFavorite/?carId=" + carId,
+                data: {
+                    carId: carId,
+                },
+                success: function () {
+
+                }
+            })
+        }
+    }
 </script>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>

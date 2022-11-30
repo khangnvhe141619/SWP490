@@ -1,9 +1,6 @@
 package com.workshop.carauctionsystem.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -21,9 +18,9 @@ public class Favorite {
     private int id;
     @Column(name = "userid")
     private int userId;
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "carid")
-    private List<Car> carId;
+    private Car carId;
     @Column(name = "createdat")
     private Timestamp createdAt;
     @Column(name = "number")

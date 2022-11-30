@@ -17,6 +17,10 @@ function getHome (){
     window.location.assign("./home")
 }
 
+function loading(){
+    showLoading();
+    setTimeout(hideLoading, 5000);
+}
 
 function onSubmitForm () {
     showLoading();

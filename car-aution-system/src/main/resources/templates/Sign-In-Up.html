@@ -52,7 +52,7 @@
           </a>
         </div>
       </form>
-      <form th:action="@{/registration}" th:object="${UserDTO}" class="sign-up-form" method="POST" id="signup">
+      <form th:action="@{/registration}" th:object="${UserDTO}" class="sign-up-form" method="POST" id="signup" onsubmit="loading()">
         <h2 class="title">Sign up</h2>
         <div class="input-field">
           <i class="fas fa-user"></i>
