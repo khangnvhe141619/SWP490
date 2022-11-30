@@ -47,6 +47,9 @@ public class RoomController {
         int pageSize = 6;
         Page<Room> page = roomService.getListRoom(pageNo, pageSize);
         List<Room> listRoom = page.getContent();
+        for (Room ls: listRoom) {
+            System.out.println(ls.getRoomName());
+        }
         view.addObject("pageNo", pageNo);
         view.addObject("total", page.getTotalPages());
         view.addObject("list", listRoom);
