@@ -116,3 +116,25 @@ function yourPrice() {
         }
     }
 }
+
+function modelByBrandName() {
+
+    $.ajax({
+        type: "POST",
+        url: "http://localhost:8080/passExist?setUserId=" + idU + "&currentPassword=" + passU,
+        data: 'pass:' + passU,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (response) {
+            if (response.status == "ok") {
+                ableBtn();
+            } else if (response.status == "no") {
+                $("#passError").show().html(response.message);
+                disableBtn();
+            }
+        },
+        error: function (e) {
+            alert('Error: ' + e);
+        }
+    });
+}

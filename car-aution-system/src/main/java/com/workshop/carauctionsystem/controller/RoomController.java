@@ -2,9 +2,11 @@ package com.workshop.carauctionsystem.controller;
 
 import com.workshop.carauctionsystem.entity.*;
 import com.workshop.carauctionsystem.model.ResponseObject;
+import com.workshop.carauctionsystem.repository.ModelRepository;
 import com.workshop.carauctionsystem.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
@@ -17,6 +19,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import com.google.gson.Gson;
 import java.util.concurrent.TimeUnit;
 
 @RestController
@@ -33,28 +36,45 @@ public class RoomController {
     CarSpecificationService carSpecificationService;
     @Autowired
     RoomDetailPlayerService roomDetailPlayerService;
-
+    @Autowired
+    BrandService brandService;
     @Autowired
     UserService userService;
+    @Autowired
+    ModelService modelService;
+    @Autowired
+    ModelRepository modelRepository;
 
     @GetMapping("/autionRoom")
-    public ModelAndView redirect(){
+    public ModelAndView redirect() {
         return getListRoom(1);
     }
+
     @GetMapping("/lsautionRoom/{pageNo1}")
-    public ModelAndView getListRoom(@PathVariable(value = "pageNo1") int pageNo){
+    public ModelAndView getListRoom(@PathVariable(value = "pageNo1") int pageNo) {
         ModelAndView view = new ModelAndView();
         int pageSize = 6;
         Page<Room> page = roomService.getListRoom(pageNo, pageSize);
         List<Room> listRoom = page.getContent();
-        for (Room ls: listRoom) {
+        for (Room ls : listRoom) {
             System.out.println(ls.getRoomName());
         }
+        List<Brand> brandList = brandService.getAllBrand();
+        view.addObject("brandList", brandList);
+
         view.addObject("pageNo", pageNo);
         view.addObject("total", page.getTotalPages());
         view.addObject("list", listRoom);
         view.setViewName("auctionRoom");
         return view;
+    }
+
+    @GetMapping("/htmlHelper/{brandId}")
+    public String getCombobox(@PathVariable(value ="brandId" ) String brandId) {
+
+        Long bId = Long.parseLong(brandId);
+       Gson gson = new Gson();
+        return gson.toJson(modelRepository.getListModelByBrand(bId));
     }
 
     @GetMapping("/auctionRoom/{id}")
@@ -69,18 +89,18 @@ public class RoomController {
         long diffSeconds = difference / 1000 % 60;
         long diffMinutes = difference / (60 * 1000) % 60;
         long diffHours = difference / (60 * 60 * 1000) % 24;
-        if(diffSeconds < 0){
-            view.setViewName("redirect:/winPage?roomId="+id);
+        if (diffSeconds < 0) {
+            view.setViewName("redirect:/winPage?roomId=" + id);
             return view;
         }
         List<RoomDetailPlayer> roomDetailPlayer = roomDetailPlayerService.getAllByUserIdAndRoomId(id, userId);
-        if(roomDetailPlayer.isEmpty()){
+        if (roomDetailPlayer.isEmpty()) {
             Date date = new Date();
             DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String dateString = df.format(date);
-            roomDetailPlayerService.addPlayer(id, userId, 0,dateString,0);
+            roomDetailPlayerService.addPlayer(id, userId, 0, dateString, 0);
         }
-        if(roomDetailPlayer.get(0).getUserBid() == 0){
+        if (roomDetailPlayer.get(0).getUserBid() == 0) {
             model.addAttribute("bidPrice", true);
         } else {
             model.addAttribute("bidPrice", false);
@@ -89,7 +109,7 @@ public class RoomController {
         List<Image> imageList = imageService.getAllImageByCarId(carId);
         List<SafetySystem> safetySystemList = safetySystemService.getAllSafetySystem(carId);
         Car car = carService.getAllCarById(carId);
-        CarSpecification carSpecification =  carSpecificationService.getAllByCarId(carId);
+        CarSpecification carSpecification = carSpecificationService.getAllByCarId(carId);
         model.addAttribute("diffHours", diffHours);
         model.addAttribute("roomDetailPlayer", roomDetailPlayer.get(0).getUserBid());
         model.addAttribute("diffMinutes", diffMinutes);
@@ -107,12 +127,12 @@ public class RoomController {
     @PostMapping("/insertBid")
     public ResponseEntity<ResponseObject> insertBid(@RequestParam("bid") String bid,
                                                     @CookieValue(value = "setUserId") int setUserId,
-                                                    HttpSession session){
+                                                    HttpSession session) {
         int bidInt = Integer.parseInt(bid);
         Date date = new Date();
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String dateString = df.format(date);
-        roomDetailPlayerService.updateUserBid(bidInt, dateString,setUserId);
+        roomDetailPlayerService.updateUserBid(bidInt, dateString, setUserId);
         return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject("no", "Invalid password!", null));
     }
 }
