@@ -1,4 +1,7 @@
 
+body{
+	background: #f7f7f7;
+}
 
 .modal {
 	position: fixed;
@@ -61,4 +64,34 @@ button {
 .result {
 	color: darkgreen;
 	float: right;
+}
+.tabbar-room {
+	padding: 0;
+	margin: 5px 0 35px 0;
+	list-style: none;
+	text-align: center;
+}
+
+.tablink {
+	cursor: pointer;
+	margin: 15px 15px 15px 0;
+	display: inline-block;
+	font-size: 12px;
+	line-height: 20px;
+	color: #666666;
+	border-radius: 4px;
+	text-transform: uppercase;
+	background: #fff;
+	margin-bottom: 5px;
+	transition: all 0.3s ease-in-out;
+	border: none;
+}
+
+.tablink:hover{
+	background: #56c9fc;
+	color: #fff;
+}
+
+.tablink:last-child{
+	margin-right: 0;
 }

@@ -10,6 +10,7 @@ import com.workshop.carauctionsystem.service.CarService;
 import com.workshop.carauctionsystem.service.FavoriteService;
 import com.workshop.carauctionsystem.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCrypt;
@@ -36,8 +37,35 @@ public class AuctionRoomController {
     FavoriteService favoriteService;
 
     @GetMapping("/auctionRoom")
-    public ModelAndView redirectAuctionRoom(@CookieValue(value = "setUser") String setUser, Model model,
-                                            @CookieValue(value = "setUserId") int setUserId) {
+    public ModelAndView redirectAuctionRoom(@CookieValue(value = "setUser", defaultValue = "") String setUser, Model model,
+                                            @CookieValue(value = "setUserId", defaultValue = "") String setUserId) {
+
+        return getListRoom(1, setUser, model, setUserId);
+    }
+
+    @GetMapping("/lsautionRoom/{pageNo1}")
+    public ModelAndView getListRoom(@PathVariable(value = "pageNo1") int pageNo,
+                                    @CookieValue(value = "setUser", defaultValue = "") String setUser, Model model,
+                                    @CookieValue(value = "setUserId", defaultValue = "") String setUserId) {
+        ModelAndView view = new ModelAndView();
+        int pageSize = 6;
+        Page<Room> page = service.getListRoom(pageNo, pageSize);
+        Page<Room> pageRoomCurrent = service.getListRoomCurrent(pageNo, pageSize);
+        List<Room> listRoom = page.getContent();
+        List<Room> listRoomCurrent = pageRoomCurrent.getContent();
+        for (Room ls : listRoom) {
+            System.out.println(ls.getRoomName());
+        }
+        List<Brand> brandList = brandService.getAllBrand();
+
+        view.addObject("brandList", brandList);
+        view.addObject("pageNo", pageNo);
+        view.addObject("total", page.getTotalPages());
+        view.addObject("totalCurrent", pageRoomCurrent.getTotalPages());
+        view.addObject("list", listRoom);
+        view.addObject("listRoomCurrent", listRoomCurrent);
+
+//        ---------------------------------------
         Cookie cookie = new Cookie("setUser", setUser);
         model.addAttribute("cookieValue", cookie);
         model.addAttribute("setUserId", setUserId);
@@ -45,19 +73,17 @@ public class AuctionRoomController {
             model.addAttribute("check", false);
         } else {
             model.addAttribute("check", true);
+            List<Favorite> favoriteList = favoriteService.listAllFavo(Integer.parseInt(setUserId));
+            if(!favoriteList.isEmpty()){
+                model.addAttribute("checkList", true);
+                model.addAttribute("favoriteList", favoriteList);
+            }else {
+                model.addAttribute("checkList", false);
+            }
         }
-        List<Favorite> favoriteList = favoriteService.listAllFavo(setUserId);
-        if(!favoriteList.isEmpty()){
-            model.addAttribute("checkList", true);
-            model.addAttribute("favoriteList", favoriteList);
-        }else {
-            model.addAttribute("checkList", false);
-        }
-        List<Room> listRoom = service.getAllRoom();
-        List<Brand> brandList = brandService.getAllBrand();
-        model.addAttribute("listRoom", listRoom);
-        model.addAttribute("brandList", brandList);
-        ModelAndView view = new ModelAndView();
+
+//        ---------------------------------------
+
         view.setViewName("auctionRoom");
         return view;
     }

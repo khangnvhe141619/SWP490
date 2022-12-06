@@ -62,6 +62,29 @@ function clock() {
         location.replace("/winPage?roomId="+roomId);
     }
 
+    if (Gio_hien_tai == 0 && Phut_hien_tai == 1 && Giay_hien_tai == 0) {
+        Swal.fire('1 minute left')
+    }
+
+    if (Gio_hien_tai == 0 && Phut_hien_tai == 0 && Giay_hien_tai == 30) {
+        Swal.fire(
+            '30 seconds left',
+            'Close your final bid',
+        )
+    }
+
+    if (Gio_hien_tai == 0 && Phut_hien_tai == 0 && Giay_hien_tai == 10) {
+        Swal.fire({
+            html: 'Bid button locked!',
+            timer: 2000,
+            didOpen: () => {
+                Swal.showLoading()
+            },
+        })
+        document.getElementById('btnBid').setAttribute('onclick', '');
+        document.getElementById('btnBid').setAttribute('style', 'background-color: #c0c0c0;');
+    }
+
     timeout = setTimeout(function () {
         Giay_hien_tai--;
         ;

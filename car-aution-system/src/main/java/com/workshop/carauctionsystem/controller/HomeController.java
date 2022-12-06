@@ -30,7 +30,7 @@ public class HomeController {
     BrandService brandService;
 
     @GetMapping("/home")
-    public ModelAndView redirectHome(@CookieValue(value = "setUser") String setUser, Model model){
+    public ModelAndView redirectHome(@CookieValue(value = "setUser", defaultValue = "") String setUser, Model model){
         Cookie cookie = new Cookie("setUser", setUser);
         model.addAttribute("cookieValue", cookie);
         if(cookie.getValue().equals("")){

@@ -64,6 +64,9 @@ public class RoomServiceImpl implements RoomService {
         Pageable roomPage = PageRequest.of(pageNo-1,pageSize);
         return roomRepository.getListRoom(roomPage);
     }
-
-
+    @Override
+    public Page<Room> getListRoomCurrent(int pageNo, int pageSize) {
+        Pageable roomPage = PageRequest.of(pageNo-1,pageSize);
+        return roomRepository.getListRoomCurrent(roomPage);
+    }
 }

@@ -1055,7 +1055,7 @@ section {
   background: #fff;
   text-align: center;
   padding: 30px;
-  height: 90px;
+  height: 130px;
   border-radius: 0 0 3px 3px;
 }
 
@@ -1073,6 +1073,7 @@ section {
 
 .portfolio .portfolio-item .portfolio-info h4 a:hover {
   color: #4481eb;
+  cursor: pointer;
 }
 
 .portfolio .portfolio-item .portfolio-info p {
@@ -2030,6 +2031,7 @@ section {
   padding: 0 0 30px 0;
   color: #eee;
   font-size: 14px;
+  position: relative;
 }
 
 #footer .footer-top {

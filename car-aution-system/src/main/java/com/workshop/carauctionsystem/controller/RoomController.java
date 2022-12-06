@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -44,30 +45,6 @@ public class RoomController {
     ModelService modelService;
     @Autowired
     ModelRepository modelRepository;
-
-    @GetMapping("/autionRoom")
-    public ModelAndView redirect() {
-        return getListRoom(1);
-    }
-
-    @GetMapping("/lsautionRoom/{pageNo1}")
-    public ModelAndView getListRoom(@PathVariable(value = "pageNo1") int pageNo) {
-        ModelAndView view = new ModelAndView();
-        int pageSize = 6;
-        Page<Room> page = roomService.getListRoom(pageNo, pageSize);
-        List<Room> listRoom = page.getContent();
-        for (Room ls : listRoom) {
-            System.out.println(ls.getRoomName());
-        }
-        List<Brand> brandList = brandService.getAllBrand();
-        view.addObject("brandList", brandList);
-
-        view.addObject("pageNo", pageNo);
-        view.addObject("total", page.getTotalPages());
-        view.addObject("list", listRoom);
-        view.setViewName("auctionRoom");
-        return view;
-    }
 
     @GetMapping("/htmlHelper/{brandId}")
     public String getCombobox(@PathVariable(value ="brandId" ) String brandId) {

@@ -41,8 +41,11 @@ public class UserController {
     @GetMapping(value = {"/logout"})
     public ModelAndView getLogout(HttpServletRequest request, HttpServletResponse response){
         Cookie cookie = new Cookie("setUser", "");
+        Cookie cookie2 = new Cookie("setUserId", "");
         cookie.setMaxAge(0);
+        cookie2.setMaxAge(0);
         response.addCookie(cookie);
+        response.addCookie(cookie2);
         return redirectLogin();
     }
 

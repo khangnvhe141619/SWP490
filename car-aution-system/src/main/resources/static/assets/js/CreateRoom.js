@@ -1,3 +1,53 @@
+function openPage(pageName, elmnt, color) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablink");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].style.backgroundColor = "";
+        tablinks[i].style.color = "";
+    }
+    document.getElementById(pageName).style.display = "block";
+    elmnt.style.backgroundColor = color;
+    elmnt.style.color = "#fff";
+}
+
+document.getElementById("defaultOpen").click();
+
+function checkDate(openDate, startTime, roomId) {
+    var x = document.cookie;
+    if (x == null || x == "") {
+        location.href = "/login";
+    } else {
+        let currentDate = new Date();
+        var date = openDate.toString() + ' ' + startTime.toString();
+        let openDay = new Date(date);
+
+        if (currentDate.getDate() - openDay.getDate() + currentDate.getMonth() - openDay.getMonth() == 0) {
+            if (currentDate.getHours() - openDay.getHours() + currentDate.getMinutes() - openDay.getMinutes()
+                + currentDate.getSeconds() - openDay.getSeconds() >= 0) {
+                location.href = "/auctionRoom/" + roomId;
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'The auction room hasn\'t started yet\n' +
+                        ', Please wait until now!',
+                });
+            }
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'The auction room hasn\'t started yet\n' +
+                    ', Please wait until now!',
+            });
+        }
+    }
+}
+
 const element = document.querySelector(".addModel");
 
 function model(){
