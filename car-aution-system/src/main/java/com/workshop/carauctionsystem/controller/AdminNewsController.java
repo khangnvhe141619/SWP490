@@ -48,7 +48,7 @@ public class AdminNewsController {
                          @RequestParam MultipartFile upImg, RedirectAttributes ra) {
         try {
             String nameFile = upImg.getOriginalFilename();
-            FileCopyUtils.copy(upImg.getBytes(), new File("E:\\DoAn\\SWP490\\car-aution-system\\src\\main\\resources\\static\\assets\\hoang/" + nameFile));
+            FileCopyUtils.copy(upImg.getBytes(), new File("src\\main\\resources\\static\\assets\\hoang/" + nameFile));
             News news = new News();
             news.setTitle(newsModel.getTitle());
             news.setAuthor(newsModel.getAuthor());
@@ -79,7 +79,7 @@ public class AdminNewsController {
         String nameFile = upImg.getOriginalFilename();
         News newsId = newsService.findById(id);
         try {
-            FileCopyUtils.copy(upImg.getBytes(), new File("E:\\DoAn\\SWP490\\car-aution-system\\src\\main\\resources\\static\\assets\\hoang/" + nameFile));
+            FileCopyUtils.copy(upImg.getBytes(), new File("src\\main\\resources\\static\\assets\\hoang/" + nameFile));
             news.setImg("/hoang/" + nameFile);
             newsService.saveNews(news);
         } catch (IOException e) {

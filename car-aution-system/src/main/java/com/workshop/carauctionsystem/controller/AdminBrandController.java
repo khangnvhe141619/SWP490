@@ -51,7 +51,7 @@ public class AdminBrandController {
                          @RequestParam MultipartFile upImg, RedirectAttributes ra) {
         try {
             String nameFile = upImg.getOriginalFilename();
-            FileCopyUtils.copy(upImg.getBytes(), new File("E:\\DoAn\\SWP490\\car-aution-system\\src\\main\\resources\\static\\assets\\hoang/" + nameFile));
+            FileCopyUtils.copy(upImg.getBytes(), new File("src\\main\\resources\\static\\assets\\hoang/" + nameFile));
             Brand brand = new Brand();
             brand.setBrandName(brandModel.getName());
             Validate validateName = new Validate();
@@ -101,7 +101,7 @@ public class AdminBrandController {
                 }
             }
             //brandId.setBrandName(name);
-            FileCopyUtils.copy(upImg.getBytes(), new File("E:\\DoAn\\SWP490\\car-aution-system\\src\\main\\resources\\static\\assets\\hoang/" + nameFile));
+            FileCopyUtils.copy(upImg.getBytes(), new File("src\\main\\resources\\static\\assets\\hoang/" + nameFile));
             String img = "/hoang/" + nameFile;
             brandService.updateBrand(name, img, id);
         } catch (IOException e) {

@@ -84,9 +84,15 @@ public class AdminCarController {
     public String createCar(@ModelAttribute(value = "CarDTO") CarDTO carDTO,
                             @ModelAttribute(value = "CarSpecDTO")CarSpecificationDTO carSpecDTO,
                             @ModelAttribute(value = "Safety")SafetySystemDTO safetyDTO,
-                            @RequestParam Long modelId,
-                            @RequestParam int createById,
+                            @RequestParam Map<String, String> requestMap,
                             RedirectAttributes ra) {
+        Long modelId = Long.parseLong(requestMap.get("modelId"));
+        int createById = Integer.parseInt(requestMap.get("createById"));
+        String statusCar = requestMap.get("statusCar");
+        String absBrake = requestMap.get("absBrake");
+        String speedControl = requestMap.get("speedControl");
+        String tirePressure = requestMap.get("tirePressure");
+
         try{
             ModelCar modelCar = new ModelCar();
             modelCar.setId(modelId);
@@ -107,13 +113,12 @@ public class AdminCarController {
             car.setUpdatedAt(timestamp);
 
             carService.saveCar(car);
-            System.out.println(car.getId());
             Long carID = car.getId();
             if (carID != null){
                 CarSpecification carSpec = new CarSpecification();
                 carSpec.setCarId(car);
                 carSpec.setManufacturing(carSpecDTO.getManufacturing());
-                carSpec.setStatus("old");
+                carSpec.setStatus(statusCar);
                 carSpec.setKm_driven(carSpecDTO.getKm_driven());
                 carSpec.setGear(carSpecDTO.getGear());
                 carSpec.setFuel(carSpecDTO.getFuel());
@@ -129,9 +134,9 @@ public class AdminCarController {
                 SafetySystem safetySystem = new SafetySystem();
                 safetySystem.setCarId(car);
                 safetySystem.setAir_bag(safetyDTO.getAir_bag());
-                safetySystem.setAbs_brake(safetyDTO.getAbs_brake());
-                safetySystem.setSpeedControl(safetyDTO.getSpeedControl());
-                safetySystem.setTirePressure(safetyDTO.getTirePressure());
+                safetySystem.setAbs_brake(absBrake);
+                safetySystem.setSpeedControl(speedControl);
+                safetySystem.setTirePressure(tirePressure);
                 safetySystem.setOtherDescription(safetyDTO.getOtherDescription());
                 safetySystemService.saveSafetySystem(safetySystem);
             }
