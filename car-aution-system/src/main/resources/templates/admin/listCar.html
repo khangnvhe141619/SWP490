@@ -1041,6 +1041,18 @@
                       </div>
                     </div>
                   </div>
+                  <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                    <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
+                      <p><b>Status Car</b></p>
+                      <div class="form-group">
+                        <select name="statusCar" class="form-control">
+                          <option value="none" selected="" disabled="">Status Car</option>
+                          <option  th:value="Old" th:text="Old"></option>
+                          <option  th:value="New" th:text="New"></option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
                 </div><hr>
                 <div class="row">
                   <div class="col-sm-12 col-xs-6">
@@ -1159,28 +1171,40 @@
                     </div>
                   </div>
                   <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
-                    <div class="address-hr">
-                      <p><b>ABS brake</b></p>
+                    <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
+                      <p><b>ABS Brake</b></p>
                       <div class="form-group">
-                        <input th:field="*{Safety.abs_brake}" name="abs_brake" type="text" class="form-control" placeholder="ABS Brake">
+                        <select name="absBrake" class="form-control">
+                          <option value="none" selected="" disabled="">ABS brake</option>
+                          <option  th:value="Yes" th:text="Yes"></option>
+                          <option  th:value="No" th:text="No"></option>
+                        </select>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
-                    <div class="address-hr">
+                    <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
                       <p><b>Speed Control</b></p>
                       <div class="form-group">
-                        <input th:field="*{Safety.speedControl}" name="speedControl" type="text" class="form-control" placeholder="Speed Control">
+                        <select name="speedControl" class="form-control">
+                          <option value="none" selected="" disabled="">Speed Control</option>
+                          <option  th:value="Yes" th:text="Yes"></option>
+                          <option  th:value="No" th:text="No"></option>
+                        </select>
                       </div>
                     </div>
                   </div>
                   <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
-                    <div class="address-hr">
+                    <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
                       <p><b>Tire Pressure</b></p>
                       <div class="form-group">
-                        <input th:field="*{Safety.tirePressure}" name="tirePressure" type="text" class="form-control" placeholder="Tire Pressure">
+                        <select name="tirePressure" class="form-control">
+                          <option value="none" selected="" disabled="">Tire Pressure</option>
+                          <option  th:value="Yes" th:text="Yes"></option>
+                          <option  th:value="No" th:text="No"></option>
+                        </select>
                       </div>
                     </div>
                   </div>

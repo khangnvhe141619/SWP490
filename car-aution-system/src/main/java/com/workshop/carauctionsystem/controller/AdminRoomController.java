@@ -91,7 +91,7 @@ public class AdminRoomController {
             room.setTicketNumber(roomDTO.getTicketNumber());
             room.setTicketPrice(roomDTO.getTicketPrice());
             String nameFile = upImg.getOriginalFilename();
-            FileCopyUtils.copy(upImg.getBytes(), new File("E:\\DoAn\\SWP490\\car-aution-system\\src\\main\\resources\\static\\assets\\hoang/" + nameFile));
+            FileCopyUtils.copy(upImg.getBytes(), new File("src\\main\\resources\\static\\assets\\hoang/" + nameFile));
             room.setImgPath("/hoang/"+nameFile);
             roomService.saveRoom(room);
             ra.addFlashAttribute("success", "The new Room Auction has been saved successfully");
@@ -118,7 +118,7 @@ public class AdminRoomController {
         String nameFile = upImg.getOriginalFilename();
         Room room = roomService.getRoomById(id);
         try {
-            FileCopyUtils.copy(upImg.getBytes(), new File("E:\\DoAn\\SWP490\\car-aution-system\\src\\main\\resources\\static\\assets\\hoang/" + nameFile));
+            FileCopyUtils.copy(upImg.getBytes(), new File("src\\main\\resources\\static\\assets\\hoang/" + nameFile));
             String img = "/hoang/" + nameFile;
             roomService.update(roomName,startTime,endTime,updateAt,ticketPrice,typeRoom,createBy,img,id);
         } catch (IOException e) {
