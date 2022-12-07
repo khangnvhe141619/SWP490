@@ -1,0 +1,27 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.content{
+    margin-top: 35px;
+}
+
+#btnChange{
+    border: 1px solid rgb(245, 119, 8); 
+    border-radius: 100px;
+    height: 26px;
+    width: 26px;
+}
+
+#btnChange:hover{
+    background-color: rgb(245, 119, 8);
+}
+
+#down{
+    color: rgb(250, 193, 5);
+}
+
+#down:hover{
+    color: aliceblue;
+}

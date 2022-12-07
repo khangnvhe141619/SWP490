@@ -13,5 +13,8 @@ public class TryAuctionController {
     public String showAuction1(){
         return "connectWallet";
     }
-
+    @GetMapping("/exchange")
+    public String showAuction1o(){
+        return "exchangeCoins";
+    }
 }

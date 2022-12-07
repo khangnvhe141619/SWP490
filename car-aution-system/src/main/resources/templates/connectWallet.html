@@ -52,15 +52,20 @@
               <p>Connect with your available wallet or create new wallet to join our marketplace</p>
               <button id="connectButton"><img src="assets/img/MetaMask_Fox.svg.png">Login with MetaMask</button>
               <div><img class="line" src="assets/img/line.jpg"></div>
-            <h5>We do not own your private keys and cannot access your funds without your confirmation.</h5>
-            </div>  
+                  <h5 id="walletID">We do not own your private keys and cannot access your funds without your confirmation.</h5>
+              <div class="alert" id="installAlert">
+                Please refresh your browser after installing the Metamask plugin
+                <button class="button" id="reloadButton">Reload page</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </section>
-  <script type="module" src="../"></script>
-  <script type="module" src="/assets/js/connectWallet.js"></script>
 
+  </section>
+<!--  <script type="module" src="../"></script>-->
+<!--  <script type="module" src="/assets/js/connectWallet.js"></script>-->
+  <script type="module" src="/assets/js/connectWallet.js"></script>
 </body>
 </html>
