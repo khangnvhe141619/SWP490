@@ -55,7 +55,7 @@ public class RoomController {
     }
 
     @GetMapping("/auctionRoom/{id}")
-    public ModelAndView redirectAuctionRoom(@PathVariable int id, Model model,
+    public ModelAndView redirectAuctionRoom(@PathVariable int id, Model model,@CookieValue(value = "setUser", defaultValue = "") String setUser,
                                             @CookieValue(value = "setUserId") int userId) throws ParseException {
         ModelAndView view = new ModelAndView();
         Room room = roomService.getRoomById(id);
@@ -87,6 +87,7 @@ public class RoomController {
         List<SafetySystem> safetySystemList = safetySystemService.getAllSafetySystem(carId);
         Car car = carService.getAllCarById(carId);
         CarSpecification carSpecification = carSpecificationService.getAllByCarId(carId);
+        Cookie cookie = new Cookie("setUser", setUser);
         model.addAttribute("diffHours", diffHours);
         model.addAttribute("roomDetailPlayer", roomDetailPlayer.get(0).getUserBid());
         model.addAttribute("diffMinutes", diffMinutes);
@@ -97,19 +98,20 @@ public class RoomController {
         model.addAttribute("car", car);
         model.addAttribute("carSpecification", carSpecification);
         model.addAttribute("roomId", id);
+        model.addAttribute("cookieValue", cookie);
         view.setViewName("index");
         return view;
     }
 
     @PostMapping("/insertBid")
-    public ResponseEntity<ResponseObject> insertBid(@RequestParam("bid") String bid,
+    public ResponseEntity<ResponseObject> insertBid(@RequestParam("bid") String bid, @RequestParam("roomId") int roomId,
                                                     @CookieValue(value = "setUserId") int setUserId,
                                                     HttpSession session) {
         int bidInt = Integer.parseInt(bid);
         Date date = new Date();
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String dateString = df.format(date);
-        roomDetailPlayerService.updateUserBid(bidInt, dateString, setUserId);
+        roomDetailPlayerService.updateUserBid(bidInt, dateString, setUserId, roomId);
         return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject("no", "Invalid password!", null));
     }
 }

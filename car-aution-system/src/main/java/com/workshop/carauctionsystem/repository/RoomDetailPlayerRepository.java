@@ -16,8 +16,8 @@ public interface RoomDetailPlayerRepository extends JpaRepository<RoomDetailPlay
     public void addPlayer(int roomId, int userId, int userBid, String timeBid, int winner);
 
     @Modifying
-    @Query(nativeQuery = true, value = "UPDATE `swp490_cab`.`roomdetailplayer` SET `userBid` = :bid, `timeBid` = :time WHERE (`userId` = :userId)")
-    public void updateUserBid(int bid,String time, int userId);
+    @Query(nativeQuery = true, value = "UPDATE `swp490_cab`.`roomdetailplayer` SET `userBid` = :bid, `timeBid` = :time WHERE (`userId` = :userId and `roomId` = :roomId)")
+    public void updateUserBid(int bid,String time, int userId, int roomId);
 
     @Query(nativeQuery = true, value = "SELECT r.* from roomdetailplayer r where roomId = :roomId ")
     public List<RoomDetailPlayer> getAllBidByRoomId(int roomId);
