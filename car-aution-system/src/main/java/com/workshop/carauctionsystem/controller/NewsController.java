@@ -41,6 +41,8 @@ public class NewsController {
             modelAndView.addObject("page", page);
             modelAndView.addObject("total", list.getTotalPages());
             modelAndView.addObject("list", list);
+            modelAndView.addObject("search", search);
+
         } else {
             modelAndView = new ModelAndView("page404");
         }
