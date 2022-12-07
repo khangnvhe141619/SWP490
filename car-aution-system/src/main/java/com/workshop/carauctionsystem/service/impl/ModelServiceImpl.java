@@ -63,4 +63,9 @@ public class ModelServiceImpl implements ModelService {
             return modelRepo.findAllOrderById(pageable);
         }
     }
+
+    @Override
+    public List<ModelCar> getModelByBrand(Long brandName) {
+        return modelRepo.getListModelByBrand(brandName);
+    }
 }

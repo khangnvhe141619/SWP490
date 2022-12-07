@@ -13,5 +13,7 @@ public interface NewsService {
     public News findById(Long id) throws NotFoundException;
     public Page<News> findAllOrderById(Pageable pageable);
     public Page<News> findAllNewsOrderById(Pageable pageable,String search);
-
+    Page<News> findPaginated(int pageNo, int pageSize);
+    News getNewsById(long id);
+    Page<News> getTop5(int pageable);
 }

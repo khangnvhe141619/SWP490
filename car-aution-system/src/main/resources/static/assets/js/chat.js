@@ -11,8 +11,15 @@ var connectingElement = document.querySelector('.connecting');
 var stompClient = null;
 var username = null;
 
-var colors = ['/assets/img/avatar/ava1.jpg', '/assets/img/avatar/testimonial-2.jpg', '/assets/img/avatar/ava3.jpg',
-'/assets/img/avatar/sy.jpg', '/assets/img/avatar/testimonial-1.jpg']
+var colors = [
+    '#2196F3', '#32c787', '#00BCD4', '#ff5652',
+    '#ffc107', '#ff85af', '#FF9800', '#39bbb0'
+];
+
+window.onload = function () {
+    document.getElementById('btnStart').click();
+    document.getElementById('btnStart2').click();
+}
 
 function connect(event) {
     username = document.querySelector('#name').value.trim();
@@ -67,39 +74,41 @@ function sendMessage(event) {
 
 function onMessageReceived(payload) {
     var message = JSON.parse(payload.body);
+    var mess = message.content.length
+    if(mess >= 5){
+        var messageElement = document.createElement('li');
 
-    var messageElement = document.createElement('li');
+        if(message.type === 'JOIN') {
+            messageElement.classList.add('event-message');
+            message.content = message.sender + ' vừa  vào!';
+        } else if (message.type === 'LEAVE') {
+            messageElement.classList.add('event-message');
+            message.content = message.sender + ' vừa ra!';
+        } else {
+            messageElement.classList.add('chat-message');
 
-    if(message.type === 'JOIN') {
-        messageElement.classList.add('event-message');
-        message.content = message.sender + ' vừa  vào!';
-    } else if (message.type === 'LEAVE') {
-        messageElement.classList.add('event-message');
-        message.content = message.sender + ' vừa ra!';
-    } else {
-        messageElement.classList.add('chat-message');
+            var avatarElement = document.createElement('i');
+            var avatarText = document.createTextNode(message.sender[0]);
+            avatarElement.appendChild(avatarText);
+            avatarElement.style['background-color'] = getAvatarColor(message.sender);
 
-        var avatarElement = document.createElement('img');
-        var avatarText = document.createTextNode(message.sender[0]);
-        avatarElement.appendChild(avatarText);
-        avatarElement.src = getAvatarColor(message.sender);
+            messageElement.appendChild(avatarElement);
 
-        messageElement.appendChild(avatarElement);
+            var usernameElement = document.createElement('span');
+            var usernameText = document.createTextNode(message.sender);
+            usernameElement.appendChild(usernameText);
+            messageElement.appendChild(usernameElement);
+        }
 
-        var usernameElement = document.createElement('span');
-        var usernameText = document.createTextNode(message.sender);
-        usernameElement.appendChild(usernameText);
-        messageElement.appendChild(usernameElement);
+        var textElement = document.createElement('p');
+        var messageText = document.createTextNode(message.content);
+        textElement.appendChild(messageText);
+
+        messageElement.appendChild(textElement);
+
+        messageArea.appendChild(messageElement);
+        messageArea.scrollTop = messageArea.scrollHeight;
     }
-
-    var textElement = document.createElement('p');
-    var messageText = document.createTextNode(message.content);
-    textElement.appendChild(messageText);
-
-    messageElement.appendChild(textElement);
-
-    messageArea.appendChild(messageElement);
-    messageArea.scrollTop = messageArea.scrollHeight;
 }
 
 

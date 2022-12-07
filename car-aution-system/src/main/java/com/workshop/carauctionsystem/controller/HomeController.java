@@ -30,7 +30,7 @@ public class HomeController {
     BrandService brandService;
 
     @GetMapping("/home")
-    public ModelAndView redirectHome(@CookieValue(value = "setUser") String setUser, Model model){
+    public ModelAndView redirectHome(@CookieValue(value = "setUser", defaultValue = "") String setUser, Model model){
         Cookie cookie = new Cookie("setUser", setUser);
         model.addAttribute("cookieValue", cookie);
         if(cookie.getValue().equals("")){
@@ -38,9 +38,7 @@ public class HomeController {
         } else {
             model.addAttribute("check", true);
         }
-        List<Room> listRoom = service.getAllRoom();
         List<Brand> brandList = brandService.getAllBrand();
-        model.addAttribute("listRoom", listRoom);
         model.addAttribute("brandList", brandList);
         ModelAndView view = new ModelAndView();
         view.setViewName("Home");

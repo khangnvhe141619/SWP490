@@ -28,26 +28,26 @@
         <div class="container-fluid">
             <div class="row justify-content-center align-items-center">
                 <div class="col-xl-11 d-flex align-items-center justify-content-between">
-                    <h1 class="logo"><a href="home.html">CAB Auction</a></h1>
+                    <h1 class="logo"><a th:href="@{/home}">CAB Auction</a></h1>
                     <nav id="navbar" class="navbar">
                         <ul>
-                            <li><a class="nav-link scrollto active" href="home.html">Home</a></li>
-                            <li><a class="nav-link scrollto" href="home.html">Brand</a></li>
-                            <li><a class="nav-link scrollto " href="home.html">Auction Room</a></li>
+                            <li><a class="nav-link scrollto " th:href="@{/home}">Home</a></li>
+                            <li><a class="nav-link scrollto" th:href="@{/home}">Brand</a></li>
+                            <li><a class="nav-link scrollto" th:href="@{/auctionRoom}">Auction Room</a></li>
                             <li><a class="nav-link scrollto" href="blog.html">News</a></li>
-                            <li><a class="nav-link scrollto" href="guideline.html">Guideline</a></li>
-                            <li><a class="nav-link scrollto " href="home.html">About Us</a></li>
+                            <li><a class="nav-link scrollto active" th:href="@{/guideLine}">Guideline</a></li>
+                            <li><a class="nav-link scrollto " th:href="@{/home}">About Us</a></li>
                         </ul>
                         <a href="connectWallet.html" style="background-color: rgb(66, 180, 66); padding-right: 30px;"
-                            class="connectwallet">Connect wallet</a>
-                        <a href="PeronalProfile.html"><i class="bi bi-person-circle" style="font-size: 30px;"></i></a>
+                           class="connectwallet">Connect wallet</a>
+                        <a th:href="@{/personProfile}"><i class="bi bi-person-circle" style="font-size: 30px;"></i><i th:text="${session.username}"></i></a>
                     </nav>
                 </div>
             </div>
 
         </div>
     </header>
-    <section class="content" style="background: url(assets/img/about-bg1.png);padding: 100px; margin-top: 50px;">
+    <section class="content" style="background: url(/assets/img/about-bg1.png);padding: 100px; margin-top: 50px;">
         <h3>What is a Vickrey Auction?</h3>
         <p>A Vickrey auction is a sealed-bid auction where bidders submit bids without knowing the bids of other people.
             However, as opposed to other sealed-bid auctions, the price paid is the second-highest bid price and not the

@@ -52,7 +52,7 @@
           </a>
         </div>
       </form>
-      <form th:action="@{/registration}" th:object="${UserDTO}" class="sign-up-form" method="POST" id="signup">
+      <form th:action="@{/registration}" th:object="${UserDTO}" class="sign-up-form" method="POST" id="signup" onsubmit="loading()">
         <h2 class="title">Sign up</h2>
         <div class="input-field">
           <i class="fas fa-user"></i>
@@ -186,10 +186,10 @@
         dataType: "json",
         success: function (response) {
           // we have the response
-          if (response.status == "no") {
-            $("#emailError").show().html("");
+          if (response.status == "ok") {
+            $("#emailError").show().html(response.message);
             disableBtn();
-          } else if (response.status == "ok") {
+          } else if (response.status == "no") {
             $("#emailError").show().html(response.message);
             ableBtn();
           }
@@ -216,10 +216,10 @@
         dataType: "json",
         success: function (response) {
           // we have the response
-          if (response.status == "no") {
-            $("#usernameError").show().html("");
+          if (response.status == "ok") {
+            $("#usernameError").show().html(response.message);
             disableBtn();
-          } else if (response.status == "ok") {
+          } else if (response.status == "no") {
             $("#usernameError").show().html(response.message);
             ableBtn();
           }

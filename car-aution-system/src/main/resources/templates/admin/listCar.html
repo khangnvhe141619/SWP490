@@ -149,15 +149,15 @@
 <div class="left-sidebar-pro">
   <nav id="sidebar" class="">
     <div class="sidebar-header">
-      <a href="index.html"><img class="main-logo" th:src="@{img/logo/logo.png}" alt="" /></a>
-      <strong><a href="index.html"><img th:src="@{img/logo/logosn.png}" alt="" /></a></strong>
+      <a th:href="@{/admin/home}"><img class="main-logo" th:src="@{img/logo/logo.png}" alt="" /></a>
+      <strong><a th:href="@{/admin/home}"><img th:src="@{img/logo/logosn.png}" alt="" /></a></strong>
     </div>
     <!--Start left-scrollbar-->
     <div class="left-custom-menu-adp-wrap comment-scrollbar">
       <nav class="sidebar-nav left-sidebar-menu-pro">
         <ul class="metismenu" id="menu1">
           <li>
-            <a title="Landing Page" href="index.html" aria-expanded="false"><span
+            <a title="Landing Page" th:href="@{/admin/home}" aria-expanded="false"><span
                     class="fa fa-home icon-wrap" aria-hidden="true"></span> <span
                     class="mini-click-non">Home</span></a>
           </li>
@@ -237,7 +237,7 @@
     <div class="row">
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="logo-pro">
-          <a href="index.html"><img class="main-logo" th:src="@{img/logo/logo.png}" alt="" /></a>
+          <a th:href="@{/admin/home}"><img class="main-logo" th:src="@{img/logo/logo.png}" alt="" /></a>
         </div>
       </div>
     </div>
@@ -296,9 +296,9 @@
             <div class="mobile-menu">
               <nav id="dropdown">
                 <ul class="mobile-menu-nav">
-                  <li><a href="index.html">Home</a></li>
+                  <li><a th:href="@{/admin/home}">Home</a></li>
 
-                  <li><a data-toggle="collapse" data-target="#demoevent" href="#">User <span
+                  <li><a data-toggle="collapse" data-target="#demoevent" th:href="@{/admin/user}">User <span
                           class="admin-project-icon edu-icon edu-down-arrow"></span></a>
                     <ul id="demoevent" class="collapse dropdown-header-top">
                       <li><a th:href="@{/admin/user}">All Users</a>
@@ -327,7 +327,7 @@
                       </li>
                     </ul>
                   </li>
-                  <li><a data-toggle="collapse" data-target="#demopro" href="#">Model <span
+                  <li><a data-toggle="collapse" data-target="#demopro" th:href="@{/admin/model}">Model <span
                           class="admin-project-icon edu-icon edu-down-arrow"></span></a>
                     <ul id="demopro4" class="collapse dropdown-header-top">
                       <li><a th:href="@{/admin/model}">All Model</a>
@@ -380,7 +380,7 @@
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                   <ul class="breadcome-menu">
-                    <li><a href="#">Home</a> <span class="bread-slash">/</span>
+                    <li><a th:href="@{/admin/home}">Home</a> <span class="bread-slash">/</span>
                     </li>
                     <li><span class="bread-blod">Car</span>
                     </li>
@@ -689,7 +689,7 @@
                                 <div class="row">
                                   <div class="col-sm-12 col-xs-6">
                                     <div class="address-hr">
-                                      <h3>Create Car</h3>
+                                      <h3>Update Car</h3>
                                     </div>
                                   </div>
                                 </div>
@@ -1041,6 +1041,18 @@
                       </div>
                     </div>
                   </div>
+                  <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                    <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
+                      <p><b>Status Car</b></p>
+                      <div class="form-group">
+                        <select name="statusCar" class="form-control">
+                          <option value="none" selected="" disabled="">Status Car</option>
+                          <option  th:value="Old" th:text="Old"></option>
+                          <option  th:value="New" th:text="New"></option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
                 </div><hr>
                 <div class="row">
                   <div class="col-sm-12 col-xs-6">
@@ -1159,28 +1171,40 @@
                     </div>
                   </div>
                   <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
-                    <div class="address-hr">
-                      <p><b>ABS brake</b></p>
+                    <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
+                      <p><b>ABS Brake</b></p>
                       <div class="form-group">
-                        <input th:field="*{Safety.abs_brake}" name="abs_brake" type="text" class="form-control" placeholder="ABS Brake">
+                        <select name="absBrake" class="form-control">
+                          <option value="none" selected="" disabled="">ABS brake</option>
+                          <option  th:value="Yes" th:text="Yes"></option>
+                          <option  th:value="No" th:text="No"></option>
+                        </select>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
-                    <div class="address-hr">
+                    <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
                       <p><b>Speed Control</b></p>
                       <div class="form-group">
-                        <input th:field="*{Safety.speedControl}" name="speedControl" type="text" class="form-control" placeholder="Speed Control">
+                        <select name="speedControl" class="form-control">
+                          <option value="none" selected="" disabled="">Speed Control</option>
+                          <option  th:value="Yes" th:text="Yes"></option>
+                          <option  th:value="No" th:text="No"></option>
+                        </select>
                       </div>
                     </div>
                   </div>
                   <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
-                    <div class="address-hr">
+                    <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
                       <p><b>Tire Pressure</b></p>
                       <div class="form-group">
-                        <input th:field="*{Safety.tirePressure}" name="tirePressure" type="text" class="form-control" placeholder="Tire Pressure">
+                        <select name="tirePressure" class="form-control">
+                          <option value="none" selected="" disabled="">Tire Pressure</option>
+                          <option  th:value="Yes" th:text="Yes"></option>
+                          <option  th:value="No" th:text="No"></option>
+                        </select>
                       </div>
                     </div>
                   </div>

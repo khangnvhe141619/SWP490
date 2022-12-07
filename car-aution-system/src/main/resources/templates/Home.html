@@ -2,626 +2,512 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>CAB Auction</title>
-  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700"
-        rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <link href="assets/vendor/animate.css/animate.min.css" rel="stylesheet">
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-  <link href="assets/css/style.css" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/CreateRoom.css">
+    <title>CAB Auction</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link href="assets/img/favicon.png" rel="icon">
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700"
+          rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <link href="assets/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/CreateRoom.css">
 </head>
 
 <body>
 <style></style>
 <header id="header" class="fixed-top d-flex align-items-center header-transparent">
-  <div class="container-fluid">
-    <div class="row justify-content-center align-items-center">
-      <div class="col-xl-11 d-flex align-items-center justify-content-between">
-        <h1 class="logo"><a href="home.html">CAB Auction</a></h1>
-        <nav id="navbar" class="navbar">
-          <ul>
-            <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-            <li><a class="nav-link scrollto" href="#clients">Brand</a></li>
-            <li><a class="nav-link scrollto " href="#portfolio">Auction Room</a></li>
-            <li><a class="nav-link scrollto" href="blog.html">News</a></li>
-            <li><a class="nav-link scrollto" href="guideline.html">Guideline</a></li>
-            <li><a class="nav-link scrollto " href="#about">About Us</a></li>
-          </ul>
-          <a href="connectWallet.html" style="background-color: rgb(66, 180, 66); padding-right: 30px;"
-             class="connectwallet">Connect wallet</a>
-          <span th:if="${check} == true">
-            <a th:href="@{/personProfile}"><i class="bi bi-person-circle" style="font-size: 30px;"></i><i th:text="${cookieValue.value}"></i></a>
+    <div class="container-fluid">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-xl-11 d-flex align-items-center justify-content-between">
+                <h1 class="logo"><a href="home.html">CAB Auction</a></h1>
+                <nav id="navbar" class="navbar">
+                    <ul>
+                        <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+                        <li><a class="nav-link scrollto" href="#clients">Brand</a></li>
+                        <li><a class="nav-link scrollto" th:href="@{/auctionRoom}">Auction Room</a></li>
+                        <li><a class="nav-link scrollto" href="blog.html">News</a></li>
+                        <li><a class="nav-link scrollto" th:href="@{/guideLine}">Guideline</a></li>
+                        <li><a class="nav-link scrollto " href="#about">About Us</a></li>
+                    </ul>
+                    <a href="connectWallet.html" style="background-color: rgb(66, 180, 66); padding-right: 30px;"
+                       class="connectwallet">Connect wallet</a>
+                    <span th:if="${check} == true">
+            <a th:href="@{/personProfile}"><i class="bi bi-person-circle" style="font-size: 30px;"></i><i
+                    th:text="${cookieValue.value}"></i></a>
             </span>
-          <span th:if="${check} == false">
-            <a th:href="@{/login}"><i class="bi bi-person-circle" style="font-size: 30px;"></i><i th:text="${cookieValue.value}"></i></a>
+                    <span th:if="${check} == false">
+            <a th:href="@{/login}"><i class="bi bi-person-circle" style="font-size: 30px;"></i><i
+                    th:text="${cookieValue.value}"></i></a>
             </span>
-        </nav>
-      </div>
-    </div>
+                </nav>
+            </div>
+        </div>
 
-  </div>
+    </div>
 </header>
 
 <section id="hero">
-  <div class="hero-container">
-    <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
+    <div class="hero-container">
+        <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
 
-      <ol id="hero-carousel-indicators" class="carousel-indicators"></ol>
+            <ol id="hero-carousel-indicators" class="carousel-indicators"></ol>
 
-      <div class="carousel-inner" role="listbox">
+            <div class="carousel-inner" role="listbox">
 
-        <div class="carousel-item active" style="background-image: url(/assets/img/hero-carousel/1.jpg)">
-          <div class="carousel-container">
-            <div class="container">
-              <h2 class="animate__animated animate__fadeInDown">We are CAB auction</h2>
-              <p class="animate__animated animate__fadeInUp">Chào mừng đến với cổng đấu giá trực tuyến ô tô hàng đầu
-                Việt Nam.</p>
-              <a th:href="@{/login}" class="btn-get-started scrollto animate__animated animate__fadeInUp">Get
-                Started</a>
+                <div class="carousel-item active" style="background-image: url(/assets/img/hero-carousel/1.jpg)">
+                    <div class="carousel-container">
+                        <div class="container">
+                            <h2 class="animate__animated animate__fadeInDown">We are CAB auction</h2>
+                            <p class="animate__animated animate__fadeInUp">Chào mừng đến với cổng đấu giá trực tuyến ô
+                                tô hàng đầu
+                                Việt Nam.</p>
+                            <a th:href="@{/login}" class="btn-get-started scrollto animate__animated animate__fadeInUp">Get
+                                Started</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-item" style="background-image: url(/assets/img/hero-carousel/2.jpg)">
+                    <div class="carousel-container">
+                        <div class="container">
+                            <h2 class="animate__animated animate__fadeInDown">We are CAB auction</h2>
+                            <p class="animate__animated animate__fadeInUp">Chào mừng đến với cổng đấu giá trực tuyến ô
+                                tô hàng đầu
+                                Việt Nam.</p>
+                            <a th:href="@{/login}" class="btn-get-started scrollto animate__animated animate__fadeInUp">Get
+                                Started</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-item" style="background-image: url(/assets/img/hero-carousel/3.jpg)">
+                    <div class="carousel-container">
+                        <div class="container">
+                            <h2 class="animate__animated animate__fadeInDown">We are CAB auction</h2>
+                            <p class="animate__animated animate__fadeInUp">Chào mừng đến với cổng đấu giá trực tuyến ô
+                                tô hàng đầu
+                                Việt Nam.</p>
+                            <a th:href="@{/login}" class="btn-get-started scrollto animate__animated animate__fadeInUp">Get
+                                Started</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-item" style="background-image: url(/assets/img/hero-carousel/4.jpg)">
+                    <div class="carousel-container">
+                        <div class="container">
+                            <h2 class="animate__animated animate__fadeInDown">We are CAB auction</h2>
+                            <p class="animate__animated animate__fadeInUp">Chào mừng đến với cổng đấu giá trực tuyến ô
+                                tô hàng đầu
+                                Việt Nam.</p>
+                            <a th:href="@{/login}" class="btn-get-started scrollto animate__animated animate__fadeInUp">Get
+                                Started</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-item" style="background-image: url(/assets/img/hero-carousel/5.jpg)">
+                    <div class="carousel-container">
+                        <div class="container">
+                            <h2 class="animate__animated animate__fadeInDown">We are CAB auction</h2>
+                            <p class="animate__animated animate__fadeInUp">Chào mừng đến với cổng đấu giá trực tuyến ô
+                                tô hàng đầu
+                                Việt Nam.</p>
+                            <a th:href="@{/login}" class="btn-get-started scrollto animate__animated animate__fadeInUp">Get
+                                Started</a>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-          </div>
+
+            <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
+            </a>
+
+            <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
+                <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
+            </a>
+
         </div>
-
-        <div class="carousel-item" style="background-image: url(/assets/img/hero-carousel/2.jpg)">
-          <div class="carousel-container">
-            <div class="container">
-              <h2 class="animate__animated animate__fadeInDown">We are CAB auction</h2>
-              <p class="animate__animated animate__fadeInUp">Chào mừng đến với cổng đấu giá trực tuyến ô tô hàng đầu
-                Việt Nam.</p>
-              <a th:href="@{/login}" class="btn-get-started scrollto animate__animated animate__fadeInUp">Get
-                Started</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="carousel-item" style="background-image: url(/assets/img/hero-carousel/3.jpg)">
-          <div class="carousel-container">
-            <div class="container">
-              <h2 class="animate__animated animate__fadeInDown">We are CAB auction</h2>
-              <p class="animate__animated animate__fadeInUp">Chào mừng đến với cổng đấu giá trực tuyến ô tô hàng đầu
-                Việt Nam.</p>
-              <a th:href="@{/login}" class="btn-get-started scrollto animate__animated animate__fadeInUp">Get
-                Started</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="carousel-item" style="background-image: url(/assets/img/hero-carousel/4.jpg)">
-          <div class="carousel-container">
-            <div class="container">
-              <h2 class="animate__animated animate__fadeInDown">We are CAB auction</h2>
-              <p class="animate__animated animate__fadeInUp">Chào mừng đến với cổng đấu giá trực tuyến ô tô hàng đầu
-                Việt Nam.</p>
-              <a th:href="@{/login}" class="btn-get-started scrollto animate__animated animate__fadeInUp">Get
-                Started</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="carousel-item" style="background-image: url(/assets/img/hero-carousel/5.jpg)">
-          <div class="carousel-container">
-            <div class="container">
-              <h2 class="animate__animated animate__fadeInDown">We are CAB auction</h2>
-              <p class="animate__animated animate__fadeInUp">Chào mừng đến với cổng đấu giá trực tuyến ô tô hàng đầu
-                Việt Nam.</p>
-              <a th:href="@{/login}" class="btn-get-started scrollto animate__animated animate__fadeInUp">Get
-                Started</a>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
-      </a>
-
-      <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
-        <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
-      </a>
-
     </div>
-  </div>
 </section>
 
 <main id="main">
-  <section id="featured-services">
-    <div class="container">
-      <div class="row">
-
-        <div class="col-lg-4 box">
-          <i class="bi bi-briefcase"></i>
-          <h4 class="title"><a href="">#1 Việt Nam</a></h4>
-          <p class="description">Chúng tôi tự hào khi là thị trường đấu giá online số 1 tại Việt Nam</p>
-        </div>
-
-        <div class="col-lg-4 box box-bg">
-          <i class="bi bi-card-checklist"></i>
-          <h4 class="title"><a href="">Uy Tín</a></h4>
-          <p class="description">Chúng tôi luôn đặt chữ tín lên hàng đầu và luôn mang đến cho khách hàng sự tin tưởng
-            và những trải nghiệm hài lòng</p>
-        </div>
-
-        <div class="col-lg-4 box">
-          <i class="bi bi-binoculars"></i>
-          <h4 class="title"><a href="">Tầm Nhìn</a></h4>
-          <p class="description">Chúng tôi luôn cố gắng càng ngày càng phát triển để có thể tiệp cận với nhiều khách
-            hàng để mọi người ai cũng có thể trải nghiệm dịch vụ tuyệt vời của chúng tôi</p>
-        </div>
-
-      </div>
-    </div>
-  </section>
-  <section id="about">
-    <div class="container" data-aos="fade-up">
-
-      <header class="section-header">
-        <h3>About Us</h3>
-        <p>Bạn đã biết gì về chúng tôi ? Xin tự giới thiệu chúng tôi gồm 5 thành viên thuộc đại học FPT và Viato
-          Auction chính là sự tâm huyết, sự sáng tạo và là chất xám của chúng tôi mà có. Vậy hãy tìm hiểu về những
-          thời gian khi chúng tôi tạo ra Viato Auction nào!</p>
-      </header>
-
-      <div class="row about-cols">
-
-        <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
-          <div class="about-col">
-            <div class="img">
-              <img src="assets/img/about-mission.jpg" alt="" class="img-fluid">
-              <div class="icon"><i class="bi bi-bar-chart"></i></div>
-            </div>
-            <h2 class="title"><a href="#">Ý Tưởng</a></h2>
-            <div style="text-align: center;">
-              <p>Ý tưởng của chúng tôi bắt nguồn từ niềm đam mê xe và thấu hiểu được nhu cầu thị trường mua bán xe
-                online của người Việt Nam. Muốn đem đến công nghệ blockchain cho mọi người để mọi người có thể hiếu
-                hơn. Chính vì vậy ý tưởng của chúng tôi từ đó đã sinh ra một ý định tạo ra một trang web đấu giá xe
-                online bằng công nghệ blockchain.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
-          <div class="about-col">
-            <div class="img">
-              <img src="assets/img/about-plan.jpg" alt="" class="img-fluid">
-              <div class="icon"><i class="bi bi-brightness-high"></i></div>
-            </div>
-            <h2 class="title"><a href="#">Thành tựu</a></h2>
-            <p>
-              Viato Auction ra mắt lần đầu vào năm 2022 khi các sàn đấu giá bằng công nghệ blockcjain đang chưa được
-              phổ biến hơn ở thị trường Việt Nam. Thì Viato Auction đã được ra mắt vào thời điểm đấy và đã làm cộng
-              đồng mạng nói chung và cộng đồng blockchain, cộng đồng đấu gái online nói riêng điên đảo vì sự sáng tạo
-              và mới lạ này. Sau khi Viato Auction được công bố thì lượt truy cập đã lên đến 10 triệu lượt chỉ trong
-              vòng 1 ngày. Đứng top 1 tìm kiếm trong suốt 1 tháng và thu hút được vô số các nhà đầu tư lớn nhỏ trong
-              và ngoài nước.
-            </p>
-          </div>
-        </div>
-
-        <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
-          <div class="about-col">
-            <div class="img">
-              <img src="assets/img/about-vision.jpg" alt="" class="img-fluid">
-              <div class="icon"><i class="bi bi-calendar4-week"></i></div>
-            </div>
-            <h2 class="title"><a href="#">Về Dự Án</a></h2>
-            <p>
-              Chúng tôi xe đưa ra một con xe với một số tiền không được công khai. Việc của các bạn là tìm hiểu và
-              phân tích về chiếc xe ấy rồi đưa ra 1 cái giá hợp lí để mua xe của chúng tôi đã đặt ra. Nếu số tiền bạn
-              đặt ra không quá số tiền con xe của chúng tôi thì số tiền chênh lệch sẽ thuộc về bạn và ngược lại nếu
-              bạn đặt số tiền đấu giá quá với số tiền con xe của chúng tôi thì bạn sẽ mất số tiền chênh lệch ấy.
-            </p>
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-  </section>
-  <!------------------------------->
-  <section class="portfolio section-bg" id="portfolio">
-    <div class="container" data-aos="fade-up">
-
-      <header class="section-header">
-        <h3 class="section-title">Auction Room</h3>
-      </header>
-
-      <div class="row" data-aos="fade-up" data-aos-delay="100">
-        <div class=" col-lg-12">
-          <ul id="portfolio-flters">
-            <li data-filter="*" class="filter-active">All</li>
-            <li data-filter=".filter-app">Free</li>
-            <li data-filter=".filter-card">Normal</li>
-            <li data-filter=".filter-card">Vip</li>
-          </ul>
-        </div>
-      </div>
-      <div class="contant mb-5">
+    <section id="featured-services">
         <div class="container">
-          <div class="row">
-            <div class="col-md-4">
-              <select onchange="model()" id="elements" class="form-select" aria-label="Default select example">
-                <option selected>Brand</option>
-                <div th:each="brandList,state:${brandList}">
-                <option th:value="${brandList.id}" th:text="${brandList.brandName}" onkeyup="isPassAjax()"></option>
+            <div class="row">
+
+                <div class="col-lg-4 box">
+                    <i class="bi bi-briefcase"></i>
+                    <h4 class="title"><a href="">#1 Việt Nam</a></h4>
+                    <p class="description">Chúng tôi tự hào khi là thị trường đấu giá online số 1 tại Việt Nam</p>
                 </div>
-              </select>
+
+                <div class="col-lg-4 box box-bg">
+                    <i class="bi bi-card-checklist"></i>
+                    <h4 class="title"><a href="">Uy Tín</a></h4>
+                    <p class="description">Chúng tôi luôn đặt chữ tín lên hàng đầu và luôn mang đến cho khách hàng sự
+                        tin tưởng
+                        và những trải nghiệm hài lòng</p>
+                </div>
+
+                <div class="col-lg-4 box">
+                    <i class="bi bi-binoculars"></i>
+                    <h4 class="title"><a href="">Tầm Nhìn</a></h4>
+                    <p class="description">Chúng tôi luôn cố gắng càng ngày càng phát triển để có thể tiệp cận với nhiều
+                        khách
+                        hàng để mọi người ai cũng có thể trải nghiệm dịch vụ tuyệt vời của chúng tôi</p>
+                </div>
+
             </div>
-            <div class="col-md-4">
-              <select class="form-select addModel" aria-label="Default select example">
-                <option selected>Model</option>
-              </select>
-            </div>
-            <div class="col-md-4">
-              <div class="input-group rounded">
-                <input type="search" class="form-control rounded-left" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-                <span class="input-group-text" id="search-addon">
-                        <i class="bi bi-search"></i>
-                      </span>
-              </div>
-            </div>
-          </div>
         </div>
+    </section>
+    <section id="about">
+        <div class="container" data-aos="fade-up">
 
-      </div>
-    </div>
-      </section>
-      <div class="row portfolio-container" style="margin: 0 80px 0 80px">
-        <div th:each="listRoom:${listRoom}">
-          <section class="portfolio section-bg">
-        <div class="col-lg-4 col-md-6 portfolio-item filter-app p-3" data-aos="fade-up" data-aos-delay="200">
-          <div class="portfolio-wrap">
-            <figure>
-              <img th:src="${listRoom.imgPath}" class="img-fluid" alt="">
-              <a data-toggle="modal" th:attr="data-target='#bd-example-modal-lg'+*{listRoom.carId}" class="link-preview"><i class="bi bi-plus"></i></a>
-              <a data-toggle="modal" th:attr="data-target='#bd-example-modal-lg2'+*{listRoom.carId}" class="link-details" title="More Details"><i class="bi bi-link"></i></a>
-            </figure>
+            <header class="section-header">
+                <h3>About Us</h3>
+                <p>Bạn đã biết gì về chúng tôi ? Xin tự giới thiệu chúng tôi gồm 5 thành viên thuộc đại học FPT và Viato
+                    Auction chính là sự tâm huyết, sự sáng tạo và là chất xám của chúng tôi mà có. Vậy hãy tìm hiểu về
+                    những
+                    thời gian khi chúng tôi tạo ra Viato Auction nào!</p>
+            </header>
 
-            <div class="portfolio-info">
-              <h4><a th:href="@{'/auctionRoom/'+${listRoom.id}}" th:text="${listRoom.roomName}"></a></h4>
-              <p th:text="'Giá vé: '+${listRoom.ticketPrice}+' CAB'"></p>
-            </div>
-          </div>
-        </div>
-            </section>
-          <!-- Modal -->
-          <div th:id="'bd-example-modal-lg'+*{listRoom.carId}" class="modal fade"  tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="width: 100%">
-            <div class="modal-dialog modal-lg">
-              <div class="modal-content"  style="width: 100%">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLongTitle" th:text="${listRoom.roomName}"></h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <div class="w3-content">
-                    <img class="mySlides" th:src="${listRoom.imgPath}" style="width: 100%">
-                  </div>
-                  <div id="Home" class="tabcontent" style="padding:30px;">
-                    <h5>Deciption</h5>
-                    <p th:text="${listRoom.carId.description}"></p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!--End-->
-          <!--Modal-->
-          <div class="modal fade" th:id="'bd-example-modal-lg2'+*{listRoom.carId}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="width: 100%">
-            <div class="modal-dialog modal-lg">
-              <div class="modal-content"  style="width: 100%">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLongTitle2"></h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <div class="w3-content text-center">
-                    <img th:src="${listRoom.imgPath}" class="w-50 h-50">
-                  </div>
-                  <div id="Home2" class="tabcontent" style="padding:30px;">
-                    <div class="row mt-2 d-flex modal-body">
-                      <h2 class="text-center" th:text="${listRoom.roomName}"></h2>
-                      <div class="col-md-1 "></div>
-                      <div class="col-md-5 me-2">
-                        <p class="border-top border-bottom">
-                          <span class="h6">Room:</span>
-                          <span class="result" th:text="${listRoom.id}"></span>
-                        </p>
-                        <p class="border-top border-bottom">
-                          <span class="h6">Player:</span>
-                          <span class="result">7/10</span>
-                        </p>
-                        <p class="border-top border-bottom">
-                          <span class="h6">Ticket:</span>
-                          <span class="result" th:text="${listRoom.ticketPrice}"></span>
-                        </p>
-                      </div>
-                      <div class="col-md-5 ms-2">
-                        <p class="border-top border-bottom">
-                          <span class="h6">This Auction start in:</span>
-                          <span class="result">
-                  <span id="hours">00</span><span> : </span>
-                  <span id="minutes">00</span><span> : </span>
-                  <span id="seconds">00</span>
-              </span>
-                        </p>
-                        <p class="border-top border-bottom">
-                          <span class="h6">Start:</span>
-                          <span class="result" th:text="${listRoom.startTime}"></span>
-                        </p>
-                        <p class="border-top border-bottom">
-                          <span class="h6">End:</span>
-                          <span class="result" th:text="${listRoom.endTime}"></span>
-                        </p>
+            <div class="row about-cols">
 
-                      </div>
-                      <div class="text-center">
-                        <button class="btn btn-primary rounded-pill"><a href="index.html" style="color: #fff;">Join Now</a></button>
-                      </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="about-col">
+                        <div class="img">
+                            <img src="assets/img/about-mission.jpg" alt="" class="img-fluid">
+                            <div class="icon"><i class="bi bi-bar-chart"></i></div>
+                        </div>
+                        <h2 class="title"><a href="#">Ý Tưởng</a></h2>
+                        <div style="text-align: center;">
+                            <p>Ý tưởng của chúng tôi bắt nguồn từ niềm đam mê xe và thấu hiểu được nhu cầu thị trường
+                                mua bán xe
+                                online của người Việt Nam. Muốn đem đến công nghệ blockchain cho mọi người để mọi người
+                                có thể hiếu
+                                hơn. Chính vì vậy ý tưởng của chúng tôi từ đó đã sinh ra một ý định tạo ra một trang web
+                                đấu giá xe
+                                online bằng công nghệ blockchain.</p>
+                        </div>
                     </div>
-                  </div>
                 </div>
-              </div>
-            </div>
-          </div>
-          <!--End-->
-        </div>
-      </div>
-  <section id="clients">
-    <div class="container" data-aos="zoom-in">
 
-      <header class="section-header">
-        <h3>Car Brand</h3>
-      </header>
-      <div class="clients-slider swiper">
-        <div class="swiper-wrapper align-items-center">
-          <div th:each="brandList:${brandList}" class="swiper-slide"><img th:src="${brandList.imgPath}" class="img-fluid" alt=""></div>
-        </div>
-        <div class="swiper-pagination"></div>
-      </div>
-    </div>
-  </section>
-  <section id="team">
-    <div class="container" data-aos="fade-up">
-      <div class="section-header">
-        <h3>Team</h3>
-      </div>
-
-      <div class="row">
-
-        <div class="col-lg-3 col-md-6">
-          <div class="member" data-aos="fade-up" data-aos-delay="100">
-            <img src="assets/img/team-1.jpg" class="img-fluid" alt="">
-            <div class="member-info">
-              <div class="member-info-content">
-                <h4>Walter White</h4>
-                <span>Chief Executive Officer</span>
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="about-col">
+                        <div class="img">
+                            <img src="assets/img/about-plan.jpg" alt="" class="img-fluid">
+                            <div class="icon"><i class="bi bi-brightness-high"></i></div>
+                        </div>
+                        <h2 class="title"><a href="#">Thành tựu</a></h2>
+                        <p>
+                            Viato Auction ra mắt lần đầu vào năm 2022 khi các sàn đấu giá bằng công nghệ blockcjain đang
+                            chưa được
+                            phổ biến hơn ở thị trường Việt Nam. Thì Viato Auction đã được ra mắt vào thời điểm đấy và đã
+                            làm cộng
+                            đồng mạng nói chung và cộng đồng blockchain, cộng đồng đấu gái online nói riêng điên đảo vì
+                            sự sáng tạo
+                            và mới lạ này. Sau khi Viato Auction được công bố thì lượt truy cập đã lên đến 10 triệu lượt
+                            chỉ trong
+                            vòng 1 ngày. Đứng top 1 tìm kiếm trong suốt 1 tháng và thu hút được vô số các nhà đầu tư lớn
+                            nhỏ trong
+                            và ngoài nước.
+                        </p>
+                    </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
 
-        <div class="col-lg-3 col-md-6">
-          <div class="member" data-aos="fade-up" data-aos-delay="200">
-            <img src="assets/img/team-2.jpg" class="img-fluid" alt="">
-            <div class="member-info">
-              <div class="member-info-content">
-                <h4>Sarah Jhonson</h4>
-                <span>Product Manager</span>
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="about-col">
+                        <div class="img">
+                            <img src="assets/img/about-vision.jpg" alt="" class="img-fluid">
+                            <div class="icon"><i class="bi bi-calendar4-week"></i></div>
+                        </div>
+                        <h2 class="title"><a href="#">Về Dự Án</a></h2>
+                        <p>
+                            Chúng tôi xe đưa ra một con xe với một số tiền không được công khai. Việc của các bạn là tìm
+                            hiểu và
+                            phân tích về chiếc xe ấy rồi đưa ra 1 cái giá hợp lí để mua xe của chúng tôi đã đặt ra. Nếu
+                            số tiền bạn
+                            đặt ra không quá số tiền con xe của chúng tôi thì số tiền chênh lệch sẽ thuộc về bạn và
+                            ngược lại nếu
+                            bạn đặt số tiền đấu giá quá với số tiền con xe của chúng tôi thì bạn sẽ mất số tiền chênh
+                            lệch ấy.
+                        </p>
+                    </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
 
-        <div class="col-lg-3 col-md-6">
-          <div class="member" data-aos="fade-up" data-aos-delay="300">
-            <img src="assets/img/team-3.jpg" class="img-fluid" alt="">
-            <div class="member-info">
-              <div class="member-info-content">
-                <h4>William Anderson</h4>
-                <span>CTO</span>
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
+            </div>
+
+        </div>
+    </section>
+    <!------------------------------->
+    <section id="clients">
+        <div class="container" data-aos="zoom-in">
+
+            <header class="section-header">
+                <h3>Car Brand</h3>
+            </header>
+            <div class="clients-slider swiper">
+                <div class="swiper-wrapper align-items-center">
+                    <div th:each="brandList:${brandList}" class="swiper-slide"><img th:src="${brandList.imgPath}"
+                                                                                    class="img-fluid" alt=""></div>
                 </div>
-              </div>
+                <div class="swiper-pagination"></div>
             </div>
-          </div>
         </div>
+    </section>
+    <section id="team">
+        <div class="container" data-aos="fade-up">
+            <div class="section-header">
+                <h3>Team</h3>
+            </div>
 
-        <div class="col-lg-3 col-md-6">
-          <div class="member" data-aos="fade-up" data-aos-delay="400">
-            <img src="assets/img/team-4.jpg" class="img-fluid" alt="">
-            <div class="member-info">
-              <div class="member-info-content">
-                <h4>Amanda Jepson</h4>
-                <span>Accountant</span>
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
+            <div class="row">
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="member" data-aos="fade-up" data-aos-delay="100">
+                        <img src="assets/img/team-1.jpg" class="img-fluid" alt="">
+                        <div class="member-info">
+                            <div class="member-info-content">
+                                <h4>Walter White</h4>
+                                <span>Chief Executive Officer</span>
+                                <div class="social">
+                                    <a href=""><i class="bi bi-twitter"></i></a>
+                                    <a href=""><i class="bi bi-facebook"></i></a>
+                                    <a href=""><i class="bi bi-instagram"></i></a>
+                                    <a href=""><i class="bi bi-linkedin"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="member" data-aos="fade-up" data-aos-delay="200">
+                        <img src="assets/img/team-2.jpg" class="img-fluid" alt="">
+                        <div class="member-info">
+                            <div class="member-info-content">
+                                <h4>Sarah Jhonson</h4>
+                                <span>Product Manager</span>
+                                <div class="social">
+                                    <a href=""><i class="bi bi-twitter"></i></a>
+                                    <a href=""><i class="bi bi-facebook"></i></a>
+                                    <a href=""><i class="bi bi-instagram"></i></a>
+                                    <a href=""><i class="bi bi-linkedin"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="member" data-aos="fade-up" data-aos-delay="300">
+                        <img src="assets/img/team-3.jpg" class="img-fluid" alt="">
+                        <div class="member-info">
+                            <div class="member-info-content">
+                                <h4>William Anderson</h4>
+                                <span>CTO</span>
+                                <div class="social">
+                                    <a href=""><i class="bi bi-twitter"></i></a>
+                                    <a href=""><i class="bi bi-facebook"></i></a>
+                                    <a href=""><i class="bi bi-instagram"></i></a>
+                                    <a href=""><i class="bi bi-linkedin"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="member" data-aos="fade-up" data-aos-delay="400">
+                        <img src="assets/img/team-4.jpg" class="img-fluid" alt="">
+                        <div class="member-info">
+                            <div class="member-info-content">
+                                <h4>Amanda Jepson</h4>
+                                <span>Accountant</span>
+                                <div class="social">
+                                    <a href=""><i class="bi bi-twitter"></i></a>
+                                    <a href=""><i class="bi bi-facebook"></i></a>
+                                    <a href=""><i class="bi bi-instagram"></i></a>
+                                    <a href=""><i class="bi bi-linkedin"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-          </div>
+
         </div>
+    </section>
+    <section id="contact" class="section-bg">
+        <div class="container" data-aos="fade-up">
 
-      </div>
-
-    </div>
-  </section>
-  <section id="contact" class="section-bg">
-    <div class="container" data-aos="fade-up">
-
-      <div class="section-header">
-        <h3>Contact Us</h3>
-        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque</p>
-      </div>
-
-      <div class="row contact-info">
-
-        <div class="col-md-4">
-          <div class="contact-address">
-            <i class="bi bi-geo-alt"></i>
-            <h3>Address</h3>
-            <address>FPT UNIVERSITY</address>
-          </div>
-        </div>
-
-        <div class="col-md-4">
-          <div class="contact-phone">
-            <i class="bi bi-phone"></i>
-            <h3>Phone Number</h3>
-            <p><a href="tel:+155895548855">+84 123456789</a></p>
-          </div>
-        </div>
-
-        <div class="col-md-4">
-          <div class="contact-email">
-            <i class="bi bi-envelope"></i>
-            <h3>Email</h3>
-            <p><a href="mailto:info@example.com">sydong@gmail.com</a></p>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="form">
-        <form action="forms/contact.php" method="post" role="form" class="php-email-form">
-          <div class="row">
-            <div class="form-group col-md-6">
-              <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
+            <div class="section-header">
+                <h3>Contact Us</h3>
+                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque</p>
             </div>
-            <div class="form-group col-md-6">
-              <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
-            </div>
-          </div>
-          <div class="form-group">
-            <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
-          </div>
-          <div class="form-group">
-            <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
-          </div>
-          <div class="my-3">
-            <div class="loading">Loading</div>
-            <div class="error-message"></div>
-            <div class="sent-message">Your message has been sent. Thank you!</div>
-          </div>
-          <div class="text-center"><button class="rounded-pill" type="submit">Send</button></div>
-        </form>
-      </div>
 
-    </div>
-  </section>
+            <div class="row contact-info">
+
+                <div class="col-md-4">
+                    <div class="contact-address">
+                        <i class="bi bi-geo-alt"></i>
+                        <h3>Address</h3>
+                        <address>FPT UNIVERSITY</address>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="contact-phone">
+                        <i class="bi bi-phone"></i>
+                        <h3>Phone Number</h3>
+                        <p><a href="tel:+155895548855">+84 123456789</a></p>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="contact-email">
+                        <i class="bi bi-envelope"></i>
+                        <h3>Email</h3>
+                        <p><a href="mailto:info@example.com">sydong@gmail.com</a></p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form">
+                <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <input type="text" name="name" class="form-control" id="name" placeholder="Your Name"
+                                   required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <input type="email" class="form-control" name="email" id="email" placeholder="Your Email"
+                                   required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject"
+                               required>
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" name="message" rows="5" placeholder="Message"
+                                  required></textarea>
+                    </div>
+                    <div class="my-3">
+                        <div class="loading">Loading</div>
+                        <div class="error-message"></div>
+                        <div class="sent-message">Your message has been sent. Thank you!</div>
+                    </div>
+                    <div class="text-center">
+                        <button class="rounded-pill" type="submit">Send</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </section>
 </main>
 <footer id="footer">
-  <div class="footer-top">
+    <div class="footer-top">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-3 col-md-6 footer-info">
+                    <h3>CAB Auction</h3>
+                </div>
+
+                <div class="col-lg-3 col-md-6 footer-links">
+                    <h4>Useful Links</h4>
+                    <ul>
+                        <li><i class="bi bi-chevron-right"></i> <a href="#">Home</a></li>
+                        <li><i class="bi bi-chevron-right"></i> <a href="#">About us</a></li>
+                        <li><i class="bi bi-chevron-right"></i> <a href="#">Services</a></li>
+                        <li><i class="bi bi-chevron-right"></i> <a href="#">Terms of service</a></li>
+                        <li><i class="bi bi-chevron-right"></i> <a href="#">Privacy policy</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-6 footer-contact">
+                    <h4>Contact Us</h4>
+                    <p>
+                        FPT <br>
+                        Thach Hoa Thach That<br>
+                        Ha Noi<br>
+                        <strong>Phone:</strong> +84 3213212<br>
+                        <strong>Email:</strong> cabauction@gmail.com<br>
+                    </p>
+
+                    <div class="social-links">
+                        <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                        <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+                    </div>
+
+                </div>
+
+                <div class="col-lg-3 col-md-6 footer-newsletter">
+                    <h4>Our Newsletter</h4>
+                    <form action="" method="post">
+                        <input type="email" name="email"><input type="submit" value="Subscribe">
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
     <div class="container">
-      <div class="row">
-
-        <div class="col-lg-3 col-md-6 footer-info">
-          <h3>CAB Auction</h3>
+        <div class="copyright">
+            &copy; Copyright <strong>BizPage</strong>. All Rights Reserved
         </div>
-
-        <div class="col-lg-3 col-md-6 footer-links">
-          <h4>Useful Links</h4>
-          <ul>
-            <li><i class="bi bi-chevron-right"></i> <a href="#">Home</a></li>
-            <li><i class="bi bi-chevron-right"></i> <a href="#">About us</a></li>
-            <li><i class="bi bi-chevron-right"></i> <a href="#">Services</a></li>
-            <li><i class="bi bi-chevron-right"></i> <a href="#">Terms of service</a></li>
-            <li><i class="bi bi-chevron-right"></i> <a href="#">Privacy policy</a></li>
-          </ul>
+        <div class="credits">
         </div>
-
-        <div class="col-lg-3 col-md-6 footer-contact">
-          <h4>Contact Us</h4>
-          <p>
-            FPT <br>
-            Thach Hoa Thach That<br>
-            Ha Noi<br>
-            <strong>Phone:</strong> +84 3213212<br>
-            <strong>Email:</strong> cabauction@gmail.com<br>
-          </p>
-
-          <div class="social-links">
-            <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-            <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-            <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-            <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-            <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
-          </div>
-
-        </div>
-
-        <div class="col-lg-3 col-md-6 footer-newsletter">
-          <h4>Our Newsletter</h4>
-          <form action="" method="post">
-            <input type="email" name="email"><input type="submit" value="Subscribe">
-          </form>
-        </div>
-
-      </div>
     </div>
-  </div>
-
-  <div class="container">
-    <div class="copyright">
-      &copy; Copyright <strong>BizPage</strong>. All Rights Reserved
-    </div>
-    <div class="credits">
-    </div>
-  </div>
 </footer>
 
-<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+        class="bi bi-arrow-up-short"></i></a>
 <script>
-  $(document).ready(function (){
-    $("#elements").change(function (){
-      var id = $("#elements").val();
-      $.ajax({
-        type: "POST",
-        url: "http://localhost:8080/selectModel?brandId=" + brandId,
-        data: 'brandId:' + brandId,
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-      });
+    $(document).ready(function () {
+        $("#elements").change(function () {
+            var id = $("#elements").val();
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:8080/selectModel?brandId=" + brandId,
+                data: 'brandId:' + brandId,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+            });
+        });
     });
-  });
 </script>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
 <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
 <script src="assets/vendor/aos/aos.js"></script>
 <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

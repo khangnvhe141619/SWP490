@@ -4,9 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.Date;
 
 @Getter
@@ -25,29 +27,32 @@ public class Room {
     @JoinColumn(name = "carid")
     private Car carId;
 
-    @Column(name = "typeroomid")
-    private String typeRoomId;
+    @OneToOne
+    @JoinColumn(name = "typeroomid")
+    private RoomType typeRoomId;
 
     @Column(name = "roomname")
     private String roomName;
 
     @Column(name = "createdat")
-    private String createdAt;
+    private Timestamp createdAt;
 
     @Column(name = "updatedat")
-    private String updatedAt;
+    private Timestamp updatedAt;
 
-    @Column(name = "createdby")
-    private String createdBy;
+    @OneToOne
+    @JoinColumn(name = "createdby")
+    private User createdBy;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "opendate")
-    private Date openDate;
+    private String openDate;
 
     @Column(name = "starttime")
-    private Time startTime;
+    private String startTime;
 
     @Column(name = "endtime")
-    private Time endTime;
+    private String endTime;
 
     @Column(name = "ticketnumber")
     private int ticketNumber;
@@ -57,4 +62,7 @@ public class Room {
 
     @Column(name = "imgpath")
     private String imgPath;
+
+    @Column(name = "roomtime")
+    private String roomTime;
 }

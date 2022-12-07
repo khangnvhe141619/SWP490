@@ -6,6 +6,7 @@ import com.workshop.carauctionsystem.repository.NewsRepository;
 import com.workshop.carauctionsystem.service.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -59,5 +60,23 @@ public class NewsServiceImpl implements NewsService {
         }else{
             return newsRepo.findAllOrderById(pageable);
         }
+    }
+    @Override
+    public Page<News> findPaginated(int pageNo, int pageSize) {
+
+        Pageable pageable = PageRequest.of(pageNo-1,pageSize);
+        return newsRepo.findAll(pageable);
+
+    }
+
+    @Override
+    public News getNewsById(long id) {
+        return newsRepo.findNewsById(id);
+    }
+
+    @Override
+    public Page<News> getTop5(int pageable) {
+        Pageable page = PageRequest.of(0,5);
+        return newsRepo.getTop5(page);
     }
 }

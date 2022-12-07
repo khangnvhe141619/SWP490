@@ -25,8 +25,8 @@ public class RoomDetailPlayerServiceImpl implements RoomDetailPlayerService {
     }
 
     @Override
-    public void updateUserBid(int bid, String time,int userId){
-        roomDetailPlayerRepository.updateUserBid(bid, time,userId);
+    public void updateUserBid(int bid, String time,int userId, int roomId){
+        roomDetailPlayerRepository.updateUserBid(bid, time,userId, roomId);
     }
 
     @Override

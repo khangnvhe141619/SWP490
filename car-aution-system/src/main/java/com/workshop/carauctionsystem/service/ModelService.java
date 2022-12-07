@@ -20,5 +20,6 @@ public interface ModelService {
     public ModelCar findById(Long id) throws NotFoundException;
     public Page<ModelCar> findAllOrderById(Pageable pageable);
     public Page<ModelCar> findAllOrderByName(Pageable pageable, String name);
+    public List<ModelCar> getModelByBrand(Long brandId);
 
 }
