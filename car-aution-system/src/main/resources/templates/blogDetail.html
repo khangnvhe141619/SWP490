@@ -54,13 +54,13 @@
             <h1 th:text="${ls.getTitle()}"></h1>
             <h5 th:text="${ls.getShortDescribe()}"></h5>
             <p th:text="${ls.getCreateAt()}"></p>
-            <p><img th:src="${ls.getImg()}"></p>
+            <p><img style="width: 600px" th:src="${ls.getImg()}"></p>
             <p th:text="${ls.getDescribe()}"></p>
         </div>
         <div class="col-md-3">
             <h4>Latest news</h4>
             <div class="right-content flex-column d-flex" th:each="top:${top5}">
-                <a class="pe-auto" href="#"><p th:text="${top.getTitle()}"></p></a>
+                <a class="pe-auto" th:href="@{'/user/details/'+ ${top.getId()}}"><p th:text="${top.getTitle()}"></p></a>
 
             </div>
         </div>

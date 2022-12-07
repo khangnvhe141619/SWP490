@@ -64,17 +64,16 @@
         </div>
         <div class="col-md-3" >
             <h4>Latest news</h4>
-            <div class="box">
-                <input type="checkbox" id="check">
-                <div class="search-box">
-                    <input type="text" placeholder="Type here...">
-                    <label for="check" class="icon">
-                        <i class="bi bi-search"></i>
-                    </label>
-                </div>
-            </div>
+            <form th:action="@{/user/news}" method="get" role="search" class="sr-input-func">
+
+
+                    <input type="text" name="search" th:value="${param.search}" placeholder="Type here...">
+                    <button>oke</button>
+
+
+            </form>
             <div class="right-content flex-column d-flex" th:each="top:${top5}">
-                <a class="pe-auto" href="#"><p th:text="${top.getTitle()}"></p></a>
+                <a class="pe-auto" th:href="@{'/user/details/'+ ${top.getId()}}"><p th:text="${top.getTitle()}"></p></a>
 
             </div>
         </div>
@@ -83,11 +82,11 @@
 <nav aria-label="Page navigation example">
     <ul class="pagination paging align-items-center justify-content-center">
 
-        <li class="page-item"><a class="page-link" th:href="@{'/user/news/'+${pageNo -1 ==0? 1 : pageNo -1}}">Previous</a></li>
+        <li class="page-item"><a class="page-link" th:href="@{'/user/news?page='+${page -1 ==0? 1 : page -1}+'&search=a'}">Previous</a></li>
         <span th:each="i:${#numbers.sequence(1,total)}">
-          <li class="page-item"><a th:class="${pageNo == i ? 'page-link active' :'page-link' } "  th:href="@{'/user/news/'+${i}}">[[${i}]]</a></li>
+          <li class="page-item"><a th:class="${page == i ? 'page-link active' :'page-link' } "  th:href="@{/user/news(page=${i},search=${param.search})}">[[${i}]]</a></li>
           </span>
-        <li class="page-item"><a class="page-link" th:href="@{'/user/news/'+${pageNo +1 > total? pageNo : pageNo +1}}">Next</a></li>
+        <li class="page-item"><a class="page-link" th:href="@{'/user/news?page='+${page +1 > total? total : page +1}+'&search=a'}">Next</a></li>
         </span>
     </ul>
 </nav>
