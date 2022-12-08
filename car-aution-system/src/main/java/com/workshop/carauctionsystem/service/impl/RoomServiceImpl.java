@@ -69,4 +69,13 @@ public class RoomServiceImpl implements RoomService {
         Pageable roomPage = PageRequest.of(pageNo-1,pageSize);
         return roomRepository.getListRoomCurrent(roomPage);
     }
+
+    @Override
+    public Page<Room> getSearchRoom(Pageable pageable, String carName, String model) {
+        if(carName != null || model != null){
+            return roomRepository.searchRoomByNameCar(pageable,carName,model);
+        }else{
+            return roomRepository.getListRoom(pageable);
+        }
+    }
 }
