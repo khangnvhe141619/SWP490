@@ -38,80 +38,80 @@ public class AuctionRoomController {
     @Autowired
     FavoriteService favoriteService;
 
-//    @GetMapping("/auctionRoom")
-//    public ModelAndView redirectAuctionRoom(@CookieValue(value = "setUser", defaultValue = "") String setUser, Model model,
-//                                            @CookieValue(value = "setUserId", defaultValue = "") String setUserId) {
-//
-//        return getListRoom(1, setUser, model, setUserId);
-//    }
     @GetMapping("/auctionRoom")
-    public ModelAndView showList(@RequestParam(defaultValue = "1") int page,
-                                 @RequestParam(defaultValue = "") String carName,
-                                 @RequestParam(defaultValue = "") String model
-                               ) {
-        ModelAndView modelAndView = null;
-        Page<Room> list = service.getSearchRoom(PageRequest.of(page-1,5),carName,model);
-        List<Brand> brandList = brandService.getAllBrand();
+    public ModelAndView redirectAuctionRoom(@CookieValue(value = "setUser", defaultValue = "") String setUser, Model model,
+                                            @CookieValue(value = "setUserId", defaultValue = "") String setUserId) {
 
-        if (!list.isEmpty()) {
-            modelAndView = new ModelAndView("auctionRoom");
-            modelAndView.addObject("brandList", brandList);
-            modelAndView.addObject("page", page);
-            modelAndView.addObject("nameCar", carName);
-            modelAndView.addObject("modelId", model);
-            modelAndView.addObject("total", list.getTotalPages());
-            modelAndView.addObject("list", list);
-
-        } else {
-            modelAndView = new ModelAndView("page404");
-        }
-        return modelAndView;
+        return getListRoom(1, setUser, model, setUserId);
     }
-
-//    @GetMapping("/lsautionRoom/{pageNo1}")
-//    public ModelAndView getListRoom(@PathVariable(value = "pageNo1") int pageNo,
-//                                    @CookieValue(value = "setUser", defaultValue = "") String setUser, Model model,
-//                                    @CookieValue(value = "setUserId", defaultValue = "") String setUserId) {
-//        ModelAndView view = new ModelAndView();
-//        int pageSize = 6;
-//        Page<Room> page = service.getListRoom(pageNo, pageSize);
-//        Page<Room> pageRoomCurrent = service.getListRoomCurrent(pageNo, pageSize);
-//        List<Room> listRoom = page.getContent();
-//        List<Room> listRoomCurrent = pageRoomCurrent.getContent();
-//        for (Room ls : listRoom) {
-//            System.out.println(ls.getRoomName());
-//        }
+//    @GetMapping("/auctionRoom")
+//    public ModelAndView showList(@RequestParam(defaultValue = "1") int page,
+//                                 @RequestParam(defaultValue = "") String carName,
+//                                 @RequestParam(defaultValue = "") String model
+//                               ) {
+//        ModelAndView modelAndView = null;
+//        Page<Room> list = service.getSearchRoom(PageRequest.of(page-1,5),carName,model);
 //        List<Brand> brandList = brandService.getAllBrand();
 //
-//        view.addObject("brandList", brandList);
-//        view.addObject("pageNo", pageNo);
-//        view.addObject("total", page.getTotalPages());
-//        view.addObject("totalCurrent", pageRoomCurrent.getTotalPages());
-//        view.addObject("list", listRoom);
-//        view.addObject("listRoomCurrent", listRoomCurrent);
+//        if (!list.isEmpty()) {
+//            modelAndView = new ModelAndView("auctionRoom");
+//            modelAndView.addObject("brandList", brandList);
+//            modelAndView.addObject("page", page);
+//            modelAndView.addObject("nameCar", carName);
+//            modelAndView.addObject("modelId", model);
+//            modelAndView.addObject("total", list.getTotalPages());
+//            modelAndView.addObject("list", list);
 //
-////        ---------------------------------------
-//        Cookie cookie = new Cookie("setUser", setUser);
-//        model.addAttribute("cookieValue", cookie);
-//        model.addAttribute("setUserId", setUserId);
-//        if (cookie.getValue().equals("")) {
-//            model.addAttribute("check", false);
 //        } else {
-//            model.addAttribute("check", true);
-//            List<Favorite> favoriteList = favoriteService.listAllFavo(Integer.parseInt(setUserId));
-//            if(!favoriteList.isEmpty()){
-//                model.addAttribute("checkList", true);
-//                model.addAttribute("favoriteList", favoriteList);
-//            }else {
-//                model.addAttribute("checkList", false);
-//            }
+//            modelAndView = new ModelAndView("page404");
 //        }
-//
-////        ---------------------------------------
-//
-//        view.setViewName("auctionRoom");
-//        return view;
+//        return modelAndView;
 //    }
+
+    @GetMapping("/lsautionRoom/{pageNo1}")
+    public ModelAndView getListRoom(@PathVariable(value = "pageNo1") int pageNo,
+                                    @CookieValue(value = "setUser", defaultValue = "") String setUser, Model model,
+                                    @CookieValue(value = "setUserId", defaultValue = "") String setUserId) {
+        ModelAndView view = new ModelAndView();
+        int pageSize = 6;
+        Page<Room> page = service.getListRoom(pageNo, pageSize);
+        Page<Room> pageRoomCurrent = service.getListRoomCurrent(pageNo, pageSize);
+        List<Room> listRoom = page.getContent();
+        List<Room> listRoomCurrent = pageRoomCurrent.getContent();
+        for (Room ls : listRoom) {
+            System.out.println(ls.getRoomName());
+        }
+        List<Brand> brandList = brandService.getAllBrand();
+
+        view.addObject("brandList", brandList);
+        view.addObject("pageNo", pageNo);
+        view.addObject("total", page.getTotalPages());
+        view.addObject("totalCurrent", pageRoomCurrent.getTotalPages());
+        view.addObject("list", listRoom);
+        view.addObject("listRoomCurrent", listRoomCurrent);
+
+//        ---------------------------------------
+        Cookie cookie = new Cookie("setUser", setUser);
+        model.addAttribute("cookieValue", cookie);
+        model.addAttribute("setUserId", setUserId);
+        if (cookie.getValue().equals("")) {
+            model.addAttribute("check", false);
+        } else {
+            model.addAttribute("check", true);
+            List<Favorite> favoriteList = favoriteService.listAllFavo(Integer.parseInt(setUserId));
+            if(!favoriteList.isEmpty()){
+                model.addAttribute("checkList", true);
+                model.addAttribute("favoriteList", favoriteList);
+            }else {
+                model.addAttribute("checkList", false);
+            }
+        }
+
+//        ---------------------------------------
+
+        view.setViewName("auctionRoom");
+        return view;
+    }
 
     @PostMapping("/addFavorite")
     public ResponseEntity<ResponseObject> addFavorite(@RequestParam("carId") int carId,

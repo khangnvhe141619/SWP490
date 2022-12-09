@@ -55,8 +55,8 @@ function model(){
     if(ele == 'Brand'){
         let option ='';
         option += `<option>Model</option>`
-        element.innerHTML = option; 
-        return option; 
+        element.innerHTML = option;
+        return option;
     }
 }
 
@@ -141,3 +141,6 @@ function clock() {
 }
 var Dem_gio = setInterval(clock, 1000);
 
+function closeBanner(){
+    document.getElementById("banner-bottom").style.display = 'none';
+}
