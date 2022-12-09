@@ -18,4 +18,5 @@ public interface RoomService {
     public void delete(Long id) throws NotFoundException;
     public Page<Room> getListRoom(int pageNo, int pageSize);
     public Page<Room> getListRoomCurrent(int pageNo, int pageSize);
+    public Page<Room> getSearchRoom(Pageable pageable,String carName,String model);
 }
