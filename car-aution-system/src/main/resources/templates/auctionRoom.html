@@ -52,91 +52,93 @@
         </div>
     </div>
 </header>
-<main id="main" class="mt-5">
-    <!------------------------------->
-    <section class="portfolio section-bg" id="portfolio">
-        <div class="container" data-aos="fade-up">
-            <header class="section-header">
-                <h3 class="section-title">Auction Room</h3>
-            </header>
-            <div class="row" data-aos="fade-up" data-aos-delay="100">
-                <div class=" col-lg-12">
-                    <div style="margin-left: 200px; margin-right: 200px; margin-top: 20px;" class="tabbar-room">
-                        <button class="tablink" onclick="openPage('Home', this, '#04befe')" id="defaultOpen">
-                            Upcoming
-                        </button>
-                        <button class="tablink" onclick="openPage('News', this, '#04befe')">
-                            Happenning
-                        </button>
+<div class="container">
+    <div class="row">
+        <div class="col-md-1"></div>
+        <main id="main" class="mt-5 col-md-10">
+            <!------------------------------->
+            <section class="portfolio section-bg" id="portfolio">
+                <div class="container" data-aos="fade-up">
+                    <header class="section-header">
+                        <h3 class="section-title">Auction Room</h3>
+                    </header>
+                    <div class="row" data-aos="fade-up" data-aos-delay="100">
+                        <div class=" col-lg-12">
+                            <div style="margin-left: 200px; margin-right: 200px; margin-top: 20px;" class="tabbar-room">
+                                <button class="tablink" onclick="openPage('Home', this, '#04befe')" id="defaultOpen">
+                                    Upcoming
+                                </button>
+                                <button class="tablink" onclick="openPage('News', this, '#04befe')">
+                                    Happenning
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="contant">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <select id="elements" class="form-select" aria-label="Default select example"
-                                    onchange="brandChange(this)">
-                                <option value="" selected>Brand</option>
-                                <div th:each="brandList,state:${brandList}">
-                                    <option th:value="${brandList.id}" th:text="${brandList.brandName}"
-                                            onkeyup="isPassAjax()"></option>
+                    <div class="contant">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <select id="elements" class="form-select" aria-label="Default select example"
+                                            onchange="brandChange(this)">
+                                        <option value="" selected>Brand</option>
+                                        <div th:each="brandList,state:${brandList}">
+                                            <option th:value="${brandList.id}" th:text="${brandList.brandName}"
+                                                    onkeyup="isPassAjax()"></option>
+                                        </div>
+                                    </select>
                                 </div>
-                            </select>
-                        </div>
-                        <div class="col-md-4">
-                            <select class="form-select addModel" aria-label="Default select example" id="modelCar">
-                                <option value="" selected>Model</option>
-                            </select>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="input-group rounded">
-                                <input type="search" class="form-control rounded-left" placeholder="Search"
-                                       aria-label="Search" aria-describedby="search-addon"/>
-                                <span class="input-group-text" id="search-addon">
+                                <div class="col-md-4">
+                                    <select class="form-select addModel" aria-label="Default select example"
+                                            id="modelCar">
+                                        <option value="" selected>Model</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="input-group rounded">
+                                        <input type="search" class="form-control rounded-left" placeholder="Search"
+                                               aria-label="Search" aria-describedby="search-addon"/>
+                                        <span class="input-group-text" id="search-addon">
                                         <i class="bi bi-search"></i>
                                     </span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
+            </section>
 
-    <div id="Home" class="tabcontent">
-        <div class="row portfolio-container">
-            <div th:each="ls:${list}">
-                <section class="portfolio section-bg">
-                    <div class="col-lg-4 portfolio-item p-3">
-                        <div class="portfolio-wrap">
-                            <figure>
-                                <img th:src="'/'+${ls.imgPath}" class="img-fluid" alt="">
-                                <a data-toggle="modal" th:attr="data-target='#bd-example-modal-lg'+*{ls.carId}"
-                                   class="link-preview"><i class="bi bi-plus"></i></a>
-                                <a data-toggle="modal" th:attr="data-target='#bd-example-modal-lg2'+*{ls.carId}"
-                                   class="link-details" title="More Details"><i class="bi bi-link"></i></a>
-                            </figure>
-                            <div class="portfolio-info">
-                                <h4><a th:text="${ls.roomName}"
-                                       th:attr="onclick=|checkDate('${ls.openDate}', '${ls.startTime}')|"></a></h4>
-                                <div class="row">
-                                    <p class="col-sm-6" th:text="'Ticket Price: '+${ls.ticketPrice}+' CAB'"
-                                       style="color: black"></p>
-                                    <th:block th:if="${check}">
-                                        <span class="col-sm-1"></span>
-                                        <span th:id="${ls.id} + 'A'" class="col-sm-5">
+            <div id="Home" class="tabcontent">
+                <div class="row portfolio-container">
+                    <div th:each="ls:${list}">
+                        <section class="portfolio section-bg">
+                            <div class="col-lg-4 portfolio-item p-3">
+                                <div class="portfolio-wrap">
+                                    <figure>
+                                        <img th:src="'/'+${ls.imgPath}" class="img-fluid" alt="" style="height: 230px">
+                                        <a data-toggle="modal" th:attr="data-target='#bd-example-modal-lg'+*{ls.carId}"
+                                           class="link-preview"><i class="bi bi-plus"></i></a>
+                                        <a data-toggle="modal" th:attr="data-target='#bd-example-modal-lg2'+*{ls.carId}"
+                                           class="link-details" title="More Details"><i class="bi bi-link"></i></a>
+                                    </figure>
+                                    <div class="portfolio-info">
+                                        <h4><a th:text="${ls.roomName}"
+                                               th:attr="onclick=|checkDate('${ls.openDate}', '${ls.startTime}')|"></a>
+                                        </h4>
+                                        <div class="row">
+                                            <p class="col-sm-6" th:text="'Ticket Price: '+${ls.ticketPrice}+' CAB'"></p>
+                                            <th:block th:if="${check}">
+                                        <span th:id="${ls.id} + 'A'" class="col-sm-6">
                                             <th:block th:if="${checkList}">
                                                 <th:block th:each="favoriteList:${favoriteList}">
                                                     <th:block th:if="${favoriteList.carId.id} == ${ls.carId.id}">
-                                                        <a>Remove Favorite <i style="color: #FF6600" th:id="${ls.id}"
-                                                                              th:attr="onclick=|star('${ls.id}','${ls.carId.id}',1)|"
-                                                                              class="bi bi-star-fill"></i></a>
+                                                        <a th:attr="onclick=|star('${ls.id}','${ls.carId.id}',1)|">Remove Favorite <i
+                                                                style="color: #FF6600" th:id="${ls.id}"
+                                                                class="bi bi-star-fill"></i></a>
                                                     </th:block>
                                                     <th:block th:unless="${favoriteList.carId.id} == ${ls.carId.id}">
-                                                        <a class="col-sm-6">Add Favorite <i th:id="${ls.id}"
-                                                                                            th:attr="onclick=|star('${ls.id}','${ls.carId.id}',0)|"
-                                                                                            class="bi bi-star-fill"></i></a>
+                                                        <a th:attr="onclick=|star('${ls.id}','${ls.carId.id}',0)|">Add Favorite <i
+                                                                th:id="${ls.id}" class="bi bi-star-fill"></i></a>
                                                     </th:block>
                                                 </th:block>
                                             </th:block>
@@ -146,150 +148,150 @@
                                                                                     class="bi bi-star-fill"></i></a>
                                             </th:block>
                                         </span>
-                                    </th:block>
-                                    <th:block th:if="${check} == false">
-                                        <p class="text-warning col-sm-5">Upcoming b</p>
-                                    </th:block>
-                                </div>
-                                <th:block th:if="${check}">
-                                <div class="row m-3">
-                                    <h5 class="col-sm-12 text-warning">Upcoming</h5>
-                                </div>
-                                </th:block>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <!-- Modal -->
-                <div th:id="'bd-example-modal-lg'+*{ls.carId}" class="modal fade" tabindex="-1" role="dialog"
-                     aria-labelledby="myLargeModalLabel" aria-hidden="true" style="width: 100%">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content" style="width: 100%">
-                            <div class="modal-header">
-                                <h5 class="modal-title" th:text="${ls.roomName}"></h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="w3-content">
-                                    <img class="mySlides" th:src="'/'+${ls.imgPath}" style="width: 100%">
-                                </div>
-                                <div style="padding:30px;">
-                                    <h5>Deciption</h5>
-                                    <p th:text="${ls.carId.description}"></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--End-->
-                <!--Modal-->
-                <div class="modal fade" th:id="'bd-example-modal-lg2'+*{ls.carId}" tabindex="-1" role="dialog"
-                     aria-labelledby="myLargeModalLabel" aria-hidden="true" style="width: 100%">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content" style="width: 100%">
-                            <div class="modal-header">
-                                <h5 class="modal-title"></h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="w3-content text-center">
-                                    <img th:src="'/'+${ls.imgPath}" class="w-50 h-50">
-                                </div>
-                                <div style="padding:30px;">
-                                    <div class="row mt-2 d-flex modal-body">
-                                        <h2 class="text-center" th:text="${ls.roomName}"></h2>
-                                        <div class="col-md-1 "></div>
-                                        <div class="col-md-5 me-2">
-                                            <p class="border-top border-bottom">
-                                                <span class="h6">Room:</span>
-                                                <span class="result" th:text="${ls.id}"></span>
-                                            </p>
-                                            <p class="border-top border-bottom">
-                                                <span class="h6">Player:</span>
-                                                <span class="result">7/10</span>
-                                            </p>
-                                            <p class="border-top border-bottom">
-                                                <span class="h6">Ticket Price:</span>
-                                                <span class="result" th:text="${ls.ticketPrice} + ' CAB'"></span>
-                                            </p>
+                                            </th:block>
+                                            <th:block th:if="${check} == false">
+                                                <p class="text-warning col-sm-5">Upcoming</p>
+                                            </th:block>
                                         </div>
-                                        <div class="col-md-5 ms-2">
-                                            <p class="border-top border-bottom">
-                                                <span class="h6">Open Date:</span>
-                                                <span class="result" th:text="${ls.openDate}"></span>
-                                            </p>
-                                            <p class="border-top border-bottom">
-                                                <span class="h6">Start:</span>
-                                                <span class="result" th:text="${ls.startTime}"></span>
-                                            </p>
-                                            <p class="border-top border-bottom">
-                                                <span class="h6">End:</span>
-                                                <span class="result" th:text="${ls.endTime}"></span>
-                                            </p>
+                                        <th:block th:if="${check}">
+                                            <div class="row m-3">
+                                                <p class="col-sm-12 text-warning">Upcoming</p>
+                                            </div>
+                                        </th:block>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <!-- Modal -->
+                        <div th:id="'bd-example-modal-lg'+*{ls.carId}" class="modal fade" tabindex="-1" role="dialog"
+                             aria-labelledby="myLargeModalLabel" aria-hidden="true" style="width: 100%">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content" style="width: 100%">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" th:text="${ls.roomName}"></h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="w3-content">
+                                            <img class="mySlides" th:src="'/'+${ls.imgPath}" style="width: 100%">
                                         </div>
-                                        <div class="text-center">
-                                            <button class="btn btn-primary rounded-pill"><a href="index.html"
-                                                                                            style="color: #fff;">Join
-                                                Now</a></button>
+                                        <div style="padding:30px;">
+                                            <h5>Deciption</h5>
+                                            <p th:text="${ls.carId.description}"></p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <!--End-->
+                        <!--Modal-->
+                        <div class="modal fade" th:id="'bd-example-modal-lg2'+*{ls.carId}" tabindex="-1" role="dialog"
+                             aria-labelledby="myLargeModalLabel" aria-hidden="true" style="width: 100%">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content" style="width: 100%">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title"></h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="w3-content text-center">
+                                            <img th:src="'/'+${ls.imgPath}" class="w-50 h-50">
+                                        </div>
+                                        <div style="padding:30px;">
+                                            <div class="row mt-2 d-flex modal-body">
+                                                <h2 class="text-center" th:text="${ls.roomName}"></h2>
+                                                <div class="col-md-1 "></div>
+                                                <div class="col-md-5 me-2">
+                                                    <p class="border-top border-bottom">
+                                                        <span class="h6">Room:</span>
+                                                        <span class="result" th:text="${ls.id}"></span>
+                                                    </p>
+                                                    <p class="border-top border-bottom">
+                                                        <span class="h6">Player:</span>
+                                                        <span class="result">7/10</span>
+                                                    </p>
+                                                    <p class="border-top border-bottom">
+                                                        <span class="h6">Ticket Price:</span>
+                                                        <span class="result"
+                                                              th:text="${ls.ticketPrice} + ' CAB'"></span>
+                                                    </p>
+                                                </div>
+                                                <div class="col-md-5 ms-2">
+                                                    <p class="border-top border-bottom">
+                                                        <span class="h6">Open Date:</span>
+                                                        <span class="result" th:text="${ls.openDate}"></span>
+                                                    </p>
+                                                    <p class="border-top border-bottom">
+                                                        <span class="h6">Start:</span>
+                                                        <span class="result" th:text="${ls.startTime}"></span>
+                                                    </p>
+                                                    <p class="border-top border-bottom">
+                                                        <span class="h6">End:</span>
+                                                        <span class="result" th:text="${ls.endTime}"></span>
+                                                    </p>
+                                                </div>
+                                                <div class="text-center">
+                                                    <button class="btn btn-primary rounded-pill"><a href="index.html"
+                                                                                                    style="color: #fff;">Join
+                                                        Now</a></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--End-->
                     </div>
                 </div>
-                <!--End-->
-            </div>
-        </div>
-        <div style="margin: 20px 0 20px 0;">
-            <nav aria-label="Page navigation example">
-                <ul class="pagination filter-future paging align-items-center justify-content-center">
+                <div style="margin: 20px 0 20px 0;">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination filter-future paging align-items-center justify-content-center">
 
-                    <li class="page-item"><a class="page-link"
-                                             th:href="@{'/lsautionRoom/'+${pageNo -1 ==0? 1 : pageNo -1}}">Previous</a>
-                    </li>
-                    <span th:each="i:${#numbers.sequence(1,total)}">
+                            <li class="page-item"><a class="page-link"
+                                                     th:href="@{'/lsautionRoom/'+${pageNo -1 ==0? 1 : pageNo -1}}">Previous</a>
+                            </li>
+                            <span th:each="i:${#numbers.sequence(1,total)}">
                                 <li class="page-item"><a th:class="${pageNo == i ? 'page-link active' :'page-link' } "
                                                          th:href="@{'/lsautionRoom/'+${i}}">[[${i}]]</a></li>
                             </span>
-                    <li class="page-item"><a class="page-link"
-                                             th:href="@{'/lsautionRoom/'+${pageNo +1 > total? pageNo : pageNo +1}}">Next</a>
-                    </li>
-                    </span>
-                </ul>
-            </nav>
-        </div>
-    </div>
+                            <li class="page-item"><a class="page-link"
+                                                     th:href="@{'/lsautionRoom/'+${pageNo +1 > total? pageNo : pageNo +1}}">Next</a>
+                            </li>
+                            </span>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
 
-    <div id="News" class="tabcontent">
-        <div class="row portfolio-container portfolio">
-            <th:block th:if="${listRoomCurrent.isEmpty()}">
-                <p class="text-center">No auctions happening</p>
-            </th:block>
-            <th:block th:each="ls:${listRoomCurrent}">
-                <div class="col-lg-4 portfolio-item p-3">
-                    <div class="portfolio-wrap">
-                        <figure>
-                            <img th:src="'/'+${ls.imgPath}" class="img-fluid" alt="">
-                            <a data-toggle="modal" th:attr="data-target='#bd-example-modal-lg'+*{ls.carId}"
-                               class="link-preview"><i class="bi bi-plus"></i></a>
-                            <a data-toggle="modal" th:attr="data-target='#bd-example-modal-lg2'+*{ls.carId}"
-                               class="link-details" title="More Details"><i class="bi bi-link"></i></a>
-                        </figure>
-                        <div class="portfolio-info">
-                            <h4><a th:text="${ls.roomName}"
-                                   th:attr="onclick=|checkDate('${ls.openDate}', '${ls.startTime}', '${ls.id}')|"></a>
-                            </h4>
-                            <!--                                th:href="@{'/auctionRoom/'+${ls.id}}"-->
-                            <div class="row">
-                                <p class="col-sm-6" th:text="'Ticket Price: '+${ls.ticketPrice}+' CAB'"
-                                   style="color: black"></p>
-                                <span class="col-sm-1"></span>
-                                <span th:id="${ls.id} + 'A'" class="col-sm-5">
+            <div id="News" class="tabcontent">
+                <div class="row portfolio-container portfolio">
+                    <th:block th:if="${listRoomCurrent.isEmpty()}">
+                        <p class="text-center">No auctions happening</p>
+                    </th:block>
+                    <th:block th:each="ls:${listRoomCurrent}">
+                        <div class="col-lg-4 portfolio-item p-3">
+                            <div class="portfolio-wrap">
+                                <figure>
+                                    <img th:src="'/'+${ls.imgPath}" class="img-fluid" alt="" style="height: 230px">
+                                    <a data-toggle="modal" th:attr="data-target='#bd-example-modal-lg'+*{ls.carId}"
+                                       class="link-preview"><i class="bi bi-plus"></i></a>
+                                    <a data-toggle="modal" th:attr="data-target='#bd-example-modal-lg2'+*{ls.carId}"
+                                       class="link-details" title="More Details"><i class="bi bi-link"></i></a>
+                                </figure>
+                                <div class="portfolio-info">
+                                    <h4><a th:text="${ls.roomName}"
+                                           th:attr="onclick=|checkDate('${ls.openDate}', '${ls.startTime}', '${ls.id}')|"></a>
+                                    </h4>
+                                    <!--                                th:href="@{'/auctionRoom/'+${ls.id}}"-->
+                                    <div class="row">
+                                        <p class="col-sm-6" th:text="'Ticket Price: '+${ls.ticketPrice}+' CAB'"
+                                           style="color: black"></p>
+                                        <span th:id="${ls.id} + 'A'" class="col-sm-6">
                                             <th:block th:if="${checkList}">
                                                 <th:block th:each="favoriteList:${favoriteList}">
                                                     <th:block th:if="${favoriteList.carId.id} == ${ls.carId.id}">
@@ -298,112 +300,139 @@
                                                                               class="bi bi-star-fill"></i></a>
                                                     </th:block>
                                                     <th:block th:unless="${favoriteList.carId.id} == ${ls.carId.id}">
-                                                        <a class="col-sm-6">Add Favorite <i th:id="${ls.id}"
-                                                                                            th:attr="onclick=|star('${ls.id}','${ls.carId.id}',0)|"
-                                                                                            class="bi bi-star-fill"></i></a>
+                                                        <a th:attr="onclick=|star('${ls.id}','${ls.carId.id}',0)|">Add Favorite <i
+                                                                th:id="${ls.id}" class="bi bi-star-fill"></i></a>
                                                     </th:block>
                                                 </th:block>
                                             </th:block>
                                             <th:block th:if="${checkList} == false">
-                                                <a class="col-sm-5">Add Favorite <i th:id="${ls.id}"
-                                                                                    th:attr="onclick=|star('${ls.id}','${ls.carId.id}',0)|"
-                                                                                    class="bi bi-star-fill"></i></a>
+                                                <a th:attr="onclick=|star('${ls.id}','${ls.carId.id}',0)|">Add Favorite <i
+                                                        th:id="${ls.id}" class="bi bi-star-fill"></i></a>
                                             </th:block>
                                         </span>
-                            </div>
-                            <div class="row m-3 text-success">
-                                <h5 class="col-sm-12">Hapenning</h5>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Modal -->
-                <div th:id="'bd-example-modal-lg'+*{ls.carId}" class="modal fade" tabindex="-1" role="dialog"
-                     aria-labelledby="myLargeModalLabel" aria-hidden="true" style="width: 100%">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content" style="width: 100%">
-                            <div class="modal-header">
-                                <h5 class="modal-title" th:text="${ls.roomName}"></h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="w3-content">
-                                    <img class="mySlides" th:src="'/'+${ls.imgPath}" style="width: 100%">
-                                </div>
-                                <div style="padding:30px;">
-                                    <h5>Deciption</h5>
-                                    <p th:text="${ls.carId.description}"></p>
+                                    </div>
+                                    <div class="row m-3" style="color: #04af04">
+                                        <p class="col-sm-12">Hapenning</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <!--End-->
-                <!--Modal-->
-                <div class="modal fade" th:id="'bd-example-modal-lg2'+*{ls.carId}" tabindex="-1" role="dialog"
-                     aria-labelledby="myLargeModalLabel" aria-hidden="true" style="width: 100%">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content" style="width: 100%">
-                            <div class="modal-header">
-                                <h5 class="modal-title"></h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="w3-content text-center">
-                                    <img th:src="'/'+${ls.imgPath}" class="w-50 h-50">
-                                </div>
-                                <div style="padding:30px;">
-                                    <div class="row mt-2 d-flex modal-body">
-                                        <h2 class="text-center" th:text="${ls.roomName}"></h2>
-                                        <div class="col-md-1 "></div>
-                                        <div class="col-md-5 me-2">
-                                            <p class="border-top border-bottom">
-                                                <span class="h6">Room:</span>
-                                                <span class="result" th:text="${ls.id}"></span>
-                                            </p>
-                                            <p class="border-top border-bottom">
-                                                <span class="h6">Player:</span>
-                                                <span class="result">7/10</span>
-                                            </p>
-                                            <p class="border-top border-bottom">
-                                                <span class="h6">Ticket Price:</span>
-                                                <span class="result" th:text="${ls.ticketPrice} + ' CAB'"></span>
-                                            </p>
+                        <!-- Modal -->
+                        <div th:id="'bd-example-modal-lg'+*{ls.carId}" class="modal fade" tabindex="-1" role="dialog"
+                             aria-labelledby="myLargeModalLabel" aria-hidden="true" style="width: 100%">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content" style="width: 100%">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" th:text="${ls.roomName}"></h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="w3-content">
+                                            <img class="mySlides" th:src="'/'+${ls.imgPath}" style="width: 100%">
                                         </div>
-                                        <div class="col-md-5 ms-2">
-                                            <p class="border-top border-bottom">
-                                                <span class="h6">Open Date:</span>
-                                                <span class="result" th:text="${ls.openDate}"></span>
-                                            </p>
-                                            <p class="border-top border-bottom">
-                                                <span class="h6">Start:</span>
-                                                <span class="result" th:text="${ls.startTime}"></span>
-                                            </p>
-                                            <p class="border-top border-bottom">
-                                                <span class="h6">End:</span>
-                                                <span class="result" th:text="${ls.endTime}"></span>
-                                            </p>
-                                        </div>
-                                        <div class="text-center">
-                                            <button class="btn btn-primary rounded-pill"><a href="index.html"
-                                                                                            style="color: #fff;">Join
-                                                Now</a></button>
+                                        <div style="padding:30px;">
+                                            <h5>Deciption</h5>
+                                            <p th:text="${ls.carId.description}"></p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                        <!--End-->
+                        <!--Modal-->
+                        <div class="modal fade" th:id="'bd-example-modal-lg2'+*{ls.carId}" tabindex="-1" role="dialog"
+                             aria-labelledby="myLargeModalLabel" aria-hidden="true" style="width: 100%">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content" style="width: 100%">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title"></h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="w3-content text-center">
+                                            <img th:src="'/'+${ls.imgPath}" class="w-50 h-50">
+                                        </div>
+                                        <div style="padding:30px;">
+                                            <div class="row mt-2 d-flex modal-body">
+                                                <h2 class="text-center" th:text="${ls.roomName}"></h2>
+                                                <div class="col-md-1 "></div>
+                                                <div class="col-md-5 me-2">
+                                                    <p class="border-top border-bottom">
+                                                        <span class="h6">Room:</span>
+                                                        <span class="result" th:text="${ls.id}"></span>
+                                                    </p>
+                                                    <p class="border-top border-bottom">
+                                                        <span class="h6">Player:</span>
+                                                        <span class="result">7/10</span>
+                                                    </p>
+                                                    <p class="border-top border-bottom">
+                                                        <span class="h6">Ticket Price:</span>
+                                                        <span class="result"
+                                                              th:text="${ls.ticketPrice} + ' CAB'"></span>
+                                                    </p>
+                                                </div>
+                                                <div class="col-md-5 ms-2">
+                                                    <p class="border-top border-bottom">
+                                                        <span class="h6">Open Date:</span>
+                                                        <span class="result" th:text="${ls.openDate}"></span>
+                                                    </p>
+                                                    <p class="border-top border-bottom">
+                                                        <span class="h6">Start:</span>
+                                                        <span class="result" th:text="${ls.startTime}"></span>
+                                                    </p>
+                                                    <p class="border-top border-bottom">
+                                                        <span class="h6">End:</span>
+                                                        <span class="result" th:text="${ls.endTime}"></span>
+                                                    </p>
+                                                </div>
+                                                <div class="text-center">
+                                                    <button class="btn btn-primary rounded-pill"><a href="index.html"
+                                                                                                    style="color: #fff;">Join
+                                                        Now</a></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--End-->
+                    </th:block>
                 </div>
-                <!--End-->
-            </th:block>
+            </div>
+        </main>
+    </div>
+</div>
+<section id="banner">
+    <div id='banner-left'>
+        <div style='width:160px;position:fixed; top:60px;'>
+           <span style="color: #ff0000;" data-mce-style="color: #ff0000;">
+                <a href='http://phim14.me/'><img src='/assets/img/banner-phai.jpg'/></a>
+           </span>
         </div>
     </div>
-</main>
+
+    <div id='banner-right'>
+        <div style='width:160px;position:fixed; top:60px; right: 40px'>
+           <span style="color: #ff0000;" data-mce-style="color: #ff0000;">
+                 <a href='http://www.phim14.me/'><img src='/assets/img/banner-phai.jpg'/></a>
+           </span>
+        </div>
+    </div>
+
+    <div id='banner-bottom'>
+        <div style='position:fixed; top:650px; left: 25%; z-index: 3'>
+            <button style="float: right;" type="button" class="btn-close" aria-label="Close" onclick="closeBanner()"></button>
+            <div style="color: #ff0000;" data-mce-style="color: #ff0000;">
+                 <a href='http://www.phim14.me/'><img src='https://acd.bongdadem.net/2022/11/93546324piAvD.gif'/></a>
+           </div>
+        </div>
+    </div>
+</section>
 <footer id="footer">
     <div class="footer-top">
         <div class="container">

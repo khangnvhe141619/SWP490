@@ -11,6 +11,8 @@ import com.workshop.carauctionsystem.service.FavoriteService;
 import com.workshop.carauctionsystem.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCrypt;
@@ -42,6 +44,29 @@ public class AuctionRoomController {
 
         return getListRoom(1, setUser, model, setUserId);
     }
+//    @GetMapping("/auctionRoom")
+//    public ModelAndView showList(@RequestParam(defaultValue = "1") int page,
+//                                 @RequestParam(defaultValue = "") String carName,
+//                                 @RequestParam(defaultValue = "") String model
+//                               ) {
+//        ModelAndView modelAndView = null;
+//        Page<Room> list = service.getSearchRoom(PageRequest.of(page-1,5),carName,model);
+//        List<Brand> brandList = brandService.getAllBrand();
+//
+//        if (!list.isEmpty()) {
+//            modelAndView = new ModelAndView("auctionRoom");
+//            modelAndView.addObject("brandList", brandList);
+//            modelAndView.addObject("page", page);
+//            modelAndView.addObject("nameCar", carName);
+//            modelAndView.addObject("modelId", model);
+//            modelAndView.addObject("total", list.getTotalPages());
+//            modelAndView.addObject("list", list);
+//
+//        } else {
+//            modelAndView = new ModelAndView("page404");
+//        }
+//        return modelAndView;
+//    }
 
     @GetMapping("/lsautionRoom/{pageNo1}")
     public ModelAndView getListRoom(@PathVariable(value = "pageNo1") int pageNo,

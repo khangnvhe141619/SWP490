@@ -65,7 +65,7 @@
             <div class="col-md-7 border-right">
                 <div class="p-3 profile" id="person-profile">
                     <div class="d-flex justify-content-between mb-3">
-                        <h1>The Breeze Zodiac IX</h1>
+                        <h1 th:text="${car.carName}"></h1>
                     </div>
                     <div class="row mt-3 room-info pt-3 rounded ">
                         <div class="col-md-2 winning-bids"></div>
@@ -81,27 +81,32 @@
                                 <div class="yourPrice" style="color: crimson; "></div>
                             </th:block>
                             <th:block th:if="${bidPrice == false}">
-                                <div class="yourPrice h5" style="color: crimson;" th:text="${roomDetailPlayer}+' CAB'"></div>
+                                <div class="yourPrice h5" style="color: crimson;"
+                                     th:text="${roomDetailPlayer}+' CAB'"></div>
                             </th:block>
                         </div>
                     </div>
                 </div>
                 <div class="p-3 bg-white border-bottom border-top">
                     <form id="messageForm2" name="messageForm">
-                    <div class="row mt-3">
-                        <div class="col-md-2 active-bids">
-                            <img th:src="@{/assets/img/logo-bid.png}">
+                        <div class="row mt-3">
+                            <div class="col-md-2 active-bids">
+                                <img th:src="@{/assets/img/logo-bid.png}">
+                            </div>
+                            <div class="col-md-7 align-self-center">
+                                <span class="error" id="error" style="color: red; font-size: 12px;"></span>
+                                <input id="message2" type="number" placeholder="Enter you bid amount"
+                                       class="w-100 rounded-pill p-3">
+                                <input id="roomId" style="display:none;" th:value="${roomId}">
+                            </div>
+                            <div class="col-md-3 align-self-center">
+                                <a id="" class="btn rounded-pill Larger shadow"
+                                   th:attr="onclick=|isPassAjax1('${car.downBoundPrice}', '${car.upBoundPrice}', '${roomId}')|"
+                                   style="background-color: #04af04; color: #fff">Submit A Bid
+                                </a>
+                                <button id="btnBid" style="display:none;">OK</button>
+                            </div>
                         </div>
-                        <div class="col-md-7 align-self-center">
-                            <span class="error" id="error" style="color: red; font-size: 12px;"></span>
-                            <input id="message2" type="number" placeholder="Enter you bid amount"
-                                   class="w-100 rounded-pill p-3">
-                            <input id="roomId" style="display:none;" th:value="${roomId}">
-                        </div>
-                        <div class="col-md-3 align-self-center">
-                           <button id="btnBid" class="btn rounded-pill Larger shadow" th:attr="onclick=|isPassAjax1('${car.downBoundPrice}', '${car.upBoundPrice}', '${roomId}')|" style="background-color: #04af04; color: #fff">Submit A Bid</button>
-                        </div>
-                    </div>
                     </form>
 
                 </div>
@@ -114,7 +119,8 @@
                                    autocomplete="off" class="form-control" th:value="${cookieValue.value}"/>
                         </div>
                         <div class="form-group">
-                            <button type="submit" id="btnStart2" class="accent username-submit mt-5">Bắt Đầu Chat</button>
+                            <button type="submit" id="btnStart2" class="accent username-submit mt-5">Bắt Đầu Chat
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -167,26 +173,37 @@
             </div>
         </div>
     </div>
-    <div id="chat-page2" class="hidden rounded" style="margin-left: 220px; float: left; width: 50%">
-        <div class="chat-container2 rounded card">
-            <div class="card-header text-center">
-                Bid
+    <div class="container mt-200">
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-7">
+                <div id="chat-page2" class="hidden rounded" style="width: 50%">
+                    <div class="chat-container2 rounded card">
+                        <div class="card-header text-center">
+                            Bid
+                        </div>
+                        <ul id="messageArea2"></ul>
+                    </div>
+                </div>
             </div>
-            <ul id="messageArea2"></ul>
-        </div>
-    </div>
-    <div class="card text-center" style="width: 20%; float: right; margin-right: 15%; margin-top: 2%; box-shadow: 0 1px 11px rgba(0, 0, 0, 0.27);">
-        <div class="card-header">
-            Your bid has been set
-        </div>
-        <div class="card-body">
-            <blockquote class="blockquote mb-0">
-                <span id="bided"></span>
-            </blockquote>
+            <div class="card text-center col-md-3"
+                 style="margin-top: 30px; box-shadow: 0 1px 11px rgba(0, 0, 0, 0.27); height: 440px;">
+                <div class="card-header">
+                    Your bid has been set
+                </div>
+                <div class="card-body">
+                    <blockquote class="blockquote mb-0">
+                        <span id="bided"></span>
+                    </blockquote>
+                </div>
+                <div class="card-footer text-muted">
+                    <span class="AVG">Average: 0 CAB</span>
+                </div>
+            </div>
         </div>
     </div>
     <div>
-        <div style="margin-left: 200px; margin-right: 200px; margin-top: 500px;" class="tabbar-room">
+        <div style="margin-left: 200px; margin-right: 200px;" class="tabbar-room">
             <button class="tablink" onclick="openPage('Home', this, '#04befe')" id="defaultOpen"><img
                     th:src="@{/assets/img/description.png}">Description
             </button>
@@ -340,7 +357,9 @@
                                            autocomplete="off" class="form-control" th:value="${cookieValue.value}"/>
                                 </div>
                                 <div class="form-group">
-                                    <button type="submit" id="btnStart" class="accent username-submit mt-5">Bắt Đầu Chat</button>
+                                    <button type="submit" id="btnStart" class="accent username-submit mt-5">Bắt Đầu
+                                        Chat
+                                    </button>
                                 </div>
                             </form>
                         </div>
@@ -375,6 +394,32 @@
 
         </div>
     </div>
+    <section id="banner">
+        <div id='banner-left'>
+            <div style='width:160px;position:fixed; top:60px;'>
+           <span style="color: #ff0000;" data-mce-style="color: #ff0000;">
+                <a href='http://phim14.me/'><img src='/assets/img/banner-phai.jpg'/></a>
+           </span>
+            </div>
+        </div>
+
+        <div id='banner-right'>
+            <div style='width:160px;position:fixed; top:60px; right: 40px'>
+           <span style="color: #ff0000;" data-mce-style="color: #ff0000;">
+                 <a href='http://www.phim14.me/'><img src='/assets/img/banner-phai.jpg'/></a>
+           </span>
+            </div>
+        </div>
+
+        <div id='banner-bottom'>
+            <div style='position:fixed; top:640px; left: 25%; z-index: 3'>
+                <a style="float: right; height: 25px" type="button" class="btn-close" aria-label="Close" onclick="closeBanner()"></a>
+                <div style="color: #ff0000;" data-mce-style="color: #ff0000;">
+                    <a href='http://www.phim14.me/'><img src='https://acd.bongdadem.net/2022/11/93546324piAvD.gif'/></a>
+                </div>
+            </div>
+        </div>
+    </section>
     <div>
         <footer id="footer">
             <div class="footer-top">
@@ -437,6 +482,7 @@
         </footer>
     </div>
 </div>
+
 <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
         class="bi bi-arrow-up-short"></i></a>
 <audio id="autoplay" controls style="display: none">

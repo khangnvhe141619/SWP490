@@ -4,6 +4,7 @@ import com.workshop.carauctionsystem.entity.Brand;
 import com.workshop.carauctionsystem.exception.NotFoundException;
 import com.workshop.carauctionsystem.repository.BrandRepository;
 import com.workshop.carauctionsystem.service.BrandService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
+@AllArgsConstructor
 @Service
 public class BrandServiceImpl implements BrandService {
 

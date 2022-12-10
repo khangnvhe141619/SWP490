@@ -122,13 +122,18 @@ const element3 = document.querySelector("#bided");
 let bidPrice = '';
 let i = 1;
 const element = document.querySelector(".yourPrice");
-const element2 = document.querySelector(".error");
+const element2 = document.querySelector(".AVG");
 let h5 = '';
+let avgText = '';
 let error = '';
 let downPrice = 0;
 let upPrice = 0;
+let a = 0;
+let b = 0;
+
 function isPassAjax1(down , up, roomId) {
     var bid = $("#message2").val();
+    var avg = $("#AVG").val();
     downPrice = down;
     upPrice = up;
     const x = Number(bid);
@@ -170,6 +175,16 @@ function isPassAjax1(down , up, roomId) {
                         bidPrice += `<span>${i}. ${bid} CAB</span></br>`;
                         element3.innerHTML = bidPrice;
                         i++;
+                        if(a==0){
+                            b = bid;
+                        } else {
+                            b = (x + Number(a))/2;
+                        }
+                        a = bid;
+                        avgText = `<span>Average: ${b} CAB</span>`;
+                        element2.innerHTML = avgText;
+
+                        document.getElementById("btnBid").click();
                     },
                     error: function (e) {
                         alert('Error: ' + e);
@@ -249,8 +264,7 @@ function sendMessage2(event) {
 
 function onMessageReceived2(payload) {
     var message = JSON.parse(payload.body);
-    var mess = message.content.length
-    if ((mess < 5) && (message.content >= downPrice && message.content <= upPrice)) {
+    if ((!isNaN(message.content) && message.content) && (message.content >= downPrice && message.content <= upPrice)) {
         var messageElement = document.createElement('li');
 
         messageElement.classList.add('chat-message');
@@ -279,3 +293,7 @@ function onMessageReceived2(payload) {
 }
 usernameForm2.addEventListener('submit', connect2, true)
 messageForm2.addEventListener('submit', sendMessage2, true)
+
+function closeBanner(){
+    document.getElementById("banner-bottom").style.display = 'none';
+}
