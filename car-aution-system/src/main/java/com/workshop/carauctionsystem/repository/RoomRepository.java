@@ -46,4 +46,6 @@ public interface RoomRepository extends JpaRepository<Room, Integer> {
     public Page<Room> findRoomByHistory(Pageable pageable,String current);
     @Query(nativeQuery = true,value = "SELECT * FROM room WHERE room.roomName like %?1% AND DATE(openDate) < ?2")
     public Page<Room> findRoomByHistory(Pageable pageable,String roomName,String current);
+    @Query("SELECT r FROM Room as r join r.carId as c join c.modelId as m WHERE c.carName like %?1% and m.modelName like %?2%")
+    public Page<Room> searchRoomByNameCar(Pageable pageable,String carName, String model);
 }

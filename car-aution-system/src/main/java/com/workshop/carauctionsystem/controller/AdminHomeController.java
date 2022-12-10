@@ -52,7 +52,6 @@ public class AdminHomeController {
         } else {
             view = new ModelAndView("admin/index");
             view.addObject("lst_empty", "List Empty!");
-            view.addObject("rooms", list);
         }
         //
         if (!list1.isEmpty()) {
