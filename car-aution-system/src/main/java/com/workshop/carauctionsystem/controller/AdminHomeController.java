@@ -46,26 +46,21 @@ public class AdminHomeController {
         Page<Room> list1 = roomService.findRoomByPending(PageRequest.of(page, 5, Sort.by(id)), search,date);
         Page<Room> list2 = roomService.findRoomByHistory(PageRequest.of(page, 5, Sort.by(id)), search,date);
         // current
+        view = new ModelAndView("admin/index");
         if (!list.isEmpty()) {
-            view = new ModelAndView("admin/index");
             view.addObject("rooms", list);
         } else {
-            view = new ModelAndView("admin/index");
             view.addObject("lst_empty", "List Empty!");
         }
         //
         if (!list1.isEmpty()) {
-            view = new ModelAndView("admin/index");
             view.addObject("rooms1", list1);
         } else {
-            view = new ModelAndView("admin/index");
             view.addObject("lst_empty1", "List Empty!");
         }
         if (!list2.isEmpty()) {
-            view = new ModelAndView("admin/index");
             view.addObject("rooms2", list2);
         } else {
-            view = new ModelAndView("admin/index");
             view.addObject("lst_empty2", "List Empty!");
         }
         return view;

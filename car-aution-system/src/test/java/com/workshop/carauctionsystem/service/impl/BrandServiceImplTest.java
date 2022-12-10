@@ -34,7 +34,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 @DataJpaTest
-@Rollback(value = false)
+@Rollback(value = true)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @ComponentScan(basePackages = {
         "com.workshop.carauctionsystem.repository",
@@ -66,7 +66,6 @@ class BrandServiceImplTest {
     }
 
     @Test
-    @Disabled
     void givenValidBrand_whenSaveBrand_thenSucceed() {
         Brand b1 = new Brand("VINFAST", "/hoang/vinfast.jpg", Long.parseLong("1"));
         brandServiceImpl.saveBrand(b1);
@@ -86,7 +85,7 @@ class BrandServiceImplTest {
 
     @Test
     void whenValidId_thenBrandFound() throws NotFoundException {
-        Brand b = new Brand(Long.parseLong("1"), "VINFAST", "/hoang/vinfast.jpg", Long.parseLong("1"));
+        Brand b = new Brand(Long.parseLong("1"), "VINFAST", "/hoang/vinfast.jpg", 1l);
         Brand newB = brandServiceImpl.findById(Long.parseLong("1"));
         assertEquals(b.getBrandName(), newB.getBrandName());
         assertEquals(b.getImgPath(), newB.getImgPath());
@@ -109,4 +108,5 @@ class BrandServiceImplTest {
         Page<Brand> pb = brandServiceImpl.findAllOrderByName(pageable, name);
         assertEquals(1, pb.getNumberOfElements());
     }
+
 }
