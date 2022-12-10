@@ -71,7 +71,7 @@ class CarServiceImplTest {
     }
 
     @Test
-    void saveCar() {
+    void givenValidCar_whenSaveCar_thenSucceed() {
         ModelCar modelCar = new ModelCar();
         modelCar.setId(Long.parseLong("6"));
         User userCreate = new User();
@@ -85,7 +85,7 @@ class CarServiceImplTest {
     }
 
     @Test
-    void updateCar() {
+    void givenValidId_whenUpdateCar_thenSucceed() {
         ModelCar modelCar = new ModelCar();
         modelCar.setId(Long.parseLong("6"));
         User userCreate = new User();
@@ -100,7 +100,7 @@ class CarServiceImplTest {
     }
 
     @Test
-    void delete() throws NotFoundException {
+    void givenValidId_whenDeleteCar_thenSucceed() throws NotFoundException {
         carServiceImpl.delete(Long.parseLong("2"));
     }
 
@@ -111,7 +111,7 @@ class CarServiceImplTest {
     }
 
     @Test
-    void getAllCarById() {
+    void whenValidId_thenCarFound() {
         ModelCar modelCar = new ModelCar();
         modelCar.setId(Long.parseLong("6"));
         User userCreate = new User();
