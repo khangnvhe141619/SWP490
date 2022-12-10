@@ -184,7 +184,7 @@ function isPassAjax1(down , up, roomId) {
                         avgText = `<span>Average: ${b} CAB</span>`;
                         element2.innerHTML = avgText;
 
-                        document.getElementById("btnBid").click();
+                        document.getElementById("btnOk").click();
                     },
                     error: function (e) {
                         alert('Error: ' + e);
@@ -264,7 +264,7 @@ function sendMessage2(event) {
 
 function onMessageReceived2(payload) {
     var message = JSON.parse(payload.body);
-    if ((!isNaN(message.content) && message.content) && (message.content >= downPrice && message.content <= upPrice)) {
+    if ((!isNaN(message.content) && message.content != null) && (message.content >= downPrice && message.content <= upPrice)) {
         var messageElement = document.createElement('li');
 
         messageElement.classList.add('chat-message');
