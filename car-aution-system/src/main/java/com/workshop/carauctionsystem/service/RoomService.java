@@ -11,7 +11,9 @@ import java.util.List;
 public interface RoomService {
     public List<Room> getAllRoom();
     public Room getRoomById(int roomId);
-
+    public Page<Room> findRoomByCurrent(Pageable pageable,String roomName,String current);
+    public Page<Room> findRoomByPending(Pageable pageable,String roomName,String current);
+    public Page<Room> findRoomByHistory(Pageable pageable,String roomName,String current);
     public Page<Room> findAllByName(Pageable pageable, String roomName);
     public void saveRoom(Room room);
     public void update(String roomName, String startTime, String endTime, Timestamp updatedAt, int ticketPrice, int typeRoom, int createdBy, String img, int id);

@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="utf-8">
@@ -262,7 +262,7 @@
               <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                   <div class="breadcome-heading">
-                    <form role="search" class="sr-input-func">
+                    <form th:action="@{/admin/home}" method="get" role="search" class="sr-input-func">
                       <input type="text" placeholder="Search..." class="search-int form-control">
                       <a href="#"><i class="fa fa-search"></i></a>
                     </form>
@@ -299,54 +299,47 @@
                 <div class="row">
                   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="product-status-wrap drp-lst">
+                      <div th:if="${success} != null">
+                        <div class="alert alert-success text-center" role="alert">[[${success}]]</div>
+                      </div>
+                      <div th:if="${fail} != null">
+                        <div class="alert alert-danger text-center" role="alert">[[${fail}]]</div>
+                      </div>
                       <div class="asset-inner">
+                        <div th:if="${#lists.isEmpty(rooms)}">
+                          <h6 style="color: red;" th:text="${lst_empty}"></h6>
+                        </div>
                         <table>
                           <tr>
                             <th>No</th>
                             <th>Name of Car.</th>
                             <th>Model</th>
-                            <th>Winner</th>
                             <th>Average Price</th>
                             <th>Date Time</th>
                             <th>Setting</th>
                           </tr>
-                          <tr>
-                            <td>1</td>
-                            <td>Mercedes GLC 300</td>
-                            <td>2020</td>
-                            <td>Viet Hoang</td>
-                            <td>Average Price</td>
-                            <td>29/11/2020</td>
-                            <td>
-                              <button data-toggle="tooltip" title="View"
-                                      class="pd-setting-ed"><i class="fa fa-eye"
-                                                               aria-hidden="true"></i></button>
-                              <button data-toggle="tooltip" title="Edit"
-                                      class="pd-setting-ed"><i
-                                      class="fa fa-pencil-square-o"
-                                      aria-hidden="true"></i></button>
-                              <button data-toggle="tooltip" title="Trash"
-                                      class="pd-setting-ed"><i class="fa fa-trash-o"
-                                                               aria-hidden="true"></i></button>
-                            </td>
+                          <tr th:unless="${not #lists.isEmpty(rooms)}">
+                          <tr th:each="c,loop :${rooms}">
+                            <td th:text="${loop.count}"></td>
+                            <td th:text="${c.roomName}"></td>
+                            <td th:text="${c.carId.modelId.modelName}"></td>
+                            <td th:text="${c.carId.downBoundPrice}+'&ensp;->&ensp;'+${c.carId.upBoundPrice}"></td>
+                            <td th:text="${c.openDate}"></td>
                           </tr>
                         </table>
                       </div>
+                      <div th:if="${not #lists.isEmpty(rooms)}">
                       <div class="custom-pagination">
                         <nav aria-label="Page navigation example">
                           <ul class="pagination">
-                            <li class="page-item"><a class="page-link"
-                                                     href="#">Previous</a></li>
-                            <li class="page-item"><a class="page-link" href="#">1</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">2</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">3</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">Next</a>
-                            </li>
+                            <li class="page-item" th:if="${rooms.hasPrevious()}"><a class="page-link" th:href="@{/admin/home(page=${rooms.number}-1,search=${param.search})}">Previous</a></li>
+                            <li class="page-item"><a th:text="${rooms.number} + 1"></a></li>
+                            <li class="page-item" th:if="${rooms.hasNext()}"><a >/</a></li>
+                            <li class="page-item" th:if="${rooms.hasNext()}"><a th:text="${rooms.totalPages}"></a></li>
+                            <li class="page-item" th:if="${rooms.hasNext()}"><a class="page-link" th:href="@{/admin/home(page=${rooms.number}+1,search=${param.search})}">Next</a></li>
                           </ul>
                         </nav>
+                      </div>
                       </div>
                     </div>
                   </div>
@@ -356,54 +349,52 @@
                 <div class="row">
                   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="product-status-wrap drp-lst">
+                      <div th:if="${success} != null">
+                        <div class="alert alert-success text-center" role="alert">[[${success}]]</div>
+                      </div>
+                      <div th:if="${fail} != null">
+                        <div class="alert alert-danger text-center" role="alert">[[${fail}]]</div>
+                      </div>
                       <div class="asset-inner">
+                        <div th:if="${#lists.isEmpty(rooms1)}">
+                          <h6 style="color: red;" th:text="${lst_empty1}"></h6>
+                        </div>
                         <table>
                           <tr>
                             <th>No</th>
                             <th>Name of Car.</th>
                             <th>Model</th>
-                            <th>Winner</th>
                             <th>Average Price</th>
                             <th>Date Time</th>
                             <th>Setting</th>
                           </tr>
-                          <tr>
-                            <td>1</td>
-                            <td>Mercedes GLC 300</td>
-                            <td>2020</td>
-                            <td>Viet Hoang</td>
-                            <td>Average Price</td>
-                            <td>29/11/2020</td>
-                            <td>
-                              <button data-toggle="tooltip" title="View"
-                                      class="pd-setting-ed"><i class="fa fa-eye"
-                                                               aria-hidden="true"></i></button>
-                              <button data-toggle="tooltip" title="Edit"
-                                      class="pd-setting-ed"><i
-                                      class="fa fa-pencil-square-o"
-                                      aria-hidden="true"></i></button>
-                              <button data-toggle="tooltip" title="Trash"
-                                      class="pd-setting-ed"><i class="fa fa-trash-o"
-                                                               aria-hidden="true"></i></button>
-                            </td>
+                          <tr th:unless="${not #lists.isEmpty(rooms1)}">
+                          <tr th:each="c,loop :${rooms1}">
+                            <td th:text="${loop.count}"></td>
+                            <td th:text="${c.roomName}"></td>
+                            <td th:text="${c.carId.modelId.modelName}"></td>
+                            <td th:text="${c.carId.downBoundPrice}+'&ensp;->&ensp;'+${c.carId.upBoundPrice}"></td>
+                            <td th:text="${c.openDate}"></td>
+                          <td>
+                            <button title="View" class="pd-setting-ed"><a  th:attr="data-target='#myViewModal'+*{c.id}" data-toggle="modal"><i class="fa fa-eye" aria-hidden="true"></i></a></button>
+                            <button title="Edit" class="pd-setting-ed"><a th:attr="data-target='#myUpdateModal'+*{c.id}" data-toggle="modal"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></button>
+                            <button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><a ><i class="fa fa-trash-o" aria-hidden="true"></i></a></button>
+                          </td>
                           </tr>
                         </table>
                       </div>
-                      <div class="custom-pagination">
-                        <nav aria-label="Page navigation example">
-                          <ul class="pagination">
-                            <li class="page-item"><a class="page-link"
-                                                     href="#">Previous</a></li>
-                            <li class="page-item"><a class="page-link" href="#">1</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">2</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">3</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">Next</a>
-                            </li>
-                          </ul>
-                        </nav>
+                      <div th:if="${not #lists.isEmpty(rooms1)}">
+                        <div class="custom-pagination">
+                          <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                              <li class="page-item" th:if="${rooms1.hasPrevious()}"><a class="page-link" th:href="@{/admin/home(page=${rooms1.number}-1,search=${param.search})}">Previous</a></li>
+                              <li class="page-item"><a th:text="${rooms1.number} + 1"></a></li>
+                              <li class="page-item" th:if="${rooms1.hasNext()}"><a >/</a></li>
+                              <li class="page-item" th:if="${rooms1.hasNext()}"><a th:text="${rooms1.totalPages}"></a></li>
+                              <li class="page-item" th:if="${rooms1.hasNext()}"><a class="page-link" th:href="@{/admin/home(page=${rooms1.number}+1,search=${param.search})}">Next</a></li>
+                            </ul>
+                          </nav>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -413,54 +404,52 @@
                 <div class="row">
                   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="product-status-wrap drp-lst">
+                      <div th:if="${success} != null">
+                        <div class="alert alert-success text-center" role="alert">[[${success}]]</div>
+                      </div>
+                      <div th:if="${fail} != null">
+                        <div class="alert alert-danger text-center" role="alert">[[${fail}]]</div>
+                      </div>
                       <div class="asset-inner">
+                        <div th:if="${#lists.isEmpty(rooms2)}">
+                          <h6 style="color: red;" th:text="${lst_empty2}"></h6>
+                        </div>
                         <table>
                           <tr>
                             <th>No</th>
                             <th>Name of Car.</th>
                             <th>Model</th>
-                            <th>Winner</th>
                             <th>Average Price</th>
                             <th>Date Time</th>
                             <th>Setting</th>
                           </tr>
-                          <tr>
-                            <td>1</td>
-                            <td>Mercedes GLC 300</td>
-                            <td>2020</td>
-                            <td>Viet Hoang</td>
-                            <td>Average Price</td>
-                            <td>29/11/2020</td>
-                            <td>
-                              <button data-toggle="tooltip" title="View"
-                                      class="pd-setting-ed"><i class="fa fa-eye"
-                                                               aria-hidden="true"></i></button>
-                              <button data-toggle="tooltip" title="Edit"
-                                      class="pd-setting-ed"><i
-                                      class="fa fa-pencil-square-o"
-                                      aria-hidden="true"></i></button>
-                              <button data-toggle="tooltip" title="Trash"
-                                      class="pd-setting-ed"><i class="fa fa-trash-o"
-                                                               aria-hidden="true"></i></button>
-                            </td>
+                          <tr th:unless="${not #lists.isEmpty(rooms2)}">
+                          <tr th:each="c,loop :${rooms2}">
+                            <td th:text="${loop.count}"></td>
+                            <td th:text="${c.roomName}"></td>
+                            <td th:text="${c.carId.modelId.modelName}"></td>
+                            <td th:text="${c.carId.downBoundPrice}+'&ensp;->&ensp;'+${c.carId.upBoundPrice}"></td>
+                            <td th:text="${c.openDate}"></td>
+                          <td>
+                            <button title="View" class="pd-setting-ed"><a  th:attr="data-target='#myViewModal'+*{c.id}" data-toggle="modal"><i class="fa fa-eye" aria-hidden="true"></i></a></button>
+                            <button title="Edit" class="pd-setting-ed"><a th:attr="data-target='#myUpdateModal'+*{c.id}" data-toggle="modal"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></button>
+                            <button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><a ><i class="fa fa-trash-o" aria-hidden="true"></i></a></button>
+                          </td>
                           </tr>
                         </table>
                       </div>
-                      <div class="custom-pagination">
-                        <nav aria-label="Page navigation example">
-                          <ul class="pagination">
-                            <li class="page-item"><a class="page-link"
-                                                     href="#">Previous</a></li>
-                            <li class="page-item"><a class="page-link" href="#">1</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">2</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">3</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">Next</a>
-                            </li>
-                          </ul>
-                        </nav>
+                      <div th:if="${not #lists.isEmpty(rooms2)}">
+                        <div class="custom-pagination">
+                          <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                              <li class="page-item" th:if="${rooms2.hasPrevious()}"><a class="page-link" th:href="@{/admin/home(page=${rooms2.number}-1,search=${param.search})}">Previous</a></li>
+                              <li class="page-item"><a th:text="${rooms2.number} + 1"></a></li>
+                              <li class="page-item" th:if="${rooms2.hasNext()}"><a >/</a></li>
+                              <li class="page-item" th:if="${rooms2.hasNext()}"><a th:text="${rooms2.totalPages}"></a></li>
+                              <li class="page-item" th:if="${rooms2.hasNext()}"><a class="page-link" th:href="@{/admin/home(page=${rooms2.number}+1,search=${param.search})}">Next</a></li>
+                            </ul>
+                          </nav>
+                        </div>
                       </div>
                     </div>
                   </div>

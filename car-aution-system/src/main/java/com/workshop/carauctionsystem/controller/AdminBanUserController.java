@@ -34,7 +34,7 @@ public class AdminBanUserController {
             modelAndView = new ModelAndView("admin/listBannedUser");
             modelAndView.addObject("users", list);
         } else {
-            modelAndView = new ModelAndView("page404");
+            modelAndView = new ModelAndView("admin/page404");
         }
         return modelAndView;
     }

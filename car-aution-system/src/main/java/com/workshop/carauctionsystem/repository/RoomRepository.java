@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Repository
 public interface RoomRepository extends JpaRepository<Room, Integer> {
@@ -32,4 +33,17 @@ public interface RoomRepository extends JpaRepository<Room, Integer> {
     public Page<Room> getListRoom(Pageable pageable);
     @Query(nativeQuery = true, value = "SELECT * FROM swp490_cab.room  WHERE current_date() - openDate >= 0 and current_time() - startTime >= 0 and current_time() - endTime <= 0")
     public Page<Room> getListRoomCurrent(Pageable pageable);
+
+    @Query(nativeQuery = true,value = "SELECT * FROM room WHERE DATE(openDate) = ?1")
+    public Page<Room> findRoomByCurrent(Pageable pageable,String current);
+    @Query(nativeQuery = true,value = "SELECT * FROM room WHERE room.roomName like %?1% AND DATE(openDate) = ?2")
+    public Page<Room> findRoomByCurrent(Pageable pageable,String roomName,String current);
+    @Query(nativeQuery = true,value = "SELECT * FROM room WHERE DATE(openDate) > ?1")
+    public Page<Room> findRoomByPending(Pageable pageable,String current);
+    @Query(nativeQuery = true,value = "SELECT * FROM room WHERE room.roomName like %?1% AND DATE(openDate) > ?2")
+    public Page<Room> findRoomByPending(Pageable pageable,String roomName,String current);
+    @Query(nativeQuery = true,value = "SELECT * FROM room WHERE DATE(openDate) < ?1")
+    public Page<Room> findRoomByHistory(Pageable pageable,String current);
+    @Query(nativeQuery = true,value = "SELECT * FROM room WHERE room.roomName like %?1% AND DATE(openDate) < ?2")
+    public Page<Room> findRoomByHistory(Pageable pageable,String roomName,String current);
 }
