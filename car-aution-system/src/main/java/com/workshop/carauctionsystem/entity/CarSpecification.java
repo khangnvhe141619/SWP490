@@ -42,4 +42,19 @@ public class CarSpecification {
     private String drive;
     @Column(name = "yearofmake")
     private String yearOfMake;
+
+    public CarSpecification(Car carId, String manufacturing, String status, String km_driven, String gear, String fuel, String fuelConsumption, String outerColor, String innerColor, String overallDimension, String drive, String yearOfMake) {
+        this.carId = carId;
+        this.manufacturing = manufacturing;
+        this.status = status;
+        this.km_driven = km_driven;
+        this.gear = gear;
+        this.fuel = fuel;
+        this.fuelConsumption = fuelConsumption;
+        this.outerColor = outerColor;
+        this.innerColor = innerColor;
+        this.overallDimension = overallDimension;
+        this.drive = drive;
+        this.yearOfMake = yearOfMake;
+    }
 }

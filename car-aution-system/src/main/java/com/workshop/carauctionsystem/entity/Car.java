@@ -58,4 +58,16 @@ public class Car {
 
     @OneToMany(targetEntity = Image.class, mappedBy = "carId",orphanRemoval = false,fetch = FetchType.LAZY)
     private Set<Image> imgCar;
+
+    public Car(String carName, String description, Long upBoundPrice, Long downBoundPrice, ModelCar modelId, int status, User createdBy, Timestamp createdAt, Timestamp updatedAt) {
+        this.carName = carName;
+        this.description = description;
+        this.upBoundPrice = upBoundPrice;
+        this.downBoundPrice = downBoundPrice;
+        this.modelId = modelId;
+        this.status = status;
+        this.createdBy = createdBy;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
 }

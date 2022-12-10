@@ -2,6 +2,7 @@ package com.workshop.carauctionsystem.service.impl;
 
 import com.workshop.carauctionsystem.entity.Room;
 import com.workshop.carauctionsystem.exception.NotFoundException;
+import com.workshop.carauctionsystem.repository.RoleRepository;
 import com.workshop.carauctionsystem.repository.RoomRepository;
 import com.workshop.carauctionsystem.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,8 @@ public class RoomServiceImpl implements RoomService {
 
     @Autowired
     private RoomRepository roomRepository;
+    @Autowired
+    private RoleRepository roleRepository;
 
     @Override
     public List<Room> getAllRoom() {
@@ -30,6 +33,34 @@ public class RoomServiceImpl implements RoomService {
     public Room getRoomById(int roomId) {
         return roomRepository.findRoomById(roomId);
     }
+
+    @Override
+    public Page<Room> findRoomByCurrent(Pageable pageable,String roomName,String current) {
+        if(roomName != null){
+          return roomRepository.findRoomByCurrent(pageable,roomName,current);
+        }else {
+            return roomRepository.findRoomByCurrent(pageable,current);
+        }
+    }
+
+    @Override
+    public Page<Room> findRoomByPending(Pageable pageable,String roomName,String current) {
+       if(roomName != null) {
+           return roomRepository.findRoomByPending(pageable,roomName,current);
+       }else {
+           return roomRepository.findRoomByPending(pageable, current);
+       }
+    }
+
+    @Override
+    public Page<Room> findRoomByHistory(Pageable pageable,String roomName,String current) {
+       if (roomName != null) {
+           return roomRepository.findRoomByHistory(pageable,roomName,current);
+       }else {
+           return roomRepository.findRoomByHistory(pageable,current);
+       }
+    }
+
 
     @Override
     public Page<Room> findAllByName(Pageable pageable, String roomName) {

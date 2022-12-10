@@ -26,4 +26,10 @@ public class Brand {
 
     @Column(name = "status")
     private Long status;
+
+    public Brand(String brandName, String imgPath, Long status) {
+        this.brandName = brandName;
+        this.imgPath = imgPath;
+        this.status = status;
+    }
 }

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Repository
 public interface RoomRepository extends JpaRepository<Room, Integer> {
@@ -30,11 +31,21 @@ public interface RoomRepository extends JpaRepository<Room, Integer> {
 
     @Query(nativeQuery = true, value = "SELECT * FROM swp490_cab.room  WHERE current_date() - openDate < 0 or current_time() - startTime < 0")
     public Page<Room> getListRoom(Pageable pageable);
-    @Query(nativeQuery = true, value = "SELECT * FROM swp490_cab.room  WHERE current_date() - openDate = 0 and current_time() - startTime >= 0 and current_time() - endTime <= 0")
+    @Query(nativeQuery = true, value = "SELECT * FROM swp490_cab.room  WHERE current_date() - openDate >= 0 and current_time() - startTime >= 0 and current_time() - endTime <= 0")
     public Page<Room> getListRoomCurrent(Pageable pageable);
+
+    @Query(nativeQuery = true,value = "SELECT * FROM room WHERE DATE(openDate) = ?1")
+    public Page<Room> findRoomByCurrent(Pageable pageable,String current);
+    @Query(nativeQuery = true,value = "SELECT * FROM room WHERE room.roomName like %?1% AND DATE(openDate) = ?2")
+    public Page<Room> findRoomByCurrent(Pageable pageable,String roomName,String current);
+    @Query(nativeQuery = true,value = "SELECT * FROM room WHERE DATE(openDate) > ?1")
+    public Page<Room> findRoomByPending(Pageable pageable,String current);
+    @Query(nativeQuery = true,value = "SELECT * FROM room WHERE room.roomName like %?1% AND DATE(openDate) > ?2")
+    public Page<Room> findRoomByPending(Pageable pageable,String roomName,String current);
+    @Query(nativeQuery = true,value = "SELECT * FROM room WHERE DATE(openDate) < ?1")
+    public Page<Room> findRoomByHistory(Pageable pageable,String current);
+    @Query(nativeQuery = true,value = "SELECT * FROM room WHERE room.roomName like %?1% AND DATE(openDate) < ?2")
+    public Page<Room> findRoomByHistory(Pageable pageable,String roomName,String current);
     @Query("SELECT r FROM Room as r join r.carId as c join c.modelId as m WHERE c.carName like %?1% and m.modelName like %?2%")
     public Page<Room> searchRoomByNameCar(Pageable pageable,String carName, String model);
-
-
-
 }

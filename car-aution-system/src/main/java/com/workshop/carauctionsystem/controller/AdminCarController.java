@@ -60,12 +60,10 @@ public class AdminCarController {
         model.addAttribute("Safety",new SafetySystemDTO());
 
         Page<Car> lstCar = carService.findAllByCarName(PageRequest.of(page, 5, Sort.by(id)), search);
-
+        view = new ModelAndView("admin/listCar");
         if (!lstCar.isEmpty()) {
-            view = new ModelAndView("admin/listCar");
             view.addObject("cars", lstCar);
         } else {
-            view = new ModelAndView("admin/listCar");
             view.addObject("lst_empty", "List Empty!");
         }
         return view;
