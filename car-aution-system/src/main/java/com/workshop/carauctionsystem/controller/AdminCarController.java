@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.File;
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
@@ -89,7 +90,7 @@ public class AdminCarController {
                             @ModelAttribute(value = "Safety")SafetySystemDTO safetyDTO,
                             @RequestParam(value = "upImg") MultipartFile []upImg,
                             @RequestParam Map<String, String> requestMap,
-                            RedirectAttributes ra) {
+                            RedirectAttributes ra) throws IOException {
         Long modelId = Long.parseLong(requestMap.get("modelId"));
         int createById = Integer.parseInt(requestMap.get("createById"));
         String statusCar = requestMap.get("statusCar");
@@ -99,6 +100,7 @@ public class AdminCarController {
         List<String> photos = new ArrayList<>();
         for (MultipartFile file : upImg){
             photos.add(file.getOriginalFilename());
+            FileCopyUtils.copy(file.getBytes(), new File("src\\main\\resources\\static\\assets\\hoang/" + file.getOriginalFilename()));
         }
         try{
             ModelCar modelCar = new ModelCar();
@@ -153,7 +155,6 @@ public class AdminCarController {
                     image = new Image();
                     image.setCarId(car);
                     image.setImgPath("/hoang/"+string);
-                    FileCopyUtils.copy(string.getBytes(), new File("src\\main\\resources\\static\\assets\\hoang/" + string));
                     imageService.saveImageForCar(image);
                     System.out.println(string);
                 }
