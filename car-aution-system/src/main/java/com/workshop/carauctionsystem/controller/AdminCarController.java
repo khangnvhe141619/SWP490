@@ -162,6 +162,7 @@ public class AdminCarController {
             ra.addFlashAttribute("success", "The Car has been saved successfully");
             return "redirect:/admin/car";
         }catch (Exception e){
+            System.out.println("db");
             ra.addFlashAttribute("fail", "Add New Car Failed");
             return "redirect:/admin/car";
         }
@@ -220,7 +221,7 @@ public class AdminCarController {
             carService.delete(id);
         } catch (NotFoundException e) {
             ra.addFlashAttribute("message", e.getMessage());
-            return "page404";
+            return "admin/page404";
         }
         ra.addFlashAttribute("success", "The Car has been deleted successfully");
         return "redirect:/admin/car";

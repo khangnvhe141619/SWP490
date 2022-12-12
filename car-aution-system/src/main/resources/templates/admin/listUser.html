@@ -298,6 +298,9 @@
               <div class="alert alert-danger text-center" role="alert">[[${fail}]]</div>
             </div>
             <div class="asset-inner">
+              <div th:if="${#lists.isEmpty(users)}">
+                <h6 style="color: red;" th:text="${lst_empty}"></h6>
+              </div>
               <table>
                 <tr>
                   <th>No</th>
@@ -308,6 +311,7 @@
                   <th>Status</th>
                   <th>Setting</th>
                 </tr>
+                <tr th:unless="${not #lists.isEmpty(users)}">
                 <tr th:each="c,loop :${users}">
                   <td th:text="${loop.count}"></td>
                   <td th:text="${c.userName}"></td>
@@ -325,6 +329,7 @@
                 </tr>
               </table>
             </div>
+            <div th:if="${not #lists.isEmpty(users)}">
             <div class="custom-pagination">
               <nav aria-label="Page navigation example">
                 <ul class="pagination">
@@ -336,6 +341,7 @@
                 </ul>
               </nav>
             </div>
+          </div>
           </div>
         </div>
       </div>

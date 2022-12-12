@@ -37,11 +37,11 @@ public class AdminBrandController {
         //get list brand by page and sort by id desc
         model.addAttribute("brandModel", new BrandModel());
         Page<Brand> list = brandService.findAllOrderByName(PageRequest.of(page, 5, Sort.by(id)), search);
+        modelAndView = new ModelAndView("admin/listBrand");
         if (!list.isEmpty()) {
-            modelAndView = new ModelAndView("admin/listBrand");
             modelAndView.addObject("brands", list);
         } else {
-            modelAndView = new ModelAndView("page404");
+            modelAndView.addObject("lst_empty", "List Empty!");
         }
         return modelAndView;
     }
@@ -77,7 +77,7 @@ public class AdminBrandController {
             brandService.delete(id);
         } catch (NotFoundException e) {
             ra.addFlashAttribute("message", e.getMessage());
-            return "page404";
+            return "admin/page404";
         }
         ra.addFlashAttribute("success", "The brand has been deleted successfully");
         return "redirect:/admin/brand";

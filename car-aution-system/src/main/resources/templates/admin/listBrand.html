@@ -326,6 +326,9 @@
                             <div class="alert alert-danger text-center" role="alert">[[${fail}]]</div>
                         </div>
                         <div class="asset-inner">
+                            <div th:if="${#lists.isEmpty(brands)}">
+                                <h6 style="color: red;" th:text="${lst_empty}">a</h6>
+                            </div>
                             <table>
                                 <tr>
                                     <th>No</th>
@@ -333,6 +336,7 @@
                                     <th>Img</th>
                                     <th>Setting</th>
                                 </tr>
+                                <tr th:unless="${not #lists.isEmpty(brands)}">
                                 <tr th:each="c,loop :${brands}">
                                     <td th:text="${loop.count}"></td>
                                     <td th:text="${c.brandName}"></td>
@@ -395,8 +399,10 @@
                                     </div>
                                     <!--End Update pop-up-->
                                 </tr>
+                                </tr>
                             </table>
                         </div>
+                        <div th:if="${not #lists.isEmpty(brands)}">
                         <div class="custom-pagination">
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination">
@@ -407,6 +413,7 @@
                                     <li class="page-item" th:if="${brands.hasNext()}"><a class="page-link" th:href="@{/admin/brand(page=${brands.number}+1,search=${param.search})}">Next</a></li>
                                 </ul>
                             </nav>
+                        </div>
                         </div>
                     </div>
                 </div>

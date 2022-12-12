@@ -466,6 +466,12 @@
                                                 <div th:unless="${#sets.isEmpty(c.imgCar)}">
                                                   <img th:src="${c.imgCar.stream().findFirst().get().imgPath}" alt="" />
                                                   </div>
+                                                  <div th:unless="${#sets.isEmpty(c.imgCar)}">
+                                                    <div th:each="c : ${c.imgCar}">
+                                                      <img th:src="${c.imgPath}" alt="" />
+                                                    </div>
+                                                  </div>
+
                                                 </div>
 
                                               <div class="profile-details-hr">

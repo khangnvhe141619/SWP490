@@ -46,7 +46,7 @@ public class AdminBanUserController {
             userService.UnBanUser(id);
         } catch (NotFoundException e) {
             ra.addFlashAttribute("message", e.getMessage());
-            return "page404";
+            return "admin/page404";
         }
         ra.addFlashAttribute("success", "Unban User successfully");
         return "redirect:/admin/userban";
