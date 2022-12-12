@@ -9,7 +9,6 @@ import com.workshop.carauctionsystem.model.SafetySystemDTO;
 import com.workshop.carauctionsystem.service.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -17,11 +16,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.File;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -44,6 +47,8 @@ public class AdminCarController {
     @Autowired
     private CarSpecificationService caeSpecService;
 
+    @Autowired
+    private ImageService imageService;
 
     @GetMapping("/admin/car")
     public ModelAndView showListCar(@RequestParam(defaultValue = "0") int page,
@@ -82,6 +87,7 @@ public class AdminCarController {
     public String createCar(@ModelAttribute(value = "CarDTO") CarDTO carDTO,
                             @ModelAttribute(value = "CarSpecDTO")CarSpecificationDTO carSpecDTO,
                             @ModelAttribute(value = "Safety")SafetySystemDTO safetyDTO,
+                            @RequestParam(value = "upImg") MultipartFile []upImg,
                             @RequestParam Map<String, String> requestMap,
                             RedirectAttributes ra) {
         Long modelId = Long.parseLong(requestMap.get("modelId"));
@@ -90,7 +96,10 @@ public class AdminCarController {
         String absBrake = requestMap.get("absBrake");
         String speedControl = requestMap.get("speedControl");
         String tirePressure = requestMap.get("tirePressure");
-
+        List<String> photos = new ArrayList<>();
+        for (MultipartFile file : upImg){
+            photos.add(file.getOriginalFilename());
+        }
         try{
             ModelCar modelCar = new ModelCar();
             modelCar.setId(modelId);
@@ -137,6 +146,17 @@ public class AdminCarController {
                 safetySystem.setTirePressure(tirePressure);
                 safetySystem.setOtherDescription(safetyDTO.getOtherDescription());
                 safetySystemService.saveSafetySystem(safetySystem);
+            }
+            if(carID != null){
+                Image image = null;
+                for (String string: photos){
+                    image = new Image();
+                    image.setCarId(car);
+                    image.setImgPath("/hoang/"+string);
+                    FileCopyUtils.copy(string.getBytes(), new File("src\\main\\resources\\static\\assets\\hoang/" + string));
+                    imageService.saveImageForCar(image);
+                    System.out.println(string);
+                }
             }
             ra.addFlashAttribute("success", "The Car has been saved successfully");
             return "redirect:/admin/car";

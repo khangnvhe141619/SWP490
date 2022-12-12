@@ -18,4 +18,11 @@ public class ImageServiceImpl implements ImageService {
     public List<Image> getAllImageByCarId(Long CarId) {
         return imageRepository.findAllByCarId(CarId);
     }
+
+    @Override
+    public void saveImageForCar(Image image) {
+        imageRepository.save(image);
+    }
+
+
 }
