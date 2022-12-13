@@ -36,17 +36,18 @@
                         <li><a class="nav-link scrollto" th:href="@{/guideLine}">Guideline</a></li>
                         <li><a class="nav-link scrollto " th:href="@{/home}">About Us</a></li>
                     </ul>
-                    <a href="connectWallet.html" style="background-color: rgb(66, 180, 66); padding-right: 30px;"
-                       class="connectwallet">Connect wallet</a>
-                    <span th:if="${check} == true">
-                            <a th:href="@{/personProfile}"><i class="bi bi-person-circle"
-                                                              style="font-size: 30px;"></i><i
-                                    th:text="${cookieValue.value}"></i></a>
-                        </span>
+                    <span style="display: flex;flex-direction: row;" th:if="${check} == true">
+                        <th:block th:if="${addressWallet} == null">
+                            <a style="background-color: rgb(66, 180, 66); padding-right: 30px;" id="connectButton"
+                               class="connectwallet">Connect wallet</a>
+                        </th:block>
+                        <a  th:href="@{/personProfile}"><i class="bi bi-person-circle" style="font-size: 30px;"></i><i
+                                th:text="${cookieValue.value}"></i></a>
+                    </span>
                     <span th:if="${check} == false">
-                            <a th:href="@{/login}"><i class="bi bi-person-circle" style="font-size: 30px;"></i><i
-                                    th:text="${cookieValue.value}"></i></a>
-                        </span>
+                        <a th:href="@{/login}"><i class="bi bi-person-circle" style="font-size: 30px;"></i>
+                          <i th:text="${cookieValue.value}"></i></a>
+          </span>
                 </nav>
             </div>
         </div>
@@ -569,6 +570,7 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script th:src="@{/assets/js/main.js}"></script>
 <script th:src="@{/assets/js/CreateRoom.js}"></script>
+<script type="module" src="/assets/js/connectWallet.js"></script>
 </body>
 
 </html>

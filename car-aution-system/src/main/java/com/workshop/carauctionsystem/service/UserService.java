@@ -39,4 +39,6 @@ public interface UserService {
     public List<User> getRoleByAdminCar();
     public List<User> getRoleByAdminAuction();
 
+    public boolean saveWallet(User user, String address);
+
 }

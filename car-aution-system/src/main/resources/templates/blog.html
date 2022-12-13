@@ -66,10 +66,8 @@
             <h4>Latest news</h4>
             <form th:action="@{/user/news}" method="get" role="search" class="sr-input-func">
 
-
                     <input type="text" name="search" th:value="${param.search}" placeholder="Type here...">
                     <button>oke</button>
-
 
             </form>
             <div class="right-content flex-column d-flex" th:each="top:${top5}">

@@ -5,10 +5,7 @@ import com.workshop.carauctionsystem.model.FavoriteDTO;
 import com.workshop.carauctionsystem.model.ResponseObject;
 import com.workshop.carauctionsystem.repository.CarRepository;
 import com.workshop.carauctionsystem.repository.RoomRepository;
-import com.workshop.carauctionsystem.service.BrandService;
-import com.workshop.carauctionsystem.service.CarService;
-import com.workshop.carauctionsystem.service.FavoriteService;
-import com.workshop.carauctionsystem.service.RoomService;
+import com.workshop.carauctionsystem.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -38,6 +35,8 @@ public class AuctionRoomController {
     @Autowired
     FavoriteService favoriteService;
 
+    @Autowired
+    UserService userService;
     @GetMapping("/auctionRoom")
     public ModelAndView redirectAuctionRoom(@CookieValue(value = "setUser", defaultValue = "") String setUser, Model model,
                                             @CookieValue(value = "setUserId", defaultValue = "") String setUserId) {
@@ -102,13 +101,14 @@ public class AuctionRoomController {
             if(!favoriteList.isEmpty()){
                 model.addAttribute("checkList", true);
                 model.addAttribute("favoriteList", favoriteList);
+                User u =  userService.findByUsername(setUser);
+                view.addObject("addressWallet", u.getAddressWallet());
             }else {
                 model.addAttribute("checkList", false);
             }
         }
 
 //        ---------------------------------------
-
         view.setViewName("auctionRoom");
         return view;
     }

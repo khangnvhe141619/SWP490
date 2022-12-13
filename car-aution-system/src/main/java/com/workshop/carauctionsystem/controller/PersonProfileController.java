@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.ServletContext;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.io.InputStream;
@@ -36,7 +37,8 @@ public class PersonProfileController {
     ServletContext application;
 
     @GetMapping(value = {"/personProfile"})
-    public String getPersonProfile( User user, @CookieValue(value = "setUserId") int setUserId, Model model){
+    public ModelAndView getPersonProfile( User user, @CookieValue(value = "setUserId") int setUserId,
+                                          @CookieValue(value = "setUser") String setUser,Model model){
         User u=  service.findUserById(setUserId);
         if(u != null){
             String name = u.getFullName();
@@ -49,7 +51,17 @@ public class PersonProfileController {
             model.addAttribute("username", username);
             model.addAttribute("INFOR", u);
         }
-        return "PeronalProfile";
+        Cookie cookie = new Cookie("setUser", setUser);
+        model.addAttribute("cookieValue", cookie);
+        if(cookie.getValue().equals("")){
+            model.addAttribute("check", false);
+        } else {
+            model.addAttribute("check", true);
+        }
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("addressWallet", u.getAddressWallet());
+        modelAndView.setViewName("PeronalProfile");
+        return modelAndView;
     }
 
     @PostMapping(value = "/personProfile/update")
@@ -106,5 +118,16 @@ public class PersonProfileController {
             return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject("ok", "Valid password!", null));
         }
         return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject("no", "Invalid password!", null));
+    }
+
+    @PostMapping("/saveWallet")
+    public ResponseEntity<ResponseObject> saveWalleet(@CookieValue(value = "setUserId") int setUserId,
+                                                      @RequestParam("address") String address) {
+        User u1 = service.findUserById(setUserId);
+        boolean _suc = service.saveWallet(u1, address);
+        if (u1 != null && _suc) {
+            return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject("ok", "Succeed!", null));
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject("no", "Invalid!", null));
     }
 }

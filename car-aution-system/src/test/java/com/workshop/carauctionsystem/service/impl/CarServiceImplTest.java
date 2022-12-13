@@ -30,7 +30,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 @DataJpaTest
-@Rollback(value = false)
+@Rollback(value = true)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @ComponentScan(basePackages = {
         "com.workshop.carauctionsystem.repository",

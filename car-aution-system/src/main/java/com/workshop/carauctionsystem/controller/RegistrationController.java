@@ -72,7 +72,6 @@ public class RegistrationController {
             userDTO.setAvatar("user.png");
             userDTO.setPhone("099999999");
             userDTO.setFullName("User" + generator.nextInt(100));
-            userDTO.setAddressWallet("empty");
             User registeredUser = userService.registerNewUserAccount(userDTO);
 
             String appUrl = getAppUrl(request);

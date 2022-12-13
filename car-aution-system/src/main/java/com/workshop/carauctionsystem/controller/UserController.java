@@ -69,9 +69,11 @@ public class UserController {
             Cookie cookie = new Cookie("setUser", username);
             String setUserId = String.valueOf(u.getId());
             Cookie cookie2 = new Cookie("setUserId", setUserId);
+            Cookie walletCookie = new Cookie("walletCookie", u.getAddressWallet());
             cookie.setMaxAge(24 * 60 * 60);
             response.addCookie(cookie);
             response.addCookie(cookie2);
+            response.addCookie(walletCookie);
             session.setAttribute("username", username);
             session.setAttribute("avatar", avatar);
             model.addAttribute("cookieValue", cookie);

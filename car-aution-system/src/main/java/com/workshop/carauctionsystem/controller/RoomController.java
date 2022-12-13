@@ -99,6 +99,13 @@ public class RoomController {
         model.addAttribute("carSpecification", carSpecification);
         model.addAttribute("roomId", id);
         model.addAttribute("cookieValue", cookie);
+        if(cookie.getValue().equals("")){
+            model.addAttribute("check", false);
+        } else {
+            model.addAttribute("check", true);
+            User u =  userService.findByUsername(setUser);
+            view.addObject("addressWallet", u.getAddressWallet());
+        }
         view.setViewName("index");
         return view;
     }
