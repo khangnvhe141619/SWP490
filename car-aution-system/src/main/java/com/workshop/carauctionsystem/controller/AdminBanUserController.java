@@ -34,7 +34,8 @@ public class AdminBanUserController {
             modelAndView = new ModelAndView("admin/listBannedUser");
             modelAndView.addObject("users", list);
         } else {
-            modelAndView = new ModelAndView("admin/page404");
+            modelAndView = new ModelAndView("admin/listBannedUser");
+            modelAndView.addObject("lst_empty", "List Empty!");
         }
         return modelAndView;
     }
@@ -45,7 +46,7 @@ public class AdminBanUserController {
             userService.UnBanUser(id);
         } catch (NotFoundException e) {
             ra.addFlashAttribute("message", e.getMessage());
-            return "page404";
+            return "admin/page404";
         }
         ra.addFlashAttribute("success", "Unban User successfully");
         return "redirect:/admin/userban";

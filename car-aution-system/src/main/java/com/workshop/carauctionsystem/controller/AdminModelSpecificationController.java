@@ -32,11 +32,11 @@ public class AdminModelSpecificationController {
         ModelAndView modelAndView = null;
         model.addAttribute("modelSpecieModel", new ModelSpecieModel());
         Page<ModelSpecification> list = modelSpecService.findAllOrderByName(PageRequest.of(page, 5, Sort.by(id)), search);
+        modelAndView = new ModelAndView("admin/listModelSpec");
         if (!list.isEmpty()) {
-            modelAndView = new ModelAndView("admin/listModelSpec");
             modelAndView.addObject("modelSpecs", list);
         } else {
-            modelAndView = new ModelAndView("page404");
+            modelAndView.addObject("lst_empty", "List Empty!");
         }
         return modelAndView;
     }
@@ -70,7 +70,7 @@ public class AdminModelSpecificationController {
             modelSpecService.delete(id);
         } catch (NotFoundException e) {
             ra.addFlashAttribute("message", e.getMessage());
-            return "page404";
+            return "admin/page404";
         }
         ra.addFlashAttribute("success", "The ModelSpecification has been deleted successfully");
         return "redirect:/admin/modelSpec";

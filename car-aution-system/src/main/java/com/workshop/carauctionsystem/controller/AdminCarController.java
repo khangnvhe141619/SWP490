@@ -9,7 +9,6 @@ import com.workshop.carauctionsystem.model.SafetySystemDTO;
 import com.workshop.carauctionsystem.service.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -17,11 +16,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -44,6 +48,8 @@ public class AdminCarController {
     @Autowired
     private CarSpecificationService caeSpecService;
 
+    @Autowired
+    private ImageService imageService;
 
     @GetMapping("/admin/car")
     public ModelAndView showListCar(@RequestParam(defaultValue = "0") int page,
@@ -82,15 +88,26 @@ public class AdminCarController {
     public String createCar(@ModelAttribute(value = "CarDTO") CarDTO carDTO,
                             @ModelAttribute(value = "CarSpecDTO")CarSpecificationDTO carSpecDTO,
                             @ModelAttribute(value = "Safety")SafetySystemDTO safetyDTO,
+                            @RequestParam(value = "upImg") MultipartFile []upImg,
                             @RequestParam Map<String, String> requestMap,
-                            RedirectAttributes ra) {
+                            RedirectAttributes ra) throws IOException {
+        if(requestMap.get("modelId") != null && requestMap.get("createById") != null){
         Long modelId = Long.parseLong(requestMap.get("modelId"));
         int createById = Integer.parseInt(requestMap.get("createById"));
         String statusCar = requestMap.get("statusCar");
         String absBrake = requestMap.get("absBrake");
         String speedControl = requestMap.get("speedControl");
         String tirePressure = requestMap.get("tirePressure");
-
+        List<String> photos = new ArrayList<>();
+        for (MultipartFile file : upImg){
+            try {
+                photos.add(file.getOriginalFilename());
+                FileCopyUtils.copy(file.getBytes(), new File("src\\main\\resources\\static\\assets\\hoang/" + file.getOriginalFilename()));
+            }catch (IOException e){
+                ra.addFlashAttribute("fail", "Add New Car Failed (Can't find pictures)");
+                return "redirect:/admin/car";
+            }
+        }
         try{
             ModelCar modelCar = new ModelCar();
             modelCar.setId(modelId);
@@ -127,6 +144,9 @@ public class AdminCarController {
                 carSpec.setDrive(carSpecDTO.getDrive());
                 carSpec.setYearOfMake(carSpecDTO.getYearOfMake());
                 caeSpecService.saveCarSpecification(carSpec);
+            }else {
+                ra.addFlashAttribute("fail", "Add New Car Failed");
+                return "redirect:/admin/car";
             }
             if(carID != null){
                 SafetySystem safetySystem = new SafetySystem();
@@ -137,11 +157,30 @@ public class AdminCarController {
                 safetySystem.setTirePressure(tirePressure);
                 safetySystem.setOtherDescription(safetyDTO.getOtherDescription());
                 safetySystemService.saveSafetySystem(safetySystem);
+            }else {
+                ra.addFlashAttribute("fail", "Add New Car Failed");
+                return "redirect:/admin/car";
+            }
+            if(carID != null){
+                Image image = null;
+                for (String string: photos){
+                    image = new Image();
+                    image.setCarId(car);
+                    image.setImgPath("/hoang/"+string);
+                    imageService.saveImageForCar(image);
+                    System.out.println(string);
+                }
+            }else {
+                ra.addFlashAttribute("fail", "Add New Car Failed");
+                return "redirect:/admin/car";
             }
             ra.addFlashAttribute("success", "The Car has been saved successfully");
             return "redirect:/admin/car";
         }catch (Exception e){
             ra.addFlashAttribute("fail", "Add New Car Failed");
+            return "redirect:/admin/car";
+        }}else {
+            ra.addFlashAttribute("fail", "Add New Car Failed (Can't find Model of Car)");
             return "redirect:/admin/car";
         }
     }
@@ -199,7 +238,7 @@ public class AdminCarController {
             carService.delete(id);
         } catch (NotFoundException e) {
             ra.addFlashAttribute("message", e.getMessage());
-            return "page404";
+            return "admin/page404";
         }
         ra.addFlashAttribute("success", "The Car has been deleted successfully");
         return "redirect:/admin/car";

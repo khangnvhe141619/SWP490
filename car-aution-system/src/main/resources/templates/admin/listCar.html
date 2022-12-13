@@ -142,6 +142,7 @@
     .container {
       padding-top: 50px;
     }
+
   </style>
 </head>
 <body>
@@ -463,10 +464,16 @@
                                                 <div th:if="${#sets.isEmpty(c.imgCar)}">
                                                   <p>No image</p>
                                                 </div>
-                                                <div th:unless="${#sets.isEmpty(c.imgCar)}">
-                                                  <img th:src="${c.imgCar.stream().findFirst().get().imgPath}" alt="" />
+                                                    <div th:unless="${#sets.isEmpty(c.imgCar)}">
+                                                    <img th:src="${c.imgCar.stream().findFirst().get().imgPath}" alt=""
+                                                         style="height: 80%;width: 80%;display: block;margin-left: auto;margin-right: auto;margin-bottom: 15px;">
+                                                    </div>
+                                                  <div th:unless="${#sets.isEmpty(c.imgCar)}">
+                                                  <div style="display: flex; flex-wrap: nowrap;margin-left: auto;margin-right: auto;">
+                                                    <img th:each="c : ${c.imgCar}"  th:src="${c.imgPath}" alt="" style="margin-left: 5px;">
                                                   </div>
-                                                </div>
+                                                  </div>
+                                              </div>
 
                                               <div class="profile-details-hr">
                                                 <div class="row">
@@ -921,6 +928,7 @@
                                     </div>
                                   </div>
                                 </div>
+
                                 <div>
                                   <input th:value="*{c.safeSys.id}" name="idSafe" style="display: none">
                                   <input th:value="*{c.carSpec.id}" name="idCarSpec" style="display: none">
@@ -971,7 +979,7 @@
                   aria-hidden="true">&times;</span></button>
           <h4 class="modal-title">Create</h4>
         </div>
-        <form action="#" th:action="@{/admin/car/create}" method="post">
+        <form action="#" th:action="@{/admin/car/create}" method="post" enctype="multipart/form-data">
           <div class="modal-body">
             <div style="margin: 0 auto;" class="profile-info-inner">
               <div class="profile-details-hr">
@@ -1224,13 +1232,10 @@
                   <div class="col-sm-12 col-xs-6 col-lg-6 col-md-12">
                     <div class="container">
                       <fieldset class="form-group">
-                        <a href="javascript:void(0)"
-                           onclick="$('#pro-image').click()">Upload Image</a>
-                        <input type="file" id="pro-image" name="pro-image"
-                               style="display: none;" class="form-control" multiple>
+                        <input type="file" id="pro-image" name="upImg"
+                               multiple="multiple">
                       </fieldset>
                       <div class="preview-images-zone">
-
                       </div>
                     </div>
                   </div>
@@ -1313,7 +1318,7 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
   $(document).ready(function () {
-    document.getElementById('pro-image').addEventListener('change', readImage, false);
+    document.getElementById('pro-image').addEventListener('change', readImage, true);
 
     $(".preview-images-zone").sortable();
 
@@ -1328,28 +1333,21 @@
     if (window.File && window.FileList && window.FileReader) {
       var files = event.target.files; //FileList object
       var output = $(".preview-images-zone");
-
       for (let i = 0; i < files.length; i++) {
         var file = files[i];
         if (!file.type.match('image')) continue;
-
         var picReader = new FileReader();
 
         picReader.addEventListener('load', function (event) {
-          var picFile = event.target;
           var html = '<div class="preview-image preview-show-' + num + '">' +
                   '<div class="image-cancel" data-no="' + num + '">x</div>' +
-                  '<div class="image-zone"><img id="pro-img-' + num + '" src="' + picFile.result + '"></div>' +
-                  '<div class="tools-edit-image"><a href="javascript:void(0)" data-no="' + num + '" class="btn btn-light btn-edit-image">edit</a></div>' +
-                  '</div>';
-
+                  '<div class="image-zone"><img id="pro-img-' + num + '"src="' + event.target.result + '"></div>'
           output.append(html);
           num = num + 1;
         });
-
         picReader.readAsDataURL(file);
       }
-      $("#pro-image").val('');
+
     } else {
       console.log('Browser not support');
     }

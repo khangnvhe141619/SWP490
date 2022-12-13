@@ -34,11 +34,11 @@ public class AdminNewsController {
         ModelAndView modelAndView = null;
         model.addAttribute("newsModel", new NewsModel());
         Page<News> list = newsService.findAllNewsOrderById(PageRequest.of(page, 5, Sort.by(id)), search);
+        modelAndView = new ModelAndView("admin/listNews");
         if (!list.isEmpty()) {
-            modelAndView = new ModelAndView("admin/listNews");
             modelAndView.addObject("newss", list);
         } else {
-            modelAndView = new ModelAndView("page404");
+            modelAndView.addObject("lst_empty", "List Empty!");
         }
         return modelAndView;
     }
@@ -96,7 +96,7 @@ public class AdminNewsController {
             newsService.delete(id);
         } catch (NotFoundException e) {
             ra.addFlashAttribute("message", e.getMessage());
-            return "page404";
+            return "admin/page404";
         }
         ra.addFlashAttribute("success", "The News has been deleted successfully");
         return "redirect:/admin/news";

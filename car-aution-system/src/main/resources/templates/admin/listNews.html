@@ -327,6 +327,9 @@
                             </div>
                         </div>
                         <div class="asset-inner">
+                            <div th:if="${#lists.isEmpty(newss)}">
+                                <h6 style="color: red;" th:text="${lst_empty}"></h6>
+                            </div>
                             <table>
                                 <tr>
                                     <th>No</th>
@@ -336,6 +339,7 @@
                                     <th>Date Time</th>
                                     <th>Setting</th>
                                 </tr>
+                                <tr th:unless="${not #lists.isEmpty(newss)}">
                                 <tr th:each="c,loop :${newss}">
                                     <td th:text="${loop.count}"></td>
                                     <td th:text="${c.title}"></td>
@@ -517,8 +521,10 @@
                                     </div>
                                     <!--End Update pop-up-->
                                 </tr>
+                            </tr>
                             </table>
                         </div>
+                        <div th:if="${not #lists.isEmpty(newss)}">
                         <div class="custom-pagination">
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination">
@@ -531,6 +537,7 @@
                                     </li>
                                 </ul>
                             </nav>
+                        </div>
                         </div>
                     </div>
                 </div>

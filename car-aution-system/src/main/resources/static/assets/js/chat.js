@@ -74,8 +74,7 @@ function sendMessage(event) {
 
 function onMessageReceived(payload) {
     var message = JSON.parse(payload.body);
-    var mess = message.content.length
-    if(mess >= 5){
+    if(isNaN(message.content)){
         var messageElement = document.createElement('li');
 
         if(message.type === 'JOIN') {

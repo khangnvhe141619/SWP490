@@ -325,6 +325,9 @@
                             </div>
                         </div>
                         <div class="asset-inner">
+                            <div th:if="${#lists.isEmpty(modelSpecs)}">
+                                <h6 style="color: red;" th:text="${lst_empty}"></h6>
+                            </div>
                             <table>
                                 <tr>
                                     <th>No</th>
@@ -332,6 +335,7 @@
                                     <th>Seat Number</th>
                                     <th>Setting</th>
                                 </tr>
+                                <tr th:unless="${not #lists.isEmpty(modelSpecs)}">
                                 <tr th:each="c,loop :${modelSpecs}">
                                     <td th:text="${loop.count}"></td>
                                     <td th:text="${c.nameType}"></td>
@@ -382,9 +386,10 @@
                                     </div>
                                     <!--End Update pop-up-->
                                 </tr>
-
+</tr>
                             </table>
                         </div>
+                        <div th:if="${not #lists.isEmpty(modelSpecs)}">
                         <div class="custom-pagination">
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination">
@@ -396,6 +401,7 @@
                                     </li>
                                 </ul>
                             </nav>
+                        </div>
                         </div>
                     </div>
                 </div>

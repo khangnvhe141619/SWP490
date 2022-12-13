@@ -27,11 +27,11 @@ public class AdminListUserController {
                                  Model model) {
         ModelAndView modelAndView = null;
         Page<User> list = userService.ListUserUnBan(PageRequest.of(page, 5, Sort.by(id)), search);
+        modelAndView = new ModelAndView("admin/listUser");
         if (!list.isEmpty()) {
-            modelAndView = new ModelAndView("admin/listUser");
             modelAndView.addObject("users", list);
         } else {
-            modelAndView = new ModelAndView("page404");
+            modelAndView.addObject("lst_empty", "List Empty!");
         }
         return modelAndView;
     }
@@ -42,7 +42,7 @@ public class AdminListUserController {
             userService.BanUser(id);
         } catch (NotFoundException e) {
             ra.addFlashAttribute("message", e.getMessage());
-            return "page404";
+            return "admin/page404";
         }
         ra.addFlashAttribute("success", "Ban User successfully");
         return "redirect:/admin/user";

@@ -41,11 +41,11 @@ public class AdminModelController {
         model.addAttribute("brands", brandService.getAllBrand());
         model.addAttribute("modelType", modelSpecService.getAllModelSpecification());
         Page<ModelCar> list = modelService.findAllOrderByName(PageRequest.of(page, 5, Sort.by(id)), search);
+        modelAndView = new ModelAndView("admin/listModel");
         if (!list.isEmpty()) {
-            modelAndView = new ModelAndView("admin/listModel");
             modelAndView.addObject("models", list);
         } else {
-            modelAndView = new ModelAndView("page404");
+            modelAndView.addObject("lst_empty", "List Empty!");
         }
         return modelAndView;
     }
@@ -91,7 +91,7 @@ public class AdminModelController {
             modelService.delete(id);
         } catch (NotFoundException e) {
             ra.addFlashAttribute("message", e.getMessage());
-            return "page404";
+            return "admin/page404";
         }
         ra.addFlashAttribute("success", "The Model Car has been deleted successfully");
         return "redirect:/admin/model";

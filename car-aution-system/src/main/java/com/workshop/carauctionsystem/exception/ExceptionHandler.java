@@ -13,7 +13,7 @@ public class ExceptionHandler {
         ModelAndView mav = new ModelAndView();
         mav.addObject("exception", ex);
         mav.addObject("url", req.getRequestURL());
-        mav.setViewName("page404");
+        mav.setViewName("admin/page404");
         return mav;
     }
 }

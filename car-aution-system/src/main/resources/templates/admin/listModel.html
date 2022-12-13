@@ -303,6 +303,9 @@
               <div class="alert alert-danger text-center" role="alert">[[${fail}]]</div>
             </div>
             <div class="asset-inner">
+              <div th:if="${#lists.isEmpty(models)}">
+                <h6 style="color: red;" th:text="${lst_empty}"></h6>
+              </div>
               <table>
                 <tr>
                   <th>No</th>
@@ -313,6 +316,7 @@
                   <th>Seat Number</th>
                   <th>Setting</th>
                 </tr>
+                <tr th:unless="${not #lists.isEmpty(models)}">
                 <tr th:each="c,loop :${models}">
                   <td th:text="${loop.count}"></td>
                   <td><img th:src="${c.brandId.imgPath}"/></td>
@@ -379,10 +383,11 @@
                     </div>
                   </div>
                   <!--End Update pop-up-->
-
+</tr>
                 </tr>
               </table>
             </div>
+            <div th:if="${not #lists.isEmpty(models)}">
             <div class="custom-pagination">
               <nav aria-label="Page navigation example">
                 <ul class="pagination">
@@ -393,6 +398,7 @@
                   <li class="page-item" th:if="${models.hasNext()}"><a class="page-link" th:href="@{/admin/model(page=${models.number}+1,search=${param.search})}">Next</a></li>
                 </ul>
               </nav>
+            </div>
             </div>
           </div>
         </div>
