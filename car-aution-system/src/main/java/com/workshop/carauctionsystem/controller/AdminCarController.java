@@ -91,6 +91,7 @@ public class AdminCarController {
                             @RequestParam(value = "upImg") MultipartFile []upImg,
                             @RequestParam Map<String, String> requestMap,
                             RedirectAttributes ra) throws IOException {
+        if(requestMap.get("modelId") != null && requestMap.get("createById") != null){
         Long modelId = Long.parseLong(requestMap.get("modelId"));
         int createById = Integer.parseInt(requestMap.get("createById"));
         String statusCar = requestMap.get("statusCar");
@@ -99,8 +100,13 @@ public class AdminCarController {
         String tirePressure = requestMap.get("tirePressure");
         List<String> photos = new ArrayList<>();
         for (MultipartFile file : upImg){
-            photos.add(file.getOriginalFilename());
-            FileCopyUtils.copy(file.getBytes(), new File("src\\main\\resources\\static\\assets\\hoang/" + file.getOriginalFilename()));
+            try {
+                photos.add(file.getOriginalFilename());
+                FileCopyUtils.copy(file.getBytes(), new File("src\\main\\resources\\static\\assets\\hoang/" + file.getOriginalFilename()));
+            }catch (IOException e){
+                ra.addFlashAttribute("fail", "Add New Car Failed (Can't find pictures)");
+                return "redirect:/admin/car";
+            }
         }
         try{
             ModelCar modelCar = new ModelCar();
@@ -138,6 +144,9 @@ public class AdminCarController {
                 carSpec.setDrive(carSpecDTO.getDrive());
                 carSpec.setYearOfMake(carSpecDTO.getYearOfMake());
                 caeSpecService.saveCarSpecification(carSpec);
+            }else {
+                ra.addFlashAttribute("fail", "Add New Car Failed");
+                return "redirect:/admin/car";
             }
             if(carID != null){
                 SafetySystem safetySystem = new SafetySystem();
@@ -148,6 +157,9 @@ public class AdminCarController {
                 safetySystem.setTirePressure(tirePressure);
                 safetySystem.setOtherDescription(safetyDTO.getOtherDescription());
                 safetySystemService.saveSafetySystem(safetySystem);
+            }else {
+                ra.addFlashAttribute("fail", "Add New Car Failed");
+                return "redirect:/admin/car";
             }
             if(carID != null){
                 Image image = null;
@@ -158,12 +170,17 @@ public class AdminCarController {
                     imageService.saveImageForCar(image);
                     System.out.println(string);
                 }
+            }else {
+                ra.addFlashAttribute("fail", "Add New Car Failed");
+                return "redirect:/admin/car";
             }
             ra.addFlashAttribute("success", "The Car has been saved successfully");
             return "redirect:/admin/car";
         }catch (Exception e){
-            System.out.println("db");
             ra.addFlashAttribute("fail", "Add New Car Failed");
+            return "redirect:/admin/car";
+        }}else {
+            ra.addFlashAttribute("fail", "Add New Car Failed (Can't find Model of Car)");
             return "redirect:/admin/car";
         }
     }

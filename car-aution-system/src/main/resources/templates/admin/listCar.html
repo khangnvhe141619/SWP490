@@ -142,6 +142,7 @@
     .container {
       padding-top: 50px;
     }
+
   </style>
 </head>
 <body>
@@ -463,16 +464,16 @@
                                                 <div th:if="${#sets.isEmpty(c.imgCar)}">
                                                   <p>No image</p>
                                                 </div>
-                                                <div th:unless="${#sets.isEmpty(c.imgCar)}">
-                                                  <img th:src="${c.imgCar.stream().findFirst().get().imgPath}" alt="" />
-                                                  </div>
-                                                  <div th:unless="${#sets.isEmpty(c.imgCar)}">
-                                                    <div th:each="c : ${c.imgCar}">
-                                                      <img th:src="${c.imgPath}" alt="" />
+                                                    <div th:unless="${#sets.isEmpty(c.imgCar)}">
+                                                    <img th:src="${c.imgCar.stream().findFirst().get().imgPath}" alt=""
+                                                         style="height: 80%;width: 80%;display: block;margin-left: auto;margin-right: auto;margin-bottom: 15px;">
                                                     </div>
+                                                  <div th:unless="${#sets.isEmpty(c.imgCar)}">
+                                                  <div style="display: flex; flex-wrap: nowrap;margin-left: auto;margin-right: auto;">
+                                                    <img th:each="c : ${c.imgCar}"  th:src="${c.imgPath}" alt="" style="margin-left: 5px;">
                                                   </div>
-
-                                                </div>
+                                                  </div>
+                                              </div>
 
                                               <div class="profile-details-hr">
                                                 <div class="row">
