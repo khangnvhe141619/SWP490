@@ -66,7 +66,7 @@
                                     </div>
                                     <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Trade tokens in an instant</h5>
                                     <div class="form-outline mb-4 align-self-center">
-                                        <img th:src="@{/assets/img/usdt.png}" style="height: 25px; width: 25px;"/>
+                                        <img th:src="@{/assets/img/usdt.png}" style="height: 25px; width: 25px;" id="imgIn"/>
                                         <label id="tokenIn" class="form-label fw-bold" >USDT</label>
                                         <input type="number" value="0" id="amountIn" class="form-control form-control-lg" />
                                     </div>
@@ -74,7 +74,7 @@
                                         <button type="button" id="btnChange"><i id="changeUnit" class="bi bi-arrow-down"></i></button>
                                     </div>
                                     <div class="form-outline mb-4">
-                                        <img th:src="@{/assets/img/bnb.png}" style="height: 25px; width: 25px;"/>
+                                        <img th:src="@{/assets/img/bnb.png}" style="height: 25px; width: 25px;" id="imgOut"/>
                                         <label id="tokenOut" class="form-label fw-bold" >CAB</label>
                                         <input disabled type="number" value="0.0" id="amountOut" class="form-control form-control-lg" />
                                     </div>
