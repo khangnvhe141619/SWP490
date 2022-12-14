@@ -48,8 +48,9 @@
 <div class="container mt-200 mb-5">
     <div class="row">
         <div class="col-md-1"></div>
-        <div class="col-md-7" th:each="ls:${lsdetails}">
+
             <h4>News</h4>
+
             </a> <a href="#" class="py-3"> <p th:text="${ls.getAuthor()}"></p> </a>
             <h1 th:text="${ls.getTitle()}"></h1>
             <h5 th:text="${ls.getShortDescribe()}"></h5>
