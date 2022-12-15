@@ -73,7 +73,7 @@ public class PersonProfileController {
         String phone = user.getPhone();
         String email = user.getEmail();
         User u=  service.findUserById(setUserId);
-        Path path = Paths.get("src/main/resources/static/assets/img/avatar");
+        Path path = Paths.get("src/main/resources/static/assets/hoang");
         try {
             InputStream inputStream = photo.getInputStream();
             if(!photo.isEmpty()){
