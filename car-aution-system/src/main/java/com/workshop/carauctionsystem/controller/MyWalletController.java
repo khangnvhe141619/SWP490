@@ -41,8 +41,7 @@ public class MyWalletController {
             model.addAttribute("check", true);
         }
         ModelAndView modelAndView = new ModelAndView();
-        String _address = u.getAddressWallet().substring(0, 4) + "..." + u.getAddressWallet().substring(u.getAddressWallet().length() - 4, u.getAddressWallet().length());
-        modelAndView.addObject("addressWallet", _address);
+        modelAndView.addObject("addressWallet", u.getAddressWallet());
         modelAndView.setViewName("myWallet");
         return modelAndView;
     }

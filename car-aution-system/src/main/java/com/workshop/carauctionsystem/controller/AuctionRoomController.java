@@ -5,10 +5,7 @@ import com.workshop.carauctionsystem.model.FavoriteDTO;
 import com.workshop.carauctionsystem.model.ResponseObject;
 import com.workshop.carauctionsystem.repository.CarRepository;
 import com.workshop.carauctionsystem.repository.RoomRepository;
-import com.workshop.carauctionsystem.service.BrandService;
-import com.workshop.carauctionsystem.service.CarService;
-import com.workshop.carauctionsystem.service.FavoriteService;
-import com.workshop.carauctionsystem.service.RoomService;
+import com.workshop.carauctionsystem.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -38,6 +35,8 @@ public class AuctionRoomController {
     @Autowired
     FavoriteService favoriteService;
 
+    @Autowired
+    UserService userService;
     //    @GetMapping("/auctionRoom")
 //    public ModelAndView redirectAuctionRoom(@CookieValue(value = "setUser", defaultValue = "") String setUser, Model model,
 //                                            @CookieValue(value = "setUserId", defaultValue = "") String setUserId) {
@@ -53,10 +52,10 @@ public class AuctionRoomController {
         ModelAndView modelAndView = null;
         Page<Room> list = service.getSearchRoom(PageRequest.of(page - 1, 5), carName, model);
         List<Brand> brandList = brandService.getAllBrand();
-        int pageSize=5;
+        int pageSize = 5;
         Page<Room> pageRoomCurrent = service.getListRoomCurrent(page, pageSize);
 
-       List<Room> listRoomCurrent = pageRoomCurrent.getContent();
+        List<Room> listRoomCurrent = pageRoomCurrent.getContent();
         modelAndView = new ModelAndView("auctionRoom");
         if (!list.isEmpty()) {
             System.out.println("day la list: " + list.getSize());
@@ -70,10 +69,11 @@ public class AuctionRoomController {
             Cookie cookie = new Cookie("setUser", setUser);
             modelAndView.addObject("cookieValue", cookie);
             modelAndView.addObject("setUserId", setUserId);
-
+            User u = userService.findUserById(Integer.parseInt(setUserId));
             if (cookie.getValue().equals("")) {
                 modelAndView.addObject("check", false);
             } else {
+                modelAndView.addObject("addressWallet", u.getAddressWallet());
                 modelAndView.addObject("check", true);
                 List<Favorite> favoriteList = favoriteService.listAllFavo(Integer.parseInt(setUserId));
                 if (!favoriteList.isEmpty()) {
@@ -84,8 +84,8 @@ public class AuctionRoomController {
                 }
             }
 
-        }else {
-            modelAndView.addObject("mess","Không tìm thấy:" );
+        } else {
+            modelAndView.addObject("mess", "Không tìm thấy:");
         }
         modelAndView.addObject("brandList", brandList);
         modelAndView.addObject("listRoomCurrent", listRoomCurrent);
@@ -150,7 +150,7 @@ public class AuctionRoomController {
 
     @PostMapping("/removeFavorite")
     public ResponseEntity<ResponseObject> redirectUnFavorite(@RequestParam("carId") int carId,
-                                           @CookieValue(value = "setUserId") int userId){
+                                                             @CookieValue(value = "setUserId") int userId) {
         favoriteService.removeFavorite(carId, userId);
         return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject("no", "Username or password is wrong !", null));
     }

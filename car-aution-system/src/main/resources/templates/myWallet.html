@@ -8,101 +8,124 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>CAB Auction</title>
+    <title>CAB Auction</title>
 
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700"
-        rel="stylesheet">
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/css/style.css" rel="stylesheet">
-  <link href="assets/css/PersonalProfile.css" rel="stylesheet">
-  <link href="assets/css/myActive.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700"
+          rel="stylesheet">
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="assets/css/PersonalProfile.css" rel="stylesheet">
+    <link href="assets/css/myActive.css" rel="stylesheet">
+    <style>
+        .truncate {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
 
+        element.style {
+            max-width: calc(100% - 48px);
+        }
+
+        .align-middle {
+            vertical-align: middle;
+        }
+
+        .inline-block {
+            display: inline-block;
+        }
+    </style>
 </head>
 
 <body style="background: url(/assets/img/about-bg1.png);">
 <header id="header" class="fixed-top d-flex align-items-center header-transparent bg-black">
-  <div class="container-fluid">
-    <div class="row justify-content-center align-items-center">
-      <div class="col-xl-11 d-flex align-items-center justify-content-between">
-        <h1 class="logo"><a th:href="@{/home}">CAB Auction</a></h1>
-        <nav id="navbar" class="navbar">
-          <ul>
-            <li><a class="nav-link scrollto" th:href="@{/home}">Home</a></li>
-            <li><a class="nav-link scrollto" th:href="@{/home}">Brand</a></li>
-            <li><a class="nav-link scrollto " th:href="@{/home}">Auction Room</a></li>
-            <li><a class="nav-link scrollto" href="blog.html">News</a></li>
-            <li><a class="nav-link scrollto" th:href="@{/guideLine}">Guideline</a></li>
-            <li><a class="nav-link scrollto " th:href="@{/home}">About Us</a></li>
-          </ul>
-          <span style="display: flex;flex-direction: row;" th:if="${check} == true">
+    <div class="container-fluid">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-xl-11 d-flex align-items-center justify-content-between">
+                <h1 class="logo"><a th:href="@{/home}">CAB Auction</a></h1>
+                <nav id="navbar" class="navbar">
+                    <ul>
+                        <li><a class="nav-link scrollto" th:href="@{/home}">Home</a></li>
+                        <li><a class="nav-link scrollto" th:href="@{/home}">Brand</a></li>
+                        <li><a class="nav-link scrollto " th:href="@{/home}">Auction Room</a></li>
+                        <li><a class="nav-link scrollto" href="blog.html">News</a></li>
+                        <li><a class="nav-link scrollto" th:href="@{/guideLine}">Guideline</a></li>
+                        <li><a class="nav-link scrollto " th:href="@{/home}">About Us</a></li>
+                    </ul>
+                    <span style="display: flex;flex-direction: row;" th:if="${check} == true">
                         <th:block th:if="${addressWallet} == null">
                             <a style="background-color: rgb(66, 180, 66); padding-right: 30px;" id="connectButton"
                                class="connectwallet">Connect wallet</a>
                         </th:block>
-                        <a  th:href="@{/personProfile}"><i class="bi bi-person-circle" style="font-size: 30px;"></i><i
+                        <a th:href="@{/personProfile}"><i class="bi bi-person-circle" style="font-size: 30px;"></i><i
                                 th:text="${cookieValue.value}"></i></a>
           </span>
-          <span th:if="${check} == false">
+                    <span th:if="${check} == false">
                         <a th:href="@{/login}"><i class="bi bi-person-circle" style="font-size: 30px;"></i>
                           <i th:text="${cookieValue.value}"></i></a>
           </span>
-        </nav>
-      </div>
-    </div>
+                </nav>
+            </div>
+        </div>
 
-  </div>
+    </div>
 </header>
 <div class="container rounded mt-200 mb-5">
-  <div class="row">
-    <div class="col-md-1"></div>
-    <div class="col-md-3 border-right bg-white rounded-pill">
-      <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-        <img class="rounded-circle mt-2" th:src="@{'/assets/img/avatar/'+${INFOR.avatar}}">
-        <span class="font-weight-bold" th:text="${username}"></span>
-        <span class="text-black-50" th:text="${email}"></span>
-      </div>
-      <div class="d-flex flex-column text-center">
-        <a th:href="@{/wallet}" class="font-weight-bold h5 text-info">My Wallet</a>
-        <a th:href="@{/personProfile}" class="font-weight-bold mt-50 h5 text-black">Personal Profile</a>
-        <a th:href="@{/winningBids}" class="font-weight-bold mt-50 h5 text-black">Winning Bids</a>
-        <a th:href="@{/myFavorite}" class="font-weight-bold mt-50 mb-5 h5 text-black">My Favorite</a>
-        <a th:href="@{/logout}" class="font-weight-bold mt-50 mb-5 h5 text-black">Logout</a>
-      </div>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-3 border-right bg-white rounded-pill">
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                <img class="rounded-circle mt-2" th:src="@{'/assets/img/avatar/'+${INFOR.avatar}}">
+                <span class="font-weight-bold" th:text="${username}"></span>
+                <span class="text-black-50" th:text="${email}"></span>
+            </div>
+            <div class="d-flex flex-column text-center">
+                <a th:href="@{/wallet}" class="font-weight-bold h5 text-info">My Wallet</a>
+                <a th:href="@{/personProfile}" class="font-weight-bold mt-50 h5 text-black">Personal Profile</a>
+                <a th:href="@{/winningBids}" class="font-weight-bold mt-50 h5 text-black">Winning Bids</a>
+                <a th:href="@{/myFavorite}" class="font-weight-bold mt-50 mb-5 h5 text-black">My Favorite</a>
+                <a th:href="@{/logout}" class="font-weight-bold mt-50 mb-5 h5 text-black">Logout</a>
+            </div>
+        </div>
+        <div class="col-md-7 border-right mt-200">
+            <div class="p-3 bg-white profile" id="person-profile">
+                <div class="d-flex justify-content-between mb-3">
+                    <h4>My Wallet</h4>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-4 active-bids text-center">
+                        <img src="assets/img/bnb_1.png">
+                        <h5>CAB</h5>
+                        <h3 id="amount-acc">0</h3>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-12">
+                        <label class="labels">Address</label>
+                        <div th:if="${addressWallet} != null">
+                            <div class="inline-block undefined form-control"
+                                 style="width: 150px; margin-left: 8px;">
+                                <span class="truncate inline-block align-middle"
+                                      style="max-width: calc(100% - 48px);" th:text="${addressWallet}"></span>
+                            </div>
+                        </div>
+                        <div th:if="${addressWallet} == null">
+                            <h6>You don't connect to wallet.</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="col-md-7 border-right mt-200">
-      <div class="p-3 bg-white profile" id="person-profile">
-        <div class="d-flex justify-content-between mb-3">
-          <h4>My Wallet</h4>
-        </div>
-        <div class="row mt-3">
-          <div class="col-md-4 active-bids text-center">
-            <img src="assets/img/star.png">
-            <h2>115</h2>
-            <p id="amount-acc" onkeyup="getBalanceOf(0x39b6e7891C62c313730E17223fCE3B4619eD7B37)">1</p>
-          </div>
-        </div>
-        <div class="row mt-3">
-          <div class="col-md-12">
-            <label class="labels">Address</label>
-            <th:block th:if="${addressWallet} != null">
-              <input type="text" class="form-control" placeholder="" th:value="${addressWallet}"
-                     readonly>
-            </th:block>
-            <th:block th:if="${addressWallet} == null">
-              <h6>You don't connect to wallet.</h6>
-            </th:block>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>
 </body>
-<script src="assets/js/personalProfile.js"></script>
+<script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"
+        type="application/javascript"></script>
+<script src="/assets/js/transfer.js"></script>
 
 </html>
 

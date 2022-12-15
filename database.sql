@@ -136,7 +136,7 @@ CREATE TABLE `favorite` (
   KEY `favorite_carid_foreign` (`carId`),
   CONSTRAINT `favorite_carid_foreign` FOREIGN KEY (`carId`) REFERENCES `car` (`id`),
   CONSTRAINT `favorite_userid_foreign` FOREIGN KEY (`userId`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -145,6 +145,7 @@ CREATE TABLE `favorite` (
 
 LOCK TABLES `favorite` WRITE;
 /*!40000 ALTER TABLE `favorite` DISABLE KEYS */;
+INSERT INTO `favorite` VALUES (1,1,1,'2022-11-19 00:00:00',1),(2,1,2,'2022-11-19 00:00:00',2),(3,2,1,'2022-11-19 00:00:00',3);
 /*!40000 ALTER TABLE `favorite` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -174,35 +175,6 @@ CREATE TABLE `favoritedto` (
 LOCK TABLES `favoritedto` WRITE;
 /*!40000 ALTER TABLE `favoritedto` DISABLE KEYS */;
 /*!40000 ALTER TABLE `favoritedto` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `gamerecord`
---
-
-DROP TABLE IF EXISTS `gamerecord`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `gamerecord` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `roomId` int NOT NULL,
-  `userId` int NOT NULL,
-  `price` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `gamerecord_userid_foreign` (`userId`),
-  KEY `gamerecord_roomid_foreign` (`roomId`),
-  CONSTRAINT `gamerecord_roomid_foreign` FOREIGN KEY (`roomId`) REFERENCES `room` (`id`),
-  CONSTRAINT `gamerecord_userid_foreign` FOREIGN KEY (`userId`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `gamerecord`
---
-
-LOCK TABLES `gamerecord` WRITE;
-/*!40000 ALTER TABLE `gamerecord` DISABLE KEYS */;
-/*!40000 ALTER TABLE `gamerecord` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -240,7 +212,7 @@ CREATE TABLE `image` (
   `carid` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK3lwukq6yfu75edrx8l035ji3a` (`carid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -249,6 +221,7 @@ CREATE TABLE `image` (
 
 LOCK TABLES `image` WRITE;
 /*!40000 ALTER TABLE `image` DISABLE KEYS */;
+INSERT INTO `image` VALUES (1,'/img/Vinfast/e1.jpg',1),(2,'/img/Vinfast/v1.png',1),(3,'/img/Mer/m1.jpg',2);
 /*!40000 ALTER TABLE `image` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -380,7 +353,7 @@ CREATE TABLE `role` (
   `id` int NOT NULL AUTO_INCREMENT,
   `rolename` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -389,7 +362,7 @@ CREATE TABLE `role` (
 
 LOCK TABLES `role` WRITE;
 /*!40000 ALTER TABLE `role` DISABLE KEYS */;
-INSERT INTO `role` VALUES (1,'Admin'),(2,'Admin Car'),(3,'Admin Room'),(4,'User');
+INSERT INTO `role` VALUES (1,'ROLE_Admin'),(2,'Admin Car'),(3,'Admin Room'),(4,'ROLE_User');
 /*!40000 ALTER TABLE `role` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -409,15 +382,22 @@ CREATE TABLE `room` (
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
   `createdBy` int NOT NULL,
+  `openDate` date NOT NULL,
+  `startTime` time NOT NULL,
+  `endTime` time NOT NULL,
+  `ticketNumber` int NOT NULL,
+  `ticketPrice` int NOT NULL,
   `imgpath` varchar(255) DEFAULT NULL,
+  `status` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `room_typeroomid_foreign` (`typeRoomId`),
   KEY `FKdgcd3aoxm5w6scd8hupsjo1pq` (`carId`),
+  KEY `room_userid_foreign` (`createdBy`),
   CONSTRAINT `FKdgcd3aoxm5w6scd8hupsjo1pq` FOREIGN KEY (`carId`) REFERENCES `car` (`id`),
   CONSTRAINT `room_carid_foreign` FOREIGN KEY (`carId`) REFERENCES `car` (`id`),
   CONSTRAINT `room_typeroomid_foreign` FOREIGN KEY (`typeRoomId`) REFERENCES `typeroom` (`id`),
   CONSTRAINT `room_userid_foreign` FOREIGN KEY (`createdBy`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -426,7 +406,39 @@ CREATE TABLE `room` (
 
 LOCK TABLES `room` WRITE;
 /*!40000 ALTER TABLE `room` DISABLE KEYS */;
+INSERT INTO `room` VALUES (1,1,1,'VinFast Lux A 2.0','10:00:00','2022-11-19 00:00:00','2022-11-19 00:00:00',1,'2022-11-19','10:00:00','10:30:00',10,50,'assets/img/Vinfast/e1.jpg','1'),(2,2,2,'Mercedes-Benz E 300 AMG','10:00:00','2022-11-19 00:00:00','2022-11-19 00:00:00',1,'2022-11-19','10:00:00','10:30:00',10,50,'assets/img/Mer/m1.jpg','1'),(3,3,2,'BMW 320i Sport Line Plus ','10:00:00','2022-11-19 00:00:00','2022-11-19 00:00:00',1,'2022-11-19','10:00:00','10:30:00',10,50,'assets/img/bmw/b1.jpg','1'),(4,4,2,'Toyota Land Cruiser Prado','10:00:00','2022-11-19 00:00:00','2022-11-19 00:00:00',1,'2022-11-19','10:00:00','10:30:00',10,50,'assets/img/camry/c1.jpg','1'),(5,5,2,'Lexus LX 570','10:00:00','2022-11-19 00:00:00','2022-11-19 00:00:00',1,'2022-11-19','10:00:00','10:30:00',10,50,'assets/img/lexus/l1.jpg','1'),(6,6,2,'Hyundai Santa Fe','10:00:00','2022-11-19 00:00:00','2022-11-19 00:00:00',1,'2022-11-19','10:00:00','10:30:00',10,50,'assets/img/honda/h1.jpg','1'),(7,7,2,'Porsche Taycan Turbo S','10:00:00','2022-11-19 00:00:00','2022-11-19 00:00:00',1,'2022-11-19','10:00:00','10:30:00',10,50,'assets/img/porche/p1.png','1'),(8,8,2,'Ferrari F8 Tributo','10:00:00','2022-11-19 00:00:00','2022-11-19 00:00:00',1,'2022-11-19','10:00:00','10:30:00',10,50,'assets/img/audi/a1.jpg','1'),(9,9,2,'Lamborghini Huracan LP610-4','10:00:00','2022-11-19 00:00:00','2022-11-19 00:00:00',1,'2022-11-19','10:00:00','10:30:00',10,50,'assets/img/ranger/r1.jpg','1');
 /*!40000 ALTER TABLE `room` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `roomdetailplayer`
+--
+
+DROP TABLE IF EXISTS `roomdetailplayer`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `roomdetailplayer` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `roomId` int NOT NULL,
+  `userId` int NOT NULL,
+  `userBid` int NOT NULL,
+  `timeBid` datetime NOT NULL,
+  `winner` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `roomdetailplayer_roomid_foreign` (`roomId`),
+  KEY `roomdetailplayer_userid_foreign` (`userId`),
+  CONSTRAINT `roomdetailplayer_roomid_foreign` FOREIGN KEY (`roomId`) REFERENCES `room` (`id`),
+  CONSTRAINT `roomdetailplayer_userid_foreign` FOREIGN KEY (`userId`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `roomdetailplayer`
+--
+
+LOCK TABLES `roomdetailplayer` WRITE;
+/*!40000 ALTER TABLE `roomdetailplayer` DISABLE KEYS */;
+/*!40000 ALTER TABLE `roomdetailplayer` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -437,8 +449,10 @@ DROP TABLE IF EXISTS `roomparticipant`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `roomparticipant` (
+  `id` int NOT NULL AUTO_INCREMENT,
   `roomId` int NOT NULL,
   `userId` int NOT NULL,
+  PRIMARY KEY (`id`),
   KEY `roomparticipant_roomid_foreign` (`roomId`),
   KEY `roomparticipant_userid_foreign` (`userId`),
   CONSTRAINT `roomparticipant_roomid_foreign` FOREIGN KEY (`roomId`) REFERENCES `room` (`id`),
@@ -454,39 +468,6 @@ LOCK TABLES `roomparticipant` WRITE;
 /*!40000 ALTER TABLE `roomparticipant` DISABLE KEYS */;
 /*!40000 ALTER TABLE `roomparticipant` ENABLE KEYS */;
 UNLOCK TABLES;
-
-
---
--- Table structure for table `roomdetailplayer`
---
-
-DROP TABLE IF EXISTS `roomdetailplayer`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `roomdetailplayer` (
-	`id` int NOT NULL AUTO_INCREMENT,
-  `roomId` int NOT NULL,
-  `userId` int NOT NULL,
-  `userBid` int NOT NULL,
-  `timeBid` datetime NOT NULL,
-  `winner` int NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `roomdetailplayer_roomid_foreign` (`roomId`),
-  KEY `roomdetailplayer_userid_foreign` (`userId`),
-  CONSTRAINT `roomdetailplayer_roomid_foreign` FOREIGN KEY (`roomId`) REFERENCES `room` (`id`),
-  CONSTRAINT `roomdetailplayer_userid_foreign` FOREIGN KEY (`userId`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `roomparticipant`
---
-
-LOCK TABLES `roomdetailplayer` WRITE;
-/*!40000 ALTER TABLE `roomdetailplayer` DISABLE KEYS */;
-/*!40000 ALTER TABLE `roomdetailplayer` ENABLE KEYS */;
-UNLOCK TABLES;
-
 
 --
 -- Table structure for table `safetysystem`
@@ -592,6 +573,7 @@ CREATE TABLE `user` (
   `avatar` varchar(255) NOT NULL,
   `enabled` int NOT NULL,
   `createdAt` datetime NOT NULL,
+  `addressWallet` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -602,7 +584,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'viethoang1','$10$Kr9bEuihI1iPYZL2lSR5w.n47LowWVGpuLqQQeqRlaagl.zr8r6.u','Viet Hoang','0122333444','viethoang1@gmail.com','img',1,'2022-11-02 07:02:56'),(2,'viethoang2','$10$Kr9bEuihI1iPYZL2lSR5w.n47LowWVGpuLqQQeqRlaagl.zr8r6.u','Viet Hoang','0166232333','viethoang2@gmail.com','img',1,'2022-11-02 07:02:56'),(3,'viethoang3','$10$Kr9bEuihI1iPYZL2lSR5w.n47LowWVGpuLqQQeqRlaagl.zr8r6.u','Viet Hoang','0966812311','viethoang3@gmail.com','img',1,'2022-11-02 07:02:56'),(4,'viethoang','$10$Kr9bEuihI1iPYZL2lSR5w.n47LowWVGpuLqQQeqRlaagl.zr8r6.u','Viet Hoang','0234123123','viethoang42gmail.com','img',1,'2022-11-02 07:02:56');
+INSERT INTO `user` VALUES (1,'viethoang1','$2a$10$yTAC9kRU6xV.hUskdeMbduaYFCzeuDqTQjik0cqVB6VLCaa2eEKiq','Viet Hoang','0122333444','viethoang1@gmail.com','img',1,'2022-11-02 07:02:56',NULL),(2,'viethoang2','$2a$10$yTAC9kRU6xV.hUskdeMbduaYFCzeuDqTQjik0cqVB6VLCaa2eEKiq','Viet Hoang','0166232333','viethoang2@gmail.com','img',1,'2022-11-02 07:02:56',NULL),(3,'viethoang3','$2a$10$yTAC9kRU6xV.hUskdeMbduaYFCzeuDqTQjik0cqVB6VLCaa2eEKiq','Viet Hoang','0966812311','viethoang3@gmail.com','img',1,'2022-11-02 07:02:56',NULL),(4,'viethoang','$2a$10$yTAC9kRU6xV.hUskdeMbduaYFCzeuDqTQjik0cqVB6VLCaa2eEKiq','Viet Hoang','0234123123','viethoang42gmail.com','img',1,'2022-11-02 07:02:56',NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -656,10 +638,6 @@ LOCK TABLES `verificationtoken` WRITE;
 /*!40000 ALTER TABLE `verificationtoken` DISABLE KEYS */;
 /*!40000 ALTER TABLE `verificationtoken` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Dumping routines for database 'swp490_cab'
---
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -670,27 +648,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-21 16:55:41
-ALTER TABLE `swp490_cab`.`room` 
-ADD COLUMN `openDate` DATE NOT NULL AFTER `createdBy`,
-ADD COLUMN `startTime` TIME NOT NULL AFTER `openDate`,
-ADD COLUMN `endTime` TIME NOT NULL AFTER `startTime`,
-ADD COLUMN `ticketNumber` INT NOT NULL AFTER `endTime`,
-ADD COLUMN `ticketPrice` INT NOT NULL AFTER `ticketNumber`;
-ALTER TABLE `swp490_cab`.`user` 
-ADD COLUMN `addressWallet` VARCHAR(255) NULL AFTER `createdAt`;
-INSERT INTO `swp490_cab`.`room` (`id`, `carId`, `typeRoomId`, `roomName`, `roomTime`, `createdAt`, `updatedAt`, `createdBy`, `openDate`, `startTime`, `endTime`, `ticketNumber`, `ticketPrice`, `imgPath`) VALUES ('1', '1', '1', 'VinFast Lux A 2.0', '10:00:00', '2022-11-19 00:00:00', '2022-11-19 00:00:00', '1', '2022-11-19', '10:00:00', '10:30:00', '10', '50', 'assets/img/Vinfast/e1.jpg');
-INSERT INTO `swp490_cab`.`room` (`id`, `carId`, `typeRoomId`, `roomName`, `roomTime`, `createdAt`, `updatedAt`, `createdBy`, `openDate`, `startTime`, `endTime`, `ticketNumber`, `ticketPrice`, `imgPath`) VALUES ('2', '2', '2', 'Mercedes-Benz E 300 AMG', '10:00:00', '2022-11-19 00:00:00', '2022-11-19 00:00:00', '1', '2022-11-19', '10:00:00', '10:30:00', '10', '50', 'assets/img/Mer/m1.jpg');
-INSERT INTO `swp490_cab`.`room` (`id`, `carId`, `typeRoomId`, `roomName`, `roomTime`, `createdAt`, `updatedAt`, `createdBy`, `openDate`, `startTime`, `endTime`, `ticketNumber`, `ticketPrice`, `imgPath`) VALUES ('3', '3', '2', 'BMW 320i Sport Line Plus ', '10:00:00', '2022-11-19 00:00:00', '2022-11-19 00:00:00', '1', '2022-11-19', '10:00:00', '10:30:00', '10', '50', 'assets/img/bmw/b1.jpg');
-INSERT INTO `swp490_cab`.`room` (`id`, `carId`, `typeRoomId`, `roomName`, `roomTime`, `createdAt`, `updatedAt`, `createdBy`, `openDate`, `startTime`, `endTime`, `ticketNumber`, `ticketPrice`, `imgPath`) VALUES ('4', '4', '2', 'Toyota Land Cruiser Prado', '10:00:00', '2022-11-19 00:00:00', '2022-11-19 00:00:00', '1', '2022-11-19', '10:00:00', '10:30:00', '10', '50', 'assets/img/camry/c1.jpg');
-INSERT INTO `swp490_cab`.`room` (`id`, `carId`, `typeRoomId`, `roomName`, `roomTime`, `createdAt`, `updatedAt`, `createdBy`, `openDate`, `startTime`, `endTime`, `ticketNumber`, `ticketPrice`, `imgPath`) VALUES ('5', '5', '2', 'Lexus LX 570', '10:00:00', '2022-11-19 00:00:00', '2022-11-19 00:00:00', '1', '2022-11-19', '10:00:00', '10:30:00', '10', '50', 'assets/img/lexus/l1.jpg');
-INSERT INTO `swp490_cab`.`room` (`id`, `carId`, `typeRoomId`, `roomName`, `roomTime`, `createdAt`, `updatedAt`, `createdBy`, `openDate`, `startTime`, `endTime`, `ticketNumber`, `ticketPrice`, `imgPath`) VALUES ('6', '6', '2', 'Hyundai Santa Fe', '10:00:00', '2022-11-19 00:00:00', '2022-11-19 00:00:00', '1', '2022-11-19', '10:00:00', '10:30:00', '10', '50', 'assets/img/honda/h1.jpg');
-INSERT INTO `swp490_cab`.`room` (`id`, `carId`, `typeRoomId`, `roomName`, `roomTime`, `createdAt`, `updatedAt`, `createdBy`, `openDate`, `startTime`, `endTime`, `ticketNumber`, `ticketPrice`, `imgPath`) VALUES ('7', '7', '2', 'Porsche Taycan Turbo S', '10:00:00', '2022-11-19 00:00:00', '2022-11-19 00:00:00', '1', '2022-11-19', '10:00:00', '10:30:00', '10', '50', 'assets/img/porche/p1.png');
-INSERT INTO `swp490_cab`.`room` (`id`, `carId`, `typeRoomId`, `roomName`, `roomTime`, `createdAt`, `updatedAt`, `createdBy`, `openDate`, `startTime`, `endTime`, `ticketNumber`, `ticketPrice`, `imgPath`) VALUES ('8', '8', '2', 'Ferrari F8 Tributo', '10:00:00', '2022-11-19 00:00:00', '2022-11-19 00:00:00', '1', '2022-11-19', '10:00:00', '10:30:00', '10', '50', 'assets/img/audi/a1.jpg');
-INSERT INTO `swp490_cab`.`room` (`id`, `carId`, `typeRoomId`, `roomName`, `roomTime`, `createdAt`, `updatedAt`, `createdBy`, `openDate`, `startTime`, `endTime`, `ticketNumber`, `ticketPrice`, `imgPath`) VALUES ('9', '9', '2', 'Lamborghini Huracan LP610-4', '10:00:00', '2022-11-19 00:00:00', '2022-11-19 00:00:00', '1', '2022-11-19', '10:00:00', '10:30:00', '10', '50', 'assets/img/ranger/r1.jpg');
-INSERT INTO `swp490_cab`.`favorite` (`id`, `userId`, `carId`, `createdAt`, `number`) VALUES ('1', '1', '1', '2022-11-19 00:00:00', '1');
-INSERT INTO `swp490_cab`.`favorite` (`id`, `userId`, `carId`, `createdAt`, `number`) VALUES ('2', '1', '2', '2022-11-19 00:00:00', '2');
-INSERT INTO `swp490_cab`.`favorite` (`id`, `userId`, `carId`, `createdAt`, `number`) VALUES ('3', '2', '1', '2022-11-19 00:00:00', '3');
-INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('1', '1', '/img/Vinfast/e1.jpg');
-INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('2', '1', '/img/Vinfast/v1.jpg');
-INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('3', '2', '/img/Mer/m1.jpg');
+-- Dump completed on 2022-12-15 13:20:19
