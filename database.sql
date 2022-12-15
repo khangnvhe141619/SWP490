@@ -221,7 +221,36 @@ CREATE TABLE `image` (
 
 LOCK TABLES `image` WRITE;
 /*!40000 ALTER TABLE `image` DISABLE KEYS */;
-INSERT INTO `image` VALUES (1,'/img/Vinfast/e1.jpg',1),(2,'/img/Vinfast/v1.png',1),(3,'/img/Mer/m1.jpg',2);
+INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('1', '1', '/img/Vinfast/e1.jpg');
+INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('2', '1', '/img/Vinfast/v1.png');
+INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('3', '1', '/img/Vinfast/v2.png');
+INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('4', '1', '/img/Vinfast/v3.png');
+INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('5', '1', '/img/Vinfast/v4.png');
+INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('6', '1', '/img/Vinfast/v5.png');
+INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('7', '2', '/img/Mer/m2.png');
+INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('8', '2', '/img/Mer/m3.png');
+INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('9', '2', '/img/Mer/m4.png');
+INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('10', '2', '/img/Mer/m5.png');
+INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('11', '2', '/img/Mer/m6.png');
+INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('12', '2', '/img/Mer/m7.png');
+INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('13', '3', '/img/bmw/b1.png');
+INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('14', '3', '/img/bmw/b2.png');
+INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('15', '3', '/img/bmw/b3.png');
+INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('16', '3', '/img/bmw/b4.png');
+INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('17', '3', '/img/bmw/b6.png');
+INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('18', '3', '/img/bmw/b7.png');
+INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('19', '4', '/img/camry/c1.png');
+INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('20', '4', '/img/camry/c2.png');
+INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('21', '4', '/img/camry/c3.png');
+INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('22', '4', '/img/camry/c4.png');
+INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('23', '4', '/img/camry/c5.png');
+INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('24', '4', '/img/camry/c6.png');
+INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('25', '5', '/img/lexus/l1.png');
+INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('26', '5', '/img/lexus/l2.png');
+INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('27', '5', '/img/lexus/l3.png');
+INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('28', '5', '/img/lexus/l4.png');
+INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('29', '5', '/img/lexus/l5.png');
+INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('30', '5', '/img/lexus/l6.png');
 /*!40000 ALTER TABLE `image` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -647,5 +676,12 @@ UNLOCK TABLES;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+UPDATE `swp490_cab`.`news` SET `img` = '/assets/img/bmw/b6.jpg' WHERE (`id` = '1');
+UPDATE `swp490_cab`.`news` SET `img` = '/assets/img/bmw/b1.jpg' WHERE (`id` = '2');
+UPDATE `swp490_cab`.`news` SET `img` = '/assets/img/Mer/m6.jpg' WHERE (`id` = '3');
+UPDATE `swp490_cab`.`news` SET `img` = '/assets/img/bmw/b6.jpg' WHERE (`id` = '4');
+UPDATE `swp490_cab`.`news` SET `img` = '/assets/img/bmw/b1.jpg' WHERE (`id` = '5');
+UPDATE `swp490_cab`.`news` SET `img` = '/assets/img/Mer/m6.jpg' WHERE (`id` = '6');
 
 -- Dump completed on 2022-12-15 13:20:19
