@@ -2,7 +2,7 @@ package com.workshop.carauctionsystem.controller;
 
 import com.workshop.carauctionsystem.entity.ModelSpecification;
 import com.workshop.carauctionsystem.exception.NotFoundException;
-import com.workshop.carauctionsystem.model.ModelSpecieModel;
+import com.workshop.carauctionsystem.model.ModelSpecieDTO;
 import com.workshop.carauctionsystem.service.impl.ModelSpecificationServiceImpl;
 import com.workshop.carauctionsystem.validate.Validate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.validation.Valid;
 import java.util.Map;
 
 @Controller
@@ -30,7 +29,7 @@ public class AdminModelSpecificationController {
                                  @RequestParam(defaultValue = "") String search,
                                  Model model) {
         ModelAndView modelAndView = null;
-        model.addAttribute("modelSpecieModel", new ModelSpecieModel());
+        model.addAttribute("modelSpecieModel", new ModelSpecieDTO());
         Page<ModelSpecification> list = modelSpecService.findAllOrderByName(PageRequest.of(page, 5, Sort.by(id)), search);
         modelAndView = new ModelAndView("admin/listModelSpec");
         if (!list.isEmpty()) {
@@ -43,17 +42,28 @@ public class AdminModelSpecificationController {
 
 
     @PostMapping("/admin/modelSpec/create")
-    public String create(@ModelAttribute(value = "modelSpecieModel") ModelSpecieModel modelSpecieModel,
+    public String create(@ModelAttribute(value = "modelSpecieModel") ModelSpecieDTO modelSpecieDTO,
                          RedirectAttributes ra) {
         try {
+            String nameType = modelSpecieDTO.getNameType();
+            String regex = "[a-zA-Z]+";
+            if (!nameType.matches(regex)) {
+                ra.addFlashAttribute("fail", "Name of Type Model Car not Null or is Number");
+                return "redirect:/admin/modelSpec";
+            }
+            int number = modelSpecieDTO.getSeatNumber();
+            if (number < 2 || number > 34) {
+                ra.addFlashAttribute("fail", "Number Seat in range 2 -> 34");
+                return "redirect:/admin/modelSpec";
+            }
             ModelSpecification modelSpec = new ModelSpecification();
-            modelSpec.setNameType(modelSpecieModel.getNameType());
+            modelSpec.setNameType(nameType);
             Validate validateName = new Validate();
-            if (validateName.checkDuplicateModelSpec(modelSpecieModel.getNameType(), modelSpecieModel.getSeatNumber(), modelSpecService.getAllModelSpecification())) {
+            if (validateName.checkDuplicateModelSpec(modelSpecieDTO.getNameType(), modelSpecieDTO.getSeatNumber(), modelSpecService.getAllModelSpecification())) {
                 ra.addFlashAttribute("fail", "ModelSpecification exist");
                 return "redirect:/admin/modelSpec";
             }
-            modelSpec.setSeatNumber(modelSpecieModel.getSeatNumber());
+            modelSpec.setSeatNumber(modelSpecieDTO.getSeatNumber());
             modelSpec.setStatus(1);
             modelSpecService.saveModelSpecification(modelSpec);
             ra.addFlashAttribute("success", "The ModelSpecification has been saved successfully");
@@ -79,25 +89,38 @@ public class AdminModelSpecificationController {
 
     @PostMapping("/admin/modelSpec/edit")
     public String update(@RequestParam Map<String, String> requestMap,
-                         RedirectAttributes ra, Model model) {
+                         RedirectAttributes ra) {
         Long id = Long.parseLong(requestMap.get("id"));
         String name = requestMap.get("nameType");
-        int seatNumber = Integer.parseInt(requestMap.get("seatNumber"));
-        ModelSpecification brandId = modelSpecService.findById(id);
-        try {
-            Validate validateName = new Validate();
-            if (validateName.checkDuplicateModelSpec(name, seatNumber, modelSpecService.getAllModelSpecification())) {
-                ra.addFlashAttribute("fail", "ModelSpecification exist");
+        if (!requestMap.get("seatNumber").equals("")) {
+            int seatNumber = Integer.parseInt(requestMap.get("seatNumber"));
+            ModelSpecification modelSpecId = modelSpecService.findById(id);
+            try {
+                String regex = "[a-zA-Z]+";
+                if (!name.matches(regex)) {
+                    ra.addFlashAttribute("fail", "Name of car brand not Null or is Number");
+                    return "redirect:/admin/modelSpec";
+                }
+                if (seatNumber < 2 || seatNumber > 34) {
+                    ra.addFlashAttribute("fail", "Number Seat in range 2 -> 34");
+                    return "redirect:/admin/modelSpec";
+                }
+                if (!name.toLowerCase().equals(modelSpecId.getNameType().toLowerCase())) {
+                    Validate validateName = new Validate();
+                    if (validateName.checkDuplicateModelSpec(name, seatNumber, modelSpecService.getAllModelSpecification())) {
+                        ra.addFlashAttribute("fail", "ModelSpecification exist");
+                        return "redirect:/admin/modelSpec";
+                    }
+                }
+                modelSpecService.updateModelSpec(name, seatNumber, id);
+                ra.addFlashAttribute("success", "The ModelSpecification has been saved successfully");
+                return "redirect:/admin/modelSpec";
+            } catch (Exception e) {
+                ra.addFlashAttribute("fail", "Update ModelSpecification Failed");
                 return "redirect:/admin/modelSpec";
             }
-            modelSpecService.updateModelSpec(name, seatNumber, id);
-        } catch (Exception e) {
-            ra.addFlashAttribute("fail", "Update ModelSpecification Failed");
-            return "redirect:/admin/modelSpec";
         }
-        ra.addFlashAttribute("success", "The ModelSpecification has been saved successfully");
+        ra.addFlashAttribute("fail", "Number Seat in range 2 -> 34");
         return "redirect:/admin/modelSpec";
     }
-
-
 }

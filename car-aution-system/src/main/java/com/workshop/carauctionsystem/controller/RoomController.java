@@ -77,11 +77,13 @@ public class RoomController {
             DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String dateString = df.format(date);
             roomDetailPlayerService.addPlayer(id, userId, 0, dateString, 0);
-        }
-        if (roomDetailPlayer.get(0).getUserBid() == 0) {
-            model.addAttribute("bidPrice", true);
         } else {
-            model.addAttribute("bidPrice", false);
+            if (roomDetailPlayer.get(0).getUserBid() == 0) {
+                model.addAttribute("bidPrice", true);
+            } else {
+                model.addAttribute("bidPrice", false);
+            }
+            model.addAttribute("roomDetailPlayer", roomDetailPlayer.get(0).getUserBid());
         }
         Long carId = room.getCarId().getId();
         List<Image> imageList = imageService.getAllImageByCarId(carId);
@@ -90,7 +92,6 @@ public class RoomController {
         CarSpecification carSpecification = carSpecificationService.getAllByCarId(carId);
         Cookie cookie = new Cookie("setUser", setUser);
         model.addAttribute("diffHours", diffHours);
-        model.addAttribute("roomDetailPlayer", roomDetailPlayer.get(0).getUserBid());
         model.addAttribute("diffMinutes", diffMinutes);
         model.addAttribute("diffSeconds", diffSeconds);
         model.addAttribute("room", room);

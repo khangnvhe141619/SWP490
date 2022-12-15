@@ -52,6 +52,16 @@ public class AdminNewsController {
             News news = new News();
             news.setTitle(newsModel.getTitle());
             news.setAuthor(newsModel.getAuthor());
+            if (newsModel.getTitle().equals("") || newsModel.getShortDescribe().equals("") || newsModel.getDescribe().equals("") ||
+                    newsModel.getDescribe1().equals("") || newsModel.getDescribe2().equals("")){
+                ra.addFlashAttribute("fail", "Add News Failed");
+                return "redirect:/admin/news";
+            }
+            String regex = "[a-zA-Z ]+";
+            if (!newsModel.getAuthor().matches(regex)){
+                ra.addFlashAttribute("fail", "Name of Author not Null or is Number");
+                return "redirect:/admin/news";
+            }
             news.setShortDescribe(newsModel.getShortDescribe());
             news.setDescribe(newsModel.getDescribe());
             Date date = new Date();
@@ -79,6 +89,16 @@ public class AdminNewsController {
         String nameFile = upImg.getOriginalFilename();
         News newsId = newsService.findById(id);
         try {
+            if (news.getTitle().equals("") || news.getDescribe().equals("") || news.getDescribe2().equals("") ||
+                    news.getShortDescribe().equals("") || news.getDescribe1().equals("")){
+                ra.addFlashAttribute("fail", "Update News Failed");
+                return "redirect:/admin/news";
+            }
+            String regex = "[a-zA-Z ]+";
+            if (!news.getAuthor().matches(regex)){
+                ra.addFlashAttribute("fail", "Name of Author not Null or is Number");
+                return "redirect:/admin/news";
+            }
             FileCopyUtils.copy(upImg.getBytes(), new File("src\\main\\resources\\static\\assets\\hoang/" + nameFile));
             news.setImg("/hoang/" + nameFile);
             newsService.saveNews(news);

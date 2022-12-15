@@ -53,8 +53,14 @@ public class AdminBrandController {
             String nameFile = upImg.getOriginalFilename();
             FileCopyUtils.copy(upImg.getBytes(), new File("src\\main\\resources\\static\\assets\\hoang/" + nameFile));
             Brand brand = new Brand();
-            brand.setBrandName(brandModel.getName());
+            String brandName = brandModel.getName();
             Validate validateName = new Validate();
+            String regex = "^[a-zA-Z \\-]+$";
+            if (!brandName.matches(regex)){
+                ra.addFlashAttribute("fail", "Name of Car Brand not Null or is Number");
+                return "redirect:/admin/brand";
+            }
+            brand.setBrandName(brandName);
             if (validateName.checkDuplicateBrand(brandModel.getName(), brandService.getAllBrand())) {
                 ra.addFlashAttribute("fail", "This car brand already exists");
                 return "redirect:/admin/brand";
@@ -93,6 +99,11 @@ public class AdminBrandController {
         String nameFile = upImg.getOriginalFilename();
         Brand brandId = brandService.findById(id);
         try {
+            String regex = "[a-zA-Z]+";
+            if (!name.matches(regex)){
+                ra.addFlashAttribute("fail", "Name of car brand not Null or is Number");
+                return "redirect:/admin/brand";
+            }
             if (!name.toLowerCase().equals(brandId.getBrandName().toLowerCase())) {
                 Validate validateName = new Validate();
                 if (validateName.checkDuplicateBrand(name, brandService.getAllBrand())) {
@@ -100,12 +111,10 @@ public class AdminBrandController {
                     return "redirect:/admin/brand";
                 }
             }
-            //brandId.setBrandName(name);
             FileCopyUtils.copy(upImg.getBytes(), new File("src\\main\\resources\\static\\assets\\hoang/" + nameFile));
             String img = "/hoang/" + nameFile;
             brandService.updateBrand(name, img, id);
         } catch (IOException e) {
-            //  brandId.setImgPath(brandId.getImgPath());
             String img = brandId.getImgPath();
             brandService.updateBrand(name, img, id);
         }
