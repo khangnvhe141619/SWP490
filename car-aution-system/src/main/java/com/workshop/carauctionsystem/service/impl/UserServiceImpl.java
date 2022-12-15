@@ -108,7 +108,7 @@ public class UserServiceImpl implements UserService {
         user.setPhone(userDTO.getPhone());
         user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         user.setAvatar(userDTO.getAvatar());
-        user.setRoles(Arrays.asList(roleRepository.findByName("User")));
+        user.setRoles(Arrays.asList(roleRepository.findByName("ROLE_User")));
         Date date = new Date();
         user.setCreatedAt(new Timestamp(date.getTime()));
         user.setAddressWallet(userDTO.getAddressWallet());
