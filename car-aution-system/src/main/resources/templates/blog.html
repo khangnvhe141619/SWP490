@@ -24,33 +24,11 @@
 </head>
 
 <body>
-<header id="header" class="fixed-top d-flex align-items-center header-transparent bg-black">
-    <div class="container-fluid">
-        <div class="row justify-content-center align-items-center">
-            <div class="col-xl-11 d-flex align-items-center justify-content-between">
-                <h1 class="logo"><a href="home.html">CAB Auction</a></h1>
-                <nav id="navbar" class="navbar">
-                    <ul>
-                        <li><a class="nav-link scrollto active" href="Home.html">Home</a></li>
-                        <li><a class="nav-link scrollto" href="home.html">Brand</a></li>
-                        <li><a class="nav-link scrollto " href="home.html">Auction Room</a></li>
-                        <li><a class="nav-link scrollto" href="blog.html">News</a></li>
-                        <li><a class="nav-link scrollto" href="guideline.html">Guideline</a></li>
-                        <li><a class="nav-link scrollto " href="home.html">About Us</a></li>
-                    </ul>
-                    <a href="connectWallet.html" style="background-color: rgb(66, 180, 66); padding-right: 30px;"
-                       class="connectwallet">Connect wallet</a>
-                    <a href="PeronalProfile.html"><i class="bi bi-person-circle" style="font-size: 30px;"></i></a>
-                </nav>
-            </div>
-        </div>
-
-    </div>
-</header>
-
+<th:block th:include="/header"></th:block>
 <div class="container mt-200 mb-5">
 
     <div class="row">
+        <div class="col-md-1"></div>
         <div class="col-md-7">
             <h4>News</h4>
             <p style="color: red" th:text="${mess}"></p>
@@ -59,7 +37,7 @@
                         <img th:src="${ls.getImg()}" class="form-control" style="border: none;">
                     </div>
                     <div class="col-md-7">
-                        <a th:href="@{'/user/details/'+ ${ls.getId()}}" class="pe-auto"><h5 class="card-title"
+                        <a th:href="@{'/details/'+ ${ls.getId()}}" class="pe-auto"><h5 class="card-title"
                                                                                             th:text="${ls.getTitle()}"></h5>
                         </a>
                         <span th:text="${ls.getShortDescribe()}"></span>
@@ -70,14 +48,14 @@
             </div>
             <div class="col-md-3">
                 <h4>Latest news</h4>
-                <form th:action="@{/user/news}" method="get" role="search" class="sr-input-func">
+                <form th:action="@{/news}" method="get" role="search" class="sr-input-func">
 
                     <input type="text" name="search" th:value="${param.search}" placeholder="Type here...">
                     <button>oke</button>
 
                 </form>
                 <div class="right-content flex-column d-flex" th:each="top:${top5}">
-                    <a class="pe-auto" th:href="@{'/user/details/'+ ${top.getId()}}"><p th:text="${top.getTitle()}"></p>
+                    <a class="pe-auto" th:href="@{'/details/'+ ${top.getId()}}"><p th:text="${top.getTitle()}"></p>
                     </a>
 
                 </div>
@@ -89,14 +67,14 @@
     <nav aria-label="Page navigation example">
         <ul class="pagination paging align-items-center justify-content-center">
             <li class="page-item"><a class="page-link"
-                                     th:href="@{'/user/news?page='+${page -1 ==0? 1 : page -1}+'&search='+${search}}">Previous</a>
+                                     th:href="@{'/news?page='+${page -1 ==0? 1 : page -1}+'&search='+${search}}">Previous</a>
             </li>
             <span th:each="i:${#numbers.sequence(1,total)}">
           <li class="page-item"><a th:class="${page == i ? 'page-link active' :'page-link' } "
-                                   th:href="@{/user/news(page=${i},search=${search})}">[[${i}]]</a></li>
+                                   th:href="@{/news(page=${i},search=${search})}">[[${i}]]</a></li>
           </span>
             <li class="page-item"><a class="page-link"
-                                     th:href="@{'/user/news?page='+${page +1 > total? total : page +1}+'&search='+${search}}">Next</a>
+                                     th:href="@{'/news?page='+${page +1 > total? total : page +1}+'&search='+${search}}">Next</a>
             </li>
             </span>
         </ul>

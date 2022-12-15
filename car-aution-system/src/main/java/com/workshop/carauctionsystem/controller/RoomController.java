@@ -24,7 +24,7 @@ import java.util.List;
 import com.google.gson.Gson;
 import java.util.concurrent.TimeUnit;
 
-@Controller
+@RestController
 public class RoomController {
     @Autowired
     RoomService roomService;
