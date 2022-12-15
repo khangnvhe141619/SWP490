@@ -17,7 +17,6 @@ public class Brand {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Pattern(regexp = "[a-zA-Z]+",message = "Name not null and no number")
     @Column(name = "brandname")
     private String brandName;
 

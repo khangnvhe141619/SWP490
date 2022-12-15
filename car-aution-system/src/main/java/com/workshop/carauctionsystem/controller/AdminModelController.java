@@ -4,7 +4,7 @@ import com.workshop.carauctionsystem.entity.Brand;
 import com.workshop.carauctionsystem.entity.ModelCar;
 import com.workshop.carauctionsystem.entity.ModelSpecification;
 import com.workshop.carauctionsystem.exception.NotFoundException;
-import com.workshop.carauctionsystem.model.ModelCarModel;
+import com.workshop.carauctionsystem.model.ModelCarDTO;
 import com.workshop.carauctionsystem.service.impl.BrandServiceImpl;
 import com.workshop.carauctionsystem.service.impl.ModelServiceImpl;
 import com.workshop.carauctionsystem.service.impl.ModelSpecificationServiceImpl;
@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.validation.constraints.Pattern;
 import java.util.Map;
 
 @Controller
@@ -37,7 +39,7 @@ public class AdminModelController {
                                  @RequestParam(defaultValue = "") String search,
                                  Model model) {
         ModelAndView modelAndView = null;
-        model.addAttribute("modelCar", new ModelCarModel());
+        model.addAttribute("modelCar", new ModelCarDTO());
         model.addAttribute("brands", brandService.getAllBrand());
         model.addAttribute("modelType", modelSpecService.getAllModelSpecification());
         Page<ModelCar> list = modelService.findAllOrderByName(PageRequest.of(page, 5, Sort.by(id)), search);
@@ -51,35 +53,44 @@ public class AdminModelController {
     }
 
     @PostMapping("/admin/model/create")
-    public String create(@ModelAttribute(value = "modelCar") ModelCarModel modelCarModel,
-                         @RequestParam Long idModelSpec,
-                         @RequestParam Long idBrand,
+    public String create(@ModelAttribute(value = "modelCar") ModelCarDTO modelCarDTO,
+                         @RequestParam Map<String, String> requestMap,
                          RedirectAttributes ra) {
-        try {
-            ModelSpecification modelSpec = new ModelSpecification();
-            modelSpec.setId(idModelSpec);
-            Brand brand = new Brand();
-            brand.setId(idBrand);
 
-            ModelCar modelCar = new ModelCar();
-            modelCar.setModelSpecificationId(modelSpec);
-            modelCar.setBrandId(brand);
-            modelCar.setStatus(1);
-            modelCar.setModelName(modelCarModel.getModelName());
-            Validate validateExit = new Validate();
-            String modelName = modelCarModel.getModelName();
-            Long brandId = idBrand;
+        if(requestMap.get("idModelSpec") != null && requestMap.get("idBrand") != null) {
+            try {
+                ModelSpecification modelSpec = new ModelSpecification();
+                modelSpec.setId(Long.parseLong(requestMap.get("idModelSpec")));
+                Brand brand = new Brand();
+                brand.setId(Long.parseLong(requestMap.get("idBrand")));
 
-            if (validateExit.checkDuplicateModel(modelName,brandId,modelService.getAllModelByStatus())){
-                ra.addFlashAttribute("fail", "This Car Model already exists");
+                ModelCar modelCar = new ModelCar();
+                modelCar.setModelSpecificationId(modelSpec);
+                modelCar.setBrandId(brand);
+                modelCar.setStatus(1);
+                modelCar.setModelName(modelCarDTO.getModelName());
+                Validate validateExit = new Validate();
+                String modelName = modelCarDTO.getModelName();
+                Long brandId = Long.parseLong(requestMap.get("idBrand"));
+
+                String regex = "[a-zA-Z0-9]+";
+                if (!modelName.matches(regex)){
+                    ra.addFlashAttribute("fail", "Add New Car Model Failed (Don't enter special characters)");
+                    return "redirect:/admin/model";
+                }
+                if (validateExit.checkDuplicateModel(modelName, brandId, modelService.getAllModelByStatus())) {
+                    ra.addFlashAttribute("fail", "This Car Model already exists");
+                    return "redirect:/admin/model";
+                }
+
+                modelService.saveModel(modelCar);
+                ra.addFlashAttribute("success", "The Car Model has been saved successfully");
+                return "redirect:/admin/model";
+            } catch (Exception e) {
+                ra.addFlashAttribute("fail", "Add New Car Model Failed");
                 return "redirect:/admin/model";
             }
-
-            modelService.saveModel(modelCar);
-            ra.addFlashAttribute("success", "The Car Model has been saved successfully");
-            return "redirect:/admin/model";
-        } catch (Exception e) {
-            ra.addFlashAttribute("fail", "Add New Car Model Failed");
+        }else{   ra.addFlashAttribute("fail", "Add New Car Model Failed");
             return "redirect:/admin/model";
         }
     }
@@ -108,6 +119,11 @@ public class AdminModelController {
         ModelCar modelId = modelService.findById(id);
 
         try {
+            String regex = "[a-zA-Z0-9]+";
+            if (!modelName.matches(regex)){
+                ra.addFlashAttribute("fail", "Add New Car Model Failed (Don't enter special characters)");
+                return "redirect:/admin/model";
+            }
             Validate validateName = new Validate();
             if (!modelName.toLowerCase().equals(modelId.getModelName().toLowerCase())) {
                 if (validateName.checkDuplicateModel(modelName, idBrand, modelService.getAllModelByStatus())) {

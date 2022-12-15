@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class ModelCarModel {
+public class ModelCarDTO {
 
     private Long id;
     private Brand brandId;

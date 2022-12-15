@@ -1,14 +1,11 @@
 package com.workshop.carauctionsystem.controller;
 
 import com.workshop.carauctionsystem.entity.*;
-import com.workshop.carauctionsystem.exception.NotFoundException;
-import com.workshop.carauctionsystem.model.ModelCarModel;
 import com.workshop.carauctionsystem.model.RoomDTO;
 import com.workshop.carauctionsystem.service.CarService;
 import com.workshop.carauctionsystem.service.RoomService;
 import com.workshop.carauctionsystem.service.RoomTypeService;
 import com.workshop.carauctionsystem.service.UserService;
-import com.workshop.carauctionsystem.validate.Validate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -24,6 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
@@ -63,18 +61,21 @@ public class AdminRoomController {
     @PostMapping("/admin/auctionroom/create")
     public String create(@ModelAttribute(value = "roomDTO") RoomDTO roomDTO,
                          @RequestParam Long carId,
-                         @RequestParam int typeRoom,
-                         @RequestParam int createBy,
                          @RequestParam MultipartFile upImg,
                          RedirectAttributes ra) {
 
         try {
+            if (roomDTO.getRoomName().equals("") || carId == null || roomDTO.getStartTime().equals("") ||
+            roomDTO.getEndTime().equals("") || roomDTO.getOpenDate().equals("") ){
+                ra.addFlashAttribute("fail", "Add new Room Auction Failed");
+                return "redirect:/admin/auctionroom";
+            }
             Car car = new Car();
             car.setId(carId);
             RoomType roomType = new RoomType();
-            roomType.setId(typeRoom);
+            roomType.setId(2);
             User user = new User();
-            user.setId(createBy);
+            user.setId(2);
             Room room = new Room();
             Date date = new Date();
             Timestamp timestamp = new Timestamp(date.getTime());
@@ -93,6 +94,19 @@ public class AdminRoomController {
             String nameFile = upImg.getOriginalFilename();
             FileCopyUtils.copy(upImg.getBytes(), new File("src\\main\\resources\\static\\assets\\hoang/" + nameFile));
             room.setImgPath("/hoang/"+nameFile);
+            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+            Date d1 = sdf.parse(roomDTO.getStartTime());
+            Date d2 = sdf.parse(room.getEndTime());
+            long a = d2.getTime() - d1.getTime();
+            String regex = "^[a-zA-Z0-9 \\-*_]+$";
+            if (a < 1){
+                ra.addFlashAttribute("fail", "Add New Room Failed (EndTime Bigger StartTime)");
+                return "redirect:/admin/auctionroom";
+            }
+            if (!roomDTO.getRoomName().matches(regex)) {
+                ra.addFlashAttribute("fail", "Add New Room Failed (Don't enter special characters)");
+                return "redirect:/admin/auctionroom";
+            }
             roomService.saveRoom(room);
             ra.addFlashAttribute("success", "The new Room Auction has been saved successfully");
             return "redirect:/admin/auctionroom";
@@ -104,8 +118,13 @@ public class AdminRoomController {
 
     @PostMapping("admin/auctionroom/edit")
     public String update(@RequestParam MultipartFile upImg, RedirectAttributes ra,
-                         @RequestParam Map<String, String> requestMap) {
+                         @RequestParam Map<String, String> requestMap) throws ParseException {
 
+        if (requestMap.get("roomName").equals("") || requestMap.get("startTime").equals("") ||
+                requestMap.get("endTime").equals("")){
+            ra.addFlashAttribute("fail", "Add new Room Auction Failed");
+            return "redirect:/admin/auctionroom";
+        }
         int id = Integer.parseInt(requestMap.get("id"));
         String roomName = requestMap.get("roomName");
         String startTime = requestMap.get("startTime");
@@ -113,17 +132,31 @@ public class AdminRoomController {
         Date date = new Date();
         Timestamp updateAt = new Timestamp(date.getTime());
         int ticketPrice = Integer.parseInt(requestMap.get("ticketPrice"));
-        int createBy = Integer.parseInt(requestMap.get("createdBy"));
-        int typeRoom = Integer.parseInt(requestMap.get("typeRoom"));
+        int ticketNumber = Integer.parseInt(requestMap.get("numTicket"));
+        int createBy = 2;
+        int typeRoom = 2;
         String nameFile = upImg.getOriginalFilename();
         Room room = roomService.getRoomById(id);
+        String regex = "^[a-zA-Z0-9 \\-*_]+$";
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+        Date d1 = sdf.parse(startTime);
+        Date d2 = sdf.parse(endTime);
+        long a = d2.getTime() - d1.getTime();
+        if (a < 1){
+            ra.addFlashAttribute("fail", "Add New Room Failed (EndTime Bigger StartTime)");
+            return "redirect:/admin/auctionroom";
+        }
+        if (!roomName.matches(regex)) {
+            ra.addFlashAttribute("fail", "Add New Room Failed (Don't enter special characters)");
+            return "redirect:/admin/auctionroom";
+        }
         try {
             FileCopyUtils.copy(upImg.getBytes(), new File("src\\main\\resources\\static\\assets\\hoang/" + nameFile));
             String img = "/hoang/" + nameFile;
-            roomService.update(roomName,startTime,endTime,updateAt,ticketPrice,typeRoom,createBy,img,id);
+            roomService.update(roomName,startTime,endTime,updateAt,ticketNumber,ticketPrice,typeRoom,createBy,img,id);
         } catch (IOException e) {
             String img = room.getImgPath();
-            roomService.update(roomName,startTime,endTime,updateAt,ticketPrice,typeRoom,createBy,img,id);
+            roomService.update(roomName,startTime,endTime,updateAt,ticketNumber,ticketPrice,typeRoom,createBy,img,id);
         }
         ra.addFlashAttribute("success", "The brand has been saved successfully");
         return "redirect:/admin/auctionroom";

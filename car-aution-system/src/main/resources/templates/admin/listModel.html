@@ -62,6 +62,7 @@
   <!-- modernizr JS
     ============================================ -->
   <script th:src="@{s/vendor/modernizr-2.8.3.min.js}"></script>
+  <script th:src="@{js/validate/validate-form.js}"></script>
 </head>
 
 <body>
@@ -369,7 +370,8 @@
                               <div class="col-sm-12 col-xs-6">
                                 <p><b>Name Model</b></p>
                                 <div class="form-group">
-                                  <input th:value="*{c.modelName}" name="modelName" type="text" class="form-control" placeholder="Name">
+                                  <input th:value="*{c.modelName}" name="modelName"  type="text" class="form-control"
+                                         placeholder="Name">
                                 </div>
                               </div>
                             </div>
@@ -383,7 +385,7 @@
                     </div>
                   </div>
                   <!--End Update pop-up-->
-</tr>
+                 </tr>
                 </tr>
               </table>
             </div>
@@ -438,16 +440,18 @@
             </div>
             <div class="row">
               <div class="col-sm-12 col-xs-6">
-                <p><b>Name of Brand</b></p>
+                <p><b>Name of Model</b></p>
                 <div class="form-group">
-                  <input th:field="*{modelName}" name="modelName" id="modelName" type="text" class="form-control" placeholder="Name">
+                  <input th:field="*{modelName}" name="modelName" id="nameCreate" type="text" class="form-control"
+                         placeholder="Name" onchange="checkNameCreate2()">
                 </div>
+                <div id="nameCreateCheck" style="display: none; color: red;">Don't enter special characters</div>
               </div>
             </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-            <button type="submit" class="btn btn-primary">Create</button>
+            <button id="create-btn" type="submit" class="btn btn-primary">Create</button>
           </div>
         </form>
       </div>

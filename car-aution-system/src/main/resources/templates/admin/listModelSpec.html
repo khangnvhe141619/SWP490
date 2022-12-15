@@ -63,6 +63,7 @@
     <!-- modernizr JS
       ============================================ -->
     <script th:src="@{js/vendor/modernizr-2.8.3.min.js}"></script>
+    <script th:src="@{js/validate/validate-form.js}"></script>
 </head>
 
 <body>
@@ -352,7 +353,7 @@
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                                     <h4 class="modal-title">Update</h4>
                                                 </div>
-                                                <form th:action="@{/modelSpec/edit}" method="post" enctype="multipart/form-data">
+                                                <form th:action="@{/admin/modelSpec/edit}" method="post" enctype="multipart/form-data">
                                                     <div class="modal-body">
                                                         <div class="row">
                                                             <div class="col-sm-12 col-xs-6"><p><b>ID of Type Model</b></p>
@@ -364,14 +365,16 @@
                                                         <div class="row">
                                                             <div class="col-sm-12 col-xs-6"><p><b>Name Type Model</b></p>
                                                                 <div class="form-group">
-                                                                    <input th:value="*{c.nameType}" name="nameType" id="nameType" type="text" class="form-control" placeholder="Name">
+                                                                    <input th:value="*{c.nameType}" name="nameType" type="text"
+                                                                           class="form-control" placeholder="Name">
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-sm-12 col-xs-6"><p><b>Seat Number</b></p>
                                                                 <div class="form-group">
-                                                                    <input th:value="*{c.seatNumber}" name="seatNumber" id="seatNumber" type="number" class="form-control" placeholder="Seat">
+                                                                    <input th:value="*{c.seatNumber}" name="seatNumber" type="number" min="1" class="form-control"
+                                                                           placeholder="Seat">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -424,22 +427,25 @@
                         <div class="row">
                             <div class="col-sm-12 col-xs-6"><b>Name Type Model</b>
                                 <div class="form-group">
-                                    <input th:field="*{nameType}" name="nameType" type="text" class="form-control" placeholder="Name">
+                                    <input th:field="*{nameType}" name="nameType" id="nameCreate" type="text"
+                                           class="form-control" placeholder="Name" onchange="checkNameCreate()">
                                 </div>
+                                <div id="nameCreateCheck" style="display: none; color: red;">Type Model Car not Null or is Number</div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-12 col-xs-6"><b>Seat Number</b>
                                 <div class="form-group">
-                                    <input th:field="*{seatNumber}" name="seatNumber" type="number" class="form-control" placeholder="Seat">
+                                    <input th:field="*{seatNumber}" name="seatNumber" id="seatNumber"  type="number" min="1"
+                                           class="form-control" placeholder="Seat" onchange="checkSeatNumber()">
                                 </div>
+                                <div id="seatNumberCheck" style="display: none; color: red;">Number of Seats from 2 -> 34 seats</div>
                             </div>
-
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary">Create</button>
+                        <button id="create-btn" type="submit" class="btn btn-primary">Create</button>
                     </div>
                 </form>
             </div>

@@ -16,7 +16,7 @@ public interface RoomService {
     public Page<Room> findRoomByHistory(Pageable pageable,String roomName,String current);
     public Page<Room> findAllByName(Pageable pageable, String roomName);
     public void saveRoom(Room room);
-    public void update(String roomName, String startTime, String endTime, Timestamp updatedAt, int ticketPrice, int typeRoom, int createdBy, String img, int id);
+    public void update(String roomName, String startTime, String endTime, Timestamp updatedAt, int ticketNumber,int ticketPrice, int typeRoom, int createdBy, String img, int id);
     public void delete(Long id) throws NotFoundException;
     public Page<Room> getListRoom(int pageNo, int pageSize);
     public Page<Room> getListRoomCurrent(int pageNo, int pageSize);

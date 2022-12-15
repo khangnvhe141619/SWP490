@@ -77,8 +77,8 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public void update(String roomName, String startTime, String endTime, Timestamp updatedAt, int ticketPrice, int typeRoom, int createdBy, String img, int id) {
-        roomRepository.update(roomName,startTime,endTime,updatedAt,ticketPrice,typeRoom,createdBy,img,id);
+    public void update(String roomName, String startTime, String endTime, Timestamp updatedAt, int ticketNumber,int ticketPrice, int typeRoom, int createdBy, String img, int id) {
+        roomRepository.update(roomName,startTime,endTime,updatedAt,ticketNumber,ticketPrice,typeRoom,createdBy,img,id);
     }
 
        @Override
