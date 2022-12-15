@@ -36,8 +36,8 @@ public class PersonProfileController {
     @Autowired
     ServletContext application;
 
-    @GetMapping(value = {"/personProfile"})
-    public ModelAndView getPersonProfile( User user, @CookieValue(value = "setUserId") int setUserId,
+    @GetMapping("/personProfile")
+    public ModelAndView getPersonProfile(@CookieValue(value = "setUserId") int setUserId,
                                           @CookieValue(value = "setUser") String setUser,Model model){
         User u=  service.findUserById(setUserId);
         if(u != null){

@@ -1,0 +1,31 @@
+<header xmlns:th="http://www.thymeleaf.org" id="header" class="fixed-top d-flex align-items-center header-transparent">
+    <div class="container-fluid">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-xl-11 d-flex align-items-center justify-content-between">
+                <h1 class="logo"><a href="home.html">CAB Auction</a></h1>
+                <nav id="navbar" class="navbar">
+                    <ul>
+                        <li><a class="nav-link scrollto" th:href="@{/home}">Home</a></li>
+                        <li><a class="nav-link scrollto" th:href="@{/home}">Brand</a></li>
+                        <li><a class="nav-link scrollto active" th:href="@{/auctionRoom}">Auction Room</a></li>
+                        <li><a class="nav-link scrollto" th:href="@{/news}">News</a></li>
+                        <li><a class="nav-link scrollto" th:href="@{/guideLine}">Guideline</a></li>
+                        <li><a class="nav-link scrollto " th:href="@{/home}">About Us</a></li>
+                    </ul>
+                    <span style="display: flex;flex-direction: row;" th:if="${check} == true">
+                        <th:block th:if="${addressWallet} == null">
+                            <a style="background-color: rgb(66, 180, 66); padding-right: 30px;" id="connectButton"
+                               class="connectwallet">Connect wallet</a>
+                        </th:block>
+                        <a  th:href="@{/personProfile}"><i class="bi bi-person-circle" style="font-size: 30px;"></i><i
+                                th:text="${cookieValue.value}"></i></a>
+                    </span>
+                    <span th:if="${check} == false">
+                        <a th:href="@{/login}"><i class="bi bi-person-circle" style="font-size: 30px;"></i>
+                          <i th:text="${cookieValue.value}"></i></a>
+          </span>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>

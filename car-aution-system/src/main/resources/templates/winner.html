@@ -17,28 +17,7 @@
 </head>
 
 <body style="background: url(/assets/img/winner.gif);">
-<header id="header" class="fixed-top d-flex align-items-center header-transparent bg-black">
-    <div class="container-fluid">
-        <div class="row justify-content-center align-items-center">
-            <div class="col-xl-11 d-flex align-items-center justify-content-between">
-                <h1 class="logo"><a th:href="@{/home}">CAB Auction</a></h1>
-                <nav id="navbar" class="navbar">
-                    <ul>
-                        <li><a class="nav-link scrollto active" th:href="@{/home}">Home</a></li>
-                        <li><a class="nav-link scrollto" th:href="@{/home}">Brand</a></li>
-                        <li><a class="nav-link scrollto " th:href="@{/home}">Auction Room</a></li>
-                        <li><a class="nav-link scrollto" href="blog.html">News</a></li>
-                        <li><a class="nav-link scrollto" th:href="@{/guideLine}">Guideline</a></li>
-                        <li><a class="nav-link scrollto " th:href="@{/home}">About Us</a></li>
-                    </ul>
-                    <a href="connectWallet.html" style="background-color: rgb(66, 180, 66); padding-right: 30px;"
-                       class="connectwallet">Connect wallet</a>
-                    <a th:href="@{/personProfile}"><i class="bi bi-person-circle" style="font-size: 30px;"></i><i th:text="${session.username}"></i></a>
-                </nav>
-            </div>
-        </div>
-    </div>
-</header>
+<th:block th:include="/header"></th:block>
 <section>
     <div class="container">
         <div class="row">

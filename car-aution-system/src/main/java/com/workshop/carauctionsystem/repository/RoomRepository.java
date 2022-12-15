@@ -31,7 +31,7 @@ public interface RoomRepository extends JpaRepository<Room, Integer> {
 
     @Query(nativeQuery = true, value = "SELECT * FROM swp490_cab.room  WHERE current_date() - openDate < 0 or current_time() - startTime < 0")
     public Page<Room> getListRoom(Pageable pageable);
-    @Query(nativeQuery = true, value = "SELECT * FROM swp490_cab.room  WHERE current_date() - openDate >= 0 and current_time() - startTime >= 0 and current_time() - endTime <= 0")
+    @Query(nativeQuery = true, value = "SELECT * FROM swp490_cab.room  WHERE current_date() - openDate = 0 and current_time() - startTime >= 0 and current_time() - endTime <= 0")
     public Page<Room> getListRoomCurrent(Pageable pageable);
 
     @Query(nativeQuery = true,value = "SELECT * FROM room WHERE DATE(openDate) = ?1")

@@ -96,13 +96,13 @@ public class AuctionRoomController {
         if (cookie.getValue().equals("")) {
             model.addAttribute("check", false);
         } else {
+            User u =  userService.findByUsername(setUser);
+            view.addObject("addressWallet", u.getAddressWallet());
             model.addAttribute("check", true);
             List<Favorite> favoriteList = favoriteService.listAllFavo(Integer.parseInt(setUserId));
             if(!favoriteList.isEmpty()){
                 model.addAttribute("checkList", true);
                 model.addAttribute("favoriteList", favoriteList);
-                User u =  userService.findByUsername(setUser);
-                view.addObject("addressWallet", u.getAddressWallet());
             }else {
                 model.addAttribute("checkList", false);
             }

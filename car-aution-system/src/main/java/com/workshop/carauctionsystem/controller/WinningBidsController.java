@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -42,6 +43,7 @@ public class WinningBidsController {
             model.addAttribute("INFOR", u);
         }
         ModelAndView view = new ModelAndView();
+        view.addObject("addressWallet", u.getAddressWallet());
         view.setViewName("winningBids");
         return view;
     }
