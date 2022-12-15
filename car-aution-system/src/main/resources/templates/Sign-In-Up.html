@@ -8,7 +8,7 @@
           crossorigin="anonymous"
   ></script>
   <link rel="stylesheet" th:href="@{assets/css/Sign-In-Up.css}" />
-  <script th:src="@{assets/js/pwstrength.js}"></script>
+
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <title>Sign in & Sign up</title>
@@ -139,8 +139,10 @@
       $(":password").keyup(function(){
         if($("#passwordR").val() != $("#repasswordR").val()){
           $("#globalError").show().html("Password does not match!");
+          disableBtn()
         }else{
           $("#globalError").hide().html("");
+          ableBtn()
         }
       });
 
@@ -230,6 +232,6 @@
       });
     }
 </script>
-
+<script th:src="@{assets/js/pwstrength.js}"></script>
 </body>
 </html>

@@ -2,36 +2,27 @@ package com.workshop.carauctionsystem.controller;
 
 import com.workshop.carauctionsystem.entity.RoomDetailPlayer;
 import com.workshop.carauctionsystem.entity.User;
-import com.workshop.carauctionsystem.service.RoomDetailPlayerService;
-import com.workshop.carauctionsystem.service.RoomService;
 import com.workshop.carauctionsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.Cookie;
 import java.util.List;
 
 @RestController
-public class WinningBidsController {
-    @Autowired
-    RoomDetailPlayerService roomDetailPlayerService;
-
-    @Autowired
-    RoomService roomService;
-
+public class MyWalletController {
     @Autowired
     UserService service;
 
-    @GetMapping("/winningBids")
-    public ModelAndView winningBids(@CookieValue(value = "setUserId") int userId, Model model){
-        List<RoomDetailPlayer> roomDetailPlayerList = roomDetailPlayerService.getAllByUserIdAndWinner(userId, 1);
-        model.addAttribute("roomDetailPlayerList", roomDetailPlayerList);
-        User u =  service.findUserById(userId);
-        if(u != null){
+    @GetMapping("/wallet")
+    public ModelAndView getWallet(@CookieValue(value = "setUserId") int setUserId,
+                                  @CookieValue(value = "setUser") String setUser, Model model) {
+        User u = service.findUserById(setUserId);
+        if (u != null) {
             String name = u.getFullName();
             String email = u.getEmail();
             String phone = u.getPhone();
@@ -42,9 +33,17 @@ public class WinningBidsController {
             model.addAttribute("username", username);
             model.addAttribute("INFOR", u);
         }
-        ModelAndView view = new ModelAndView();
-        view.addObject("addressWallet", u.getAddressWallet());
-        view.setViewName("winningBids");
-        return view;
+        Cookie cookie = new Cookie("setUser", setUser);
+        model.addAttribute("cookieValue", cookie);
+        if (cookie.getValue().equals("")) {
+            model.addAttribute("check", false);
+        } else {
+            model.addAttribute("check", true);
+        }
+        ModelAndView modelAndView = new ModelAndView();
+        String _address = u.getAddressWallet().substring(0, 4) + "..." + u.getAddressWallet().substring(u.getAddressWallet().length() - 4, u.getAddressWallet().length());
+        modelAndView.addObject("addressWallet", _address);
+        modelAndView.setViewName("myWallet");
+        return modelAndView;
     }
 }

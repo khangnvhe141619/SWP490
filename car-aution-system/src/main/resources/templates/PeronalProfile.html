@@ -18,6 +18,7 @@
 </head>
 
 <body style="background: url(/assets/img/about-bg1.png);">
+
 <th:block th:include="/header"></th:block>
 <div class="container rounded mt-200 mb-5">
     <div class="row">
@@ -29,7 +30,7 @@
                 <span class="text-black-50" th:text="${email}"></span>
             </div>
             <div class="d-flex flex-column text-center">
-                <a th:href="@{/exchange}" class="font-weight-bold h5 text-black">Exchange Coins</a>
+                <a th:href="@{/wallet}" class="font-weight-bold h5 text-black">My Wallet</a>
                 <a th:href="@{/personProfile}" class="font-weight-bold mt-50 h5 text-info">Personal Profile</a>
                 <a th:href="@{/winningBids}" class="font-weight-bold mt-50 h5 text-black">Winning Bids</a>
                 <a th:href="@{/myFavorite}" class="font-weight-bold mt-50 mb-5 h5 text-black">My Favorite</a>
@@ -93,7 +94,7 @@
                         <div class="col-md-12">
                             <label class="labels">User Name</label>
                             <input type="text" class="form-control" placeholder="Username" th:value="${username}"
-                                   name="userName" required="required">
+                                   name="userName" required="required" disabled>
                         </div>
                         <div class="col-md-12">
                             <label class="labels">Email ID</label>
