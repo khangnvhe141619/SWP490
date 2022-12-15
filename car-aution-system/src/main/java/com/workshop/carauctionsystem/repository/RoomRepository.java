@@ -31,7 +31,7 @@ public interface RoomRepository extends JpaRepository<Room, Integer> {
 
     @Query(nativeQuery = true, value = "SELECT * FROM swp490_cab.room  WHERE current_date() - openDate < 0 or current_time() - startTime < 0")
     public Page<Room> getListRoom(Pageable pageable);
-    @Query(nativeQuery = true, value = "SELECT * FROM swp490_cab.room  WHERE current_date() - openDate >= 0 and current_time() - startTime >= 0 and current_time() - endTime <= 0")
+    @Query(nativeQuery = true, value = "SELECT * FROM swp490_cab.room  WHERE current_date() - openDate = 0 and current_time() - startTime >= 0 and current_time() - endTime <= 0")
     public Page<Room> getListRoomCurrent(Pageable pageable);
 
     @Query(nativeQuery = true,value = "SELECT * FROM room WHERE DATE(openDate) = ?1")
@@ -48,4 +48,8 @@ public interface RoomRepository extends JpaRepository<Room, Integer> {
     public Page<Room> findRoomByHistory(Pageable pageable,String roomName,String current);
     @Query("SELECT r FROM Room as r join r.carId as c join c.modelId as m WHERE c.carName like %?1% and m.modelName like %?2%")
     public Page<Room> searchRoomByNameCar(Pageable pageable,String carName, String model);
+    @Query("SELECT r FROM Room as r join r.carId as c join c.modelId as m WHERE c.carName like %?1% ")
+    public Page<Room> searchRoomByCar(Pageable pageable,String carName);
+    @Query("SELECT r FROM Room as r join r.carId as c join c.modelId as m WHERE m.modelName like %?1%")
+    public Page<Room> searchRoomByModel(Pageable pageable, String model);
 }

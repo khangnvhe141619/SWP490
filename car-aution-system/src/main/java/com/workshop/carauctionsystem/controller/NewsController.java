@@ -34,18 +34,22 @@ public class NewsController {
         Page<News> top5 = newsService1.getTop5(1);
         List<News> top = top5.getContent();
         Page<News> list = newsService1.findAllNewsOrderById(PageRequest.of(page-1, 5, Sort.by(id)), search);
+        modelAndView = new ModelAndView("blog");
         if (!list.isEmpty()) {
 
-            modelAndView = new ModelAndView("blog");
             modelAndView.addObject("top5", top);
             modelAndView.addObject("page", page);
             modelAndView.addObject("total", list.getTotalPages());
-            modelAndView.addObject("list", list);
+
             modelAndView.addObject("search", search);
 
         } else {
-            modelAndView = new ModelAndView("page404");
+
+           modelAndView.addObject("mess","Không tìm thấy:" +search);
+
+
         }
+        modelAndView.addObject("list", list);
         return modelAndView;
     }
 //    @GetMapping("/user/news/{pageNo1}")

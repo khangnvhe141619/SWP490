@@ -18,38 +18,7 @@
 </head>
 
 <body style="background: url(/assets/img/about-bg1.png);">
-<header id="header" class="fixed-top d-flex align-items-center header-transparent bg-black">
-    <div class="container-fluid">
-        <div class="row justify-content-center align-items-center">
-            <div class="col-xl-11 d-flex align-items-center justify-content-between">
-                <h1 class="logo"><a th:href="@{/home}">CAB Auction</a></h1>
-                <nav id="navbar" class="navbar">
-                    <ul>
-                        <li><a class="nav-link scrollto" th:href="@{/home}">Home</a></li>
-                        <li><a class="nav-link scrollto" th:href="@{/home}">Brand</a></li>
-                        <li><a class="nav-link scrollto " th:href="@{/auctionRoom}">Auction Room</a></li>
-                        <li><a class="nav-link scrollto" href="blog.html">News</a></li>
-                        <li><a class="nav-link scrollto" th:href="@{/guideLine}">Guideline</a></li>
-                        <li><a class="nav-link scrollto " th:href="@{/home}">About Us</a></li>
-                    </ul>
-                    <span style="display: flex;flex-direction: row;" th:if="${check} == true">
-                        <th:block th:if="${addressWallet} == null">
-                            <a style="background-color: rgb(66, 180, 66); padding-right: 30px;" id="connectButton"
-                               class="connectwallet">Connect wallet</a>
-                        </th:block>
-                        <a  th:href="@{/personProfile}"><i class="bi bi-person-circle" style="font-size: 30px;"></i><i
-                                th:text="${cookieValue.value}"></i></a>
-                    </span>
-                    <span th:if="${check} == false">
-                        <a th:href="@{/login}"><i class="bi bi-person-circle" style="font-size: 30px;"></i>
-                          <i th:text="${cookieValue.value}"></i></a>
-                    </span>
-                </nav>
-            </div>
-        </div>
-
-    </div>
-</header>
+<th:block th:include="/header"></th:block>
 <div class="container rounded mt-200 mb-5">
     <div class="row">
         <div class="col-md-1"></div>
@@ -64,7 +33,7 @@
                 <a th:href="@{/personProfile}" class="font-weight-bold mt-50 h5 text-black">Personal Profile</a>
                 <a th:href="@{/winningBids}" class="font-weight-bold mt-50 h5 text-black">Winning Bids</a>
                 <a th:href="@{/myFavorite}" class="font-weight-bold mt-50 mb-5 h5 text-info">My Favorite</a>
-                <a th:href="@{/logout}" class="font-weight-bold mt-50 mb-5 h5 text-black">Logout</a>
+                <a th:href="@{/logoutPage}" class="font-weight-bold mt-50 mb-5 h5 text-black">Logout</a>
             </div>
         </div>
         <div class="col-md-7 border-right">
