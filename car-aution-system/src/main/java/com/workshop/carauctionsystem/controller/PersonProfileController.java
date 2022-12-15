@@ -13,7 +13,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
 import javax.servlet.ServletContext;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.io.InputStream;
@@ -35,8 +37,9 @@ public class PersonProfileController {
     @Autowired
     ServletContext application;
 
-    @GetMapping(value = {"/personProfile"})
-    public String getPersonProfile( User user, @CookieValue(value = "setUserId") int setUserId, Model model){
+    @GetMapping("/personProfile")
+    public ModelAndView getPersonProfile(@CookieValue(value = "setUserId") int setUserId,
+                                          @CookieValue(value = "setUser") String setUser,Model model){
         User u=  service.findUserById(setUserId);
         if(u != null){
             String name = u.getFullName();
@@ -49,22 +52,32 @@ public class PersonProfileController {
             model.addAttribute("username", username);
             model.addAttribute("INFOR", u);
         }
-        return "PeronalProfile";
+        Cookie cookie = new Cookie("setUser", setUser);
+        model.addAttribute("cookieValue", cookie);
+        if (cookie.getValue().equals("")) {
+            model.addAttribute("check", false);
+        } else {
+            model.addAttribute("check", true);
+        }
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("addressWallet", u.getAddressWallet());
+        modelAndView.setViewName("PeronalProfile");
+        return modelAndView;
     }
 
     @PostMapping(value = "/personProfile/update")
     public ModelAndView updatePerson(@ModelAttribute(name = "setUser") User user,
                                      @CookieValue(value = "setUserId") int setUserId,
-                                     @RequestParam("photo") MultipartFile photo, Model model){
+                                     @RequestParam("photo") MultipartFile photo, Model model) {
         String userName = user.getUserName();
         String fullName = user.getFullName();
         String phone = user.getPhone();
         String email = user.getEmail();
-        User u=  service.findUserById(setUserId);
+        User u = service.findUserById(setUserId);
         Path path = Paths.get("src/main/resources/static/assets/img/avatar");
         try {
             InputStream inputStream = photo.getInputStream();
-            if(!photo.isEmpty()){
+            if (!photo.isEmpty()) {
                 Files.copy(inputStream, path.resolve(photo.getOriginalFilename()),
                         StandardCopyOption.REPLACE_EXISTING);
                 u.setAvatar(photo.getOriginalFilename().toLowerCase());
@@ -82,10 +95,10 @@ public class PersonProfileController {
     @PostMapping(value = "/personProfile/changePassword")
     public ModelAndView changePassword(@RequestParam(name = "currentPassword", required = false) String password,
                                        @RequestParam(name = "newPassword", required = false) String newPass,
-                                       @CookieValue(value = "setUserId") int setUserId, Model model){
-        User u =  service.findUserById(setUserId);
+                                       @CookieValue(value = "setUserId") int setUserId, Model model) {
+        User u = service.findUserById(setUserId);
         boolean checkPass = BCrypt.checkpw(password, u.getPassword());
-        if(u != null && checkPass){
+        if (u != null && checkPass) {
             service.changePassword(setUserId, newPass);
         }
         ModelAndView view = new ModelAndView();
@@ -100,11 +113,23 @@ public class PersonProfileController {
     @PostMapping("/passExist")
     public ResponseEntity<ResponseObject> isPassExisted(@CookieValue(value = "setUserId") int setUserId,
                                                         @RequestParam("currentPassword") String pass) {
-        User u =  service.findUserById(setUserId);
+        User u = service.findUserById(setUserId);
         boolean checkPass = BCrypt.checkpw(pass, u.getPassword());
         if (u != null && checkPass) {
             return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject("ok", "Valid password!", null));
         }
         return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject("no", "Invalid password!", null));
     }
+
+    @PostMapping("/saveWallet")
+    public ResponseEntity<ResponseObject> saveWalleet(@CookieValue(value = "setUserId") int setUserId,
+                                                      @RequestParam("address") String address) {
+        User u1 = service.findUserById(setUserId);
+        boolean _suc = service.saveWallet(u1, address);
+        if (u1 != null && _suc) {
+            return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject("ok", "Succeed!", null));
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject("no", "Invalid!", null));
+    }
+
 }

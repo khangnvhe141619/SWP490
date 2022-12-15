@@ -59,6 +59,11 @@ public class RegistrationController {
         return "page404";
     }
 
+    @GetMapping("/403")
+    public String show403(final HttpServletRequest request) {
+        return "403Page";
+    }
+
     @GetMapping("/successRegister")
     public String showSuccessRegister(final HttpServletRequest request) {
         return "successRegister";
@@ -72,7 +77,6 @@ public class RegistrationController {
             userDTO.setAvatar("user.png");
             userDTO.setPhone("099999999");
             userDTO.setFullName("User" + generator.nextInt(100));
-            userDTO.setAddressWallet("empty");
             User registeredUser = userService.registerNewUserAccount(userDTO);
 
             String appUrl = getAppUrl(request);

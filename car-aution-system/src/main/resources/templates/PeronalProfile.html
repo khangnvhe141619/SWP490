@@ -18,30 +18,8 @@
 </head>
 
 <body style="background: url(/assets/img/about-bg1.png);">
-<header id="header" class="fixed-top d-flex align-items-center header-transparent bg-black">
-    <div class="container-fluid">
-        <div class="row justify-content-center align-items-center">
-            <div class="col-xl-11 d-flex align-items-center justify-content-between">
-                <h1 class="logo"><a th:href="@{/home}">CAB Auction</a></h1>
-                <nav id="navbar" class="navbar">
-                    <ul>
-                        <li><a class="nav-link scrollto active" th:href="@{/home}">Home</a></li>
-                        <li><a class="nav-link scrollto" th:href="@{/home}">Brand</a></li>
-                        <li><a class="nav-link scrollto " th:href="@{/home}">Auction Room</a></li>
-                        <li><a class="nav-link scrollto" href="blog.html">News</a></li>
-                        <li><a class="nav-link scrollto" th:href="@{/guideLine}">Guideline</a></li>
-                        <li><a class="nav-link scrollto " th:href="@{/home}">About Us</a></li>
-                    </ul>
-                    <a href="connectWallet.html" style="background-color: rgb(66, 180, 66); padding-right: 30px;"
-                       class="connectwallet">Connect wallet</a>
-                    <a th:href="@{/personProfile}"><i class="bi bi-person-circle" style="font-size: 30px;"></i><i
-                            th:text="${username}"></i></a>
-                </nav>
-            </div>
-        </div>
 
-    </div>
-</header>
+<th:block th:include="/header"></th:block>
 <div class="container rounded mt-200 mb-5">
     <div class="row">
         <div class="col-md-1"></div>
@@ -52,11 +30,11 @@
                 <span class="text-black-50" th:text="${email}"></span>
             </div>
             <div class="d-flex flex-column text-center">
-                <a th:href="@{/myActive.html}" class="font-weight-bold h5 text-black">My Active</a>
+                <a th:href="@{/wallet}" class="font-weight-bold h5 text-black">My Wallet</a>
                 <a th:href="@{/personProfile}" class="font-weight-bold mt-50 h5 text-info">Personal Profile</a>
                 <a th:href="@{/winningBids}" class="font-weight-bold mt-50 h5 text-black">Winning Bids</a>
                 <a th:href="@{/myFavorite}" class="font-weight-bold mt-50 mb-5 h5 text-black">My Favorite</a>
-                <a th:href="@{/logout}" class="font-weight-bold mt-50 mb-5 h5 text-black">Logout</a>
+                <a th:href="@{/logoutPage}" class="font-weight-bold mt-50 mb-5 h5 text-black">Logout</a>
             </div>
         </div>
         <div class="col-md-7 border-right personProfile">
@@ -116,7 +94,7 @@
                         <div class="col-md-12">
                             <label class="labels">User Name</label>
                             <input type="text" class="form-control" placeholder="Username" th:value="${username}"
-                                   name="userName" required="required">
+                                   name="userName" required="required" disabled>
                         </div>
                         <div class="col-md-12">
                             <label class="labels">Email ID</label>
@@ -182,6 +160,7 @@
 <script src="assets/js/personalProfile.js"></script>
 <script th:src="@{assets/js/pwstrength.js}"></script>
 <script th:inline="javascript">
+    var serverContext = [[@{/}]];
     $(document).ready(function () {
         $(":password").keyup(function(){
             if($("#newPass").val() != $("#rePass").val()){
@@ -208,11 +187,9 @@
     function isPassAjax() {
         var passU = $("#currentPassword").val();
         var idU = $("#idU").val();
-        console.log(passU);
-        console.log(idU);
         $.ajax({
             type: "POST",
-            url: "http://localhost:8080/passExist?setUserId=" + idU + "&currentPassword=" + passU,
+            url: serverContext + "passExist?setUserId=" + idU + "&currentPassword=" + passU,
             data: 'pass:' + passU,
             contentType: "application/json; charset=utf-8",
             dataType: "json",

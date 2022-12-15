@@ -10,6 +10,7 @@ import com.workshop.carauctionsystem.repository.RoomRepository;
 import com.workshop.carauctionsystem.service.BrandService;
 import com.workshop.carauctionsystem.service.CarService;
 import com.workshop.carauctionsystem.service.RoomService;
+import com.workshop.carauctionsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,18 +30,23 @@ public class HomeController {
     @Autowired
     BrandService brandService;
 
+    @Autowired
+    UserService userService;
     @GetMapping("/home")
-    public ModelAndView redirectHome(@CookieValue(value = "setUser", defaultValue = "") String setUser, Model model){
+    public ModelAndView redirectHome(@CookieValue(value = "setUser", defaultValue = "") String setUser,
+                                     Model model){
+        ModelAndView view = new ModelAndView();
         Cookie cookie = new Cookie("setUser", setUser);
         model.addAttribute("cookieValue", cookie);
         if(cookie.getValue().equals("")){
             model.addAttribute("check", false);
         } else {
+            User u =  userService.findByUsername(setUser);
+            view.addObject("addressWallet", u.getAddressWallet());
             model.addAttribute("check", true);
         }
         List<Brand> brandList = brandService.getAllBrand();
         model.addAttribute("brandList", brandList);
-        ModelAndView view = new ModelAndView();
         view.setViewName("Home");
         return view;
     }

@@ -22,42 +22,14 @@
 </head>
 
 <body>
-<header id="header" class="fixed-top d-flex align-items-center header-transparent">
-    <div class="container-fluid">
-        <div class="row justify-content-center align-items-center">
-            <div class="col-xl-11 d-flex align-items-center justify-content-between">
-                <h1 class="logo"><a href="home.html">CAB Auction</a></h1>
-                <nav id="navbar" class="navbar">
-                    <ul>
-                        <li><a class="nav-link scrollto" th:href="@{/home}">Home</a></li>
-                        <li><a class="nav-link scrollto" th:href="@{/home}">Brand</a></li>
-                        <li><a class="nav-link scrollto active" th:href="@{/auctionRoom}">Auction Room</a></li>
-                        <li><a class="nav-link scrollto" href="blog.html">News</a></li>
-                        <li><a class="nav-link scrollto" th:href="@{/guideLine}">Guideline</a></li>
-                        <li><a class="nav-link scrollto " th:href="@{/home}">About Us</a></li>
-                    </ul>
-                    <a href="connectWallet.html" style="background-color: rgb(66, 180, 66); padding-right: 30px;"
-                       class="connectwallet">Connect wallet</a>
-                    <span th:if="${check} == true">
-                            <a th:href="@{/personProfile}"><i class="bi bi-person-circle"
-                                                              style="font-size: 30px;"></i><i
-                                    th:text="${cookieValue.value}"></i></a>
-                        </span>
-                    <span th:if="${check} == false">
-                            <a th:href="@{/login}"><i class="bi bi-person-circle" style="font-size: 30px;"></i><i
-                                    th:text="${cookieValue.value}"></i></a>
-                        </span>
-                </nav>
-            </div>
-        </div>
-    </div>
-</header>
+<th:block th:include="/header"></th:block>
 <div class="container">
     <div class="row">
         <div class="col-md-1"></div>
         <main id="main" class="mt-5 col-md-10">
             <!------------------------------->
             <section class="portfolio section-bg" id="portfolio">
+
                 <div class="container" data-aos="fade-up">
                     <header class="section-header">
                         <h3 class="section-title">Auction Room</h3>
@@ -74,6 +46,7 @@
                             </div>
                         </div>
                     </div>
+                    <form th:action="@{/auctionRoom}" method="get">
                     <div class="contant">
                         <div class="container">
                             <div class="row">
@@ -89,23 +62,27 @@
                                 </div>
                                 <div class="col-md-4">
                                     <select class="form-select addModel" aria-label="Default select example"
-                                            id="modelCar">
+                                            id="modelCar" name="model" th:value="${modelId}">
                                         <option value="" selected>Model</option>
                                     </select>
                                 </div>
                                 <div class="col-md-4">
+
                                     <div class="input-group rounded">
-                                        <input type="search" class="form-control rounded-left" placeholder="Search"
-                                               aria-label="Search" aria-describedby="search-addon"/>
-                                        <span class="input-group-text" id="search-addon">
+                                        <input type="search"  class="form-control rounded-left" placeholder="Search"
+                                               aria-label="Search" aria-describedby="search-addon" th:value="${param.nameCar}" name="carName"/>
+                                        <button style="width: 40px" class="input-group-text" id="search-addon">
                                         <i class="bi bi-search"></i>
-                                    </span>
+                                        </button>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
                     </div>
+                    </form>
                 </div>
+                <p style="color: red" th:text="${mess}"></p>
             </section>
 
             <div id="Home" class="tabcontent">
@@ -163,6 +140,7 @@
                             </div>
                         </section>
                         <!-- Modal -->
+
                         <div th:id="'bd-example-modal-lg'+*{ls.carId}" class="modal fade" tabindex="-1" role="dialog"
                              aria-labelledby="myLargeModalLabel" aria-hidden="true" style="width: 100%">
                             <div class="modal-dialog modal-lg">
@@ -247,25 +225,29 @@
                         <!--End-->
                     </div>
                 </div>
+                <div th:if="${!list.isEmpty()}">
                 <div style="margin: 20px 0 20px 0;">
                     <nav aria-label="Page navigation example">
                         <ul class="pagination filter-future paging align-items-center justify-content-center">
 
                             <li class="page-item"><a class="page-link"
-                                                     th:href="@{'/lsautionRoom/'+${pageNo -1 ==0? 1 : pageNo -1}}">Previous</a>
+
+                                th:href="@{'/auctionRoom?page='+${page -1 ==0? 1 : page -1}+'&model='+${modelId}+'&nameCar='+${nameCar}}">Previous</a>
                             </li>
                             <span th:each="i:${#numbers.sequence(1,total)}">
-                                <li class="page-item"><a th:class="${pageNo == i ? 'page-link active' :'page-link' } "
-                                                         th:href="@{'/lsautionRoom/'+${i}}">[[${i}]]</a></li>
+                                <li class="page-item"><a th:class="${page == i ? 'page-link active' :'page-link' } "
+                                                         th:href="@{/auctionRoom(page=${i},model=${modelId},nameCar=${nameCar})}">[[${i}]]</a></li>
                             </span>
                             <li class="page-item"><a class="page-link"
-                                                     th:href="@{'/lsautionRoom/'+${pageNo +1 > total? pageNo : pageNo +1}}">Next</a>
+                                th:href="@{'/auctionRoom?page='+${page +1 > total? page : page +1}+'&model='+${modelId}+'&nameCar='+${nameCar}}">Next</a>
                             </li>
                             </span>
                         </ul>
                     </nav>
                 </div>
+                </div>
             </div>
+
 
             <div id="News" class="tabcontent">
                 <div class="row portfolio-container portfolio">
@@ -541,7 +523,7 @@
                 var result = JSON.parse(result);
                 var s = '';
                 for (var i = 0; i < result.length; i++) {
-                    s += '<option value="' + result[i].id + '">' + result[i].modelName + '</option>';
+                    s += '<option value="' + result[i].modelName + '">' + result[i].modelName + '</option>';
 
                 }
                 $('#modelCar').empty();
@@ -549,8 +531,8 @@
             }
         });
     }
-
 </script>
+
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>
@@ -568,6 +550,7 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script th:src="@{/assets/js/main.js}"></script>
 <script th:src="@{/assets/js/CreateRoom.js}"></script>
+<script type="module" src="/assets/js/connectWallet.js"></script>
 </body>
 
 </html>

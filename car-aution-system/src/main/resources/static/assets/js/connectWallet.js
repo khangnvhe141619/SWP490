@@ -1,8 +1,13 @@
 const connectButton = document.getElementById("connectButton");
-const walletID = document.getElementById("walletID");
-const reloadButton = document.getElementById("reloadButton");
 const installAlert = document.getElementById("installAlert");
 const mobileDeviceWarning = document.getElementById("mobileDeviceWarning");
+
+let output = [];
+document.cookie.split(/\s*;\s*/).forEach((pair) => {
+    var name = decodeURIComponent(pair.substring(0, pair.indexOf('=')));
+    var value = decodeURIComponent(pair.substring(pair.indexOf('=') + 1));
+    output.push({key: name, val: value});
+});
 
 const startLoading = () => {
     connectButton.classList.add("loadingButton");
@@ -38,12 +43,13 @@ connectButton.addEventListener("click", () => {
         startLoading();
 
         ethereum
-            .request({ method: "eth_requestAccounts" })
+            .request({method: "eth_requestAccounts"})
             .then((accounts) => {
                 const account = accounts[0];
-
-                walletID.innerHTML = `Wallet connected: <span>${account}</span>`;
-
+                let u = output[1];
+                var valID = "val";
+                let uID = u[valID];
+                saveWallet(uID, account)
                 stopLoading();
             })
             .catch((error) => {
@@ -62,6 +68,28 @@ connectButton.addEventListener("click", () => {
     }
 });
 
-reloadButton.addEventListener("click", () => {
-    window.location.reload();
-});
+function getContextPath() {
+    return window.location.pathname.substring(0, window.location.pathname.indexOf("/", 2));
+}
+
+function saveWallet(id, address) {
+    var serverContext = getContextPath();
+    fetch(serverContext + "saveWallet?setUserId=" + id + "&address=" + address, {
+        method: 'POST',
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+        }
+    })
+        .then(response => {
+            //handle response
+            connectButton.hidden = true;
+            alert("Connect successfully!")
+        })
+        .then(data => {
+            //handle data
+            console.log(data);
+        })
+        .catch(error => {
+            alert("Unable to connect!")
+        });
+}

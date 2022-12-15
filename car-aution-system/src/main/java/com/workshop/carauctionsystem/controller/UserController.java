@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -18,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
-@RestController
+@Controller
 public class UserController {
 
     @ModelAttribute("user")
@@ -29,6 +30,13 @@ public class UserController {
     @Autowired
     UserService service;
 
+    @GetMapping("/default")
+    public String successPage(HttpServletRequest request) {
+        if(request.isUserInRole("ROLE_Admin"))
+            return "redirect:/admin/home";
+        return "redirect:/home";
+    }
+
     @Autowired
     UserRepository userRepository;
     @GetMapping("/login")
@@ -38,14 +46,16 @@ public class UserController {
         return view;
     }
 
-    @GetMapping(value = {"/logout"})
+    @GetMapping("/logoutPage")
     public ModelAndView getLogout(HttpServletRequest request, HttpServletResponse response){
-        Cookie cookie = new Cookie("setUser", "");
-        Cookie cookie2 = new Cookie("setUserId", "");
+        Cookie cookie = new Cookie("setUser", null);
+        Cookie cookie2 = new Cookie("setUserId", null);
         cookie.setMaxAge(0);
         cookie2.setMaxAge(0);
         response.addCookie(cookie);
         response.addCookie(cookie2);
+        HttpSession session = request.getSession();
+        session.invalidate();
         return redirectLogin();
     }
 
@@ -69,7 +79,7 @@ public class UserController {
             Cookie cookie = new Cookie("setUser", username);
             String setUserId = String.valueOf(u.getId());
             Cookie cookie2 = new Cookie("setUserId", setUserId);
-            cookie.setMaxAge(24 * 60 * 60);
+            cookie.setMaxAge(1 * 60 * 60);
             response.addCookie(cookie);
             response.addCookie(cookie2);
             session.setAttribute("username", username);

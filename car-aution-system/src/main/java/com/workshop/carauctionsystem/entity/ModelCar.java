@@ -31,5 +31,4 @@ public class ModelCar {
 
     @Column(name = "[status]")
     private int status;
-
 }

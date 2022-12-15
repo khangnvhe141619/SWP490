@@ -12,6 +12,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -35,6 +36,7 @@ public class AdminHomeController {
     public ModelAndView showListCar(@RequestParam(defaultValue = "0") int page,
                                     @RequestParam(defaultValue = "id") String id,
                                     @RequestParam(defaultValue = "") String search,
+                                    @CookieValue(value = "setUser", defaultValue = "") String setUser,
                                     Model model){
         ModelAndView view = null;
         model.addAttribute("cars", carService.findAllDTO());
@@ -46,6 +48,7 @@ public class AdminHomeController {
         Page<Room> list1 = roomService.findRoomByPending(PageRequest.of(page, 5, Sort.by(id)), search,date);
         Page<Room> list2 = roomService.findRoomByHistory(PageRequest.of(page, 5, Sort.by(id)), search,date);
         // current
+        model.addAttribute("userName", setUser);
         view = new ModelAndView("admin/index");
         if (!list.isEmpty()) {
             view.addObject("rooms", list);

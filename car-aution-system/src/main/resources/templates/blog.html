@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -38,7 +38,8 @@
                         <li><a class="nav-link scrollto" href="guideline.html">Guideline</a></li>
                         <li><a class="nav-link scrollto " href="home.html">About Us</a></li>
                     </ul>
-                    <a href="connectWallet.html" style="background-color: rgb(66, 180, 66); padding-right: 30px;" class="connectwallet">Connect wallet</a>
+                    <a href="connectWallet.html" style="background-color: rgb(66, 180, 66); padding-right: 30px;"
+                       class="connectwallet">Connect wallet</a>
                     <a href="PeronalProfile.html"><i class="bi bi-person-circle" style="font-size: 30px;"></i></a>
                 </nav>
             </div>
@@ -46,49 +47,61 @@
 
     </div>
 </header>
+
 <div class="container mt-200 mb-5">
+
     <div class="row">
-        <div class="col-md-1"></div>
         <div class="col-md-7">
             <h4>News</h4>
-            <div class="row mt-2 nameNews" th:each="ls:${list}">
-                <div class="col-md-5" >
-                    <img th:src="${ls.getImg()}" class="form-control" style="border: none;">
-                </div>
-                <div class="col-md-7">
-                    <a th:href="@{'/user/details/'+ ${ls.getId()}}" class="pe-auto"><h5 class="card-title" th:text="${ls.getTitle()}"></h5></a>
-                    <span th:text="${ls.getShortDescribe()}"></span>
-                    </a> <a href="#" class="py-3"> <p th:text="${ls.getAuthor()}"></p> - <p th:text="${ls.getCreateAt()}"></p></a>
+            <p style="color: red" th:text="${mess}"></p>
+                <div class="row mt-2 nameNews" th:each="ls:${list}">
+                    <div class="col-md-5">
+                        <img th:src="${ls.getImg()}" class="form-control" style="border: none;">
+                    </div>
+                    <div class="col-md-7">
+                        <a th:href="@{'/user/details/'+ ${ls.getId()}}" class="pe-auto"><h5 class="card-title"
+                                                                                            th:text="${ls.getTitle()}"></h5>
+                        </a>
+                        <span th:text="${ls.getShortDescribe()}"></span>
+                        </a> <a href="#" class="py-3"><p th:text="${ls.getAuthor()}"></p> - <p
+                            th:text="${ls.getCreateAt()}"></p></a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-3" >
-            <h4>Latest news</h4>
-            <form th:action="@{/user/news}" method="get" role="search" class="sr-input-func">
-
+            <div class="col-md-3">
+                <h4>Latest news</h4>
+                <form th:action="@{/user/news}" method="get" role="search" class="sr-input-func">
 
                     <input type="text" name="search" th:value="${param.search}" placeholder="Type here...">
                     <button>oke</button>
 
+                </form>
+                <div class="right-content flex-column d-flex" th:each="top:${top5}">
+                    <a class="pe-auto" th:href="@{'/user/details/'+ ${top.getId()}}"><p th:text="${top.getTitle()}"></p>
+                    </a>
 
-            </form>
-            <div class="right-content flex-column d-flex" th:each="top:${top5}">
-                <a class="pe-auto" th:href="@{'/user/details/'+ ${top.getId()}}"><p th:text="${top.getTitle()}"></p></a>
-
+                </div>
             </div>
         </div>
     </div>
-</div>
-<nav aria-label="Page navigation example">
-    <ul class="pagination paging align-items-center justify-content-center">
-        <li class="page-item"><a class="page-link" th:href="@{'/user/news?page='+${page -1 ==0? 1 : page -1}+'&search='+${search}}">Previous</a></li>
-        <span th:each="i:${#numbers.sequence(1,total)}">
-          <li class="page-item"><a th:class="${page == i ? 'page-link active' :'page-link' } "  th:href="@{/user/news(page=${i},search=${search})}">[[${i}]]</a></li>
+
+<div th:if="${!list.isEmpty()}">
+    <nav aria-label="Page navigation example">
+        <ul class="pagination paging align-items-center justify-content-center">
+            <li class="page-item"><a class="page-link"
+                                     th:href="@{'/user/news?page='+${page -1 ==0? 1 : page -1}+'&search='+${search}}">Previous</a>
+            </li>
+            <span th:each="i:${#numbers.sequence(1,total)}">
+          <li class="page-item"><a th:class="${page == i ? 'page-link active' :'page-link' } "
+                                   th:href="@{/user/news(page=${i},search=${search})}">[[${i}]]</a></li>
           </span>
-        <li class="page-item"><a class="page-link" th:href="@{'/user/news?page='+${page +1 > total? total : page +1}+'&search='+${search}}">Next</a></li>
-        </span>
-    </ul>
-</nav>
+            <li class="page-item"><a class="page-link"
+                                     th:href="@{'/user/news?page='+${page +1 > total? total : page +1}+'&search='+${search}}">Next</a>
+            </li>
+            </span>
+        </ul>
+    </nav>
+</div>
 <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
         class="bi bi-arrow-up-short"></i></a>
 <footer id="footer">

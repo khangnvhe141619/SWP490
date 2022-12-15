@@ -47,6 +47,7 @@ public class UserServiceImpl implements UserService {
     public User login(String username) {
         return userRepository.findUserByUserName(username);
     }
+
     @Override
     public User findByUsername(String username) {
         return userRepository.findUserByUserName(username);
@@ -160,7 +161,7 @@ public class UserServiceImpl implements UserService {
     public Page<User> ListUserBan(Pageable pageable, String name) {
         if (name != null) {
             return userRepository.ListUserBan(pageable, name);
-        }else {
+        } else {
             return userRepository.ListUserBan(pageable);
         }
     }
@@ -169,7 +170,7 @@ public class UserServiceImpl implements UserService {
     public Page<User> ListUserUnBan(Pageable pageable, String name) {
         if (name != null) {
             return userRepository.ListUserUnban(pageable, name);
-        }else {
+        } else {
             return userRepository.ListUserUnban(pageable);
         }
     }
@@ -182,7 +183,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void BanUser(Long id) throws NotFoundException{
+    public void BanUser(Long id) throws NotFoundException {
         userRepository.BanUser(id);
     }
 
@@ -194,5 +195,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> getRoleByAdminAuction() {
         return userRepository.getRoleByAdminAuction();
+    }
+
+    @Override
+    public boolean saveWallet(User user, String address) {
+        user.setAddressWallet(address);
+        return userRepository.save(user) != null ? true : false;
     }
 }
