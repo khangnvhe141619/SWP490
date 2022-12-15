@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -29,7 +30,7 @@ public class WinningBidsController {
     public ModelAndView winningBids(@CookieValue(value = "setUserId") int userId, Model model){
         List<RoomDetailPlayer> roomDetailPlayerList = roomDetailPlayerService.getAllByUserIdAndWinner(userId, 1);
         model.addAttribute("roomDetailPlayerList", roomDetailPlayerList);
-        User u=  service.findUserById(userId);
+        User u =  service.findUserById(userId);
         if(u != null){
             String name = u.getFullName();
             String email = u.getEmail();
@@ -42,6 +43,7 @@ public class WinningBidsController {
             model.addAttribute("INFOR", u);
         }
         ModelAndView view = new ModelAndView();
+        view.addObject("addressWallet", u.getAddressWallet());
         view.setViewName("winningBids");
         return view;
     }

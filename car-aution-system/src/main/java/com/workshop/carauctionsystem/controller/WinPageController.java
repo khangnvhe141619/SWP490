@@ -9,11 +9,10 @@ import com.workshop.carauctionsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -29,7 +28,10 @@ public class WinPageController {
     RoomService roomService;
 
     @GetMapping("/winPage")
-    public ModelAndView winPage(Model model, @RequestParam("roomId") int roomId){
+    public ModelAndView winPage(@RequestParam("roomId") int roomId,
+                                @CookieValue(value = "setUserId") int userId,
+                                @CookieValue(value = "setUser", defaultValue = "") String setUser,
+                                Model model){
         List<RoomDetailPlayer> roomDetailPlayerList = roomDetailPlayerService.getAllBidByRoomId(roomId);
         double sum = 0;
         double finalResult;
@@ -68,6 +70,16 @@ public class WinPageController {
         model.addAttribute("room", room);
 
         ModelAndView view = new ModelAndView();
+        User u=  userService.findUserById(userId);
+        view.addObject("addressWallet", u.getAddressWallet());
+        Cookie cookie = new Cookie("setUser", setUser);
+        model.addAttribute("cookieValue", cookie);
+        if(cookie.getValue().equals("")){
+            model.addAttribute("check", false);
+        } else {
+            view.addObject("addressWallet", u.getAddressWallet());
+            model.addAttribute("check", true);
+        }
         view.setViewName("winner");
         return view;
     }

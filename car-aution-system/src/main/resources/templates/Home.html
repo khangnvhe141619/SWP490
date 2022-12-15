@@ -35,7 +35,7 @@
                         <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
                         <li><a class="nav-link scrollto" href="#clients">Brand</a></li>
                         <li><a class="nav-link scrollto" th:href="@{/auctionRoom}">Auction Room</a></li>
-                        <li><a class="nav-link scrollto" href="blog.html">News</a></li>
+                        <li><a class="nav-link scrollto" th:href="@{/news}">News</a></li>
                         <li><a class="nav-link scrollto" th:href="@{/guideLine}">Guideline</a></li>
                         <li><a class="nav-link scrollto " href="#about">About Us</a></li>
                     </ul>
@@ -50,7 +50,7 @@
                     <span th:if="${check} == false">
                         <a th:href="@{/login}"><i class="bi bi-person-circle" style="font-size: 30px;"></i>
                           <i th:text="${cookieValue.value}"></i></a>
-          </span>
+                    </span>
                 </nav>
             </div>
         </div>

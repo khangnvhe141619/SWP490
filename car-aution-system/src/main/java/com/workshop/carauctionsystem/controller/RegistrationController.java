@@ -59,6 +59,11 @@ public class RegistrationController {
         return "page404";
     }
 
+    @GetMapping("/403")
+    public String show403(final HttpServletRequest request) {
+        return "403Page";
+    }
+
     @GetMapping("/successRegister")
     public String showSuccessRegister(final HttpServletRequest request) {
         return "successRegister";

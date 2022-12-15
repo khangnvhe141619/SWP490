@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -23,7 +24,7 @@ import java.util.List;
 import com.google.gson.Gson;
 import java.util.concurrent.TimeUnit;
 
-@RestController
+@Controller
 public class RoomController {
     @Autowired
     RoomService roomService;

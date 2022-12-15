@@ -23,7 +23,6 @@ public class ModelCar {
     private Brand brandId;
 
     @Column(name = "modelname")
-    @Pattern(regexp = "[a-zA-Z0-9]+", message = "Name not special characters")
     private String modelName;
 
     @OneToOne

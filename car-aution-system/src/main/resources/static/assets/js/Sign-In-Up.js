@@ -14,7 +14,7 @@ function hideLoading (){
     iconLoading.style.display = "none";
 }
 function getHome (){
-    window.location.assign("./home")
+    document.getElementById("btnSuccess").click();
 }
 
 function loading(){

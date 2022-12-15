@@ -8,7 +8,7 @@
           crossorigin="anonymous"
   ></script>
   <link rel="stylesheet" th:href="@{assets/css/Sign-In-Up.css}" />
-  <script th:src="@{assets/js/pwstrength.js}"></script>
+
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <title>Sign in & Sign up</title>
@@ -20,13 +20,13 @@
 <div class="container">
   <div class="forms-container">
     <div class="signin-signup">
-      <form class="sign-in-form" id="signin">
+      <form class="sign-in-form" id="signin" name='f' th:action="@{/j_spring_security_check}" method='POST'>
         <h2 class="title">Sign in</h2>
         <p th:if="${invalidCredentials}" style="color: red">Username or password is wrong</p>
         <p th:if="${checkUserBan}" style="color: red">Account has been banned or not activated !!!</p>
         <div class="input-field">
           <i class="fas fa-user"></i>
-          <input type="text" placeholder="Username" name="userName" id="username"/>
+          <input type="text" placeholder="Username" name="username" id="username"/>
         </div>
         <div class="input-field">
           <i class="fas fa-lock"></i>
@@ -38,6 +38,7 @@
           <label for="cb" class="remember">Remember Me</label>
           <a id="forgot-btn">Forgot Password</a>
         </div>
+        <button id="btnSuccess" type="submit" style="display: none">OKE</button>
         <input type="button" onclick="onSubmitForm();" value="Login" class="btn solid" />
         <p class="social-text">Connect with us</p>
         <div class="social-media">
@@ -138,8 +139,10 @@
       $(":password").keyup(function(){
         if($("#passwordR").val() != $("#repasswordR").val()){
           $("#globalError").show().html("Password does not match!");
+          disableBtn()
         }else{
           $("#globalError").hide().html("");
+          ableBtn()
         }
       });
 
@@ -229,6 +232,6 @@
       });
     }
 </script>
-
+<script th:src="@{assets/js/pwstrength.js}"></script>
 </body>
 </html>

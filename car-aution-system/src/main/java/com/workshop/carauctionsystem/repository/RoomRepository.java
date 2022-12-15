@@ -25,13 +25,13 @@ public interface RoomRepository extends JpaRepository<Room, Integer> {
     public Page<Room> findAllByName(Pageable pageable, String roomName);
 
     @Modifying
-    @Query(nativeQuery = true, value = "update room set roomname = ?1, starttime = ?2,endtime = ?3,updatedat = ?4, ticketprice = ?5, typeroomid = ?6, createdby = ?7, imgpath = ?8 where id = ?9")
+    @Query(nativeQuery = true, value = "update room set roomname = ?1, starttime = ?2,endtime = ?3,updatedat = ?4, ticketNumber = ?5,ticketprice = ?6, typeroomid = ?7, createdby = ?8, imgpath = ?9 where id = ?10")
     @Transactional
-    public void update(String roomName, String startTime, String endTime, Timestamp updatedAt, int ticketPrice, int typeRoom,int createdBy,String img,int id);
+    public void update(String roomName, String startTime, String endTime, Timestamp updatedAt, int ticketNumber,int ticketPrice, int typeRoom,int createdBy,String img,int id);
 
     @Query(nativeQuery = true, value = "SELECT * FROM swp490_cab.room  WHERE current_date() - openDate < 0 or current_time() - startTime < 0")
     public Page<Room> getListRoom(Pageable pageable);
-    @Query(nativeQuery = true, value = "SELECT * FROM swp490_cab.room  WHERE current_date() - openDate >= 0 and current_time() - startTime >= 0 and current_time() - endTime <= 0")
+    @Query(nativeQuery = true, value = "SELECT * FROM swp490_cab.room  WHERE current_date() - openDate = 0 and current_time() - startTime >= 0 and current_time() - endTime <= 0")
     public Page<Room> getListRoomCurrent(Pageable pageable);
 
     @Query(nativeQuery = true,value = "SELECT * FROM room WHERE DATE(openDate) = ?1")
