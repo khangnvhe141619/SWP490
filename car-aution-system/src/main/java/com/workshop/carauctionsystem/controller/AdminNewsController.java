@@ -30,9 +30,11 @@ public class AdminNewsController {
     public ModelAndView showList(@RequestParam(defaultValue = "0") int page,
                                  @RequestParam(defaultValue = "id") String id,
                                  @RequestParam(defaultValue = "") String search,
+                                 @CookieValue(value = "setUser", defaultValue = "") String setUser,
                                  Model model) {
         ModelAndView modelAndView = null;
         model.addAttribute("newsModel", new NewsModel());
+        model.addAttribute("userName", setUser);
         Page<News> list = newsService.findAllNewsOrderById(PageRequest.of(page, 5, Sort.by(id)), search);
         modelAndView = new ModelAndView("admin/listNews");
         if (!list.isEmpty()) {
@@ -71,7 +73,7 @@ public class AdminNewsController {
             news.setDescribe2(newsModel.getDescribe2());
             news.setDescribe3(newsModel.getDescribe3());
             news.setDescribe4(newsModel.getDescribe4());
-            news.setImg("/hoang/" + nameFile);
+            news.setImg("/assets/hoang/" + nameFile);
             newsService.saveNews(news);
             ra.addFlashAttribute("success", "The news has been saved successfully");
             return "redirect:/admin/news";
@@ -100,7 +102,7 @@ public class AdminNewsController {
                 return "redirect:/admin/news";
             }
             FileCopyUtils.copy(upImg.getBytes(), new File("src\\main\\resources\\static\\assets\\hoang/" + nameFile));
-            news.setImg("/hoang/" + nameFile);
+            news.setImg("/assets/hoang/" + nameFile);
             newsService.saveNews(news);
         } catch (IOException e) {
             news.setImg(newsId.getImg());

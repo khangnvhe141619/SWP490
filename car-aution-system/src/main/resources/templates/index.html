@@ -26,11 +26,11 @@
 <div class="content">
     <div class="w3-content" style="margin-top: 80px">
         <div th:each="imageList:${imageList}" style="margin: 0px 50px 0px 50px;">
-            <img class="mySlides" th:src="@{'/'+${imageList.imgPath}}" style="width: 100%; margin-top: 200px">
+            <img class="mySlides" th:src="@{${imageList.imgPath}}" style="width: 100%; margin-top: 200px">
         </div>
         <div class="w3-row-padding w3-section">
             <div th:each="imageList:${imageList}" class="w3-col s2">
-                <img class="demo w3-opacity w3-hover-opacity-off " th:src="@{'/'+${imageList.imgPath}}"
+                <img class="demo w3-opacity w3-hover-opacity-off " th:src="@{${imageList.imgPath}}"
                      style="width:100%;cursor:pointer; height: 100px;" onclick="currentDiv(1)">
             </div>
         </div>

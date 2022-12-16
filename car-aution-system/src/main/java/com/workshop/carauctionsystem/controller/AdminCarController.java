@@ -22,7 +22,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.Cookie;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Timestamp;
@@ -56,19 +55,19 @@ public class AdminCarController {
     @GetMapping("/admin/car")
     public ModelAndView showListCar(@RequestParam(defaultValue = "0") int page,
                                     @RequestParam(defaultValue = "id") String id,
-                                    @RequestParam(defaultValue = "") String search, Model model,
-                                    @CookieValue(value = "setUser", defaultValue = "") String setUser) {
+                                    @RequestParam(defaultValue = "") String search,
+                                    @CookieValue(value = "setUser", defaultValue = "") String setUser,
+                                    Model model) {
         ModelAndView view = new ModelAndView();
         model.addAttribute("car", new CarDTO());
-        Cookie cookie = new Cookie("setUser", setUser);
-        model.addAttribute("cookieValue", cookie);
+
         model.addAttribute("brands", brandService.getAllBrand());
         model.addAttribute("modelCar", modelService.getAllModelByStatus());
         model.addAttribute("createBy", userService.getRoleByAdminCar());
         model.addAttribute("CarDTO", new CarDTO());
         model.addAttribute("CarSpecDTO", new CarSpecificationDTO());
         model.addAttribute("Safety", new SafetySystemDTO());
-
+        model.addAttribute("userName", setUser);
         Page<Car> lstCar = carService.findAllByCarName(PageRequest.of(page, 5, Sort.by(id)), search);
         view = new ModelAndView("admin/listCar");
         if (!lstCar.isEmpty()) {

@@ -41,13 +41,14 @@ public class AdminRoomController {
     public ModelAndView showList(@RequestParam(defaultValue = "0") int page,
                                  @RequestParam(defaultValue = "id") String id,
                                  @RequestParam(defaultValue = "") String search,
+                                 @CookieValue(value = "setUser", defaultValue = "") String setUser,
                                  Model model) {
         ModelAndView modelAndView = null;
         model.addAttribute("cars", carService.findAllDTO());
         model.addAttribute("createdBy", userService.getRoleByAdminAuction());
         model.addAttribute("roomType", roomTypeService.getAllRoomType());
         model.addAttribute("roomDTO", new RoomDTO());
-
+        model.addAttribute("userName", setUser);
         Page<Room> list = roomService.findAllByName(PageRequest.of(page, 5, Sort.by(id)), search);
         if (!list.isEmpty()) {
             modelAndView = new ModelAndView("admin/listAuction");
@@ -152,7 +153,7 @@ public class AdminRoomController {
         }
         try {
             FileCopyUtils.copy(upImg.getBytes(), new File("src\\main\\resources\\static\\assets\\hoang/" + nameFile));
-            String img = "/hoang/" + nameFile;
+            String img = "/assets/hoang/" + nameFile;
             roomService.update(roomName,startTime,endTime,updateAt,ticketNumber,ticketPrice,typeRoom,createBy,img,id);
         } catch (IOException e) {
             String img = room.getImgPath();

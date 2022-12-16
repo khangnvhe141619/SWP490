@@ -37,11 +37,13 @@ public class AdminModelController {
     public ModelAndView showList(@RequestParam(defaultValue = "0") int page,
                                  @RequestParam(defaultValue = "id") String id,
                                  @RequestParam(defaultValue = "") String search,
+                                 @CookieValue(value = "setUser", defaultValue = "") String setUser,
                                  Model model) {
         ModelAndView modelAndView = null;
         model.addAttribute("modelCar", new ModelCarDTO());
         model.addAttribute("brands", brandService.getAllBrand());
         model.addAttribute("modelType", modelSpecService.getAllModelSpecification());
+        model.addAttribute("userName", setUser);
         Page<ModelCar> list = modelService.findAllOrderByName(PageRequest.of(page, 5, Sort.by(id)), search);
         modelAndView = new ModelAndView("admin/listModel");
         if (!list.isEmpty()) {
