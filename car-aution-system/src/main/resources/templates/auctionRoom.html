@@ -164,7 +164,7 @@
                             </div>
                         </div>
                         <!--End-->
-                        <!--Modal-->
+                        <!--Modal Popup Room-->
                         <div class="modal fade" th:id="'bd-example-modal-lg2'+*{ls.carId}" tabindex="-1" role="dialog"
                              aria-labelledby="myLargeModalLabel" aria-hidden="true" style="width: 100%">
                             <div class="modal-dialog modal-lg">
@@ -187,6 +187,7 @@
                                                     <p class="border-top border-bottom">
                                                         <span class="h6">Room:</span>
                                                         <span class="result" th:text="${ls.id}"></span>
+                                                        <input type="hidden" id="roomId-cab" class="result" th:value="${ls.id}">
                                                     </p>
                                                     <p class="border-top border-bottom">
                                                         <span class="h6">Player:</span>
@@ -196,6 +197,8 @@
                                                         <span class="h6">Ticket Price:</span>
                                                         <span class="result"
                                                               th:text="${ls.ticketPrice} + ' CAB'"></span>
+                                                        <input type="hidden" id="amount-cab"
+                                                               th:value="${ls.ticketPrice}">
                                                     </p>
                                                 </div>
                                                 <div class="col-md-5 ms-2">
@@ -213,8 +216,7 @@
                                                     </p>
                                                 </div>
                                                 <div class="text-center">
-                                                    <button class="btn btn-primary rounded-pill"><a href="index.html"
-                                                                                                    style="color: #fff;">Join Now</a></button>
+                                                    <button class="btn btn-primary rounded-pill" id="btnJoin"> Join Now</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -354,6 +356,7 @@
                                                         <span class="h6">Ticket Price:</span>
                                                         <span class="result"
                                                               th:text="${ls.ticketPrice} + ' CAB'"></span>
+
                                                     </p>
                                                 </div>
                                                 <div class="col-md-5 ms-2">
@@ -371,9 +374,8 @@
                                                     </p>
                                                 </div>
                                                 <div class="text-center">
-                                                    <button class="btn btn-primary rounded-pill"><a href="index.html"
-                                                                                                    style="color: #fff;">Join
-                                                        Now</a></button>
+                                                    <button class="btn btn-primary rounded-pill" >Join
+                                                        Now 1</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -551,6 +553,9 @@
 <script th:src="@{/assets/js/main.js}"></script>
 <script th:src="@{/assets/js/CreateRoom.js}"></script>
 <script type="module" src="/assets/js/connectWallet.js"></script>
+<script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"
+        type="application/javascript"></script>
+<script src="/assets/js/buyTicket.js"></script>
 </body>
 
 </html>
