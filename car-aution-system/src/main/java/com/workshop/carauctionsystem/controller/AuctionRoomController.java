@@ -50,9 +50,9 @@ public class AuctionRoomController {
                                  @CookieValue(value = "setUser", defaultValue = "") String setUser,
                                  @CookieValue(value = "setUserId", defaultValue = "") String setUserId) {
         ModelAndView modelAndView = null;
-        Page<Room> list = service.getSearchRoom(PageRequest.of(page - 1, 5), carName, model);
+        int pageSize = 6;
+        Page<Room> list = service.getSearchRoom(PageRequest.of(page - 1, pageSize), carName, model);
         List<Brand> brandList = brandService.getAllBrand();
-        int pageSize = 5;
         Page<Room> pageRoomCurrent = service.getListRoomCurrent(page, pageSize);
 
         List<Room> listRoomCurrent = pageRoomCurrent.getContent();
