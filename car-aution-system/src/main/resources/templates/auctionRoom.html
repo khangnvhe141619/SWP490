@@ -92,7 +92,7 @@
                             <div class="col-lg-4 portfolio-item p-3">
                                 <div class="portfolio-wrap">
                                     <figure>
-                                        <img th:src="'/'+${ls.imgPath}" class="img-fluid" alt="" style="height: 230px">
+                                        <img th:src="${ls.imgPath}" class="img-fluid" alt="" style="height: 230px">
                                         <a data-toggle="modal" th:attr="data-target='#bd-example-modal-lg'+*{ls.carId}"
                                            class="link-preview"><i class="bi bi-plus"></i></a>
                                         <a data-toggle="modal" th:attr="data-target='#bd-example-modal-lg2'+*{ls.carId}"
@@ -153,7 +153,7 @@
                                     </div>
                                     <div class="modal-body">
                                         <div class="w3-content">
-                                            <img class="mySlides" th:src="'/'+${ls.imgPath}" style="width: 100%">
+                                            <img class="mySlides" th:src="${ls.imgPath}" style="width: 100%">
                                         </div>
                                         <div style="padding:30px;">
                                             <h5>Deciption</h5>
@@ -177,7 +177,7 @@
                                     </div>
                                     <div class="modal-body">
                                         <div class="w3-content text-center">
-                                            <img th:src="'/'+${ls.imgPath}" class="w-50 h-50">
+                                            <img th:src="${ls.imgPath}" class="w-50 h-50">
                                         </div>
                                         <div style="padding:30px;">
                                             <div class="row mt-2 d-flex modal-body">
@@ -258,7 +258,7 @@
                         <div class="col-lg-4 portfolio-item p-3">
                             <div class="portfolio-wrap">
                                 <figure>
-                                    <img th:src="'/'+${ls.imgPath}" class="img-fluid" alt="" style="height: 230px">
+                                    <img th:src="${ls.imgPath}" class="img-fluid" alt="" style="height: 230px">
                                     <a data-toggle="modal" th:attr="data-target='#bd-example-modal-lg'+*{ls.carId}"
                                        class="link-preview"><i class="bi bi-plus"></i></a>
                                     <a data-toggle="modal" th:attr="data-target='#bd-example-modal-lg2'+*{ls.carId}"
@@ -311,7 +311,7 @@
                                     </div>
                                     <div class="modal-body">
                                         <div class="w3-content">
-                                            <img class="mySlides" th:src="'/'+${ls.imgPath}" style="width: 100%">
+                                            <img class="mySlides" th:src="${ls.imgPath}" style="width: 100%">
                                         </div>
                                         <div style="padding:30px;">
                                             <h5>Deciption</h5>
@@ -335,7 +335,7 @@
                                     </div>
                                     <div class="modal-body">
                                         <div class="w3-content text-center">
-                                            <img th:src="'/'+${ls.imgPath}" class="w-50 h-50">
+                                            <img th:src="${ls.imgPath}" class="w-50 h-50">
                                         </div>
                                         <div style="padding:30px;">
                                             <div class="row mt-2 d-flex modal-body">

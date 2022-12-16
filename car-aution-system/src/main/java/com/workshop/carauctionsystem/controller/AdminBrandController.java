@@ -32,10 +32,12 @@ public class AdminBrandController {
     public ModelAndView showList(@RequestParam(defaultValue = "0") int page,
                                  @RequestParam(defaultValue = "id") String id,
                                  @RequestParam(defaultValue = "") String search,
+                                 @CookieValue(value = "setUser", defaultValue = "") String setUser,
                                  Model model) {
         ModelAndView modelAndView = null;
         //get list brand by page and sort by id desc
         model.addAttribute("brandModel", new BrandModel());
+        model.addAttribute("userName", setUser);
         Page<Brand> list = brandService.findAllOrderByName(PageRequest.of(page, 5, Sort.by(id)), search);
         modelAndView = new ModelAndView("admin/listBrand");
         if (!list.isEmpty()) {

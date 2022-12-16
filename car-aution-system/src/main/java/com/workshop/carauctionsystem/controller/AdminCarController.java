@@ -55,7 +55,9 @@ public class AdminCarController {
     @GetMapping("/admin/car")
     public ModelAndView showListCar(@RequestParam(defaultValue = "0") int page,
                                     @RequestParam(defaultValue = "id") String id,
-                                    @RequestParam(defaultValue = "") String search, Model model) {
+                                    @RequestParam(defaultValue = "") String search,
+                                    @CookieValue(value = "setUser", defaultValue = "") String setUser,
+                                    Model model) {
         ModelAndView view = new ModelAndView();
         model.addAttribute("car", new CarDTO());
 
@@ -65,7 +67,7 @@ public class AdminCarController {
         model.addAttribute("CarDTO", new CarDTO());
         model.addAttribute("CarSpecDTO", new CarSpecificationDTO());
         model.addAttribute("Safety", new SafetySystemDTO());
-
+        model.addAttribute("userName", setUser);
         Page<Car> lstCar = carService.findAllByCarName(PageRequest.of(page, 5, Sort.by(id)), search);
         view = new ModelAndView("admin/listCar");
         if (!lstCar.isEmpty()) {
@@ -180,7 +182,7 @@ public class AdminCarController {
                 for (String string : photos) {
                     Image image = new Image();
                     image.setCarId(car);
-                    image.setImgPath("/hoang/" + string);
+                    image.setImgPath("/assets/hoang/" + string);
                     imageService.saveImageForCar(image);
                 }
 
