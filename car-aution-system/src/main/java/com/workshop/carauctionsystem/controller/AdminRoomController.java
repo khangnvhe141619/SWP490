@@ -63,6 +63,7 @@ public class AdminRoomController {
     public String create(@ModelAttribute(value = "roomDTO") RoomDTO roomDTO,
                          @RequestParam Long carId,
                          @RequestParam MultipartFile upImg,
+                         @CookieValue(value = "setUser", defaultValue = "") String setUser,
                          RedirectAttributes ra) {
 
         try {
@@ -75,8 +76,9 @@ public class AdminRoomController {
             car.setId(carId);
             RoomType roomType = new RoomType();
             roomType.setId(1);
+            User userData = userService.findByUsername(setUser);
             User user = new User();
-            user.setId(2);
+            user.setId(userData.getId());
             Room room = new Room();
             Date date = new Date();
             Timestamp timestamp = new Timestamp(date.getTime());
