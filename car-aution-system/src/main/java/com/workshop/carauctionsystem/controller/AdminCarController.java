@@ -99,7 +99,7 @@ public class AdminCarController {
         if (requestMap.get("modelId").equals("") || requestMap.get("createById").equals("") || carDTO.getUpBoundPrice() == null ||
                 carDTO.getDownBoundPrice() == null || carDTO.getDescription().equals("") || requestMap.get("statusCar").equals("") ||
                 carSpecDTO.getManufacturing().equals("") || carSpecDTO.getKm_driven().equals("") || carSpecDTO.getGear().equals("") ||
-                carSpecDTO.getFuel().equals("") || !carSpecDTO.getOverallDimension().equals("") || carSpecDTO.getFuelConsumption().equals("") ||
+                carSpecDTO.getFuel().equals("") || carSpecDTO.getOverallDimension().equals("") || carSpecDTO.getFuelConsumption().equals("") ||
                 carSpecDTO.getOuterColor().equals("") || carSpecDTO.getInnerColor().equals("") || carSpecDTO.getDrive().equals("") ||
                 carSpecDTO.getYearOfMake().equals("") || safetyDTO.getAir_bag().equals("") || requestMap.get("absBrake").equals("") ||
                 requestMap.get("speedControl").equals("") || requestMap.get("tirePressure").equals("") || safetyDTO.getOtherDescription().equals("")) {
@@ -127,7 +127,6 @@ public class AdminCarController {
             modelCar.setId(modelId);
             User userCreate = new User();
             userCreate.setId(createById);
-
             Car car = new Car();
             car.setCarName(carDTO.getCarName());
             String regex = "^[a-zA-Z0-9 \\-*_]+$";
@@ -183,7 +182,7 @@ public class AdminCarController {
                 for (String string : photos) {
                     Image image = new Image();
                     image.setCarId(car);
-                    image.setImgPath("/hoang/" + string);
+                    image.setImgPath("/assets/hoang/" + string);
                     imageService.saveImageForCar(image);
                 }
 

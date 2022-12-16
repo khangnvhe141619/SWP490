@@ -73,7 +73,7 @@ public class AdminRoomController {
             Car car = new Car();
             car.setId(carId);
             RoomType roomType = new RoomType();
-            roomType.setId(2);
+            roomType.setId(1);
             User user = new User();
             user.setId(2);
             Room room = new Room();
@@ -93,7 +93,7 @@ public class AdminRoomController {
             room.setTicketPrice(roomDTO.getTicketPrice());
             String nameFile = upImg.getOriginalFilename();
             FileCopyUtils.copy(upImg.getBytes(), new File("src\\main\\resources\\static\\assets\\hoang/" + nameFile));
-            room.setImgPath("/hoang/"+nameFile);
+            room.setImgPath("/assets/hoang/"+nameFile);
             SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
             Date d1 = sdf.parse(roomDTO.getStartTime());
             Date d2 = sdf.parse(room.getEndTime());
