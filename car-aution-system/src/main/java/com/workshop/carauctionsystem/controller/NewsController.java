@@ -25,7 +25,7 @@ public class NewsController {
 
 
 
-    @GetMapping("/user/news")
+    @GetMapping("/news")
     public ModelAndView showList(@RequestParam(defaultValue = "1") int page,
                                  @RequestParam(defaultValue = "id") String id,
                                  @RequestParam(defaultValue = "") String search,
@@ -70,7 +70,7 @@ public class NewsController {
 //        return view;
 //    }
 
-    @GetMapping("/user/details/{id}")
+    @GetMapping("/details/{id}")
     public ModelAndView newsDetails(@PathVariable(value = "id") long id) {
         ModelAndView view = new ModelAndView();
         News details = newsService1.getNewsById(id);
