@@ -36,7 +36,10 @@ public class AuctionRoomController {
     FavoriteService favoriteService;
 
     @Autowired
+    RoomParticipantService roomParticipantService;
+    @Autowired
     UserService userService;
+
     //    @GetMapping("/auctionRoom")
 //    public ModelAndView redirectAuctionRoom(@CookieValue(value = "setUser", defaultValue = "") String setUser, Model model,
 //                                            @CookieValue(value = "setUserId", defaultValue = "") String setUserId) {
@@ -50,9 +53,9 @@ public class AuctionRoomController {
                                  @CookieValue(value = "setUser", defaultValue = "") String setUser,
                                  @CookieValue(value = "setUserId", defaultValue = "") String setUserId) {
         ModelAndView modelAndView = null;
-        Page<Room> list = service.getSearchRoom(PageRequest.of(page - 1, 5), carName, model);
+        int pageSize = 6;
+        Page<Room> list = service.getSearchRoom(PageRequest.of(page - 1, pageSize), carName, model);
         List<Brand> brandList = brandService.getAllBrand();
-        int pageSize = 5;
         Page<Room> pageRoomCurrent = service.getListRoomCurrent(page, pageSize);
 
         List<Room> listRoomCurrent = pageRoomCurrent.getContent();
@@ -153,6 +156,18 @@ public class AuctionRoomController {
                                                              @CookieValue(value = "setUserId") int userId) {
         favoriteService.removeFavorite(carId, userId);
         return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject("no", "Username or password is wrong !", null));
+    }
+
+    @PostMapping("/saveParticipant")
+    public ResponseEntity<ResponseObject> saveBidder(@CookieValue(value = "setUserId") int setUserId,
+                                                          @RequestParam("roomId") String roomId) {
+        User u1 = userService.findUserById(setUserId);
+        Room r1 = service.getRoomById(Integer.parseInt(roomId));
+        boolean _suc = roomParticipantService.saveParticipant(u1, r1);
+        if (u1 != null && _suc) {
+            return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject("ok", "Succeed!", null));
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject("no", "Invalid!", null));
     }
 }
 

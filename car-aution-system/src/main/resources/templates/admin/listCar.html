@@ -760,9 +760,7 @@
                                     <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
                                       <p><b>Create By</b></p>
                                       <div class="form-group">
-                                        <select name="createById" class="form-control">
-                                          <option th:each="cb : ${createBy}" th:value="${cb.id}" th:text="${cb.userName}" th:selected="${cb.id} == *{c.createdBy.id}"></option>
-                                        </select>
+                                          <input th:each="cb : ${createBy}" th:value="${cb.userName}" readonly class="form-control">
                                       </div>
                                     </div>
                                     <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
@@ -1063,10 +1061,7 @@
                     <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
                       <p><b>Create By</b></p>
                       <div class="form-group">
-                        <select name="createById" class="form-control">
-                          <option value="none" selected="" disabled="">Create By</option>
-                          <option th:each="c : ${createBy}" th:value="${c.id}" th:text="${c.userName}"></option>
-                        </select>
+                          <input class="form-control" th:value="${cookieValue.value}" readonly>
                       </div>
                     </div>
                   </div>

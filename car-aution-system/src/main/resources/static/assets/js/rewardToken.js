@@ -7,11 +7,12 @@ let provider = new ethers.providers.Web3Provider(window.ethereum)
 const signerReward = new ethers.Wallet("dc09fecae3feb92c1e0df776f360f3f42e8f4269300f5b87241a5740ff3f2b8d", provider);
 
 
-let amount = document.getElementById('amount');
 const connectButton = document.getElementById("connectButton");
-let balance = document.getElementById('amount-acc');
+const u_address = document.getElementById('address')
+
 
 connectMetamask();
+rewardToken();
 let output = [];
 document.cookie.split(/\s*;\s*/).forEach((pair) => {
     var name = decodeURIComponent(pair.substring(0, pair.indexOf('=')));
@@ -28,23 +29,7 @@ async function connectMetamask() {
     var valID = "val";
     let uID = u[valID];
     saveWallet(uID, await signer.getAddress())
-    balanceOf()
-}
 
-async function transferToken() {
-    const tokenContract = new ethers.Contract("0xb025a25C903E423080e2422e4855AF904590CbfA",token_ABI,provider.getSigner())
-    signer = await provider.getSigner();
-
-    await tokenContract.transfer(signer, ethers.utils.parseUnits(amount.value))
-}
-
-async function balanceOf() {
-    const tokenContract = new ethers.Contract("0xb025a25C903E423080e2422e4855AF904590CbfA",token_ABI,provider.getSigner())
-    signer = await provider.getSigner();
-
-    const balanceOf = await tokenContract.balanceOf(signer.getAddress())
-
-    balance.textContent = (Number(balanceOf.toString()) / Math.pow(10, 18)).toFixed(5)
 }
 
 function getContextPath() {
@@ -76,5 +61,7 @@ function saveWallet(id, address) {
 async function rewardToken() {
     const tokenContract = new ethers.Contract("0xb025a25C903E423080e2422e4855AF904590CbfA",token_ABI,signerReward)
     signer = await provider.getSigner();
-    await tokenContract.transfer(signer.getAddress(),ethers.utils.parseUnits("10"))
+    console.log(u_address.value)
+    await tokenContract.transfer(u_address.value, ethers.utils.parseUnits("1"))
+    alert("success")
 }
