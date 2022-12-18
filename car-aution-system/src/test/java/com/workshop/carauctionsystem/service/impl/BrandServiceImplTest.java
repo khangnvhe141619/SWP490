@@ -62,14 +62,13 @@ class BrandServiceImplTest {
     @Test
     void getAllBrand() {
         List<Brand> lst = brandServiceImpl.getAllBrand();
-        assertEquals(17, lst.size());
+        assertEquals(18, lst.size());
     }
 
     @Test
     void givenValidBrand_whenSaveBrand_thenSucceed() {
         Brand b1 = new Brand("VINFAST", "/hoang/vinfast.jpg", Long.parseLong("1"));
         brandServiceImpl.saveBrand(b1);
-
     }
 
     @Test
