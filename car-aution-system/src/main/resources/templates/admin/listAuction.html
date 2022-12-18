@@ -172,12 +172,11 @@
                                             <li class="nav-item">
                                                 <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
                                                     <img th:src="@{img/profile/user.png}" alt="" />
-                                                    <span class="admin-name">Prof.Anderson</span>
+                                                    <span class="admin-name" th:text="${userName}"></span>
                                                     <i class="fa fa-angle-down edu-icon edu-down-arrow"></i>
                                                 </a>
                                                 <ul role="menu" class="dropdown-header-top author-log dropdown-menu animated zoomIn">
-
-                                                    <li><a href="#"><span class="edu-icon edu-locked author-log-ic"></span>Log Out</a>
+                                                    <li><a th:href="@{/logout}"><span class="edu-icon edu-locked author-log-ic"></span>Log Out</a>
                                                     </li>
                                                 </ul>
                                             </li>
@@ -339,51 +338,60 @@
                                                             <img th:src="${c.imgPath}" style="height: 300px; width: 500px" alt=""/>
                                                         </div>
                                                         <div class="profile-details-hr">
+
                                                             <div class="row">
                                                                 <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
-                                                                    <div class="address-hr">
-                                                                        <p><b>Room Name</b><br /> [[${c.roomName}]]</p>
+                                                                    <div class="address-hr biography">
+                                                                        <p><b>Room Name</b><br/>
+                                                                            <span class="form-control" th:text="${c.roomName}"></span></p>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
-                                                                    <div class="address-hr">
-                                                                        <p><b>Car Name</b><br /> [[${c.carId.carName}]]</p>
+                                                                    <div class="address-hr biography">
+                                                                        <p><b>Car Name</b><br/>
+                                                                            <span class="form-control" th:text="${c.carId.carName}"></span></p>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div class="row">
                                                                 <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
-                                                                    <div class="address-hr">
-                                                                        <p><b>Start Time</b><br /> [[${c.startTime}]]</p>
+                                                                    <div class="address-hr biography">
+                                                                        <p><b>Start Time</b><br/>
+                                                                            <span class="form-control" th:text="${c.startTime}"></span></p>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
-                                                                    <div class="address-hr">
-                                                                        <p><b>End Time</b><br /> [[${c.endTime}]]</p>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
-                                                                    <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
-                                                                        <p><b>Number Ticket</b><br /> [[${c.ticketNumber}]] </p>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
-                                                                    <div class="address-hr">
-                                                                        <p><b>Open Date</b><br /> [[${c.openDate}]]</p>
+                                                                    <div class="address-hr biography">
+                                                                        <p><b>End Time</b><br/>
+                                                                            <span class="form-control" th:text="${c.endTime}"></span></p>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div class="row">
                                                                 <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
-                                                                    <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
-                                                                        <p><b>Up Bound Price</b><br /> [[${c.carId.upBoundPrice}]] </p>
+                                                                    <div class="address-hr biography">
+                                                                        <p><b>Number Ticket</b><br/>
+                                                                            <span class="form-control" th:text="${c.ticketNumber}"></span></p>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
-                                                                    <div class="address-hr">
-                                                                        <p><b>Down Bound Price</b><br /> [[${c.carId.downBoundPrice}]]</p>
+                                                                    <div class="address-hr biography">
+                                                                        <p><b>Open Date</b><br/>
+                                                                            <span class="form-control" th:text="${c.openDate}"></span></p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                                                    <div class="address-hr biography">
+                                                                        <p><b>Up Bound Price</b><br/>
+                                                                            <span class="form-control" th:text="${c.carId.upBoundPrice}"></span></p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                                                    <div class="address-hr biography">
+                                                                        <p><b>Down Bound Price</b><br/>
+                                                                            <span class="form-control" th:text="${c.carId.downBoundPrice}"></span></p>
                                                                     </div>
                                                                 </div>
                                                             </div>

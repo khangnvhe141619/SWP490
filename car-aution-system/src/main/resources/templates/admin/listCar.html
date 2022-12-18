@@ -267,15 +267,12 @@
                         <a href="#" data-toggle="dropdown" role="button"
                            aria-expanded="false" class="nav-link dropdown-toggle">
                           <img th:src="@{img/profile/user.png}" alt="" />
-                          <span class="admin-name">Prof.Anderson</span>
+                          <span class="admin-name" th:text="${userName}"></span>
                           <i class="fa fa-angle-down edu-icon edu-down-arrow"></i>
                         </a>
                         <ul role="menu"
                             class="dropdown-header-top author-log dropdown-menu animated zoomIn">
-
-                          <li><a href="#"><span
-                                  class="edu-icon edu-locked author-log-ic"></span>Log
-                            Out</a>
+                          <li><a th:href="@{/logout}"><span class="edu-icon edu-locked author-log-ic"></span>Log Out</a>
                           </li>
                         </ul>
                       </li>
@@ -470,7 +467,7 @@
                                                          style="height: 80%;width: 80%;display: block;margin-left: auto;margin-right: auto;margin-bottom: 15px;">
                                                     </div>
                                                   <div th:unless="${#sets.isEmpty(c.imgCar)}">
-                                                  <div style="display: flex; flex-wrap: nowrap;margin-left: auto;margin-right: auto;">
+                                                  <div style="display: flex; flex-wrap: nowrap;margin-right: auto; width: 85%; height: 70%;">
                                                     <img th:each="c : ${c.imgCar}"  th:src="${c.imgPath}" alt="" style="margin-left: 5px;">
                                                   </div>
                                                   </div>
@@ -478,42 +475,41 @@
 
                                               <div class="profile-details-hr">
                                                 <div class="row">
-                                                  <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                  <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
                                                     <div class="address-hr biography">
                                                       <p><b>Car Name</b> <br />
-                                                        <span th:text="${c.carName}"></span></p>
+                                                        <span class="form-control" th:text="${c.carName}"></span></p>
                                                     </div>
                                                   </div>
-                                                </div>
-                                                <div class="row">
-                                                  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                                  <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
                                                     <div class="address-hr biography">
                                                       <p><b>Model</b><br />
-                                                        <span th:text="${c.modelId.modelName}"></span></p>
+                                                        <span class="form-control" th:text="${c.modelId.modelName}"></span></p>
                                                     </div>
                                                   </div>
                                                 </div>
                                                 <div class="row">
-                                                  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                                  <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
                                                     <div class="address-hr biography">
                                                       <p><b>Up price </b><br />
-                                                        <span th:text="${c.upBoundPrice}"></span></p>
+                                                        <span class="form-control" th:text="${c.upBoundPrice}"></span></p>
                                                     </div>
                                                   </div>
-                                                </div>
-                                                <div class="row">
-                                                  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                                  <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
                                                     <div class="address-hr biography">
                                                       <p><b>Down price </b><br />
-                                                        <span th:text="${c.downBoundPrice}"></span></p>
+                                                        <span class="form-control" th:text="${c.downBoundPrice}"></span></p>
                                                     </div>
                                                   </div>
                                                 </div>
+
                                                 <div class="row">
-                                                  <div class="col-lg-12">
-                                                    <div class="content-profile">
+                                                  <div class="col-sm-12 col-xs-6">
+                                                    <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
                                                       <p><b>Description</b><br />
-                                                        <span th:text="${c.description}"></span></p>
+                                                        <div class="form-group res-mg-t-15">
+                                                         <textarea th:text="${c.description}"></textarea></p>
+                                                        </div>
                                                     </div>
                                                   </div>
                                                 </div>
@@ -522,94 +518,86 @@
                                           </div>
                                         </div>
                                         <div class="product-tab-list tab-pane fade" th:id="'SPEC'+*{c.id}" >
-                                          <div class="row">.;
+                                          <div class="row">
                                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                               <div class="review-content-section">
+
                                                 <div class="row">
-                                                  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                                  <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
                                                     <div class="address-hr biography">
                                                       <p><b>Maufacturer</b><br />
-                                                        <span th:text="${c.carSpec.manufacturing}"></span></p>
+                                                        <span class="form-control" th:text="${c.carSpec.manufacturing}"></span></p>
                                                     </div>
                                                   </div>
-                                                </div>
-                                                <div class="row">
-                                                  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                                  <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
                                                     <div class="address-hr biography">
                                                       <p><b>Status</b><br />
-                                                        <span th:text="${c.carSpec.status}"></span></p>
+                                                        <span class="form-control" th:text="${c.carSpec.status}"></span></p>
                                                     </div>
                                                   </div>
                                                 </div>
+
                                                 <div class="row">
-                                                  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                                  <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
                                                     <div class="address-hr biography">
                                                       <p><b>Km driven</b><br />
-                                                        <span th:text="${c.carSpec.km_driven}"></span></p>
+                                                        <span class="form-control" th:text="${c.carSpec.km_driven}"></span></p>
                                                     </div>
                                                   </div>
-                                                </div>
-                                                <div class="row">
-                                                  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                                  <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
                                                     <div class="address-hr biography">
                                                       <p><b>Gear</b><br />
-                                                        <span th:text="${c.carSpec.gear}"></span></p>
+                                                        <span class="form-control" th:text="${c.carSpec.gear}"></span></p>
                                                     </div>
                                                   </div>
                                                 </div>
                                                 <div class="row">
-                                                  <div class="col-sm-12 col-xs-6">
+                                                  <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
                                                     <div class="address-hr biography">
                                                       <p><b>Fuel</b><br/>
-                                                        <span th:text="${c.carSpec.fuel}"></span></p>
+                                                        <span class="form-control" th:text="${c.carSpec.fuel}"></span></p>
                                                     </div>
                                                   </div>
-                                                </div>
-                                                <div class="row">
-                                                  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                                  <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
                                                     <div class="address-hr biography">
                                                       <p><b>Fuel Consumption</b><br />
-                                                        <span th:text="${c.carSpec.fuelConsumption}"></span></p>
+                                                        <span class="form-control" th:text="${c.carSpec.fuelConsumption}"></span></p>
                                                     </div>
                                                   </div>
                                                 </div>
                                                 <div class="row">
-                                                  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                                  <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
                                                     <div class="address-hr biography">
                                                       <p><b>Outer Color</b><br />
-                                                        <span th:text="${c.carSpec.outerColor}"></span></p>
+                                                        <span class="form-control" th:text="${c.carSpec.outerColor}"></span></p>
                                                     </div>
                                                   </div>
-                                                </div>
-                                                <div class="row">
-                                                  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                                  <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
                                                     <div class="address-hr biography">
                                                       <p><b>Inner Color</b><br />
-                                                        <span th:text="${c.carSpec.innerColor}"></span></p>
+                                                        <span class="form-control" th:text="${c.carSpec.innerColor}"></span></p>
                                                     </div>
                                                   </div>
                                                 </div>
                                                 <div class="row">
-                                                  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                                  <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
                                                     <div class="address-hr biography">
                                                       <p><b>Overall Dimension</b><br />
-                                                        <span th:text="${c.carSpec.overallDimension}"></span></p>
+                                                        <span class="form-control" th:text="${c.carSpec.overallDimension}"></span></p>
                                                     </div>
                                                   </div>
-                                                </div>
-                                                <div class="row">
-                                                  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                                  <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
                                                     <div class="address-hr biography">
                                                       <p><b>Wheel Drive</b><br />
-                                                        <span th:text="${c.carSpec.drive}"></span></p>
+                                                        <span class="form-control" th:text="${c.carSpec.drive}"></span></p>
                                                     </div>
                                                   </div>
                                                 </div>
                                                 <div class="row">
-                                                  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                                  <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
                                                     <div class="address-hr biography">
                                                       <p><b>Year of make </b><br />
-                                                        <span th:text="${c.carSpec.yearOfMake}"></span></p>
+                                                        <span class="form-control" th:text="${c.carSpec.yearOfMake}"></span></p>
                                                     </div>
                                                   </div>
                                                 </div>
@@ -621,43 +609,42 @@
                                           <div class="row">
                                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                               <div class="review-content-section">
+
                                                 <div class="row">
-                                                  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                                  <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
                                                     <div class="address-hr biography">
                                                       <p><b>Air bag</b><br />
-                                                        <span th:text="${c.safeSys.air_bag}"></span></p>
+                                                        <span class="form-control" th:text="${c.safeSys.air_bag}"></span></p>
                                                     </div>
                                                   </div>
-                                                </div>
-                                                <div class="row">
-                                                  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                                  <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
                                                     <div class="address-hr biography">
                                                       <p><b>ABS brake</b><br />
-                                                        <span th:text="${c.safeSys.abs_brake}"></span></p>
+                                                        <span class="form-control" th:text="${c.safeSys.abs_brake}"></span></p>
                                                     </div>
                                                   </div>
                                                 </div>
                                                 <div class="row">
-                                                  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                                  <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
                                                     <div class="address-hr biography">
                                                       <p><b>Speed control</b><br />
-                                                        <span th:text="${c.safeSys.speedControl}"></span></p>
+                                                        <span class="form-control" th:text="${c.safeSys.speedControl}"></span></p>
                                                     </div>
                                                   </div>
-                                                </div>
-                                                <div class="row">
-                                                  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                                  <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
                                                     <div class="address-hr biography">
                                                       <p><b>Tire pressure</b><br />
-                                                        <span th:text="${c.safeSys.tirePressure}"></span></p>
+                                                        <span class="form-control" th:text="${c.safeSys.tirePressure}"></span></p>
                                                     </div>
                                                   </div>
                                                 </div>
                                                 <div class="row">
-                                                  <div class="col-lg-12">
-                                                    <div class="content-profile">
+                                                  <div class="col-sm-12 col-xs-6">
+                                                    <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
                                                       <p><b>Other description </b><br /></p>
-                                                      <span th:text="${c.safeSys.otherDescription}"></span></p>
+                                                      <div class="form-group res-mg-t-15">
+                                                        <textarea th:text="${c.safeSys.otherDescription}"></textarea></p>
+                                                      </div>
                                                     </div>
                                                   </div>
                                                 </div>
@@ -722,7 +709,7 @@
                                     <div class="address-hr">
                                       <p><b>Model</b></p>
                                       <div class="form-group">
-                                        <select name="modelId" class="form-control" disabled="disabled">
+                                        <select name="modelId" class="form-control" >
                                           <option value="none" selected="" disabled="">Select Model</option>
                                           <option th:each="md : ${modelCar}" th:value="${md.id}" th:text="${md.modelName}" th:selected="${md.id} == *{c.modelId.id}"></option>
                                         </select>
@@ -735,7 +722,7 @@
                                     <div class="address-hr">
                                       <p><b>Down Bound Price</b></p>
                                       <div class="form-group">
-                                        <input th:value="*{c.downBoundPrice}" name="downBound" id="downPrice" type="number" step="1" min="0" class="form-control"
+                                        <input th:value="*{c.downBoundPrice}" name="downBound" type="number" step="1" min="0" class="form-control"
                                                placeholder="Down" >
                                       </div>
                                     </div>
@@ -744,8 +731,7 @@
                                     <div class="address-hr">
                                       <p><b>Up Bound Price</b></p>
                                       <div class="form-group">
-                                        <input th:value="*{c.upBoundPrice}" name="upBound" id="upPrice" type="number" step="1" min="0" class="form-control"
-                                               placeholder="Up" >
+                                        <input th:value="*{c.upBoundPrice}" name="upBound"  type="number" step="1" min="0" class="form-control" placeholder="Up" >
                                       </div>
                                     </div>
                                   </div>
@@ -760,14 +746,6 @@
                                     </div>
                                   </div>
                                   <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
-                                    <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
-                                      <p><b>Create By</b></p>
-                                      <div class="form-group">
-                                        <select name="createById" class="form-control">
-                                          <option th:each="cb : ${createBy}" th:value="${cb.id}" th:text="${cb.userName}" th:selected="${cb.id} == *{c.createdBy.id}"></option>
-                                        </select>
-                                      </div>
-                                    </div>
                                     <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
                                       <p><b>Created At</b></p>
                                       <div class="form-group">
@@ -926,7 +904,7 @@
                                     <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
                                       <p><b>Description</b></p>
                                       <div class="form-group res-mg-t-15">
-                                        <textarea th:value="*{c.safeSys.otherDescription}" th:text="*{c.safeSys.otherDescription}" id="otherDescription" name="otherDescription" placeholder="Other Description"></textarea>
+                                        <textarea th:value="*{c.safeSys.otherDescription}" th:text="*{c.safeSys.otherDescription}" name="otherDescription" placeholder="Other Description"></textarea>
                                       </div>
                                     </div>
                                   </div>
@@ -1058,18 +1036,7 @@
                     <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
                       <p><b>Description</b></p>
                       <div class="form-group res-mg-t-15">
-                        <textarea th:field="*{CarDTO.description}" id="description" name="description" placeholder="Description"></textarea>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
-                    <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
-                      <p><b>Create By</b></p>
-                      <div class="form-group">
-                        <select name="createById" class="form-control">
-                          <option value="none" selected="" disabled="">Create By</option>
-                          <option th:each="c : ${createBy}" th:value="${c.id}" th:text="${c.userName}"></option>
-                        </select>
+                        <textarea th:field="*{CarDTO.description}" name="description" placeholder="Description"></textarea>
                       </div>
                     </div>
                   </div>
@@ -1269,8 +1236,7 @@
                   <div class="col-sm-12 col-xs-6 col-lg-6 col-md-12">
                     <div class="container">
                       <fieldset class="form-group">
-                        <input type="file" id="pro-image" name="upImg"
-                               multiple="multiple">
+                        <input type="file" id="pro-image" name="upImg" multiple="multiple">
                       </fieldset>
                       <div class="preview-images-zone">
                       </div>
@@ -1386,6 +1352,7 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
 <script>
+
   $(document).ready(function () {
     document.getElementById('pro-image').addEventListener('change', readImage, true);
 

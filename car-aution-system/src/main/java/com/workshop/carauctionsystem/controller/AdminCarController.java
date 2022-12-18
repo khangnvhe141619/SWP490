@@ -24,6 +24,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLOutput;
 import java.sql.Timestamp;
 import java.time.Year;
 import java.util.ArrayList;
@@ -55,7 +56,9 @@ public class AdminCarController {
     @GetMapping("/admin/car")
     public ModelAndView showListCar(@RequestParam(defaultValue = "0") int page,
                                     @RequestParam(defaultValue = "id") String id,
-                                    @RequestParam(defaultValue = "") String search, Model model) {
+                                    @RequestParam(defaultValue = "") String search,
+                                    @CookieValue(value = "setUser", defaultValue = "") String setUser,
+                                    Model model) {
         ModelAndView view = new ModelAndView();
         model.addAttribute("car", new CarDTO());
 
@@ -65,7 +68,7 @@ public class AdminCarController {
         model.addAttribute("CarDTO", new CarDTO());
         model.addAttribute("CarSpecDTO", new CarSpecificationDTO());
         model.addAttribute("Safety", new SafetySystemDTO());
-
+        model.addAttribute("userName", setUser);
         Page<Car> lstCar = carService.findAllByCarName(PageRequest.of(page, 5, Sort.by(id)), search);
         view = new ModelAndView("admin/listCar");
         if (!lstCar.isEmpty()) {
@@ -91,12 +94,13 @@ public class AdminCarController {
                             @ModelAttribute(value = "Safety") SafetySystemDTO safetyDTO,
                             @RequestParam(value = "upImg") MultipartFile[] upImg,
                             @RequestParam Map<String, String> requestMap,
+                            @CookieValue(value = "setUser", defaultValue = "") String setUser,
                             RedirectAttributes ra) {
 
-        if (requestMap.get("modelId").equals("") || requestMap.get("createById").equals("") || carDTO.getUpBoundPrice() == null ||
+        if (requestMap.get("modelId").equals("") || carDTO.getUpBoundPrice() == null ||
                 carDTO.getDownBoundPrice() == null || carDTO.getDescription().equals("") || requestMap.get("statusCar").equals("") ||
                 carSpecDTO.getManufacturing().equals("") || carSpecDTO.getKm_driven().equals("") || carSpecDTO.getGear().equals("") ||
-                carSpecDTO.getFuel().equals("") || !carSpecDTO.getOverallDimension().equals("") || carSpecDTO.getFuelConsumption().equals("") ||
+                carSpecDTO.getFuel().equals("") || carSpecDTO.getOverallDimension().equals("") || carSpecDTO.getFuelConsumption().equals("") ||
                 carSpecDTO.getOuterColor().equals("") || carSpecDTO.getInnerColor().equals("") || carSpecDTO.getDrive().equals("") ||
                 carSpecDTO.getYearOfMake().equals("") || safetyDTO.getAir_bag().equals("") || requestMap.get("absBrake").equals("") ||
                 requestMap.get("speedControl").equals("") || requestMap.get("tirePressure").equals("") || safetyDTO.getOtherDescription().equals("")) {
@@ -104,12 +108,13 @@ public class AdminCarController {
             return "redirect:/admin/car";
         }
         Long modelId = Long.parseLong(requestMap.get("modelId"));
-        int createById = Integer.parseInt(requestMap.get("createById"));
+        User user = userService.findByUsername(setUser);
         String statusCar = requestMap.get("statusCar");
         String absBrake = requestMap.get("absBrake");
         String speedControl = requestMap.get("speedControl");
         String tirePressure = requestMap.get("tirePressure");
         List<String> photos = new ArrayList<>();
+
         for (MultipartFile file : upImg) {
             try {
                 photos.add(file.getOriginalFilename());
@@ -123,8 +128,7 @@ public class AdminCarController {
             ModelCar modelCar = new ModelCar();
             modelCar.setId(modelId);
             User userCreate = new User();
-            userCreate.setId(createById);
-
+            userCreate.setId(user.getId());
             Car car = new Car();
             car.setCarName(carDTO.getCarName());
             String regex = "^[a-zA-Z0-9 \\-*_]+$";
@@ -180,7 +184,7 @@ public class AdminCarController {
                 for (String string : photos) {
                     Image image = new Image();
                     image.setCarId(car);
-                    image.setImgPath("/hoang/" + string);
+                    image.setImgPath("/assets/hoang/" + string);
                     imageService.saveImageForCar(image);
                 }
 
@@ -199,20 +203,21 @@ public class AdminCarController {
 
     @PostMapping("/admin/car/edit")
     public String update(@RequestParam Map<String, String> requestMap,
+                         @CookieValue(value = "setUser", defaultValue = "") String setUser,
                          RedirectAttributes ra) {
-
+        User user = userService.findByUsername(setUser);
         String regex = "^[a-zA-Z0-9 \\-*_]+$";
         String regex1 = "^[a-zA-Z \\-]+$";
         String regNumberInteger = "^\\d+$";
+        System.out.println(requestMap.get("upBound"));
+
         try {
             if (requestMap.get("upBound").equals("") || requestMap.get("downBound").equals("") || requestMap.get("modelId").equals("") ||
-                    requestMap.get("createById").equals("") || !requestMap.get("manufacturing").matches(regex1) || requestMap.get("km_driven").equals("") ||
-                    requestMap.get("gear").equals("") || requestMap.get("fuel").equals("") || requestMap.get("overallDimension").equals("") ||
-                    requestMap.get("fuelConsumption").equals("") || !requestMap.get("outerColor").matches(regex1) || !requestMap.get("innerColor").matches(regex1) ||
-                    requestMap.get("drive").equals("") || requestMap.get("yearOfMake").equals("") || requestMap.get("air_bag").equals("") ||
-                    !requestMap.get("abs_brake").matches(regex1) || !requestMap.get("speedControl").matches(regex1) || !requestMap.get("tirePressure").matches(regex1) ||
-                    requestMap.get("otherDescription").equals("")) {
-                ra.addFlashAttribute("fail", "Update Car Failed");
+            !requestMap.get("manufacturing").matches(regex1) || !requestMap.get("outerColor").matches(regex1) || !requestMap.get("innerColor").matches(regex1) ||
+             requestMap.get("gear").equals("") || requestMap.get("fuel").equals("") || requestMap.get("overallDimension").equals("") ||
+             requestMap.get("fuelConsumption").equals("") ||  requestMap.get("drive").equals("")  || requestMap.get("otherDescription").equals("") ||
+             !requestMap.get("abs_brake").matches(regex1) || !requestMap.get("speedControl").matches(regex1) || !requestMap.get("tirePressure").matches(regex1)) {
+                ra.addFlashAttribute("fail", "Update Car Failed (Value not null)");
                 return "redirect:/admin/car";
             }
             Long id = Long.parseLong(requestMap.get("id"));// carId
@@ -220,12 +225,13 @@ public class AdminCarController {
             Long upBound = Long.parseLong(requestMap.get("upBound"));
             Long downBound = Long.parseLong(requestMap.get("downBound"));
             String description = requestMap.get("description");
-            Long createById = Long.parseLong(requestMap.get("createById"));
+
+            Long createById = Long.valueOf(user.getId());
             Date date = new Date();
             Timestamp updateAt = new Timestamp(date.getTime());
             //saveCar
             if (upBound < downBound || !carName.matches(regex) || description.equals("")) {
-                ra.addFlashAttribute("fail", "Add New Car Failed");
+                ra.addFlashAttribute("fail", "Update Car Failed (Up Price away bigger Down Price)");
                 return "redirect:/admin/car";
             }
             carService.updateCar(createById, description, upBound, downBound, updateAt, carName, id);
@@ -247,9 +253,9 @@ public class AdminCarController {
             Year thisYear = Year.now();
             int yearNow = Integer.parseInt(String.valueOf(thisYear)) + 1;
             if (!km_driven.matches(regNumberInteger) || !yearOfMake.matches(regNumberInteger) ||
-                    km < 0 || year < 2000 || year > 2100 || year < yearNow) {
-                    ra.addFlashAttribute("fail", "Update Car Failed");
-                    return "redirect:/admin/car";
+                    km < 0 || year < 2000 || year > 2100 || year > yearNow) {
+                ra.addFlashAttribute("fail", "Update Car Failed");
+                return "redirect:/admin/car";
             }
             caeSpecService.update(manufacturing, km_driven, gear, fuel, fuelConsumption, outerColor, innerColor, overallDimension, drive, yearOfMake, idCarSpec);
             Long idSafe = Long.parseLong(requestMap.get("idSafe"));

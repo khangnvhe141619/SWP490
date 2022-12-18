@@ -41,13 +41,14 @@ public class AdminRoomController {
     public ModelAndView showList(@RequestParam(defaultValue = "0") int page,
                                  @RequestParam(defaultValue = "id") String id,
                                  @RequestParam(defaultValue = "") String search,
+                                 @CookieValue(value = "setUser", defaultValue = "") String setUser,
                                  Model model) {
         ModelAndView modelAndView = null;
         model.addAttribute("cars", carService.findAllDTO());
         model.addAttribute("createdBy", userService.getRoleByAdminAuction());
         model.addAttribute("roomType", roomTypeService.getAllRoomType());
         model.addAttribute("roomDTO", new RoomDTO());
-
+        model.addAttribute("userName", setUser);
         Page<Room> list = roomService.findAllByName(PageRequest.of(page, 5, Sort.by(id)), search);
         if (!list.isEmpty()) {
             modelAndView = new ModelAndView("admin/listAuction");
@@ -62,6 +63,7 @@ public class AdminRoomController {
     public String create(@ModelAttribute(value = "roomDTO") RoomDTO roomDTO,
                          @RequestParam Long carId,
                          @RequestParam MultipartFile upImg,
+                         @CookieValue(value = "setUser", defaultValue = "") String setUser,
                          RedirectAttributes ra) {
 
         try {
@@ -73,9 +75,10 @@ public class AdminRoomController {
             Car car = new Car();
             car.setId(carId);
             RoomType roomType = new RoomType();
-            roomType.setId(2);
+            roomType.setId(1);
+            User userData = userService.findByUsername(setUser);
             User user = new User();
-            user.setId(2);
+            user.setId(userData.getId());
             Room room = new Room();
             Date date = new Date();
             Timestamp timestamp = new Timestamp(date.getTime());
@@ -93,7 +96,7 @@ public class AdminRoomController {
             room.setTicketPrice(roomDTO.getTicketPrice());
             String nameFile = upImg.getOriginalFilename();
             FileCopyUtils.copy(upImg.getBytes(), new File("src\\main\\resources\\static\\assets\\hoang/" + nameFile));
-            room.setImgPath("/hoang/"+nameFile);
+            room.setImgPath("/assets/hoang/"+nameFile);
             SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
             Date d1 = sdf.parse(roomDTO.getStartTime());
             Date d2 = sdf.parse(room.getEndTime());
@@ -152,7 +155,7 @@ public class AdminRoomController {
         }
         try {
             FileCopyUtils.copy(upImg.getBytes(), new File("src\\main\\resources\\static\\assets\\hoang/" + nameFile));
-            String img = "/hoang/" + nameFile;
+            String img = "/assets/hoang/" + nameFile;
             roomService.update(roomName,startTime,endTime,updateAt,ticketNumber,ticketPrice,typeRoom,createBy,img,id);
         } catch (IOException e) {
             String img = room.getImgPath();

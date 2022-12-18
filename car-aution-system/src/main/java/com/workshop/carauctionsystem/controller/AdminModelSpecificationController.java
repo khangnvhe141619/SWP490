@@ -27,9 +27,11 @@ public class AdminModelSpecificationController {
     public ModelAndView showList(@RequestParam(defaultValue = "0") int page,
                                  @RequestParam(defaultValue = "id") String id,
                                  @RequestParam(defaultValue = "") String search,
+                                 @CookieValue(value = "setUser", defaultValue = "") String setUser,
                                  Model model) {
         ModelAndView modelAndView = null;
         model.addAttribute("modelSpecieModel", new ModelSpecieDTO());
+        model.addAttribute("userName", setUser);
         Page<ModelSpecification> list = modelSpecService.findAllOrderByName(PageRequest.of(page, 5, Sort.by(id)), search);
         modelAndView = new ModelAndView("admin/listModelSpec");
         if (!list.isEmpty()) {

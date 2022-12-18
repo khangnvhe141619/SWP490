@@ -49,10 +49,13 @@
             <div class="col-md-3">
                 <h4>Latest news</h4>
                 <form th:action="@{/news}" method="get" role="search" class="sr-input-func">
-
-                    <input type="text" name="search" th:value="${param.search}" placeholder="Type here...">
-                    <button>oke</button>
-
+                    <div class="input-group rounded">
+                        <input type="search"  class="form-control rounded-left" placeholder="Search"
+                               aria-label="Search" aria-describedby="search-addon" th:value="${param.search}" name="search"/>
+                        <button style="width: 40px" class="input-group-text" id="search-addon">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </div>
                 </form>
                 <div class="right-content flex-column d-flex" th:each="top:${top5}">
                     <a class="pe-auto" th:href="@{'/details/'+ ${top.getId()}}"><p th:text="${top.getTitle()}"></p>
