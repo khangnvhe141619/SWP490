@@ -77,11 +77,16 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public void update(String roomName, String startTime, String endTime, Timestamp updatedAt, int ticketNumber,int ticketPrice, int typeRoom, int createdBy, String img, int id) {
-        roomRepository.update(roomName,startTime,endTime,updatedAt,ticketNumber,ticketPrice,typeRoom,createdBy,img,id);
+    public void update(String roomName, String startTime, String endTime, Timestamp updatedAt, int ticketNumber,int ticketPrice, int typeRoom, int createdBy, String img, String date,int id) {
+        roomRepository.update(roomName,startTime,endTime,updatedAt,ticketNumber,ticketPrice,typeRoom,createdBy,img,date,id);
     }
 
-       @Override
+    @Override
+    public void auctionPause(String date, int id) {
+        roomRepository.auctionPause(date,id);
+    }
+
+    @Override
     public void delete(Long id) throws NotFoundException {
 //        Long count = roomRepository.countById(id);
 //        if (count == null || count == 0) {

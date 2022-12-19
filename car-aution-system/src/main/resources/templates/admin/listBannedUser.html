@@ -318,7 +318,7 @@
                     <button class="pd-setting">Ban</button>
                   </td>
                   <td>
-                    <button data-toggle="tooltip" title="Unban" class="pd-setting-ed"><a th:href="@{/admin/userban/unban/{id}(id=${c.id})}"><i class="fa fa-check-square" aria-hidden="true"></i></a></button>
+                    <button data-toggle="tooltip" title="Unban" class="pd-setting-ed"><a th:onclick="showMess([[${c.id}]])"><i class="fa fa-check-square" aria-hidden="true"></i></a></button>
                   </td>
                 </tr>
                 </tr>
@@ -405,6 +405,13 @@
 <!-- main JS
     ============================================ -->
 <script th:src="@{js/main.js}"></script>
-
+<script th:inline="javascript">
+  function showMess(id) {
+    var option = confirm('Do you want Unban for this user ?');
+    if (option === true){
+      window.location.href = "userban/unban/"+id;
+    }
+  }
+</script>
 </body>
 </html>

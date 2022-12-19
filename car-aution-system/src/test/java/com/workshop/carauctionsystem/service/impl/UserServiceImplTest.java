@@ -43,7 +43,7 @@ class UserServiceImplTest {
         Collection<Role> roles = null;
         User u = new User(4, "viethoang", "$10$Kr9bEuihI1iPYZL2lSR5w.n47LowWVGpuLqQQeqRlaagl.zr8r6.u",
                 "Viet Hoang", "viethoang42gmail.com", "0234123123",
-                "img", 1, null, null, roles);
+                "img/avatar.jpg", 1, null, null, roles);
         User u1 = userService.login("viethoang");
         assertEquals(u.getUserName(), u1.getUserName());
         assertEquals(u.getEmail(), u1.getEmail());
@@ -99,7 +99,7 @@ class UserServiceImplTest {
     @Test
     void givenRoom_thenDisplayListUser() {
         List<User> lst = userService.listUserByRoom();
-        assertEquals(0, lst.size());
+        assertEquals(1, lst.size());
     }
 
     @Test
@@ -112,10 +112,10 @@ class UserServiceImplTest {
     void givenValidInformation_whenSaveRegisteredUser_thenSucceed() {
         Date date = new Date();
         Timestamp timestamp = new Timestamp(date.getTime());
-        Collection<Role> roles = Arrays.asList(roleRepository.findByName("User"));
+        Collection<Role> roles = Arrays.asList(roleRepository.findByName("ROLE_User"));
         User u = new User(8, "viethoang", "$10$Kr9bEuihI1iPYZL2lSR5w.n47LowWVGpuLqQQeqRlaagl.zr8r6.u",
                 "Viet Hoang", "viethoang42gmail.com", "0234123123",
-                "img", 1, null, timestamp, roles);
+                "img/avatar.jpg", 1, null, timestamp, roles);
         userService.saveRegisteredUser(u);
     }
 
@@ -127,7 +127,7 @@ class UserServiceImplTest {
 
     @Test
     void givenValidInformation_whenRegisterNewUserAccount_thenSucceed() {
-        UserDTO userDTO = new UserDTO("khang123", "123", "Khang", "khang123@gmail.com", "0111111111", "avatar.jpg", "empty", 4);
+        UserDTO userDTO = new UserDTO("khang123", "123", "Khang", "khang123@gmail.com", "0111111111", "img/avatar.jpg", "empty", 4);
         userService.registerNewUserAccount(userDTO);
     }
 
@@ -167,7 +167,7 @@ class UserServiceImplTest {
 
     @Test
     void getPasswordResetToken() {
-        String token = "097abc0e-8d16-4b57-9d6b-39c97f4a37a0";
+        String token = "076abc0e-8f56-4b54-9d6b-67c97f4a67a0";
         userService.getPasswordResetToken(token);
     }
 
@@ -193,9 +193,9 @@ class UserServiceImplTest {
         Pageable pageable = PageRequest.of(0, 5, Sort.by(
                 Sort.Order.desc("id")));
         Page<User> pr = userService.ListUserBan(pageable, null);
-        assertEquals(2, pr.getNumberOfElements());
+        assertEquals(0, pr.getTotalElements());
         Page<User> pr1 = userService.ListUserBan(pageable, "viethoang1");
-        assertEquals(0, pr1.getNumberOfElements());
+        assertEquals(0, pr1.getTotalElements());
     }
 
     @Test
@@ -203,9 +203,9 @@ class UserServiceImplTest {
         Pageable pageable = PageRequest.of(0, 5, Sort.by(
                 Sort.Order.desc("id")));
         Page<User> pr = userService.ListUserUnBan(pageable, null);
-        assertEquals(4, pr.getNumberOfElements());
-        Page<User> pr1 = userService.ListUserUnBan(pageable, "viethoang1");
-        assertEquals(1, pr1.getNumberOfElements());
+        assertEquals(4, pr.getTotalElements());
+        Page<User> pr1 = userService.ListUserUnBan(pageable, "viethoang");
+        assertEquals(1, pr1.getTotalElements());
     }
 
     @Test

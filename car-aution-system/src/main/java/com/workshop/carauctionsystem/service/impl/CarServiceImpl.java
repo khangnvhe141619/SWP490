@@ -37,11 +37,6 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public List<Car> getAllModel() {
-        return null;
-    }
-
-    @Override
     public void saveCar(Car car) {
         carRepository.save(car);
     }
@@ -58,11 +53,6 @@ public class CarServiceImpl implements CarService {
             throw new NotFoundException("Could not find any with ID" + id);
         }
         carRepository.delete(id);
-    }
-
-    @Override
-    public ModelCar findById(Long id) throws NotFoundException {
-        return null;
     }
 
     @Override

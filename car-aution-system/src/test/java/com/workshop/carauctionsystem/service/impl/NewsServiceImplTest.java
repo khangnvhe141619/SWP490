@@ -37,7 +37,7 @@ class NewsServiceImplTest {
     @Test
     void whenSearch_thenListNewsFound() {
         List<News> lst = newsService.getAllNews();
-        assertEquals(8, lst.size());
+        assertEquals(7, lst.size());
     }
 
     @Test
@@ -64,7 +64,7 @@ class NewsServiceImplTest {
         Pageable pageable = PageRequest.of(0, 5, Sort.by(
                 Sort.Order.desc("id")));
         Page<News> pm = newsService.findAllOrderById(pageable);
-        assertEquals(5, pm.getNumberOfElements());
+        assertEquals(7, pm.getTotalElements());
     }
 
     @Test
@@ -73,9 +73,9 @@ class NewsServiceImplTest {
         Pageable pageable = PageRequest.of(0, 5, Sort.by(
                 Sort.Order.desc("id")));
         Page<News> pm = newsService.findAllNewsOrderById(pageable, name);
-        assertEquals(0, pm.getNumberOfElements());
+        assertEquals(0, pm.getTotalElements());
         Page<News> pm1 = newsService.findAllNewsOrderById(pageable, null);
-        assertEquals(5, pm1.getNumberOfElements());
+        assertEquals(7, pm1.getTotalElements());
     }
 
     @Test
@@ -83,7 +83,7 @@ class NewsServiceImplTest {
         Pageable pageable = PageRequest.of(0, 5, Sort.by(
                 Sort.Order.desc("id")));
         Page<News> pn = newsService.findPaginated(1, 1);
-        assertEquals(1, pn.getNumberOfElements());
+        assertEquals(7, pn.getTotalElements());
     }
 
     @Test
@@ -95,6 +95,6 @@ class NewsServiceImplTest {
     void display5NewsLatest() {
         Pageable page = PageRequest.of(0, 5);
         Page<News> pn = newsService.getTop5(1);
-        assertEquals(5, pn.getNumberOfElements());
+        assertEquals(7, pn.getTotalElements());
     }
 }

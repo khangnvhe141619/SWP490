@@ -21,8 +21,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 
@@ -124,7 +126,7 @@ public class AdminRoomController {
                          @RequestParam Map<String, String> requestMap) throws ParseException {
 
         if (requestMap.get("roomName").equals("") || requestMap.get("startTime").equals("") ||
-                requestMap.get("endTime").equals("")){
+                requestMap.get("endTime").equals("") || requestMap.get("openDate").equals("")){
             ra.addFlashAttribute("fail", "Add new Room Auction Failed");
             return "redirect:/admin/auctionroom";
         }
@@ -132,6 +134,7 @@ public class AdminRoomController {
         String roomName = requestMap.get("roomName");
         String startTime = requestMap.get("startTime");
         String endTime = requestMap.get("endTime");
+        String openDate = requestMap.get("openDate");
         Date date = new Date();
         Timestamp updateAt = new Timestamp(date.getTime());
         int ticketPrice = Integer.parseInt(requestMap.get("ticketPrice"));
@@ -156,24 +159,13 @@ public class AdminRoomController {
         try {
             FileCopyUtils.copy(upImg.getBytes(), new File("src\\main\\resources\\static\\assets\\hoang/" + nameFile));
             String img = "/assets/hoang/" + nameFile;
-            roomService.update(roomName,startTime,endTime,updateAt,ticketNumber,ticketPrice,typeRoom,createBy,img,id);
+            roomService.update(roomName,startTime,endTime,updateAt,ticketNumber,ticketPrice,typeRoom,createBy,img,openDate,id);
         } catch (IOException e) {
             String img = room.getImgPath();
-            roomService.update(roomName,startTime,endTime,updateAt,ticketNumber,ticketPrice,typeRoom,createBy,img,id);
+            roomService.update(roomName,startTime,endTime,updateAt,ticketNumber,ticketPrice,typeRoom,createBy,img,openDate,id);
         }
         ra.addFlashAttribute("success", "The brand has been saved successfully");
         return "redirect:/admin/auctionroom";
     }
 
-//    @GetMapping("/admin/auctionroom/delete/{id}")
-//    public String deleteModel(@PathVariable(value = "id") Long id, RedirectAttributes ra) {
-//        try {
-//            roomService.delete(id);
-//        } catch (NotFoundException e) {
-//            ra.addFlashAttribute("message", e.getMessage());
-//            return "page404";
-//        }
-//        ra.addFlashAttribute("success", "The Auction Room has been deleted successfully");
-//        return "redirect:/admin/auctionroom";
-//    }
 }

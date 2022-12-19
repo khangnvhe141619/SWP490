@@ -321,6 +321,223 @@
                             <td th:text="${c.carId.modelId.modelName}"></td>
                             <td th:text="${c.carId.downBoundPrice}+'&ensp;->&ensp;'+${c.carId.upBoundPrice}"></td>
                             <td th:text="${c.openDate}"></td>
+                          <td>
+                            <button title="View" class="pd-setting-ed"><a  th:attr="data-target='#myViewModal'+*{c.id}" data-toggle="modal"><i class="fa fa-eye" aria-hidden="true"></i></a></button>
+                            <button title="Edit" class="pd-setting-ed"><a th:attr="data-target='#myUpdateModal'+*{c.id}" data-toggle="modal"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></button>
+                            <button data-toggle="tooltip" title="Trash" class="pd-setting-ed" ><a th:onclick="showMess([[${c.id}]])"><i class="fa fa-trash-o" aria-hidden="true"></i></a></button>
+                          </td>
+                          <div th:id="'myViewModal'+*{c.id}" class="modal fade" tabindex="-1" role="dialog">
+                            <div class="modal-dialog modal-lg" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                  <h4 class="modal-title">View</h4>
+                                </div>
+                                <div class="modal-body">
+                                  <div style="margin: 0 auto;" class="profile-info-inner">
+                                    <div class="text-center">
+                                      <img th:src="${c.imgPath}" style="height: 300px; width: 500px" alt=""/>
+                                    </div>
+                                    <div class="profile-details-hr">
+
+                                      <div class="row">
+                                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                          <div class="address-hr biography">
+                                            <p><b>Room Name</b><br/>
+                                              <span class="form-control" th:text="${c.roomName}"></span></p>
+                                          </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                          <div class="address-hr biography">
+                                            <p><b>Car Name</b><br/>
+                                              <span class="form-control" th:text="${c.carId.carName}"></span></p>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="row">
+                                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                          <div class="address-hr biography">
+                                            <p><b>Start Time</b><br/>
+                                              <span class="form-control" th:text="${c.startTime}"></span></p>
+                                          </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                          <div class="address-hr biography">
+                                            <p><b>End Time</b><br/>
+                                              <span class="form-control" th:text="${c.endTime}"></span></p>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="row">
+                                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                          <div class="address-hr biography">
+                                            <p><b>Number Ticket</b><br/>
+                                              <span class="form-control" th:text="${c.ticketNumber}"></span></p>
+                                          </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                          <div class="address-hr biography">
+                                            <p><b>Open Date</b><br/>
+                                              <span class="form-control" th:text="${c.openDate}"></span></p>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="row">
+                                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                          <div class="address-hr biography">
+                                            <p><b>Up Bound Price</b><br/>
+                                              <span class="form-control" th:text="${c.carId.upBoundPrice}"></span></p>
+                                          </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                          <div class="address-hr biography">
+                                            <p><b>Down Bound Price</b><br/>
+                                              <span class="form-control" th:text="${c.carId.downBoundPrice}"></span></p>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="row">
+                                        <div class="col-sm-12 col-xs-6">
+                                          <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
+                                            <p><b>Description</b><br /> [[${c.carId.description}]]</p>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="row">
+                                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                        </div>
+                                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                          <div class="address-hr">
+                                            <p><b>Create By</b><br /> [[${c.createdBy.userName}]]</p>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <!--End View pop-up-->
+
+                          <!-- Start Update pop-up-->
+                          <div th:id="'myUpdateModal'+*{c.id}" class="modal fade" tabindex="-1" role="dialog">
+                            <div class="modal-dialog modal-lg" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                  <h4 class="modal-title">Update</h4>
+                                </div>
+                                <form action="#"  th:action="@{/admin/home/edit}" method="post" enctype="multipart/form-data">
+                                  <div class="modal-body">
+                                    <div style="margin: 0 auto;" class="profile-info-inner">
+                                      <div class="profile-details-hr">
+                                        <div class="row">
+                                          <div class="col-sm-12 col-xs-6">
+                                            <p><b>ID</b></p>
+                                            <div class="form-group">
+                                              <input th:value="*{c.id}" name="id" type="text" class="form-control" placeholder="ID" readonly="readonly">
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="row">
+                                          <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                            <div class="address-hr">
+                                              <p><b>Room Name</b></p>
+                                              <div class="form-group">
+                                                <input th:value="*{c.roomName}" name="roomName" type="text" class="form-control" placeholder="Room Name">
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                            <div class="address-hr">
+                                              <p><b>Car Name</b></p>
+                                              <div class="form-group">
+                                                <select name="getIdCar" class="form-control" disabled="disabled">
+                                                  <option value="none" selected="" disabled="">Select Model</option>
+                                                  <option th:each="ca : ${cars}" th:value="${ca.id}" th:text="${ca.carName}" th:selected="${ca.id} == *{c.carId.id}"></option>
+                                                </select>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="row">
+                                          <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                            <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
+                                              <p><b>Start Time</b></p>
+                                              <div class="form-group res-mg-t-15">
+                                                <input th:value="*{c.startTime}" name="startTime" type="time" class="form-control" placeholder="Start Time">
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                            <div class="address-hr">
+                                              <p><b>End Time</b></p>
+                                              <div class="form-group">
+                                                <input th:value="*{c.endTime}" name="endTime" type="time" class="form-control" placeholder="Start Time">
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="row">
+                                          <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                            <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
+                                              <p><b>Number Ticket</b></p>
+                                              <div class="form-group res-mg-t-15">
+                                                <input th:value="*{c.ticketNumber}" name="numTicket" type="number" min="5" max="20" class="form-control" placeholder="Ticket">
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                            <div class="address-hr">
+                                              <p><b>Open Date</b></p>
+                                              <div class="form-group">
+                                                <input th:value="*{c.openDate}"  name="openDate" type="date" class="form-control" placeholder="Start Time" >
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="row">
+                                          <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                            <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
+                                              <p><b>Ticket Price</b></p>
+                                              <div class="form-group res-mg-t-15">
+                                                <input th:value="*{c.ticketPrice}" name="ticketPrice" type="number" min="1" max="1000" class="form-control" placeholder="Ticket">
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                            <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
+                                              <p><b>Image</b></p>
+                                              <div class="form-group">
+                                                <input name="upImg" type="file" class="form-control" placeholder="">
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="row">
+                                          <div class="col-sm-12 col-xs-6">
+                                            <div class="text-center">
+                                              <img th:src="${c.imgPath}" style="height: 300px; width: 500px" alt=""/>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                    <button type="submit" class="btn btn-primary">Update</button>
+                                  </div>
+                                </form>
+                              </div>
+                            </div>
+                          </div>
+                          <!--End Update pop-up-->
+
                           </tr>
                         </table>
                       </div>
@@ -374,8 +591,218 @@
                           <td>
                             <button title="View" class="pd-setting-ed"><a  th:attr="data-target='#myViewModal'+*{c.id}" data-toggle="modal"><i class="fa fa-eye" aria-hidden="true"></i></a></button>
                             <button title="Edit" class="pd-setting-ed"><a th:attr="data-target='#myUpdateModal'+*{c.id}" data-toggle="modal"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></button>
-                            <button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><a ><i class="fa fa-trash-o" aria-hidden="true"></i></a></button>
                           </td>
+                          <div th:id="'myViewModal'+*{c.id}" class="modal fade" tabindex="-1" role="dialog">
+                            <div class="modal-dialog modal-lg" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                  <h4 class="modal-title">View</h4>
+                                </div>
+                                <div class="modal-body">
+                                  <div style="margin: 0 auto;" class="profile-info-inner">
+                                    <div class="text-center">
+                                      <img th:src="${c.imgPath}" style="height: 300px; width: 500px" alt=""/>
+                                    </div>
+                                    <div class="profile-details-hr">
+
+                                      <div class="row">
+                                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                          <div class="address-hr biography">
+                                            <p><b>Room Name</b><br/>
+                                              <span class="form-control" th:text="${c.roomName}"></span></p>
+                                          </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                          <div class="address-hr biography">
+                                            <p><b>Car Name</b><br/>
+                                              <span class="form-control" th:text="${c.carId.carName}"></span></p>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="row">
+                                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                          <div class="address-hr biography">
+                                            <p><b>Start Time</b><br/>
+                                              <span class="form-control" th:text="${c.startTime}"></span></p>
+                                          </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                          <div class="address-hr biography">
+                                            <p><b>End Time</b><br/>
+                                              <span class="form-control" th:text="${c.endTime}"></span></p>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="row">
+                                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                          <div class="address-hr biography">
+                                            <p><b>Number Ticket</b><br/>
+                                              <span class="form-control" th:text="${c.ticketNumber}"></span></p>
+                                          </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                          <div class="address-hr biography">
+                                            <p><b>Open Date</b><br/>
+                                              <span class="form-control" th:text="${c.openDate}"></span></p>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="row">
+                                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                          <div class="address-hr biography">
+                                            <p><b>Up Bound Price</b><br/>
+                                              <span class="form-control" th:text="${c.carId.upBoundPrice}"></span></p>
+                                          </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                          <div class="address-hr biography">
+                                            <p><b>Down Bound Price</b><br/>
+                                              <span class="form-control" th:text="${c.carId.downBoundPrice}"></span></p>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="row">
+                                        <div class="col-sm-12 col-xs-6">
+                                          <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
+                                            <p><b>Description</b><br /> [[${c.carId.description}]]</p>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="row">
+                                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                        </div>
+                                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                          <div class="address-hr">
+                                            <p><b>Create By</b><br /> [[${c.createdBy.userName}]]</p>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <!--End View pop-up-->
+
+                          <div th:id="'myUpdateModal'+*{c.id}" class="modal fade" tabindex="-1" role="dialog">
+                            <div class="modal-dialog modal-lg" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                  <h4 class="modal-title">Update</h4>
+                                </div>
+                                <form action="#"  th:action="@{/admin/home/edit}" method="post" enctype="multipart/form-data">
+                                  <div class="modal-body">
+                                    <div style="margin: 0 auto;" class="profile-info-inner">
+                                      <div class="profile-details-hr">
+                                        <div class="row">
+                                          <div class="col-sm-12 col-xs-6">
+                                            <p><b>ID</b></p>
+                                            <div class="form-group">
+                                              <input th:value="*{c.id}" name="id" type="text" class="form-control" placeholder="ID" readonly="readonly">
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="row">
+                                          <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                            <div class="address-hr">
+                                              <p><b>Room Name</b></p>
+                                              <div class="form-group">
+                                                <input th:value="*{c.roomName}" name="roomName" type="text" class="form-control" placeholder="Room Name">
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                            <div class="address-hr">
+                                              <p><b>Car Name</b></p>
+                                              <div class="form-group">
+                                                <select name="getIdCar" class="form-control" disabled="disabled">
+                                                  <option value="none" selected="" disabled="">Select Model</option>
+                                                  <option th:each="ca : ${cars}" th:value="${ca.id}" th:text="${ca.carName}" th:selected="${ca.id} == *{c.carId.id}"></option>
+                                                </select>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="row">
+                                          <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                            <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
+                                              <p><b>Start Time</b></p>
+                                              <div class="form-group res-mg-t-15">
+                                                <input th:value="*{c.startTime}" name="startTime" type="time" class="form-control" placeholder="Start Time">
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                            <div class="address-hr">
+                                              <p><b>End Time</b></p>
+                                              <div class="form-group">
+                                                <input th:value="*{c.endTime}" name="endTime" type="time" class="form-control" placeholder="Start Time">
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="row">
+                                          <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                            <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
+                                              <p><b>Number Ticket</b></p>
+                                              <div class="form-group res-mg-t-15">
+                                                <input th:value="*{c.ticketNumber}" name="numTicket" type="number" min="5" max="20" class="form-control" placeholder="Ticket">
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                            <div class="address-hr">
+                                              <p><b>Open Date</b></p>
+                                              <div class="form-group">
+                                                <input th:value="*{c.openDate}"  name="openDate" type="date" class="form-control" placeholder="Start Time" >
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="row">
+                                          <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                            <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
+                                              <p><b>Ticket Price</b></p>
+                                              <div class="form-group res-mg-t-15">
+                                                <input th:value="*{c.ticketPrice}" name="ticketPrice" type="number" min="1" max="1000" class="form-control" placeholder="Ticket">
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                            <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
+                                              <p><b>Image</b></p>
+                                              <div class="form-group">
+                                                <input name="upImg" type="file" class="form-control" placeholder="">
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="row">
+                                          <div class="col-sm-12 col-xs-6">
+                                            <div class="text-center">
+                                              <img th:src="${c.imgPath}" style="height: 300px; width: 500px" alt=""/>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                    <button type="submit" class="btn btn-primary">Update</button>
+                                  </div>
+                                </form>
+                              </div>
+                            </div>
+                          </div>
+                          <!--End Update pop-up-->
+
                           </tr>
                         </table>
                       </div>
@@ -429,6 +856,102 @@
                           <td>
                             <button title="View" class="pd-setting-ed"><a  th:attr="data-target='#myViewModal'+*{c.id}" data-toggle="modal"><i class="fa fa-eye" aria-hidden="true"></i></a></button>
                           </td>
+                          <div th:id="'myViewModal'+*{c.id}" class="modal fade" tabindex="-1" role="dialog">
+                            <div class="modal-dialog modal-lg" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                  <h4 class="modal-title">View</h4>
+                                </div>
+                                <div class="modal-body">
+                                  <div style="margin: 0 auto;" class="profile-info-inner">
+                                    <div class="text-center">
+                                      <img th:src="${c.imgPath}" style="height: 300px; width: 500px" alt=""/>
+                                    </div>
+                                    <div class="profile-details-hr">
+
+                                      <div class="row">
+                                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                          <div class="address-hr biography">
+                                            <p><b>Room Name</b><br/>
+                                              <span class="form-control" th:text="${c.roomName}"></span></p>
+                                          </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                          <div class="address-hr biography">
+                                            <p><b>Car Name</b><br/>
+                                              <span class="form-control" th:text="${c.carId.carName}"></span></p>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="row">
+                                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                          <div class="address-hr biography">
+                                            <p><b>Start Time</b><br/>
+                                              <span class="form-control" th:text="${c.startTime}"></span></p>
+                                          </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                          <div class="address-hr biography">
+                                            <p><b>End Time</b><br/>
+                                              <span class="form-control" th:text="${c.endTime}"></span></p>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="row">
+                                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                          <div class="address-hr biography">
+                                            <p><b>Number Ticket</b><br/>
+                                              <span class="form-control" th:text="${c.ticketNumber}"></span></p>
+                                          </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                          <div class="address-hr biography">
+                                            <p><b>Open Date</b><br/>
+                                              <span class="form-control" th:text="${c.openDate}"></span></p>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="row">
+                                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                          <div class="address-hr biography">
+                                            <p><b>Up Bound Price</b><br/>
+                                              <span class="form-control" th:text="${c.carId.upBoundPrice}"></span></p>
+                                          </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                          <div class="address-hr biography">
+                                            <p><b>Down Bound Price</b><br/>
+                                              <span class="form-control" th:text="${c.carId.downBoundPrice}"></span></p>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="row">
+                                        <div class="col-sm-12 col-xs-6">
+                                          <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
+                                            <p><b>Description</b><br /> [[${c.carId.description}]]</p>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="row">
+                                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                        </div>
+                                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                          <div class="address-hr">
+                                            <p><b>Create By</b><br /> [[${c.createdBy.userName}]]</p>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <!--End View pop-up-->
                           </tr>
                         </table>
                       </div>
@@ -472,6 +995,14 @@
   <!--End footer-->
 </div>
 
+<script th:inline="javascript">
+  function showMess(id) {
+    var option = confirm('Do you want delete ?');
+  if (option === true){
+  window.location.href = "home/delete/"+id;
+}
+  }
+</script>
 <!-- jquery
     ============================================ -->
 <script th:src="@{js/vendor/jquery-1.12.4.min.js}"></script>
