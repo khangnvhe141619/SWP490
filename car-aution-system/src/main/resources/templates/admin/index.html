@@ -324,7 +324,7 @@
                           <td>
                             <button title="View" class="pd-setting-ed"><a  th:attr="data-target='#myViewModal'+*{c.id}" data-toggle="modal"><i class="fa fa-eye" aria-hidden="true"></i></a></button>
                             <button title="Edit" class="pd-setting-ed"><a th:attr="data-target='#myUpdateModal'+*{c.id}" data-toggle="modal"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></button>
-                            <button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><a th:href="@{/admin/home/delete/{id}(id=${c.id})}"><i class="fa fa-trash-o" aria-hidden="true"></i></a></button>
+                            <button data-toggle="tooltip" title="Trash" class="pd-setting-ed" ><a th:onclick="showMess([[${c.id}]])"><i class="fa fa-trash-o" aria-hidden="true"></i></a></button>
                           </td>
                           <div th:id="'myViewModal'+*{c.id}" class="modal fade" tabindex="-1" role="dialog">
                             <div class="modal-dialog modal-lg" role="document">
@@ -995,6 +995,14 @@
   <!--End footer-->
 </div>
 
+<script th:inline="javascript">
+  function showMess(id) {
+    var option = confirm('Do you want delete ?');
+  if (option === true){
+  window.location.href = "home/delete/"+id;
+}
+  }
+</script>
 <!-- jquery
     ============================================ -->
 <script th:src="@{js/vendor/jquery-1.12.4.min.js}"></script>

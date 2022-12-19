@@ -323,7 +323,7 @@
                   </td>
                   <td>
                     <button title="View" class="pd-setting-ed"><a href="#myModal" data-toggle="modal"><i class="fa fa-eye" aria-hidden="true"></i></a></button>
-                    <button data-toggle="tooltip" title="Ban" class="pd-setting-ed"><a th:href="@{/admin/user/ban/{id}(id=${c.id})}"><i class="fa fa-trash-o" aria-hidden="true"></i></a></button>
+                    <button data-toggle="tooltip" title="Ban" class="pd-setting-ed"><a th:onclick="showMess([[${c.id}]])"><i class="fa fa-trash-o" aria-hidden="true"></i></a></button>
                   </td>
                 </tr>
                 </tr>
@@ -458,6 +458,13 @@
 <!-- main JS
     ============================================ -->
 <script th:src="@{js/main.js}"></script>
-
+<script th:inline="javascript">
+  function showMess(id) {
+    var option = confirm('Do you want Ban this user ?');
+    if (option === true){
+      window.location.href = "user/ban/"+id;
+    }
+  }
+</script>
 </body>
 </html>
