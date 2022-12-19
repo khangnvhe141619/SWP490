@@ -8,6 +8,11 @@ a {
   text-decoration: none;
 }
 
+.bidBox{
+  overflow-x:hidden;
+  overflow-y:auto;
+}
+
 .mySlides {
   margin-top: 50px;
   height: 500px;

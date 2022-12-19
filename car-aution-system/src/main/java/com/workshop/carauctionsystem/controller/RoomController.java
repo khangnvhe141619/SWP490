@@ -51,7 +51,7 @@ public class RoomController {
     public String getCombobox(@PathVariable(value ="brandId" ) String brandId) {
 
         Long bId = Long.parseLong(brandId);
-       Gson gson = new Gson();
+        Gson gson = new Gson();
         return gson.toJson(modelRepository.getListModelByBrand(bId));
     }
 
@@ -87,6 +87,8 @@ public class RoomController {
         }
         Long carId = room.getCarId().getId();
         List<Image> imageList = imageService.getAllImageByCarId(carId);
+        List<HistoryBid> historyBids = roomDetailPlayerService.getAllHistoryBidByRoomIdAndUserId(id, userId);
+        List<HistoryBid> listAllByRoomId = roomDetailPlayerService.getAllHistoryBidByRoomId(id);
         List<SafetySystem> safetySystemList = safetySystemService.getAllSafetySystem(carId);
         Car car = carService.getAllCarById(carId);
         CarSpecification carSpecification = carSpecificationService.getAllByCarId(carId);
@@ -94,6 +96,8 @@ public class RoomController {
         model.addAttribute("diffHours", diffHours);
         model.addAttribute("diffMinutes", diffMinutes);
         model.addAttribute("diffSeconds", diffSeconds);
+        model.addAttribute("historyBids", historyBids);
+        model.addAttribute("listAllByRoomId", listAllByRoomId);
         model.addAttribute("room", room);
         model.addAttribute("imageList", imageList);
         model.addAttribute("safetySystemList", safetySystemList);
@@ -113,14 +117,34 @@ public class RoomController {
     }
 
     @PostMapping("/insertBid")
-    public ResponseEntity<ResponseObject> insertBid(@RequestParam("bid") String bid, @RequestParam("roomId") int roomId,
-                                                    @CookieValue(value = "setUserId") int setUserId,
-                                                    HttpSession session) {
+    public ResponseEntity<ResponseObject> insertBid(@RequestParam("bid") String bid,
+                                                    @RequestParam("roomId") int roomId,
+                                                    @CookieValue(value = "setUserId") int setUserId) {
+        System.out.println(bid+"AAAAAAAA"+roomId);
         int bidInt = Integer.parseInt(bid);
         Date date = new Date();
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String dateString = df.format(date);
         roomDetailPlayerService.updateUserBid(bidInt, dateString, setUserId, roomId);
+        roomDetailPlayerService.updateHistoryBid(roomId, setUserId, bidInt, dateString);
         return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject("no", "Invalid password!", null));
+    }
+
+    @PostMapping("/allBid")
+    public String allBid() {
+        String html = "";
+        List<HistoryBid> historyBidList = roomDetailPlayerService.getAllHistoryBidByRoomId(1);
+        for (HistoryBid historyBid : historyBidList){
+            html += "<div class=\"row\">";
+            html += "<div class=\"col-md-1\">";
+            html += "<img src=\"/assets/img/avatar/andanh.jpg\" style=\"height: 40px; width: 40px\">";
+            html += "</div>";
+            html += "<div class=\"col-md-11\" style=\"font-size: 14px\">";
+            html += "<span>***</span>";
+            html += "<p>" + historyBid.getYourBid() + " CAB</p>";
+            html += "</div>";
+            html += "</div>";
+        }
+        return html;
     }
 }

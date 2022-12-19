@@ -1,6 +1,8 @@
 package com.workshop.carauctionsystem.service.impl;
 
+import com.workshop.carauctionsystem.entity.HistoryBid;
 import com.workshop.carauctionsystem.entity.RoomDetailPlayer;
+import com.workshop.carauctionsystem.repository.HistoryBidRepository;
 import com.workshop.carauctionsystem.repository.RoomDetailPlayerRepository;
 import com.workshop.carauctionsystem.service.RoomDetailPlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,8 @@ import java.util.List;
 public class RoomDetailPlayerServiceImpl implements RoomDetailPlayerService {
     @Autowired
     RoomDetailPlayerRepository roomDetailPlayerRepository;
+    @Autowired
+    HistoryBidRepository historyBidRepository;
     @Override
     public List<RoomDetailPlayer> getAllByUserIdAndRoomId(int roomId, int userId) {
         return roomDetailPlayerRepository.findRoomDetailPlayerByRoomIdAndUserId(roomId, userId);
@@ -47,5 +51,19 @@ public class RoomDetailPlayerServiceImpl implements RoomDetailPlayerService {
     @Override
     public List<RoomDetailPlayer> getAllByUserIdAndWinner(int userId, int winner) {
         return roomDetailPlayerRepository.getAllByUserIdAndWinner(userId, winner);
+    }
+    @Override
+    public void updateHistoryBid( int roomId, int userId,double yourBid, String time){
+        historyBidRepository.updateHistoryBid(roomId, userId, yourBid, time);
+    }
+
+    @Override
+    public List<HistoryBid> getAllHistoryBidByRoomIdAndUserId(int roomId, int userId) {
+        return historyBidRepository.getAllByRoomIdAndUserId(roomId, userId);
+    }
+
+    @Override
+    public List<HistoryBid> getAllHistoryBidByRoomId(int roomId) {
+        return historyBidRepository.getAllByRoomId(roomId);
     }
 }

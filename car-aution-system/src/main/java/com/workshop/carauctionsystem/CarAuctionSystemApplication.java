@@ -8,9 +8,6 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 public class CarAuctionSystemApplication {
 
 	public static void main(String[] args) {
-
 		SpringApplication.run(CarAuctionSystemApplication.class, args);
 	}
-
-
 }
