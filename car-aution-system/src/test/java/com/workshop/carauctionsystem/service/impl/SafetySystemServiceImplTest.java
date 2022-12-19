@@ -31,7 +31,7 @@ class SafetySystemServiceImplTest {
     void givenValidInformation_whenSaveSafetySystem_thenSucceed() {
         Car c = new Car();
         c.setId(1l);
-        SafetySystem ss = new SafetySystem(17l, c, "1", "yes", "1", "yes", "1");
+        SafetySystem ss = new SafetySystem(17l, c, "4", "yes", "Yes", "yes", "No have car");
         safetySystemService.saveSafetySystem(ss);
     }
 
@@ -43,6 +43,6 @@ class SafetySystemServiceImplTest {
 
     @Test
     void givenValidId_whenUpdate_thenSucceed() {
-        safetySystemService.update("1", "yes", "1", "yes", "1", 1l);
+        safetySystemService.update("1", "yes", "Yes", "yes", "There is a car", 1l);
     }
 }

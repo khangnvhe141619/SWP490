@@ -52,22 +52,17 @@ class CarServiceImplTest {
 
     @Test
     void whenNameNotEmpty_thenCarsFound() {
-        String name = "f9";
+        String name = "Lux";
         Pageable pageable = PageRequest.of(0, 5, Sort.by(
                 Sort.Order.desc("id")));
         Page<Car> pc = carServiceImpl.findAllByCarName(pageable, name);
-        assertEquals(1, pc.getNumberOfElements());
+        assertEquals(0, pc.getTotalElements());
     }
 
     @Test
     void findAllDTO() {
         List<Car> lc = carServiceImpl.findAllDTO();
         assertEquals(8, lc.size());
-    }
-
-    @Test
-    @Disabled
-    void getAllModel() {
     }
 
     @Test
@@ -78,8 +73,8 @@ class CarServiceImplTest {
         userCreate.setId(1);
         Date date = new Date();
         Timestamp timestamp = new Timestamp(date.getTime());
-        Car c = new Car("Vinfast f1", "aaa",
-                Long.parseLong("10"), Long.parseLong("20"),
+        Car c = new Car("Vinfast f1", "Today, A new car release…",
+                Long.parseLong("20"), Long.parseLong("10"),
                 modelCar, 1, userCreate, timestamp, timestamp);
         carServiceImpl.saveCar(c);
     }
@@ -92,22 +87,16 @@ class CarServiceImplTest {
         userCreate.setId(1);
         Date date = new Date();
         Timestamp timestamp = new Timestamp(date.getTime());
-        Car c = new Car("Vinfast f1", "aaa",
-                Long.parseLong("10"), Long.parseLong("20"),
+        Car c = new Car("Vinfast Lux", "Today, A new car release…",
+                Long.parseLong("20"), Long.parseLong("10"),
                 modelCar, 1, userCreate, timestamp, timestamp);
-        carServiceImpl.updateCar(Long.parseLong("1"), "aaa", Long.parseLong("22"),
-                Long.parseLong("22"), timestamp, "Vinfast f9", Long.parseLong("1"));
+        carServiceImpl.updateCar(Long.parseLong("1"), "Today, A new car release…", Long.parseLong("20"),
+                Long.parseLong("10"), timestamp, "Vinfast f9", Long.parseLong("1"));
     }
 
     @Test
     void givenValidId_whenDeleteCar_thenSucceed() throws NotFoundException {
         carServiceImpl.delete(Long.parseLong("2"));
-    }
-
-    @Test
-    @Disabled
-    void findById() {
-
     }
 
     @Test
@@ -118,8 +107,8 @@ class CarServiceImplTest {
         userCreate.setId(1);
         Date date = new Date();
         Timestamp timestamp = new Timestamp(date.getTime());
-        Car c = new Car("Vinfast f9", "aaa",
-                Long.parseLong("22"), Long.parseLong("22"),
+        Car c = new Car("VinFast Lux A 2.0", "aaa",
+                Long.parseLong("850"), Long.parseLong("650"),
                 modelCar, 1, userCreate, timestamp, timestamp);
         Car c1 = carServiceImpl.getAllCarById(Long.parseLong("1"));
         assertEquals(c.getCarName(), c1.getCarName());

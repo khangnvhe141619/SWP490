@@ -58,30 +58,41 @@ class BrandServiceImplTest {
     void tearDown() throws Exception {
         autoCloseable.close();
     }
-
+//1
     @Test
     void getAllBrand() {
         List<Brand> lst = brandServiceImpl.getAllBrand();
-        assertEquals(18, lst.size());
+        assertEquals(14, lst.size());
     }
-
+//2
     @Test
     void givenValidBrand_whenSaveBrand_thenSucceed() {
+        Brand b1 = new Brand("VINFAST", "/hoang/vinfast.jpg", Long.parseLong("0"));
+        brandServiceImpl.saveBrand(b1);
+    }
+//3
+    @Test
+    void givenValidBrandNotStatus_whenSaveBrand_thenSucceed() {
         Brand b1 = new Brand("VINFAST", "/hoang/vinfast.jpg", Long.parseLong("1"));
         brandServiceImpl.saveBrand(b1);
     }
-
+//4
     @Test
     void givenValidBrand_whenUpdateBrand_thenSucceed() {
         Brand b1 = new Brand("FANVIST", "/hoang/vinfast.jpg", Long.parseLong("1"));
         brandServiceImpl.updateBrand(b1.getBrandName(), b1.getImgPath(), Long.parseLong("6"));
     }
-
+//5
     @Test
     void whenValidId_thenDelete() throws NotFoundException {
         brandServiceImpl.delete(Long.parseLong("3"));
     }
-
+//6
+    @Test
+    void whenValidId1_thenDelete() throws NotFoundException {
+        brandServiceImpl.delete(Long.parseLong("100"));
+    }
+//7
     @Test
     void whenValidId_thenBrandFound() throws NotFoundException {
         Brand b = new Brand(Long.parseLong("1"), "VINFAST", "/hoang/vinfast.jpg", 1l);
@@ -89,16 +100,25 @@ class BrandServiceImplTest {
         assertEquals(b.getBrandName(), newB.getBrandName());
         assertEquals(b.getImgPath(), newB.getImgPath());
     }
-
+//8
+    @Test
+    void whenValidId1_thenBrandFound() throws NotFoundException {
+        Brand b = new Brand(Long.parseLong("1"), "TOYOTA", "/hoang/toyota.png", 1l);
+        Brand newB = brandServiceImpl.findById(Long.parseLong("3"));
+        assertEquals(b.getBrandName(), newB.getBrandName());
+        assertEquals(b.getImgPath(), newB.getImgPath());
+    }
+//9
     @Test
     void findAllOrderById() {
         Pageable pageable = PageRequest.of(0, 5, Sort.by(
                 Sort.Order.desc("id")));
         Page<Brand> pb = brandServiceImpl.findAllOrderById(pageable);
         assertEquals(4, pb.getTotalPages());
+        assertEquals(20, pb.getTotalElements());
         assertEquals(5, pb.getNumberOfElements());
     }
-
+//10
     @Test
     void whenNameNotEmpty_thenBrandsFound() {
         String name = "MAZDA";
@@ -106,6 +126,16 @@ class BrandServiceImplTest {
                 Sort.Order.desc("id")));
         Page<Brand> pb = brandServiceImpl.findAllOrderByName(pageable, name);
         assertEquals(1, pb.getNumberOfElements());
+        assertEquals(1, pb.getTotalElements());
     }
-
+//11
+    @Test
+    void whenNameNotEmpty1_thenBrandsFound() {
+        String name = "VINFAST";
+        Pageable pageable = PageRequest.of(0, 5, Sort.by(
+                Sort.Order.desc("id")));
+        Page<Brand> pb = brandServiceImpl.findAllOrderByName(pageable, name);
+        assertEquals(1, pb.getNumberOfElements());
+        assertEquals(1, pb.getTotalElements());
+    }
 }

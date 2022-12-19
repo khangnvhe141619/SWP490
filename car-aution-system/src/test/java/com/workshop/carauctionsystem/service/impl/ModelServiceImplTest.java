@@ -51,7 +51,7 @@ class ModelServiceImplTest {
 
     @Test
     void givenValidInformation_whenUpdate_thenSucceed() {
-        modelService.updateModel(1l, "LX", 1l, 1l);
+        modelService.updateModel(2l, "LX", 1l, 1l);
     }
 
     @Test
@@ -65,7 +65,7 @@ class ModelServiceImplTest {
 
     @Test
     void givenValidId_whenSearch_thenModelFound() {
-        modelService.findById(1l);
+        modelService.findById(5l);
     }
 
     @Test
@@ -73,7 +73,7 @@ class ModelServiceImplTest {
         Pageable pageable = PageRequest.of(0, 5, Sort.by(
                 Sort.Order.desc("id")));
         Page<ModelCar> pm = modelService.findAllOrderById(pageable);
-        assertEquals(5, pm.getNumberOfElements());
+        assertEquals(60, pm.getTotalElements());
     }
 
     @Test
@@ -82,7 +82,7 @@ class ModelServiceImplTest {
         Pageable pageable = PageRequest.of(0, 5, Sort.by(
                 Sort.Order.desc("id")));
         Page<ModelCar> pm = modelService.findAllOrderByName(pageable, name);
-        assertEquals(1, pm.getNumberOfElements());
+        assertEquals(1, pm.getTotalElements());
         Page<ModelCar> pm1 = modelService.findAllOrderByName(pageable, null);
         assertEquals(5,pm1.getNumberOfElements());
     }

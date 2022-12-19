@@ -34,7 +34,7 @@ class RoomDetailPlayerServiceImplTest {
 
     @Test
     void addPlayer() {
-        roomDetailPlayerService.addPlayer(1, 1, 1, "2022-12-10 10:00", 1);
+        roomDetailPlayerService.addPlayer(1, 1, 10, "2022-12-1 10:00", 1);
     }
 
     @Test
@@ -45,12 +45,12 @@ class RoomDetailPlayerServiceImplTest {
     @Test
     void givenValidRoomId_thenGetAllBid() {
         List<RoomDetailPlayer> lst = roomDetailPlayerService.getAllBidByRoomId(1);
-        assertEquals(0, lst.size());
+        assertEquals(1, lst.size());
     }
 
     @Test
     void whenValiId_thenWinnerFound() {
-        List<RoomDetailPlayer> lst = roomDetailPlayerService.findWinner(1, 1);
+        List<RoomDetailPlayer> lst = roomDetailPlayerService.findWinner(1, 2);
         assertEquals(0, lst.size());
     }
 
@@ -61,7 +61,7 @@ class RoomDetailPlayerServiceImplTest {
 
     @Test
     void getAllByUserIdAndWinner() {
-        List<RoomDetailPlayer> lst = roomDetailPlayerService.getAllByUserIdAndWinner(1, 1);
+        List<RoomDetailPlayer> lst = roomDetailPlayerService.getAllByUserIdAndWinner(2, 1);
         assertEquals(0, lst.size());
     }
 }

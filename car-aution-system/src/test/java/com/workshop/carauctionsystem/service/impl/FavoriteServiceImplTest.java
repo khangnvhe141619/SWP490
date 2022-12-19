@@ -41,8 +41,8 @@ class FavoriteServiceImplTest {
 
     @Test
     void whenValidIDUser_thenGetlistAllFavorite_2() {
-        List<FavoriteDTO> lst = favoriteService.listAllFavorite(1);
-        assertEquals(2, lst.size());
+        List<FavoriteDTO> lst = favoriteService.listAllFavorite(2);
+        assertEquals(1, lst.size());
     }
 
     @Test

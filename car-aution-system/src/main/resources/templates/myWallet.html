@@ -14,25 +14,6 @@
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="assets/css/PersonalProfile.css" rel="stylesheet">
     <link href="assets/css/myActive.css" rel="stylesheet">
-    <style>
-        .truncate {
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-
-        element.style {
-            max-width: calc(100% - 48px);
-        }
-
-        .align-middle {
-            vertical-align: middle;
-        }
-
-        .inline-block {
-            display: inline-block;
-        }
-    </style>
 </head>
 
 <body style="background: url(/assets/img/about-bg1.png);">
@@ -102,11 +83,9 @@
                     <div class="col-md-12">
                         <label class="labels">Address</label>
                         <div th:if="${addressWallet} != null">
-                            <div class="inline-block undefined form-control"
-                                 style="width: 150px; margin-left: 8px;">
-                                <span class="truncate inline-block align-middle"
-                                      style="max-width: calc(100% - 48px);" th:text="${addressWallet}"></span>
-                            </div>
+                            <input type="text" class="form-control" placeholder="enter password"
+                                   th:value="${addressWallet}" value="khang123"
+                                   readonly>
                         </div>
                         <div th:if="${addressWallet} == null">
                             <h6>You don't connect to wallet.</h6>
