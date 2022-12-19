@@ -322,7 +322,6 @@
                                     <td>
                                         <button title="View" class="pd-setting-ed"><a  th:attr="data-target='#myViewModal'+*{c.id}" data-toggle="modal"><i class="fa fa-eye" aria-hidden="true"></i></a></button>
                                         <button title="Edit" class="pd-setting-ed"><a th:attr="data-target='#myUpdateModal'+*{c.id}" data-toggle="modal"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></button>
-                                        <button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><a ><i class="fa fa-trash-o" aria-hidden="true"></i></a></button>
                                     </td>
                                     <!-- Start View pop-up-->
                                     <div th:id="'myViewModal'+*{c.id}" class="modal fade" tabindex="-1" role="dialog">
@@ -494,7 +493,7 @@
                                                                         <div class="address-hr">
                                                                             <p><b>Open Date</b></p>
                                                                             <div class="form-group">
-                                                                                <input th:value="*{c.openDate}"  name="openDate"  class="form-control" placeholder="Start Time" readonly="readonly">
+                                                                                <input th:value="*{c.openDate}"  name="openDate" type="date" class="form-control" placeholder="Start Time" >
                                                                             </div>
                                                                         </div>
                                                                     </div>
