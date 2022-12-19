@@ -40,7 +40,7 @@ class CarSpecificationServiceImplTest {
 
     @Test
     void givenValidInformation_whenUpdateCarSpecification_thenSucceed() {
-        carSpecificationService.update("VinFast",
+        carSpecificationService.update("Mercedes",
                 "15000", "9G TRONIC", "2.0L", "11,11/100km",
                 "Grey", "Brown", "4.709 x 1.827 x 1.435 mm",
                 "AWD - 4 wheelers full time", "2019", Long.parseLong("9"));

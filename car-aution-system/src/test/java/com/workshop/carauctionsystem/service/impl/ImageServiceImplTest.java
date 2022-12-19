@@ -1,5 +1,6 @@
 package com.workshop.carauctionsystem.service.impl;
 
+import com.workshop.carauctionsystem.entity.Car;
 import com.workshop.carauctionsystem.entity.Image;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -29,7 +30,14 @@ class ImageServiceImplTest {
     @Test
     void givenValidCarID_thenAllImageFound() {
         List<Image> lst = imageService.getAllImageByCarId(1l);
-        assertEquals(2, lst.size());
+        assertEquals(3, lst.size());
     }
 
+    @Test
+    void givenValidCarID_whenSaveImage_thenSucceed() {
+        Car car = new Car();
+        car.setId(1l);
+        Image img = new Image(9, car, "/img/Mer/m1.png");
+        imageService.saveImageForCar(img);
+    }
 }

@@ -17,14 +17,11 @@ public interface CarService {
 
     public List<Car> findAllDTO();
 
-    List<Car> getAllModel();
-
     public void saveCar(Car car);
 
     public void updateCar(Long createdBy, String description, Long upBoundPrice, Long downBoundPrice, Timestamp updatedAt, String carName, Long id);
 
     public void delete(Long id) throws NotFoundException;
 
-    public ModelCar findById(Long id) throws NotFoundException;
     public Car getAllCarById(Long id);
 }

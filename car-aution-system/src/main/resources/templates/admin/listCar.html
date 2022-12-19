@@ -432,6 +432,7 @@
                       <button title="View" class="pd-setting-ed"><a th:attr="data-target='#myViewModal'+*{c.id}" data-toggle="modal"><i class="fa fa-eye" aria-hidden="true"></i></a></button>
                       <button title="Edit" class="pd-setting-ed"><a data-toggle="modal" th:attr="data-target='#myUpdateModal'+*{c.id}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></button>
                       <button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><a th:href="@{/admin/car/delete/{id}(id=${c.id})}"><i class="fa fa-trash-o" aria-hidden="true"></i></a></button>
+
                     </td>
                     <!-- Start View pop-up-->
                     <div th:id="'myViewModal'+*{c.id}" class="modal fade" tabindex="-1" role="dialog">

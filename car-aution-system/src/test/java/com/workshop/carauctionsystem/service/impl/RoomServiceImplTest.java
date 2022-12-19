@@ -77,9 +77,9 @@ class RoomServiceImplTest {
         Pageable pageable = PageRequest.of(0, 5, Sort.by(
                 Sort.Order.desc("id")));
         Page<Room> pr = roomService.findAllByName(pageable, name);
-        assertEquals(1, pr.getNumberOfElements());
+        assertEquals(1, pr.getTotalElements());
         Page<Room> pr1 = roomService.findAllByName(pageable, null);
-        assertEquals(5, pr1.getNumberOfElements());
+        assertEquals(9, pr1.getTotalElements());
     }
 
     @Test
@@ -102,7 +102,7 @@ class RoomServiceImplTest {
         Date date = new Date();
         Timestamp timestamp = new Timestamp(date.getTime());
         roomService.update("Lux A", "20:00", "20:20", timestamp,
-                10, 1, 1, "hoang/img1.jpg", 1);
+                10, 1, 1, 1,"hoang/img1.jpg", 1);
     }
 
     @Test
@@ -115,7 +115,7 @@ class RoomServiceImplTest {
         Pageable pageable = PageRequest.of(0, 5, Sort.by(
                 Sort.Order.desc("id")));
         Page<Room> pr = roomService.getListRoom(1, 5);
-        assertEquals(0, pr.getNumberOfElements());
+        assertEquals(0, pr.getTotalElements());
     }
 
     @Test
@@ -123,7 +123,7 @@ class RoomServiceImplTest {
         Pageable pageable = PageRequest.of(0, 5, Sort.by(
                 Sort.Order.desc("id")));
         Page<Room> pr = roomService.getListRoomCurrent(1, 5);
-        assertEquals(0, pr.getNumberOfElements());
+        assertEquals(0, pr.getTotalElements());
     }
 
     @Test
@@ -131,8 +131,8 @@ class RoomServiceImplTest {
         Pageable pageable = PageRequest.of(0, 5, Sort.by(
                 Sort.Order.desc("id")));
         Page<Room> pr = roomService.getSearchRoom(pageable, null, null);
-        assertEquals(0, pr.getNumberOfElements());
+        assertEquals(0, pr.getTotalElements());
         Page<Room> pr1 = roomService.getSearchRoom(pageable, "Lux", "LX");
-        assertEquals(0, pr.getNumberOfElements());
+        assertEquals(0, pr.getTotalElements());
     }
 }

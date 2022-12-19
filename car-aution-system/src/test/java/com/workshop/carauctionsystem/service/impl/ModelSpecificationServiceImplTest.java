@@ -59,7 +59,7 @@ class ModelSpecificationServiceImplTest {
         Pageable pageable = PageRequest.of(0, 5, Sort.by(
                 Sort.Order.desc("id")));
         Page<ModelSpecification> pm = modelSpecificationService.findAllOrderById(pageable);
-        assertEquals(5, pm.getNumberOfElements());
+        assertEquals(13, pm.getTotalElements());
     }
 
     @Test
@@ -67,7 +67,7 @@ class ModelSpecificationServiceImplTest {
         Pageable pageable = PageRequest.of(0, 5, Sort.by(
                 Sort.Order.desc("id")));
         Page<ModelSpecification> pm = modelSpecificationService.findAllOrderById(pageable);
-        assertEquals(5, pm.getNumberOfElements());
+        assertEquals(13, pm.getTotalElements());
     }
 
     @Test
@@ -76,7 +76,8 @@ class ModelSpecificationServiceImplTest {
         Pageable pageable = PageRequest.of(0, 5, Sort.by(
                 Sort.Order.desc("id")));
         Page<ModelSpecification> pm = modelSpecificationService.findAllOrderByName(pageable, name);
-        assertEquals(2, pm.getNumberOfElements());
+        assertEquals(1, pm.getNumberOfElements());
+        assertEquals(1, pm.getTotalElements());
         Page<ModelSpecification> pm1 = modelSpecificationService.findAllOrderByName(pageable, null);
         assertEquals(5, pm1.getNumberOfElements());
     }
