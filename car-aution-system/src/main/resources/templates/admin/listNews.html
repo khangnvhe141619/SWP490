@@ -352,7 +352,7 @@
                                         <button title="Edit" class="pd-setting-ed"><a data-toggle="modal"
                                                                                       th:attr="data-target='#myUpdateModal'+*{c.id}"><i
                                                 class="fa fa-pencil-square-o" aria-hidden="true"></i></a></button>
-                                        <button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><a th:href="@{/admin/news/delete/{id}(id=${c.id})}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                        <button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><a th:onclick="showMess([[${c.id}]])"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                         </button>
                                     </td>
                                     <!-- Start View pop-up-->
@@ -693,6 +693,14 @@
 <!-- main JS
     ============================================ -->
 <script th:src="@{js/main.js}"></script>
+<script th:inline="javascript">
+    function showMess(id) {
+        var option = confirm('Do you want delete ?');
+        if (option === true){
+            window.location.href = "news/delete/"+id;
+        }
+    }
+</script>
 </body>
 
 </html>

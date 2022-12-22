@@ -1,5 +1,6 @@
 package com.workshop.carauctionsystem.service;
 
+import com.workshop.carauctionsystem.entity.HistoryBid;
 import com.workshop.carauctionsystem.entity.RoomDetailPlayer;
 
 import java.util.List;
@@ -12,4 +13,7 @@ public interface RoomDetailPlayerService {
     public List<RoomDetailPlayer> findWinner(int userBid, int roomId);
     public void updateWinner(int winId, int roomId);
     public List<RoomDetailPlayer> getAllByUserIdAndWinner(int userId, int winner);
+    public void updateHistoryBid( int roomId, int userId,double yourBid, String time);
+    public List<HistoryBid> getAllHistoryBidByRoomIdAndUserId(int roomId, int userId);
+    public List<HistoryBid> getAllHistoryBidByRoomId(int roomId);
 }

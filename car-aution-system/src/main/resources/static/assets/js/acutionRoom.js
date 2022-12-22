@@ -1,6 +1,22 @@
+
+
 function currentDiv(n) {
     showDivs(slideIndex = n);
 }
+
+function allBid(){
+    $.ajax({
+        type: "POST",
+        url: "http://localhost:8080/allBid",
+        success: function (value) {
+            document.getElementById("allBid").innerHTML = value;
+        },
+        error: function (e) {
+            alert('Error: ' + e);
+        }
+    });
+}
+setInterval(allBid, 5000);
 
 function showDivs(n) {
     var i;
@@ -171,8 +187,7 @@ function isPassAjax1(down , up, roomId) {
                             'Your bid has been placed successfully.',
                             'success'
                         )
-
-                        bidPrice += `<span>${i}. ${bid} CAB</span></br>`;
+                        bidPrice += `<p>${bid} CAB</p>`;
                         element3.innerHTML = bidPrice;
                         i++;
                         if(a==0){
@@ -184,7 +199,6 @@ function isPassAjax1(down , up, roomId) {
                         avgText = `<span>Average: ${b} CAB</span>`;
                         element2.innerHTML = avgText;
 
-                        document.getElementById("btnOk").click();
                     },
                     error: function (e) {
                         alert('Error: ' + e);

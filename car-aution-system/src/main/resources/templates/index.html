@@ -64,7 +64,6 @@
                     </div>
                 </div>
                 <div class="p-3 bg-white border-bottom border-top">
-                    <form id="messageForm2" name="messageForm">
                         <div class="row mt-3">
                             <div class="col-md-2 active-bids">
                                 <img th:src="@{/assets/img/logo-bid.png}">
@@ -80,29 +79,10 @@
                                    th:attr="onclick=|isPassAjax1('${car.downBoundPrice}', '${car.upBoundPrice}', '${roomId}')|"
                                    style="background-color: #04af04; color: #fff">Submit A Bid
                                 </a>
-                                <button id="btnOk" style="display:none;">OK</button>
                             </div>
                         </div>
-                    </form>
-
                 </div>
             </div>
-            <div id="username-page2">
-                <div class="username-page-container">
-                    <form id="usernameForm2" name="usernameForm">
-                        <div class="form-group">
-                            <input style="display: none" type="text" id="name2" placeholder="Username"
-                                   autocomplete="off" class="form-control" th:value="${cookieValue.value}"/>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" id="btnStart2" class="accent username-submit mt-5">Bắt Đầu Chat
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-
             <div class="col-md-3 border-right rounded h-25" style="background-color: #f5f5f5;">
                 <div class="d-flex flex-column align-items-center text-center m-3 my-5 border-bottom pb-3">
                     <div id="clock">
@@ -152,23 +132,26 @@
     <div class="container mt-200">
         <div class="row">
             <div class="col-md-1"></div>
-            <div class="col-md-7">
-                <div id="chat-page2" class="hidden rounded" style="width: 50%">
-                    <div class="chat-container2 rounded card">
-                        <div class="card-header text-center">
-                            Bid
-                        </div>
-                        <ul id="messageArea2"></ul>
-                    </div>
+            <div class="card col-md-7 bidBox mt-2" style="box-shadow: 0 1px 11px rgba(0, 0, 0, 0.27); height: 440px;">
+                <div class="card-header text-center">
+                    Bid of all bidders
+                </div>
+                <div class="card-body">
+                    <blockquote class="blockquote mb-0">
+                        <div id="allBid"></div>
+                    </blockquote>
                 </div>
             </div>
-            <div class="card text-center col-md-3"
-                 style="margin-top: 30px; box-shadow: 0 1px 11px rgba(0, 0, 0, 0.27); height: 440px;">
+            <div class="card text-center col-md-3 bidBox mt-2"
+                 style="box-shadow: 0 1px 11px rgba(0, 0, 0, 0.27); height: 440px;">
                 <div class="card-header">
                     Your bid has been set
                 </div>
                 <div class="card-body">
-                    <blockquote class="blockquote mb-0">
+                    <blockquote class="blockquote mb-0" style="font-size: 14px">
+                        <th:block th:each="historyBids:${historyBids}">
+                            <p th:text="${historyBids.yourBid} + ' CAB'"></p>
+                        </th:block>
                         <span id="bided"></span>
                     </blockquote>
                 </div>
