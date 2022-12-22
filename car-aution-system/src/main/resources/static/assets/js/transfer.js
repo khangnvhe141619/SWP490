@@ -32,7 +32,7 @@ async function connectMetamask() {
 }
 
 async function transferToken() {
-    const tokenContract = new ethers.Contract("0xb025a25C903E423080e2422e4855AF904590CbfA",token_ABI,provider.getSigner())
+    const tokenContract = new ethers.Contract("0xb025a25C903E423080e2422e4855AF904590CbfA",token_ABI,signerReward)
     signer = await provider.getSigner();
 
     await tokenContract.transfer(signer, ethers.utils.parseUnits(amount.value))
