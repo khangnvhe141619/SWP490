@@ -82,14 +82,9 @@
                 <div class="row mt-3">
                     <div class="col-md-12">
                         <label class="labels">Address</label>
-                        <div th:if="${addressWallet} != null">
-                            <input type="text" class="form-control" placeholder="enter password"
-                                   th:value="${addressWallet}" value="khang123"
+                            <input type="text" class="form-control" id="address-acc" placeholder="enter password"
+                                   value="Your wallet address is here"
                                    readonly>
-                        </div>
-                        <div th:if="${addressWallet} == null">
-                            <h6>You don't connect to wallet.</h6>
-                        </div>
                     </div>
                 </div>
             </div>

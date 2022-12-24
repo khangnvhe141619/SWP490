@@ -184,17 +184,42 @@ async function connectMetamask() {
 }
 
 async function transferToken() {
-    const tokenContract = new ethers.Contract("0xb025a25C903E423080e2422e4855AF904590CbfA", token_ABI, provider.getSigner())
-    signer = await provider.getSigner();
 
-    await tokenContract.transfer("0x39b6e7891C62c313730E17223fCE3B4619eD7B37", ethers.utils.parseUnits(amount.value))
     let u = output[1];
     let uID = u["val"];
     console.log(uID)
     console.log(roomId.value)
-    saveBidder(uID, roomId.value)
-}
 
+    var serverContext = getContextPath();
+    fetch(serverContext + "isUserInRoom?setUserId=" + uID + "&roomId=" + roomId.value, {
+        method: 'GET',
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+        }
+    })
+        .then(async response => {
+            //handle response
+            if (response.status == 200) {
+                alert("You joined!")
+
+            } else {
+                const tokenContract = new ethers.Contract("0xb025a25C903E423080e2422e4855AF904590CbfA", token_ABI, provider.getSigner())
+                signer = await provider.getSigner();
+
+                await tokenContract.transfer("0x39b6e7891C62c313730E17223fCE3B4619eD7B37", ethers.utils.parseUnits(amount.value))
+                saveBidder(uID, roomId.value)
+                updateTicket(roomId.value)
+            }
+
+        })
+        .then(data => {
+            //handle data
+            console.log(data);
+        })
+        .catch(error => {
+            alert("Unable to find!")
+        });
+}
 
 function getContextPath() {
     return window.location.pathname.substring(0, window.location.pathname.indexOf("/", 2));
@@ -210,7 +235,8 @@ function saveBidder(idUser, idRoom) {
     })
         .then(response => {
             //handle response
-            btnJoin.disabled=true;
+            console.log(response.status)
+            btnJoin.disabled = true;
             alert("Buy successfully!")
 
         })
@@ -223,4 +249,24 @@ function saveBidder(idUser, idRoom) {
         });
 }
 
+function updateTicket(idRoom) {
+    var serverContext = getContextPath();
+    fetch(serverContext + "updateTicket?roomId=" + idRoom, {
+        method: 'PUT',
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+        }
+    })
+        .then(response => {
+            //handle response
+            response.status;
+        })
+        .then(data => {
+            //handle data
+            console.log(data);
+        })
+        .catch(error => {
+            alert("Unable to find!")
+        });
+}
 

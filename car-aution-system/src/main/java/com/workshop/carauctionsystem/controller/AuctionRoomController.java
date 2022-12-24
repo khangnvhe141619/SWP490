@@ -166,5 +166,24 @@ public class AuctionRoomController {
         }
         return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject("no", "Invalid!", null));
     }
+    @GetMapping("/isUserInRoom")
+    public ResponseEntity<ResponseObject> isUserInRoom(@CookieValue(value = "setUserId") int setUserId,
+                                                     @RequestParam("roomId") String roomId) {
+        User u1 = userService.findUserById(setUserId);
+        Room r1 = service.getRoomById(Integer.parseInt(roomId));
+        boolean _found = roomParticipantService.isParticipantIn(u1, r1);
+        if (u1 != null && _found) {
+            return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject("ok", "Found!", null));
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ResponseObject("no", "Not found!", null));
+    }
+
+    @PutMapping("/updateTicket")
+    public ResponseEntity<ResponseObject> updateTicket(@RequestParam("roomId") String roomId) {
+        Room r1 = service.getRoomById(Integer.parseInt(roomId));
+        service.updateTicket(r1);
+        return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject("ok", "Succeed!", null));
+
+    }
 }
 

@@ -57,4 +57,7 @@ public interface RoomRepository extends JpaRepository<Room, Integer> {
     @Query("SELECT r FROM Room as r join r.carId as c join c.modelId as m WHERE m.modelName like %?1%")
     public Page<Room> searchRoomByModel(Pageable pageable, String model);
 
+    @Modifying
+    @Query(nativeQuery = true, value = "update room set ticketNumber = ticketNumber - 1 where id = ?1")
+    public void updateTicket(int roomId);
 }

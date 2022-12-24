@@ -102,7 +102,7 @@ class RoomServiceImplTest {
         Date date = new Date();
         Timestamp timestamp = new Timestamp(date.getTime());
         roomService.update("Lux A", "20:00", "20:20", timestamp,
-                10, 1, 1, 1,"hoang/img1.jpg", 1);
+                10, 1, 1, 1,"hoang/img1.jpg", date.toString(),1);
     }
 
     @Test

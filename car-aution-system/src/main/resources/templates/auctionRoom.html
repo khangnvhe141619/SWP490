@@ -108,13 +108,11 @@
                                         <span th:id="${ls.id} + 'A'" class="col-sm-6">
                                             <th:block th:if="${checkList}">
                                                 <th:block th:each="favoriteList:${favoriteList}">
-                                                    <div>
-                                                        <th:block th:if="${favoriteList.carId.id} == ${ls.carId.id}">
-                                                            <a th:attr="onclick=|star('${ls.id}','${ls.carId.id}',1)|">Remove Favorite <i
-                                                                    style="color: #FF6600" th:id="${ls.id}"
-                                                                    class="bi bi-star-fill"></i></a>
-                                                        </th:block>
-                                                    </div>
+                                                    <th:block th:if="${favoriteList.carId.id} == ${ls.carId.id}">
+                                                        <a th:attr="onclick=|star('${ls.id}','${ls.carId.id}',1)|">Remove Favorite <i
+                                                                style="color: #FF6600" th:id="${ls.id}"
+                                                                class="bi bi-star-fill"></i></a>
+                                                    </th:block>
                                                     <th:block th:unless="${favoriteList.carId.id} == ${ls.carId.id}">
                                                         <a th:attr="onclick=|star('${ls.id}','${ls.carId.id}',0)|">Add Favorite <i
                                                                 th:id="${ls.id}" class="bi bi-star-fill"></i></a>
@@ -192,8 +190,8 @@
                                                         <input type="hidden" id="roomId-cab" class="result" th:value="${ls.id}">
                                                     </p>
                                                     <p class="border-top border-bottom">
-                                                        <span class="h6">Player:</span>
-                                                        <span class="result">7/10</span>
+                                                        <span class="h6">Ticket:</span>
+                                                        <span class="result"th:text="${ls.ticketNumber}+ '/10'"> </span>
                                                     </p>
                                                     <p class="border-top border-bottom">
                                                         <span class="h6">Ticket Price:</span>
@@ -218,7 +216,12 @@
                                                     </p>
                                                 </div>
                                                 <div class="text-center">
-                                                    <button class="btn btn-primary rounded-pill" th:id="btnJoin+${ls.id}"> Join Now</button>
+                                                    <th:block th:if="${ls.ticketNumber == 0}">
+                                                        <button class="btn btn-primary rounded-pill" style="display: none;"> Buy Now</button>
+                                                    </th:block>
+                                                    <th:block th:if="${ ls.ticketNumber > 0}">
+                                                        <button class="btn btn-primary rounded-pill" id="btnJoin"> Buy Now</button>
+                                                    </th:block>
                                                 </div>
                                             </div>
                                         </div>

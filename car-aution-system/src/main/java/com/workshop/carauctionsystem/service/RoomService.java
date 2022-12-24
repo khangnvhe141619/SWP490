@@ -22,4 +22,6 @@ public interface RoomService {
     public Page<Room> getListRoom(int pageNo, int pageSize);
     public Page<Room> getListRoomCurrent(int pageNo, int pageSize);
     public Page<Room> getSearchRoom(Pageable pageable,String carName,String model);
+
+    public void updateTicket(Room room);
 }

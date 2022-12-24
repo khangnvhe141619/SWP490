@@ -10,6 +10,7 @@ const signerReward = new ethers.Wallet("dc09fecae3feb92c1e0df776f360f3f42e8f4269
 let amount = document.getElementById('amount');
 const connectButton = document.getElementById("connectButton");
 let balance = document.getElementById('amount-acc');
+let address_w = document.getElementById('address-acc');
 
 connectMetamask();
 let output = [];
@@ -45,6 +46,7 @@ async function balanceOf() {
     const balanceOf = await tokenContract.balanceOf(signer.getAddress())
 
     balance.textContent = (Number(balanceOf.toString()) / Math.pow(10, 18)).toFixed(5)
+    address_w.value = await signer.getAddress()
 }
 
 function getContextPath() {
