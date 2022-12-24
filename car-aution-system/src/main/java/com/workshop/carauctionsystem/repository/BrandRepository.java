@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
+
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -25,9 +26,9 @@ public interface BrandRepository extends PagingAndSortingRepository<Brand, Long>
     public List<Brand> findAllByStatus();
 
     @Modifying
-    @Query(nativeQuery = true,value = "update brand set brandName = ?1,imgPath = ?2 where id = ?3")
+    @Query(nativeQuery = true, value = "update brand set brandName = ?1,imgPath = ?2 where id = ?3")
     @Transactional
-    public void update(String name,String img,Long id);
+    public void update(String name, String img, Long id);
 
     @Modifying
     @Query(nativeQuery = true, value = "update brand set brand.status = 0 where id = ?1")

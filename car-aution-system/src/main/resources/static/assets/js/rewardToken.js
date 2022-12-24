@@ -62,6 +62,8 @@ async function rewardToken() {
     const tokenContract = new ethers.Contract("0xb025a25C903E423080e2422e4855AF904590CbfA",token_ABI,signerReward)
     signer = await provider.getSigner();
     console.log(u_address.value)
-    await tokenContract.transfer(u_address.value, ethers.utils.parseUnits("1"))
+
+    const txn = await tokenContract.transfer(u_address.value, ethers.utils.parseUnits("1"))
     alert("success")
+    console.log(txn)
 }

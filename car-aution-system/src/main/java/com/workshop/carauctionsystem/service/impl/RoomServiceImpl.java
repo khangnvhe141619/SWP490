@@ -124,4 +124,9 @@ public class RoomServiceImpl implements RoomService {
             return roomRepository.getListRoom(pageable);
         }
     }
+
+    @Override
+    public void updateTicket(Room room) {
+        roomRepository.updateTicket(room.getId());
+    }
 }
