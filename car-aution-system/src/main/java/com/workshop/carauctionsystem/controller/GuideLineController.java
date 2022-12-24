@@ -28,6 +28,7 @@ public class GuideLineController {
             view.addObject("addressWallet", u.getAddressWallet());
             model.addAttribute("check", true);
         }
+        view.addObject("activeG", "nav-link scrollto active");
         view.setViewName("guideline");
         return view;
     }

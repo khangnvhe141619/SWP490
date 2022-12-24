@@ -108,11 +108,13 @@
                                         <span th:id="${ls.id} + 'A'" class="col-sm-6">
                                             <th:block th:if="${checkList}">
                                                 <th:block th:each="favoriteList:${favoriteList}">
-                                                    <th:block th:if="${favoriteList.carId.id} == ${ls.carId.id}">
-                                                        <a th:attr="onclick=|star('${ls.id}','${ls.carId.id}',1)|">Remove Favorite <i
-                                                                style="color: #FF6600" th:id="${ls.id}"
-                                                                class="bi bi-star-fill"></i></a>
-                                                    </th:block>
+                                                    <div>
+                                                        <th:block th:if="${favoriteList.carId.id} == ${ls.carId.id}">
+                                                            <a th:attr="onclick=|star('${ls.id}','${ls.carId.id}',1)|">Remove Favorite <i
+                                                                    style="color: #FF6600" th:id="${ls.id}"
+                                                                    class="bi bi-star-fill"></i></a>
+                                                        </th:block>
+                                                    </div>
                                                     <th:block th:unless="${favoriteList.carId.id} == ${ls.carId.id}">
                                                         <a th:attr="onclick=|star('${ls.id}','${ls.carId.id}',0)|">Add Favorite <i
                                                                 th:id="${ls.id}" class="bi bi-star-fill"></i></a>
@@ -216,7 +218,7 @@
                                                     </p>
                                                 </div>
                                                 <div class="text-center">
-                                                    <button class="btn btn-primary rounded-pill" id="btnJoin"> Join Now</button>
+                                                    <button class="btn btn-primary rounded-pill" th:id="btnJoin+${ls.id}"> Join Now</button>
                                                 </div>
                                             </div>
                                         </div>
