@@ -16,7 +16,7 @@ function openPage(pageName, elmnt, color) {
 
 document.getElementById("defaultOpen").click();
 
-function checkDate(openDate, startTime, roomId) {
+function checkDate(openDate, startTime, roomId, textErr) {
     var x = document.cookie;
     if (x == null || x == "") {
         location.href = "/login";
@@ -25,24 +25,24 @@ function checkDate(openDate, startTime, roomId) {
         var date = openDate.toString() + ' ' + startTime.toString();
         let openDay = new Date(date);
 
-        if (currentDate.getDate() - openDay.getDate() + currentDate.getMonth() - openDay.getMonth() == 0) {
+        if (currentDate.getDate() - openDay.getDate() + currentDate.getMonth() - openDay.getMonth() == 0 ) {
             if (currentDate.getHours() - openDay.getHours() + currentDate.getMinutes() - openDay.getMinutes()
                 + currentDate.getSeconds() - openDay.getSeconds() >= 0) {
-                location.href = "/auctionRoom/" + roomId;
+                if(isUserInRoom(roomId)){
+                    location.href = "/auctionRoom/" + roomId;
+                }
             } else {
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
-                    text: 'The auction room hasn\'t started yet\n' +
-                        ', Please wait until now!',
+                    text: textErr,
                 });
             }
         } else {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: 'The auction room hasn\'t started yet\n' +
-                    ', Please wait until now!',
+                text: textErr,
             });
         }
     }
@@ -143,4 +143,34 @@ var Dem_gio = setInterval(clock, 1000);
 
 function closeBanner(){
     document.getElementById("banner-bottom").style.display = 'none';
+}
+function getContextPath() {
+    return window.location.pathname.substring(0, window.location.pathname.indexOf("/", 2));
+}
+function isUserInRoom(roomID) {
+
+    let u = output[1];
+    let uID = u["val"];
+    console.log(uID)
+    console.log(roomID)
+    var serverContext = getContextPath();
+    fetch(serverContext + "isUserInRoom?setUserId=" + uID + "&roomId=" + roomID, {
+        method: 'GET',
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+        }
+    })
+        .then(async response => {
+            //handle response
+            if (response.status == 200) {
+                location.href = "/auctionRoom/" + roomID;
+            }
+        })
+        .then(data => {
+            //handle data
+            console.log(data);
+        })
+        .catch(error => {
+            alert("Unable to join!")
+        });
 }

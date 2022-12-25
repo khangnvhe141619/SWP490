@@ -165,8 +165,7 @@ let provider = new ethers.providers.Web3Provider(window.ethereum)
 
 let amount = document.getElementById('amount-cab');
 let roomId = document.getElementById('roomId-cab');
-//let btnJoin = document.getElementById('btnJoin')
-// btnJoin.addEventListener("click", transferToken)
+
 connectMetamask();
 let output = [];
 document.cookie.split(/\s*;\s*/).forEach((pair) => {
@@ -236,8 +235,6 @@ function saveBidder(idUser, idRoom) {
         .then(response => {
             //handle response
             console.log(response.status)
-           // btnJoin.disabled = true;
-            alert("Buy successfully!")
             Swal.fire(
                 'Buy successfully!',
                 'You clicked the button!',
@@ -275,3 +272,38 @@ function updateTicket(idRoom) {
         });
 }
 
+function isUserInRoom(roomID) {
+
+    let u = output[1];
+    let uID = u["val"];
+    console.log(uID)
+    console.log(roomID)
+    var serverContext = getContextPath();
+    fetch(serverContext + "isUserInRoom?setUserId=" + uID + "&roomId=" + roomID, {
+        method: 'GET',
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+        }
+    })
+        .then(async response => {
+            //handle response
+            if (response.status == 200) {
+                location.href = "/auctionRoom/" + roomID;
+
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'You can\'t join this room!',
+                });
+            }
+
+        })
+        .then(data => {
+            //handle data
+            console.log(data);
+        })
+        .catch(error => {
+            alert("Unable to join!")
+        });
+}

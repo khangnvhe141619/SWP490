@@ -100,7 +100,8 @@
                                     </figure>
                                     <div class="portfolio-info">
                                         <h4><a th:text="${ls.roomName}"
-                                               th:attr="onclick=|checkDate('${ls.openDate}', '${ls.startTime}')|"></a>
+                                               th:attr="onclick=|checkDate('${ls.openDate}', '${ls.startTime}', 'The auction room hasn\'t started yet\n' +
+                        ', Please wait until now!')|"></a>
                                         </h4>
                                         <div class="row">
                                             <p class="col-sm-6" th:text="'Ticket Price: '+${ls.ticketPrice}+' CAB'"></p>
@@ -220,7 +221,7 @@
                                                         <button class="btn btn-primary rounded-pill" style="display: none;"> Buy Now</button>
                                                     </th:block>
                                                     <th:block th:if="${ ls.ticketNumber > 0}">
-                                                        <button class="btn btn-primary rounded-pill" th:id="'btnJoin'+${ls.id}" th:attr="onclick=|transferToken('${ls.id}', '${ls.ticketPrice}')|"> Buy Now</button>
+                                                        <button class="btn btn-primary rounded-pill" th:id="'btnBuy'+${ls.id}" th:attr="onclick=|transferToken('${ls.id}', '${ls.ticketPrice}')|"> Buy Now</button>
                                                     </th:block>
                                                 </div>
                                             </div>
@@ -273,7 +274,7 @@
                                 </figure>
                                 <div class="portfolio-info">
                                     <h4><a th:text="${ls.roomName}"
-                                           th:attr="onclick=|checkDate('${ls.openDate}', '${ls.startTime}', '${ls.id}')|"></a>
+                                           th:attr="onclick=|checkDate('${ls.openDate}', '${ls.startTime}', '${ls.id}', 'You can\'t join this room!')|"></a>
                                     </h4>
                                     <!--                                th:href="@{'/auctionRoom/'+${ls.id}}"-->
                                     <div class="row">
@@ -354,8 +355,8 @@
                                                         <span class="result" th:text="${ls.id}"></span>
                                                     </p>
                                                     <p class="border-top border-bottom">
-                                                        <span class="h6">Player:</span>
-                                                        <span class="result">7/10</span>
+                                                        <span class="h6">Ticket:</span>
+                                                        <span class="result"th:text="${ls.ticketNumber}+ '/10'"> </span>
                                                     </p>
                                                     <p class="border-top border-bottom">
                                                         <span class="h6">Ticket Price:</span>
@@ -379,8 +380,8 @@
                                                     </p>
                                                 </div>
                                                 <div class="text-center">
-                                                    <button class="btn btn-primary rounded-pill" >Join
-                                                        Now 1</button>
+                                                    <button class="btn btn-primary rounded-pill" th:id="'btnJoin'+${ls.id}" th:attr="onclick=|isUserInRoom('${ls.id}')|">Join
+                                                        Now </button>
                                                 </div>
                                             </div>
                                         </div>
