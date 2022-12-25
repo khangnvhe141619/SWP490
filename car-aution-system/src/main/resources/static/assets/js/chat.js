@@ -18,7 +18,6 @@ var colors = [
 
 window.onload = function () {
     document.getElementById('btnStart').click();
-    document.getElementById('btnStart2').click();
 }
 
 function connect(event) {

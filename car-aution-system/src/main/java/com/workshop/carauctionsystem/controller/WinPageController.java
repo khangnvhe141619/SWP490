@@ -1,5 +1,6 @@
 package com.workshop.carauctionsystem.controller;
 
+import com.workshop.carauctionsystem.entity.HistoryBid;
 import com.workshop.carauctionsystem.entity.Room;
 import com.workshop.carauctionsystem.entity.RoomDetailPlayer;
 import com.workshop.carauctionsystem.entity.User;
@@ -33,6 +34,7 @@ public class WinPageController {
                                 @CookieValue(value = "setUser", defaultValue = "") String setUser,
                                 Model model) {
         List<RoomDetailPlayer> roomDetailPlayerList = roomDetailPlayerService.getAllBidByRoomId(roomId);
+        List<HistoryBid> listHistoryBid = roomDetailPlayerService.getAllHistoryBidByRoomIdAndUserId(roomId, userId);
         double sum = 0;
         double finalResult;
         double[] array = new double[roomDetailPlayerList.size()];
@@ -65,7 +67,7 @@ public class WinPageController {
         model.addAttribute("winner", roomDetailPlayerList1.get(0));
         model.addAttribute("userList", roomDetailPlayerList);
         model.addAttribute("result", (double) Math.round(result * 100) / 100);
-
+        model.addAttribute("listHistoryBid", listHistoryBid);
         Room room = roomService.getRoomById(roomId);
         model.addAttribute("room", room);
 

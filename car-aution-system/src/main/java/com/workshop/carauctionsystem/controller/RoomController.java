@@ -141,7 +141,7 @@ public class RoomController {
             html += "</div>";
             html += "<div class=\"col-md-11\" style=\"font-size: 14px\">";
             html += "<span>***</span>";
-            html += "<p>" + historyBid.getYourBid() + " CAB</p>";
+            html += "<p> Bid is " + historyBid.getYourBid() + " CAB</p>";
             html += "</div>";
             html += "</div>";
         }

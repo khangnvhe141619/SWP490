@@ -136,20 +136,15 @@ crossorigin = "anonymous"
 
 const element3 = document.querySelector("#bided");
 let bidPrice = '';
-let i = 1;
 const element = document.querySelector(".yourPrice");
 const element2 = document.querySelector(".AVG");
 let h5 = '';
-let avgText = '';
 let error = '';
 let downPrice = 0;
 let upPrice = 0;
-let a = 0;
-let b = 0;
 
 function isPassAjax1(down , up, roomId) {
     var bid = $("#message2").val();
-    var avg = $("#AVG").val();
     downPrice = down;
     upPrice = up;
     const x = Number(bid);
@@ -188,17 +183,6 @@ function isPassAjax1(down , up, roomId) {
                         )
                         bidPrice += `<p>${bid} CAB</p>`;
                         element3.innerHTML = bidPrice;
-
-                        i++;
-                        if(a==0){
-                            b = bid;
-                        } else {
-                            b = (x + Number(a))/2;
-                        }
-                        a = bid;
-                        avgText = `<span>Average: ${b} CAB</span>`;
-                        element2.innerHTML = avgText;
-
                     },
                     error: function (e) {
                         alert('Error: ' + e);
