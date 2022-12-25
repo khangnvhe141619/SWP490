@@ -21,6 +21,7 @@ const buttonChange = document.getElementById('changeUnit')
 amountIn.addEventListener("input", updateValue)
 buttonChange.addEventListener("click", changeUnit)
 buttonSwap.addEventListener("click", swapToken)
+
 connectMetamask();
 
 
@@ -45,11 +46,8 @@ async function changeUnit() {
     console.log(amountOut.value)
 
     let temp2 = tokenIn.textContent
-    console.log(temp2)
     tokenIn.textContent = tokenOut.textContent
-    console.log(tokenOut.textContent)
     tokenOut.textContent = temp2;
-    console.log(temp2)
     swapImages()
 }
 

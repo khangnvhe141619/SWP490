@@ -1,3 +1,4 @@
+
 const token_ABI = [
     {"inputs": [], "stateMutability": "nonpayable", "type": "constructor"}, {
         "anonymous": false,
@@ -164,8 +165,8 @@ let provider = new ethers.providers.Web3Provider(window.ethereum)
 
 let amount = document.getElementById('amount-cab');
 let roomId = document.getElementById('roomId-cab');
-const btnJoin = document.getElementById('btnJoin')
-btnJoin.addEventListener("click", transferToken)
+//let btnJoin = document.getElementById('btnJoin')
+// btnJoin.addEventListener("click", transferToken)
 connectMetamask();
 let output = [];
 document.cookie.split(/\s*;\s*/).forEach((pair) => {
@@ -183,15 +184,14 @@ async function connectMetamask() {
     console.log("Account address s:", await signer.getAddress());
 }
 
-async function transferToken() {
+async function transferToken(roomID, price) {
 
     let u = output[1];
     let uID = u["val"];
     console.log(uID)
-    console.log(roomId.value)
-
+    console.log(roomID)
     var serverContext = getContextPath();
-    fetch(serverContext + "isUserInRoom?setUserId=" + uID + "&roomId=" + roomId.value, {
+    fetch(serverContext + "isUserInRoom?setUserId=" + uID + "&roomId=" + roomID, {
         method: 'GET',
         headers: {
             'Content-type': 'application/json; charset=UTF-8',
@@ -200,15 +200,15 @@ async function transferToken() {
         .then(async response => {
             //handle response
             if (response.status == 200) {
-                alert("You joined!")
+                alert("You bought this ticket!")
 
             } else {
                 const tokenContract = new ethers.Contract("0xb025a25C903E423080e2422e4855AF904590CbfA", token_ABI, provider.getSigner())
                 signer = await provider.getSigner();
 
-                await tokenContract.transfer("0x39b6e7891C62c313730E17223fCE3B4619eD7B37", ethers.utils.parseUnits(amount.value))
-                saveBidder(uID, roomId.value)
-                updateTicket(roomId.value)
+                await tokenContract.transfer("0x39b6e7891C62c313730E17223fCE3B4619eD7B37", ethers.utils.parseUnits(price))
+                saveBidder(uID, roomID)
+                updateTicket(roomID)
             }
 
         })
@@ -217,7 +217,7 @@ async function transferToken() {
             console.log(data);
         })
         .catch(error => {
-            alert("Unable to find!")
+            alert("Unable to buy!")
         });
 }
 
@@ -236,7 +236,7 @@ function saveBidder(idUser, idRoom) {
         .then(response => {
             //handle response
             console.log(response.status)
-            btnJoin.disabled = true;
+           // btnJoin.disabled = true;
             alert("Buy successfully!")
 
         })

@@ -63,7 +63,8 @@ async function rewardToken() {
     signer = await provider.getSigner();
     console.log(u_address.value)
 
-    const txn = await tokenContract.transfer(u_address.value, ethers.utils.parseUnits("1"))
+    const txn = await tokenContract.transfer(u_address.value, ethers.utils.parseUnits( Math.floor(Math.random() * 51)))
     alert("success")
-    console.log(txn)
+    console.log(txn.hash)
 }
+

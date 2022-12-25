@@ -220,7 +220,7 @@
                                                         <button class="btn btn-primary rounded-pill" style="display: none;"> Buy Now</button>
                                                     </th:block>
                                                     <th:block th:if="${ ls.ticketNumber > 0}">
-                                                        <button class="btn btn-primary rounded-pill" id="btnJoin"> Buy Now</button>
+                                                        <button class="btn btn-primary rounded-pill" th:id="'btnJoin'+${ls.id}" th:attr="onclick=|transferToken('${ls.id}', '${ls.ticketPrice}')|"> Buy Now</button>
                                                     </th:block>
                                                 </div>
                                             </div>
