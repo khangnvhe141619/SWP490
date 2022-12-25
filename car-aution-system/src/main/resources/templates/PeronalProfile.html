@@ -15,6 +15,7 @@
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="assets/css/PersonalProfile.css" rel="stylesheet">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body style="background: url(/assets/img/about-bg1.png);">
@@ -114,7 +115,8 @@
                         </div>
                     </div>
                     <div class="mt-2 text-center">
-                        <button class="btn btn-primary profile-button rounded-pill" type="submit">Save Profile</button>
+                        <button style="display:none;" id="btnSubmitProfile" type="submit"></button>
+                        <button class="btn btn-primary profile-button rounded-pill" type="button" onclick="changeProfile()">Save Profile</button>
                     </div>
                 </div>
             </form>
@@ -149,7 +151,9 @@
                         </div>
                     </div>
                     <div class="mt-2 text-center">
-                        <button id="btnChange" class="btn btn-primary profile-button rounded-pill" type="submit">Change
+                        <button style="display:none;" id="btnSubmit" type="submit"></button>
+                        <button id="btnChange" class="btn btn-primary profile-button rounded-pill" type="button" onclick="changePass()">
+                            Change
                         </button>
                     </div>
                 </div>

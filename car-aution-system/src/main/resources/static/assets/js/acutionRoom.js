@@ -136,20 +136,15 @@ crossorigin = "anonymous"
 
 const element3 = document.querySelector("#bided");
 let bidPrice = '';
-let i = 1;
 const element = document.querySelector(".yourPrice");
 const element2 = document.querySelector(".AVG");
 let h5 = '';
-let avgText = '';
 let error = '';
 let downPrice = 0;
 let upPrice = 0;
-let a = 0;
-let b = 0;
 
 function isPassAjax1(down , up, roomId) {
     var bid = $("#message2").val();
-    var avg = $("#AVG").val();
     downPrice = down;
     upPrice = up;
     const x = Number(bid);
@@ -174,7 +169,6 @@ function isPassAjax1(down , up, roomId) {
             if (result.isConfirmed) {
                 h5 = `<h5>${bid} CAB</h5>`;
                 element.innerHTML = h5;
-                console.log(bid);
                 $.ajax({
                     type: "POST",
                     url: "http://localhost:8080/insertBid?bid=" + bid + "&roomId=" + roomId,
@@ -189,16 +183,6 @@ function isPassAjax1(down , up, roomId) {
                         )
                         bidPrice += `<p>${bid} CAB</p>`;
                         element3.innerHTML = bidPrice;
-                        i++;
-                        if(a==0){
-                            b = bid;
-                        } else {
-                            b = (x + Number(a))/2;
-                        }
-                        a = bid;
-                        avgText = `<span>Average: ${b} CAB</span>`;
-                        element2.innerHTML = avgText;
-
                     },
                     error: function (e) {
                         alert('Error: ' + e);
@@ -214,99 +198,6 @@ function isPassAjax1(down , up, roomId) {
         });
     }
 }
-var usernamePage2 = document.querySelector('#username-page2');
-var chatPage2 = document.querySelector('#chat-page2');
-var usernameForm2 = document.querySelector('#usernameForm2');
-var messageForm2 = document.querySelector('#messageForm2');
-var messageInput2 = document.querySelector('#message2');
-var messageArea2 = document.querySelector('#messageArea2');
-var connectingElement2 = document.querySelector('.connecting');
-
-var stompClient2 = null;
-var username2 = null;
-
-function connect2(event) {
-    username2 = document.querySelector('#name2').value.trim();
-
-    if (username2) {
-        usernamePage2.classList.add('hidden');
-        chatPage2.classList.remove('hidden');
-
-        var socket = new SockJS('/ws');
-        stompClient2 = Stomp.over(socket);
-
-        stompClient2.connect({}, onConnected2, onError2);
-    }
-    event.preventDefault();
-}
-
-
-function onConnected2() {
-    // Subscribe to the Public Topic
-    stompClient2.subscribe('/topic/public', onMessageReceived2);
-
-    // Tell your username to the server
-    stompClient2.send("/app/chat.addUser",
-        {},
-        JSON.stringify({sender: username2, type: 'JOIN'})
-    )
-
-    connectingElement2.classList.add('hidden');
-}
-
-
-function onError2(error) {
-    connectingElement2.textContent = 'Could not connect to WebSocket server. Please refresh this page to try again!';
-    connectingElement2.style.color = 'red';
-}
-
-
-function sendMessage2(event) {
-    var messageContent2 = messageInput2.value.trim();
-    if (messageContent2 && stompClient2) {
-        var chatMessage2 = {
-            sender: username2,
-            content: messageInput2.value,
-            type: 'CHAT'
-        };
-        stompClient2.send("/app/chat.sendMessage", {}, JSON.stringify(chatMessage2));
-        messageInput2.value = '';
-    }
-    event.preventDefault();
-}
-
-
-function onMessageReceived2(payload) {
-    var message = JSON.parse(payload.body);
-    if ((!isNaN(message.content) && message.content != null) && (message.content >= downPrice && message.content <= upPrice)) {
-        var messageElement = document.createElement('li');
-
-        messageElement.classList.add('chat-message');
-
-        var avatarElement = document.createElement('img');
-        var avatarText = document.createTextNode(message.sender[0]);
-        avatarElement.appendChild(avatarText);
-        avatarElement.src = '/assets/img/avatar/andanh.jpg';
-
-        messageElement.appendChild(avatarElement);
-
-        var usernameElement = document.createElement('span');
-        var usernameText = document.createTextNode("***");
-        usernameElement.appendChild(usernameText);
-        messageElement.appendChild(usernameElement);
-
-        var textElement = document.createElement('p');
-        var messageText = document.createTextNode(message.content + ' CAB');
-        textElement.appendChild(messageText);
-
-        messageElement.appendChild(textElement);
-
-        messageArea2.appendChild(messageElement);
-        messageArea2.scrollTop = messageArea2.scrollHeight;
-    }
-}
-usernameForm2.addEventListener('submit', connect2, true)
-messageForm2.addEventListener('submit', sendMessage2, true)
 
 function closeBanner(){
     document.getElementById("banner-bottom").style.display = 'none';

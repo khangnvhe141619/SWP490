@@ -108,10 +108,9 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     public Page<Room> getSearchRoom(Pageable pageable, String carName, String model) {
-        System.out.println(carName + "AAAA" + model);
-//        if("".contains(carName.trim())&& "".contains(model.trim())){
-//            return roomRepository.getListRoom(pageable);
-//        }
+        if(carName.trim().isEmpty() && model.trim().isEmpty()){
+            return roomRepository.getListRoom(pageable);
+        }
         if(carName != "" && model != ""){
             return roomRepository.searchRoomByNameCar(pageable,carName,model);
         }

@@ -76,6 +76,7 @@ public class RoomController {
             Date date = new Date();
             DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String dateString = df.format(date);
+            model.addAttribute("bidPrice", true);
             roomDetailPlayerService.addPlayer(id, userId, 0, dateString, 0);
         } else {
             if (roomDetailPlayer.get(0).getUserBid() == 0) {
@@ -117,16 +118,15 @@ public class RoomController {
     }
 
     @PostMapping("/insertBid")
-    public ResponseEntity<ResponseObject> insertBid(@RequestParam("bid") String bid,
+    public ResponseEntity<ResponseObject> insertBid(@RequestParam("bid") int bid,
                                                     @RequestParam("roomId") int roomId,
                                                     @CookieValue(value = "setUserId") int setUserId) {
         System.out.println(bid+"AAAAAAAA"+roomId);
-        int bidInt = Integer.parseInt(bid);
         Date date = new Date();
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String dateString = df.format(date);
-        roomDetailPlayerService.updateUserBid(bidInt, dateString, setUserId, roomId);
-        roomDetailPlayerService.updateHistoryBid(roomId, setUserId, bidInt, dateString);
+        roomDetailPlayerService.updateUserBid(bid, dateString, setUserId, roomId);
+        roomDetailPlayerService.updateHistoryBid(roomId, setUserId, bid, dateString);
         return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject("no", "Invalid password!", null));
     }
 
@@ -141,7 +141,7 @@ public class RoomController {
             html += "</div>";
             html += "<div class=\"col-md-11\" style=\"font-size: 14px\">";
             html += "<span>***</span>";
-            html += "<p>" + historyBid.getYourBid() + " CAB</p>";
+            html += "<p> Bid is " + historyBid.getYourBid() + " CAB</p>";
             html += "</div>";
             html += "</div>";
         }

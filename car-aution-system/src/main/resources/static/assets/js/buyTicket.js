@@ -238,6 +238,11 @@ function saveBidder(idUser, idRoom) {
             console.log(response.status)
            // btnJoin.disabled = true;
             alert("Buy successfully!")
+            Swal.fire(
+                'Buy successfully!',
+                'You clicked the button!',
+                'success'
+            )
 
         })
         .then(data => {

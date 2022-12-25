@@ -21,38 +21,49 @@
 <section>
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
-                <div class="d-flex flex-column align-items-center text-center p-3 bg bg-white col-md-4 offset-sm-4">
-                    <img src="assets/img/giphy.gif">
-                    <img class="mt-2 ava" th:src="'assets/img/avatar/'+${winner.userId.avatar}">
-                    <input type="hidden" id="address" th:value="${winner.userId.getAddressWallet()} ">
-                    <span class="font-weight-bold mt-3" th:text="${winner.userId.userName}"></span>
-                    <span class="text-black-50" th:text="${winner.userId.email}"></span>
-                    <h3 class="mt-5" th:text="${winner.userBid} + ' CAB'"></h3>
-                    <img src="assets/img/winner-gif-1.gif">
-                </div>
+            <div class="d-flex flex-column align-items-center text-center p-3 bg bg-white col-md-4 offset-sm-4">
+                <img src="assets/img/giphy.gif">
+                <img class="mt-2 ava" th:src="'assets/img/avatar/'+${winner.userId.avatar}">
+                <input type="hidden" id="address" th:value="${winner.userId.getAddressWallet()} ">
+                <span class="font-weight-bold mt-3" th:text="${winner.userId.userName}"></span>
+                <span class="text-black-50" th:text="${winner.userId.email}"></span>
+                <h3 class="mt-5" th:text="${winner.userBid} + ' CAB'"></h3>
+                <img src="assets/img/winner-gif-1.gif">
             </div>
-            <div class="row mt-5 mb-5 ">
-                <div class="col-md-5 bg-white p-5 text-center">
-                    <img th:src="${room.imgPath}" class="w-100 rounded">
-                    <h2 class="mt-3" th:text="${room.roomName}"></h2>
-                    <h3 th:text="${result} + ' CAB'"></h3>
-                </div>
-                <div class="col-md-2"></div>
-                <div class="col-md-5 bg-white">
-                    <table class="table table-striped mt-4 text-center">
-                            <tr>
-                                <th scope="col">User Name</th>
-                                <th scope="col">Bid</th>
-                                <th scope="col">Time</th>
-                            </tr>
-                            <tr th:each="userList:${userList}">
-                                <td th:text="${userList.userId.userName}"></td>
-                                <td th:text="${userList.userBid} + ' CAB'"></td>
-                                <td th:text="${userList.timeBid}"></td>
-                            </tr>
-                    </table>
-                </div>
+        </div>
+        <div class="row mt-5 mb-5 ">
+            <div class="col-md-4 bg-white p-5 text-center">
+                <img th:src="${room.imgPath}" class="w-100 rounded">
+                <h2 class="mt-3" th:text="${room.roomName}"></h2>
+                <h3 th:text="${result} + ' CAB'"></h3>
+            </div>
+            <div class="col-md-4 bg-white">
+                <h5 class="text-center mt-3">Your Bid</h5>
+                <table class="table table-striped mt-4 text-center">
+                    <tr>
+                        <th scope="col">Bid</th>
+                        <th scope="col">Time</th>
+                    </tr>
+                    <tr th:each="listHistoryBid:${listHistoryBid}">
+                        <td th:text="${listHistoryBid.yourBid} + ' CAB'"></td>
+                        <td th:text="${listHistoryBid.setTime}"></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-md-4 bg-white">
+                <h5 class="text-center mt-3">All Bid</h5>
+                <table class="table table-striped mt-4 text-center">
+                    <tr>
+                        <th scope="col">User Name</th>
+                        <th scope="col">Bid</th>
+                        <th scope="col">Time</th>
+                    </tr>
+                    <tr th:each="userList:${userList}">
+                        <td th:text="${userList.userId.userName}"></td>
+                        <td th:text="${userList.userBid} + ' CAB'"></td>
+                        <td th:text="${userList.timeBid}"></td>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>

@@ -57,25 +57,21 @@ public class AuctionRoomController {
         Page<Room> list = service.getSearchRoom(PageRequest.of(page - 1, pageSize), carName, model);
         List<Brand> brandList = brandService.getAllBrand();
         Page<Room> pageRoomCurrent = service.getListRoomCurrent(page, pageSize);
-
         List<Room> listRoomCurrent = pageRoomCurrent.getContent();
         modelAndView = new ModelAndView("auctionRoom");
         if (!list.isEmpty()) {
             System.out.println("day la list: " + list.getSize());
-
-
             modelAndView.addObject("page", page);
             modelAndView.addObject("nameCar", carName);
             modelAndView.addObject("modelId", model);
             modelAndView.addObject("total", list.getTotalPages());
-
             Cookie cookie = new Cookie("setUser", setUser);
             modelAndView.addObject("cookieValue", cookie);
             modelAndView.addObject("setUserId", setUserId);
-            User u = userService.findUserById(Integer.parseInt(setUserId));
             if (cookie.getValue().equals("")) {
                 modelAndView.addObject("check", false);
             } else {
+                User u = userService.findUserById(Integer.parseInt(setUserId));
                 modelAndView.addObject("addressWallet", u.getAddressWallet());
                 modelAndView.addObject("check", true);
                 List<Favorite> favoriteList = favoriteService.listAllFavo(Integer.parseInt(setUserId));
@@ -93,6 +89,7 @@ public class AuctionRoomController {
         modelAndView.addObject("brandList", brandList);
         modelAndView.addObject("listRoomCurrent", listRoomCurrent);
         modelAndView.addObject("list", list);
+        modelAndView.addObject("activeAR", "nav-link scrollto active");
         return modelAndView;
     }
 

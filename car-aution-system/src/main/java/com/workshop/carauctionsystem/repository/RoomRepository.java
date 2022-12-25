@@ -29,7 +29,7 @@ public interface RoomRepository extends JpaRepository<Room, Integer> {
     @Transactional
     public void update(String roomName, String startTime, String endTime, Timestamp updatedAt, int ticketNumber,int ticketPrice, int typeRoom,int createdBy,String img,String date,int id);
 
-    @Query(nativeQuery = true, value = "SELECT * FROM swp490_cab.room  WHERE current_date() - openDate <= 0 and current_time() - startTime < 0")
+    @Query(nativeQuery = true, value = "SELECT * FROM swp490_cab.room  WHERE (case when openDate = current_date() then current_time() - startTime <= 0 else current_date() <openDate end)")
     public Page<Room> getListRoom(Pageable pageable);
     @Query(nativeQuery = true, value = "SELECT * FROM swp490_cab.room  WHERE current_date() - openDate = 0 and current_time() - startTime >= 0 and current_time() - endTime <= 0")
     public Page<Room> getListRoomCurrent(Pageable pageable);
