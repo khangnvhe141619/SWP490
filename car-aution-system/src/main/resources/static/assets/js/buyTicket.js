@@ -1,4 +1,3 @@
-
 const token_ABI = [
     {"inputs": [], "stateMutability": "nonpayable", "type": "constructor"}, {
         "anonymous": false,
@@ -178,7 +177,7 @@ async function connectMetamask() {
     // MetaMask requires requesting permission to connect users accounts
     await provider.send("eth_requestAccounts", []);
 
-    signer = await provider.getSigner();
+    const signer = await provider.getSigner();
 
     console.log("Account address s:", await signer.getAddress());
 }
@@ -203,11 +202,12 @@ async function transferToken(roomID, price) {
 
             } else {
                 const tokenContract = new ethers.Contract("0xb025a25C903E423080e2422e4855AF904590CbfA", token_ABI, provider.getSigner())
-                signer = await provider.getSigner();
+                const signer = await provider.getSigner();
 
                 await tokenContract.transfer("0x39b6e7891C62c313730E17223fCE3B4619eD7B37", ethers.utils.parseUnits(price))
                 saveBidder(uID, roomID)
                 updateTicket(roomID)
+
             }
 
         })
