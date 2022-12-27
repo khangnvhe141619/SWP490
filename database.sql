@@ -711,7 +711,7 @@ UPDATE `swp490_cab`.`news` SET `img` = '/assets/img/bmw/b1.jpg' WHERE (`id` = '2
 UPDATE `swp490_cab`.`news` SET `img` = '/assets/img/Mer/m6.jpg' WHERE (`id` = '3');
 UPDATE `swp490_cab`.`news` SET `img` = '/assets/img/bmw/b6.jpg' WHERE (`id` = '4');
 UPDATE `swp490_cab`.`news` SET `img` = '/assets/img/bmw/b1.jpg' WHERE (`id` = '5');
-UPDATE `swp490_cab`.`news` SET `img` = '/assets/img/Mer/m6.jpg' WHERE (`id` = '6');
+UPDATE `swp490_cab`.`news` SET `img` = '/assets/img/Mer/m6.png' WHERE (`id` = '6');
 UPDATE `swp490_cab`.`news` SET `img` = '/assets/img/bmw/b6.jpg' WHERE (`id` = '7');
 UPDATE `swp490_cab`.`news` SET `img` = '/assets/img/bmw/b1.jpg' WHERE (`id` = '8');
 
