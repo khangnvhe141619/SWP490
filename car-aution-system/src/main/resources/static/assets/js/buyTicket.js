@@ -307,3 +307,19 @@ function isUserInRoom(roomID) {
             alert("Unable to join!")
         });
 }
+
+async function getDataChart(carId){
+    var serverContext = getContextPath();
+    const response = await fetch(serverContext + "showAllBidByCar?carId=" + carId);
+
+    // Storing data in form of JSON
+    var l_data = await response.json();
+    console.log(l_data);
+    if (response) {
+        alert("load")
+    }
+    for(let r of l_data.data){
+        console.log(r)
+    }
+    return l_data.data;
+}

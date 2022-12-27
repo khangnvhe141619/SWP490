@@ -128,4 +128,9 @@ public class RoomServiceImpl implements RoomService {
     public void updateTicket(Room room) {
         roomRepository.updateTicket(room.getId());
     }
+
+    @Override
+    public List<Integer> showAllBidChart(int id) {
+        return roomRepository.showAllBidChart(id);
+    }
 }

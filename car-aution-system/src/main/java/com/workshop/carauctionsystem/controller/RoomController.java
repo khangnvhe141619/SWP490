@@ -147,4 +147,14 @@ public class RoomController {
         }
         return html;
     }
+
+    @GetMapping("/showAllBidByCar")
+    public ResponseEntity<ResponseObject> showChart(@RequestParam("carId") String roomId) {
+        List<Integer> ls = roomService.showAllBidChart(Integer.parseInt(roomId));
+        if (ls == null) {
+            return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject("no", "not!", null));
+        } else {
+            return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject("ok", "Succeed!", ls));
+        }
+    }
 }

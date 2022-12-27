@@ -213,19 +213,12 @@
             </ul>
           </li>
           <li>
-            <a class="has-arrow" href="#" aria-expanded="false"><span class="fa fa-gamepad icon-wrap"></span> <span class="mini-click-non">Game Play</span></a>
+            <a class="has-arrow" th:href="@{/admin/transaction}" aria-expanded="false"><span class="fa fa-gamepad icon-wrap"></span> <span class="mini-click-non">Transaction</span></a>
             <ul class="submenu-angle" aria-expanded="false">
-              <li><a href="#"><span class="mini-sub-pro">Game Play</span></a></li>
+              <li><a th:href="@{/admin/transaction}"><span class="mini-sub-pro">Transaction</span></a></li>
             </ul>
           </li>
-          <li>
-            <a class="has-arrow" href="wishlist.html" aria-expanded="false"><span
-                    class="fa fa-heart icon-wrap"></span> <span
-                    class="mini-click-non">Wishlist</span></a>
-            <ul class="submenu-angle" aria-expanded="false">
-              <li><a href="wishlist.html"><span class="mini-sub-pro">View</span></a></li>
-            </ul>
-          </li>
+
         </ul>
       </nav>
     </div>
@@ -341,17 +334,9 @@
                       <li><a th:href="@{/admin/news}">All News</a></li>
                     </ul>
                   </li>
-                  <li><a data-toggle="collapse" data-target="#demopro" href="#">Game Play<span
-                          class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                    <ul id="demopro6" class="collapse dropdown-header-top">
-                      <li><a href="#">Game Play</a></li>
-                    </ul>
-                  </li>
-                  <li><a data-toggle="collapse" data-target="#demopro" href="#">Wishlist<span
-                          class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                    <ul id="demopro7" class="collapse dropdown-header-top">
-                      <li><a href="wishlist.html">All</a>
-                      </li>
+                  <li><a data-toggle="collapse" data-target="#demopro" th:href="@{/admin/transaction}">Transaction<span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
+                    <ul class="collapse dropdown-header-top">
+                      <li><a th:href="@{/admin/transaction}">Transaction</a></li>
                     </ul>
                   </li>
                 </ul>
