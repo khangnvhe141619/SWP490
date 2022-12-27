@@ -204,10 +204,11 @@ async function transferToken(roomID, price) {
                 const tokenContract = new ethers.Contract("0xb025a25C903E423080e2422e4855AF904590CbfA", token_ABI, provider.getSigner())
                 const signer = await provider.getSigner();
 
-                await tokenContract.transfer("0x39b6e7891C62c313730E17223fCE3B4619eD7B37", ethers.utils.parseUnits(price))
+                const txn = await tokenContract.transfer("0x39b6e7891C62c313730E17223fCE3B4619eD7B37", ethers.utils.parseUnits(price))
                 saveBidder(uID, roomID)
                 updateTicket(roomID)
-
+                console.log(txn.hash)
+                saveTransaction(uID, 2, txn.hash,1)
             }
 
         })
@@ -247,7 +248,7 @@ function saveBidder(idUser, idRoom) {
             console.log(data);
         })
         .catch(error => {
-            alert("Unable to buy!")
+            alert("Unable to save!")
         });
 }
 
@@ -322,4 +323,24 @@ async function getDataChart(carId){
         console.log(r)
     }
     return l_data.data;
+}
+
+function saveTransaction(id, carId, transactionHash, status) {
+    var serverContext = getContextPath();
+    fetch(serverContext + "saveTransaction?setUserId=" + id + "&carId=" + carId + "&transactionHash=" + transactionHash + "&status=" + status, {
+        method: 'POST',
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+        }
+    })
+        .then(response => {
+            //handle response
+        })
+        .then(data => {
+            //handle data
+            console.log(data);
+        })
+        .catch(error => {
+
+        });
 }

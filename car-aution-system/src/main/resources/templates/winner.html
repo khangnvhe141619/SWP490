@@ -24,7 +24,8 @@
             <div class="d-flex flex-column align-items-center text-center p-3 bg bg-white col-md-4 offset-sm-4">
                 <img src="assets/img/giphy.gif">
                 <img class="mt-2 ava" th:src="'assets/img/avatar/'+${winner.userId.avatar}">
-                <input type="hidden" id="address" th:value="${winner.userId.getAddressWallet()} ">
+                <input type="hidden" id="address" th:value="${winner.userId.getAddressWallet()}">
+                <input type="hidden" id="userID-cab" th:value="${winner.userId.getId()}">
                 <span class="font-weight-bold mt-3" th:text="${winner.userId.userName}"></span>
                 <span class="text-black-50" th:text="${winner.userId.email}"></span>
                 <h3 class="mt-5" th:text="${winner.userBid} + ' CAB'"></h3>
@@ -73,5 +74,6 @@
 <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"
         type="application/javascript"></script>
 <script src="/assets/js/rewardToken.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>
