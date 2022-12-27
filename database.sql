@@ -417,7 +417,6 @@ CREATE TABLE `room` (
   `ticketNumber` int NOT NULL,
   `ticketPrice` int NOT NULL,
   `imgpath` varchar(255) DEFAULT NULL,
-  `status` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `room_typeroomid_foreign` (`typeRoomId`),
   KEY `FKdgcd3aoxm5w6scd8hupsjo1pq` (`carId`),
