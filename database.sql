@@ -570,7 +570,7 @@ CREATE TABLE `transaction` (
   `id` int NOT NULL AUTO_INCREMENT,
   `userId` int NOT NULL,
   `carId` int NOT NULL,
-  `transationHash` varchar(255) NOT NULL,
+  `transactionHash` varchar(255) NOT NULL,
   `status` int NOT NULL,
   `createdAt` datetime NOT NULL,
   `updateAt` datetime NOT NULL,
