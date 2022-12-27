@@ -30,6 +30,6 @@ public class Transaction {
     private int status;
     @Column(name = "createdat")
     private Timestamp createdAt;
-    @Column(name = "updatedat")
+    @Column(name = "updateat")
     private Timestamp updatedAt;
 }

@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>User</title>
+  <title>Transaction</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- favicon
@@ -63,44 +63,56 @@
   <!-- modernizr JS
     ============================================ -->
   <script th:src="@{js/vendor/modernizr-2.8.3.min.js}"></script>
+  <!-- jquery
+  ============================================ -->
+  <script th:src="@{js/vendor/jquery-1.12.4.min.js}"></script>
+  <script th:src="@{js/validate/validate-form.js}"></script>
 </head>
 
 <body>
+
 <!-- Start Left menu area -->
 <div class="left-sidebar-pro">
   <nav id="sidebar" class="">
     <div class="sidebar-header">
-      <a th:href="@{/admin/home}"><img class="main-logo" th:src="@{img/logo/logo.png}" alt="" /></a>
-      <strong><a th:href="@{/admin/home}"><img th:src="@{img/logo/logosn.png}" alt="" /></a></strong>
+      <a th:href="@{/admin/home}"><img class="main-logo" th:src="@{img/logo/logo.png}" alt=""/></a>
+      <strong><a th:href="@{/admin/home}"><img th:src="@{img/logo/logosn.png}" alt=""/></a></strong>
     </div>
     <!--Start left-scrollbar-->
     <div class="left-custom-menu-adp-wrap comment-scrollbar">
       <nav class="sidebar-nav left-sidebar-menu-pro">
         <ul class="metismenu" id="menu1">
           <li>
-            <a title="Landing Page" th:href="@{/admin/home}" aria-expanded="false"><span class="fa fa-home icon-wrap" aria-hidden="true"></span> <span class="mini-click-non">Home</span></a>
+            <a title="Landing Page" th:href="@{/admin/home}" aria-expanded="false"><span
+                    class="fa fa-home icon-wrap" aria-hidden="true"></span> <span class="mini-click-non">Home</span></a>
           </li>
           <li>
-            <a class="has-arrow" th:href="@{/admin/user}" aria-expanded="false"><span class="fa fa-user icon-wrap"></span> <span class="mini-click-non">User</span></a>
+            <a class="has-arrow" th:href="@{/admin/user}" aria-expanded="false"><span
+                    class="fa fa-user icon-wrap"></span> <span class="mini-click-non">User</span></a>
             <ul class="submenu-angle" aria-expanded="false">
               <li><a th:href="@{/admin/user}"><span class="mini-sub-pro">All Users</span></a></li>
-              <li><a th:href="@{/admin/userban}"><span class="mini-sub-pro">All Banned Users</span></a></li>
+              <li><a th:href="@{/admin/userban}"><span class="mini-sub-pro">All Banned Users</span></a>
+              </li>
             </ul>
           </li>
           <li>
-            <a class="has-arrow" th:href="@{/admin/car}" aria-expanded="false"><span class="fa fa-automobile icon-wrap"></span> <span class="mini-click-non">Car</span></a>
+            <a class="has-arrow" th:href="@{/admin/car}" aria-expanded="false"><span
+                    class="fa fa-automobile icon-wrap"></span> <span class="mini-click-non">Car</span></a>
             <ul class="submenu-angle" aria-expanded="false">
               <li><a th:href="@{/admin/car}"><span class="mini-sub-pro">All Cars</span></a></li>
             </ul>
           </li>
           <li>
-            <a class="has-arrow" th:href="@{/admin/brand}" aria-expanded="false"><span class="glyphicon glyphicon-menu-hamburger icon-wrap"></span> <span class="mini-click-non">Brand</span></a>
+            <a class="has-arrow" th:href="@{/admin/brand}" aria-expanded="false"><span
+                    class="glyphicon glyphicon-menu-hamburger icon-wrap"></span> <span
+                    class="mini-click-non">Brand</span></a>
             <ul class="submenu-angle" aria-expanded="false">
               <li><a th:href="@{/admin/brand}"><span class="mini-sub-pro">All Brands</span></a></li>
             </ul>
           </li>
           <li>
-            <a class="has-arrow" th:href="@{/admin/auctionroom}" aria-expanded="false"><span class="fa fa-window-maximize icon-wrap"></span> <span class="mini-click-non">Auction Room</span></a>
+            <a class="has-arrow" th:href="@{/admin/auctionroom}" aria-expanded="false"><span
+                    class="fa fa-window-maximize icon-wrap"></span> <span class="mini-click-non">Auction Room</span></a>
             <ul class="submenu-angle" aria-expanded="false">
               <li><a th:href="@{/admin/auctionroom}"><span class="mini-sub-pro">All Auction Room</span></a></li>
             </ul>
@@ -113,7 +125,8 @@
             </ul>
           </li>
           <li>
-            <a class="has-arrow" th:href="@{/admin/news}" aria-expanded="false"><span class="fa fa-newspaper-o icon-wrap"></span> <span class="mini-click-non">News</span></a>
+            <a class="has-arrow" th:href="@{/admin/news}" aria-expanded="false"><span
+                    class="fa fa-newspaper-o icon-wrap"></span> <span class="mini-click-non">News</span></a>
             <ul class="submenu-angle" aria-expanded="false">
               <li><a th:href="@{/admin/news}"><span class="mini-sub-pro">All News</span></a></li>
             </ul>
@@ -137,7 +150,7 @@
     <div class="row">
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="logo-pro">
-          <a th:href="@{/admin/home}"><img class="main-logo" th:src="@{img/logo/logo.png}" alt="" /></a>
+          <a th:href="@{/admin/home}"><img class="main-logo" th:src="@{img/logo/logo.png}" alt=""/></a>
         </div>
       </div>
     </div>
@@ -151,7 +164,8 @@
               <div class="row">
                 <div class="col-lg-1 col-md-0 col-sm-1 col-xs-12">
                   <div class="menu-switcher-pro">
-                    <button type="button" id="sidebarCollapse" class="btn bar-button-pro header-drl-controller-btn btn-info navbar-btn">
+                    <button type="button" id="sidebarCollapse"
+                            class="btn bar-button-pro header-drl-controller-btn btn-info navbar-btn">
                       <i class="fa fa-align-justify"></i>
                     </button>
                   </div>
@@ -161,17 +175,19 @@
                   <div class="header-right-info">
                     <ul class="nav navbar-nav mai-top-nav header-right-menu">
                       <li class="nav-item">
-                        <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
-<!--                      Chỉ sửa 'user.png' còn '/assets/img/avatar/' fix cứng -->
-                          <img th:src="@{'/assets/img/avatar/'+ 'user.png'}" alt="" />
+                        <a href="#" data-toggle="dropdown" role="button" aria-expanded="false"
+                           class="nav-link dropdown-toggle">
+                          <img th:src="@{img/profile/user.png}" alt=""/>
                           <span class="admin-name" th:text="${userName}"></span>
                           <i class="fa fa-angle-down edu-icon edu-down-arrow"></i>
                         </a>
-                        <ul role="menu" class="dropdown-header-top author-log dropdown-menu animated zoomIn">
+                        <ul role="menu"
+                            class="dropdown-header-top author-log dropdown-menu animated zoomIn">
                           <li><a th:href="@{/logout}"><span class="edu-icon edu-locked author-log-ic"></span>Log Out</a>
                           </li>
                         </ul>
                       </li>
+
                       </li>
                     </ul>
                   </div>
@@ -191,7 +207,9 @@
               <nav id="dropdown">
                 <ul class="mobile-menu-nav">
                   <li><a th:href="@{/admin/home}">Home</a></li>
-                  <li><a data-toggle="collapse" data-target="#demoevent" th:href="@{/admin/user}">User <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
+
+                  <li><a data-toggle="collapse" data-target="#demoevent" th:href="@{/admin/user}">User <span
+                          class="admin-project-icon edu-icon edu-down-arrow"></span></a>
                     <ul id="demoevent" class="collapse dropdown-header-top">
                       <li><a th:href="@{/admin/user}">All Users</a>
                       </li>
@@ -199,33 +217,36 @@
                       </li>
                     </ul>
                   </li>
-                  <li><a data-toggle="collapse" data-target="#demopro" th:href="@{/admin/car}">Car <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
+                  <li><a data-toggle="collapse" data-target="#demopro" th:href="@{/admin/car}">Car <span
+                          class="admin-project-icon edu-icon edu-down-arrow"></span></a>
                     <ul class="collapse dropdown-header-top">
                       <li><a th:href="@{/admin/car}">All Cars</a>
                       </li>
                     </ul>
                   </li>
-                  <li><a data-toggle="collapse" data-target="#demopro" th:href="@{/admin/brand}">Brand <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
+                  <li><a data-toggle="collapse" data-target="#demopro" th:href="@{/admin/brand}">Brand <span
+                          class="admin-project-icon edu-icon edu-down-arrow"></span></a>
                     <ul class="collapse dropdown-header-top">
                       <li><a th:href="@{/admin/brand}">All Brands</a>
                       </li>
                     </ul>
                   </li>
-                  <li><a data-toggle="collapse" data-target="#demopro" th:href="@{/admin/auctionroom}">Auction Room <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
+                  <li><a data-toggle="collapse" data-target="#demopro" th:href="@{/admin/auctionroom}">Auction Room <span
+                          class="admin-project-icon edu-icon edu-down-arrow"></span></a>
                     <ul class="collapse dropdown-header-top">
                       <li><a th:href="@{/admin/auctionroom}">All Auction Room</a>
                       </li>
                     </ul>
                   </li>
-                  <li><a data-toggle="collapse" data-target="#demopro" th:href="@{/admin/model}">Model <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
+                  <li><a data-toggle="collapse" data-target="#demopro" th:href="@{/admin/model}">Model <span
+                          class="admin-project-icon edu-icon edu-down-arrow"></span></a>
                     <ul class="collapse dropdown-header-top">
-                      <li><a th:href="@{/admin/model}">All Model</a>
-                      </li>
-                      <li><a th:href="@{/admin/modelSpec}">All Model Specification</a>
-                      </li>
+                      <li><a th:href="@{/admin/model}">All Model</a></li>
+                      <li><a th:href="@{/admin/modelSpec}">All Model Specification</a></li>
                     </ul>
                   </li>
-                  <li><a data-toggle="collapse" data-target="#demopro" href="#">News <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
+                  <li><a data-toggle="collapse" data-target="#demopro" th:href="@{/admin/news}">News <span
+                          class="admin-project-icon edu-icon edu-down-arrow"></span></a>
                     <ul class="collapse dropdown-header-top">
                       <li><a th:href="@{/admin/news}">All News</a></li>
                     </ul>
@@ -251,8 +272,9 @@
               <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                   <div class="breadcome-heading">
-                    <form th:action="@{/admin/user}" method="get" role="search" class="sr-input-func">
-                      <input id="search" name="search" type="text" placeholder="Search..." class="search-int form-control">
+                    <form th:action="@{/admin/brand}" method="get" role="search" class="sr-input-func">
+                      <input id="search" name="search" type="text" placeholder="Search..."
+                             class="search-int form-control">
                       <a href="#"><i class="fa fa-search"></i></a>
                     </form>
                   </div>
@@ -261,7 +283,7 @@
                   <ul class="breadcome-menu">
                     <li><a th:href="@{/admin/home}">Home</a> <span class="bread-slash">/</span>
                     </li>
-                    <li><span class="bread-blod">User</span>
+                    <li><span class="bread-blod">Brand</span>
                     </li>
                   </ul>
                 </div>
@@ -278,7 +300,7 @@
       <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
           <div class="product-status-wrap drp-lst">
-            <h4>User List</h4>
+            <h4>Transaction List</h4>
             <div th:if="${success} != null">
               <div class="alert alert-success text-center" role="alert">[[${success}]]</div>
             </div>
@@ -286,55 +308,48 @@
               <div class="alert alert-danger text-center" role="alert">[[${fail}]]</div>
             </div>
             <div class="asset-inner">
-              <div th:if="${#lists.isEmpty(users)}">
-                <h6 style="color: red;" th:text="${lst_empty}"></h6>
+              <div th:if="${#lists.isEmpty(transactions)}">
+                <h6 style="color: red;" th:text="${lst_empty}">a</h6>
               </div>
               <table>
                 <tr>
                   <th>No</th>
-                  <th>Username</th>
-                  <th>Full Name</th>
-                  <th>Email</th>
-                  <th>Phone</th>
+                  <th>Transaction</th>
+                  <th>Created Date</th>
                   <th>Status</th>
-                  <th>Setting</th>
                 </tr>
-                <tr th:unless="${not #lists.isEmpty(users)}">
-                <tr th:each="c,loop :${users}">
+                <tr th:unless="${not #lists.isEmpty(transactions)}">
+                <tr th:each="c,loop :${transactions}">
                   <td th:text="${loop.count}"></td>
-                  <td th:text="${c.userName}"></td>
-                  <td th:text="${c.fullName}"></td>
-                  <td th:text="${c.email}"></td>
-                  <td th:text="${c.phone}"></td>
-                  <td>
-                    <button class="pd-setting">Active</button>
-                  </td>
-                  <td>
-                    <button data-toggle="tooltip" title="Ban" class="pd-setting-ed"><a th:onclick="showMess([[${c.id}]])"><i class="fa fa-trash-o" aria-hidden="true"></i></a></button>
-                  </td>
+                  <td th:text="${c.transactionHash}"></td>
+                  <td th:text="${c.createdAt}"></td>
+                <td>
+                  <button class="pd-setting">Success</button>
+                </td>
                 </tr>
                 </tr>
               </table>
             </div>
-            <div th:if="${not #lists.isEmpty(users)}">
-            <div class="custom-pagination">
-              <nav aria-label="Page navigation example">
-                <ul class="pagination">
-                  <li class="page-item" th:if="${users.hasPrevious()}"><a class="page-link" th:href="@{/admin/user(page=${users.number}-1,search=${param.search})}">Previous</a></li>
-                  <li class="page-item"><a th:text="${users.number} + 1"></a></li>
-                  <li class="page-item" th:if="${users.hasNext()}"><a> / </a></li>
-                  <li class="page-item" th:if="${users.hasNext()}"><a th:text="${users.totalPages}"></a></li>
-                  <li class="page-item" th:if="${users.hasNext()}"><a class="page-link" th:href="@{/admin/user(page=${users.number}+1,search=${param.search})}">Next</a></li>
-                </ul>
-              </nav>
+            <div th:if="${not #lists.isEmpty(transactions)}">
+              <div class="custom-pagination">
+                <nav aria-label="Page navigation example">
+                  <ul class="pagination">
+                    <li class="page-item" th:if="${transactions.hasPrevious()}"><a class="page-link" th:href="@{/admin/transaction(page=${transactions.number}-1,search=${param.search})}">Previous</a></li>
+                    <li class="page-item"><a th:text="${transactions.number} + 1"></a></li>
+                    <li class="page-item" th:if="${transactions.hasNext()}"><a> / </a></li>
+                    <li class="page-item" th:if="${transactions.hasNext()}"><a th:text="${transactions.totalPages}"></a></li>
+                    <li class="page-item" th:if="${transactions.hasNext()}"><a class="page-link" th:href="@{/admin/transaction(page=${transactions.number}+1,search=${param.search})}">Next</a></li>
+                  </ul>
+                </nav>
+              </div>
             </div>
-          </div>
           </div>
         </div>
       </div>
     </div>
   </div>
   <!-- End content area-->
+
   <!--Start footer-->
   <div class="footer-copyright-area">
     <div class="container-fluid">
@@ -349,7 +364,6 @@
   </div>
   <!--End footer-->
 </div>
-
 <!-- jquery
     ============================================ -->
 <script th:src="@{js/vendor/jquery-1.12.4.min.js}"></script>
@@ -397,13 +411,5 @@
 <!-- main JS
     ============================================ -->
 <script th:src="@{js/main.js}"></script>
-<script th:inline="javascript">
-  function showMess(id) {
-    var option = confirm('Do you want Ban this user ?');
-    if (option === true){
-      window.location.href = "user/ban/"+id;
-    }
-  }
-</script>
 </body>
 </html>

@@ -24,4 +24,6 @@ public interface RoomService {
     public Page<Room> getSearchRoom(Pageable pageable,String carName,String model);
 
     public void updateTicket(Room room);
+
+    public List<Integer> showAllBidChart(int id);
 }

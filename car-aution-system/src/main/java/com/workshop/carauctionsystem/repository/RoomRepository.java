@@ -60,4 +60,12 @@ public interface RoomRepository extends JpaRepository<Room, Integer> {
     @Modifying
     @Query(nativeQuery = true, value = "update room set ticketNumber = ticketNumber - 1 where id = ?1")
     public void updateTicket(int roomId);
+
+    @Modifying
+    @Query(nativeQuery = true,value = "select rd.userBid\n" +
+            "from room r\n" +
+            "join car c  on c.id=r.carId\n" +
+            "join roomdetailplayer rd on r.id=rd.roomId\n" +
+            "where c.id = ?1")
+    public List<Integer> showAllBidChart(int id);
 }
