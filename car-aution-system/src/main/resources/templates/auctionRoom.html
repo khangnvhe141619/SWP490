@@ -100,8 +100,7 @@
                                     </figure>
                                     <div class="portfolio-info">
                                         <h4><a th:text="${ls.roomName}"
-                                               th:attr="onclick=|checkDate('${ls.openDate}', '${ls.startTime}', '${ls.id}', 'The auction room hasn\'t started yet\n' +
-                        ', Please wait until now!')|"></a>
+                                               data-toggle="modal" th:attr="data-target='#bd-example-modal-lg2'+*{ls.carId}"></a>
                                         </h4>
                                         <div class="row">
                                             <p class="col-sm-6" th:text="'Ticket Price: '+${ls.ticketPrice}+' CAB'"></p>
