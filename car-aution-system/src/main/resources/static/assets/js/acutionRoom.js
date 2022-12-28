@@ -91,7 +91,7 @@ function clock() {
 
     if (Gio_hien_tai == 0 && Phut_hien_tai == 0 && Giay_hien_tai == 10) {
         Swal.fire({
-            html: 'Bid button locked!',
+            html: 'The system is closing bids!',
             timer: 2000,
             didOpen: () => {
                 Swal.showLoading()

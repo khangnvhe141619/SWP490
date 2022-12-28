@@ -100,8 +100,7 @@
                                     </figure>
                                     <div class="portfolio-info">
                                         <h4><a th:text="${ls.roomName}"
-                                               th:attr="onclick=|checkDate('${ls.openDate}', '${ls.startTime}', '${ls.id}', 'The auction room hasn\'t started yet\n' +
-                        ', Please wait until now!')|"></a>
+                                               data-toggle="modal" th:attr="data-target='#bd-example-modal-lg2'+*{ls.carId}"></a>
                                         </h4>
                                         <div class="row">
                                             <p class="col-sm-6" th:text="'Ticket Price: '+${ls.ticketPrice}+' CAB'"></p>
@@ -191,8 +190,8 @@
                                                         <input type="hidden" id="roomId-cab" class="result" th:value="${ls.id}">
                                                     </p>
                                                     <p class="border-top border-bottom">
-                                                        <span class="h6">Ticket:</span>
-                                                        <span class="result"th:text="${ls.ticketNumber}+ '/10'"> </span>
+                                                        <span class="h6">Remaining tickets:</span>
+                                                        <span class="result"th:text="${ls.ticketNumber}"> </span>
                                                     </p>
                                                     <p class="border-top border-bottom">
                                                         <span class="h6">Ticket Price:</span>

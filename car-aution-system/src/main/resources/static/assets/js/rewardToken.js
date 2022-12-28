@@ -169,6 +169,7 @@ const u_address = document.getElementById('address')
 
 let carId = document.getElementById('car-cab')
 let price = document.getElementById('price-cab')
+let userID_cab = document.getElementById('userID-cab')
 connectMetamask();
 
 let output = [];
@@ -222,12 +223,24 @@ async function rewardToken() {
 
     const tokenContract = new ethers.Contract("0xb025a25C903E423080e2422e4855AF904590CbfA", token_ABI, signerReward)
     const signer = await provider.getSigner();
-    const txn = await tokenContract.transfer(u_address.value, ethers.utils.parseUnits(randomNumber(price.value).toString()))
-    console.log(txn.hash)
+    let reward = randomNumber(price.value);
+    let receiver = userID_cab.value;
+
     let u = output[1];
     var valID = "val";
     let uID = u[valID];
-    saveTransaction(uID, carId.value, txn.hash, 1)
+    if (receiver == uID) {
+        const txn = await tokenContract.transfer(u_address.value, ethers.utils.parseUnits(reward.toString()))
+        console.log(txn.hash)
+        saveTransaction(receiver, carId.value, txn.hash, 1)
+        Swal.fire(
+            'Congratulation!',
+            'You win! Reward is ' + reward + ' CAB',
+            'success'
+        )
+    } else {
+        alert("Wish you luck next time!")
+    }
 }
 
 function saveTransaction(id, carId, transactionHash, status) {
@@ -240,7 +253,6 @@ function saveTransaction(id, carId, transactionHash, status) {
     })
         .then(response => {
             //handle response
-            alert("Send reward to winner successfully!")
         })
         .then(data => {
             //handle data

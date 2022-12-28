@@ -143,7 +143,7 @@ public class AdminRoomController {
         int typeRoom = 2;
         String nameFile = upImg.getOriginalFilename();
         Room room = roomService.getRoomById(id);
-        String regex = "^[a-zA-Z0-9 \\-*_]+$";
+        String regex = "^[a-zA-Z0-9 \\s-*_]+$";
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
         Date d1 = sdf.parse(startTime);
         Date d2 = sdf.parse(endTime);
