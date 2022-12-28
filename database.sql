@@ -233,24 +233,48 @@ INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('9', '2', '/
 INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('10', '2', '/img/Mer/m5.png');
 INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('11', '2', '/img/Mer/m6.png');
 INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('12', '2', '/img/Mer/m7.png');
-INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('13', '3', '/img/bmw/b1.png');
-INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('14', '3', '/img/bmw/b2.png');
-INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('15', '3', '/img/bmw/b3.png');
-INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('16', '3', '/img/bmw/b4.png');
-INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('17', '3', '/img/bmw/b6.png');
-INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('18', '3', '/img/bmw/b7.png');
-INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('19', '4', '/img/camry/c1.png');
-INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('20', '4', '/img/camry/c2.png');
-INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('21', '4', '/img/camry/c3.png');
-INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('22', '4', '/img/camry/c4.png');
-INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('23', '4', '/img/camry/c5.png');
-INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('24', '4', '/img/camry/c6.png');
-INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('25', '5', '/img/lexus/l1.png');
-INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('26', '5', '/img/lexus/l2.png');
-INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('27', '5', '/img/lexus/l3.png');
-INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('28', '5', '/img/lexus/l4.png');
-INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('29', '5', '/img/lexus/l5.png');
-INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('30', '5', '/img/lexus/l6.png');
+INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('13', '3', '/img/bmw/b1.jpg');
+INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('14', '3', '/img/bmw/b2.jpg');
+INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('15', '3', '/img/bmw/b3.jpg');
+INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('16', '3', '/img/bmw/b4.jpg');
+INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('17', '3', '/img/bmw/b6.jpg');
+INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('18', '3', '/img/bmw/b7.jpg');
+INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('19', '4', '/img/camry/c1.jpg');
+INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('20', '4', '/img/camry/c2.jpg');
+INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('21', '4', '/img/camry/c3.jpg');
+INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('22', '4', '/img/camry/c4.jpg');
+INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('23', '4', '/img/camry/c5.jpg');
+INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('24', '4', '/img/camry/c6.jpg');
+INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('25', '5', '/img/lexus/l1.jpg');
+INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('26', '5', '/img/lexus/l2.jpg');
+INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('27', '5', '/img/lexus/l3.jpg');
+INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('28', '5', '/img/lexus/l4.jpg');
+INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('29', '5', '/img/lexus/l5.jpg');
+INSERT INTO `swp490_cab`.`image` (`id`, `carId`, `imgPath`) VALUES ('30', '5', '/img/lexus/l6.jpg');
+INSERT INTO `swp490_cab`.`image` (`id`, `imgpath`, `carid`) VALUES ('31', '/img/huyndai/huyn1.png', '6');
+INSERT INTO `swp490_cab`.`image` (`id`, `imgpath`, `carid`) VALUES ('32', '/img/huyndai/huyn2.png', '6');
+INSERT INTO `swp490_cab`.`image` (`id`, `imgpath`, `carid`) VALUES ('33', '/img/huyndai/huyn3.png', '6');
+INSERT INTO `swp490_cab`.`image` (`id`, `imgpath`, `carid`) VALUES ('34', '/img/huyndai/huyn4.png', '6');
+INSERT INTO `swp490_cab`.`image` (`id`, `imgpath`, `carid`) VALUES ('35', '/img/huyndai/huyn5.png', '6');
+INSERT INTO `swp490_cab`.`image` (`id`, `imgpath`, `carid`) VALUES ('36', '/img/huyndai/huyn6.png', '6');
+INSERT INTO `swp490_cab`.`image` (`id`, `imgpath`, `carid`) VALUES ('37', '/img/porche/p1.png', '7');
+INSERT INTO `swp490_cab`.`image` (`id`, `imgpath`, `carid`) VALUES ('38', '/img/porche/p2.png', '7');
+INSERT INTO `swp490_cab`.`image` (`id`, `imgpath`, `carid`) VALUES ('39', '/img/porche/p3.png', '7');
+INSERT INTO `swp490_cab`.`image` (`id`, `imgpath`, `carid`) VALUES ('40', '/img/porche/p4.jpg', '7');
+INSERT INTO `swp490_cab`.`image` (`id`, `imgpath`, `carid`) VALUES ('41', '/img/porche/p5.jpg', '7');
+INSERT INTO `swp490_cab`.`image` (`id`, `imgpath`, `carid`) VALUES ('42', '/img/porche/p6.jpg', '7');
+INSERT INTO `swp490_cab`.`image` (`id`, `imgpath`, `carid`) VALUES ('43', '/img/ferrari/fr1.png', '8');
+INSERT INTO `swp490_cab`.`image` (`id`, `imgpath`, `carid`) VALUES ('44', '/img/ferrari/fr2.png', '8');
+INSERT INTO `swp490_cab`.`image` (`id`, `imgpath`, `carid`) VALUES ('45', '/img/ferrari/fr3.png', '8');
+INSERT INTO `swp490_cab`.`image` (`id`, `imgpath`, `carid`) VALUES ('46', '/img/ferrari/fr4.png', '8');
+INSERT INTO `swp490_cab`.`image` (`id`, `imgpath`, `carid`) VALUES ('47', '/img/ferrari/fr5.png', '8');
+INSERT INTO `swp490_cab`.`image` (`id`, `imgpath`, `carid`) VALUES ('48', '/img/ferrari/fr6.png', '8');
+INSERT INTO `swp490_cab`.`image` (`id`, `imgpath`, `carid`) VALUES ('49', '/img/lambor/lam1.png', '9');
+INSERT INTO `swp490_cab`.`image` (`id`, `imgpath`, `carid`) VALUES ('50', '/img/lambor/lam2.png', '9');
+INSERT INTO `swp490_cab`.`image` (`id`, `imgpath`, `carid`) VALUES ('51', '/img/lambor/lam3.png', '9');
+INSERT INTO `swp490_cab`.`image` (`id`, `imgpath`, `carid`) VALUES ('52', '/img/lambor/lam4.png', '9');
+INSERT INTO `swp490_cab`.`image` (`id`, `imgpath`, `carid`) VALUES ('53', '/img/lambor/lam5.png', '9');
+INSERT INTO `swp490_cab`.`image` (`id`, `imgpath`, `carid`) VALUES ('54', '/img/lambor/lam6.png', '9');
 /*!40000 ALTER TABLE `image` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -434,7 +458,15 @@ CREATE TABLE `room` (
 
 LOCK TABLES `room` WRITE;
 /*!40000 ALTER TABLE `room` DISABLE KEYS */;
-INSERT INTO `room` VALUES (1,1,1,'VinFast Lux A 2.0','10:00:00','2022-12-31 00:00:00','2022-12-31 00:00:00',1,'2022-12-31','10:00:00','10:30:00',10,50,'assets/img/Vinfast/e1.jpg'),(2,2,2,'Mercedes-Benz E 300 AMG','10:00:00','2022-12-31 00:00:00','2022-12-31 00:00:00',1,'2022-12-31','10:00:00','10:30:00',10,50,'assets/img/Mer/m1.jpg'),(3,3,2,'BMW 320i Sport Line Plus ','10:00:00','2022-12-31 00:00:00','2022-12-31 00:00:00',1,'2022-12-31','10:00:00','10:30:00',10,50,'assets/img/bmw/b1.jpg'),(4,4,2,'Toyota Land Cruiser Prado','10:00:00','2022-12-31 00:00:00','2022-12-31 00:00:00',1,'2022-12-31','10:00:00','10:30:00',10,50,'assets/img/camry/c1.jpg'),(5,5,2,'Lexus LX 570','10:00:00','2022-12-31 00:00:00','2022-12-31 00:00:00',1,'2022-12-31','10:00:00','10:30:00',10,50,'assets/img/lexus/l1.jpg'),(6,6,2,'Hyundai Santa Fe','10:00:00','2022-12-31 00:00:00','2022-12-31 00:00:00',1,'2022-12-31','10:00:00','10:30:00',10,50,'assets/img/honda/h1.jpg'),(7,7,2,'Porsche Taycan Turbo S','10:00:00','2022-12-31 00:00:00','2022-12-31 00:00:00',1,'2022-12-31','10:00:00','10:30:00',10,50,'assets/img/porche/p1.png'),(8,8,2,'Ferrari F8 Tributo','10:00:00','2022-12-31 00:00:00','2022-12-31 00:00:00',1,'2022-12-31','10:00:00','10:30:00',10,50,'assets/img/audi/a1.jpg'),(9,9,2,'Lamborghini Huracan LP610-4','10:00:00','2022-12-31 00:00:00','2022-12-31 00:00:00',1,'2022-12-31','10:00:00','10:30:00',10,50,'assets/img/ranger/r1.jpg');
+INSERT INTO `room` VALUES (1,1,1,'VinFast Lux A 2.0','10:00:00','2022-12-26 00:00:00','2022-12-26 00:00:00',1,'2022-12-29','10:00:00','10:30:00',10,1,'assets/img/Vinfast/e1.jpg'),
+(2,2,2,'Mercedes-Benz E 300 AMG','10:00:00','2022-12-26 00:00:00','2022-12-26 00:00:00',1,'2022-12-29','10:00:00','10:30:00',10,1,'assets/img/Mer/m1.jpg'),
+(3,3,2,'BMW 320i Sport Line Plus ','10:00:00','2022-12-26 00:00:00','2022-12-26 00:00:00',1,'2022-12-29','10:00:00','10:30:00',10,1,'assets/img/bmw/b1.jpg'),
+(4,4,2,'Toyota Land Cruiser Prado','10:00:00','2022-12-26 00:00:00','2022-12-26 00:00:00',1,'2022-12-29','10:00:00','10:30:00',10,1,'assets/img/camry/c1.jpg'),
+(5,5,2,'Lexus LX 570','10:00:00','2022-12-26 00:00:00','2022-12-26 00:00:00',1,'2022-12-29','10:00:00','10:30:00',10,1,'assets/img/lexus/l1.jpg'),
+(6,6,2,'Hyundai Santa Fe','10:00:00','2022-12-26 00:00:00','2022-12-26 00:00:00',1,'2022-12-29','10:00:00','10:30:00',10,1,'assets/img/honda/h1.jpg'),
+(7,7,2,'Porsche Taycan Turbo S','10:00:00','2022-12-26 00:00:00','2022-12-26 00:00:00',1,'2022-12-29','10:00:00','10:30:00',10,1,'assets/img/porche/p1.png'),
+(8,8,2,'Ferrari F8 Tributo','10:00:00','2022-12-26 00:00:00','2022-12-26 00:00:00',1,'2022-12-29','10:00:00','10:30:00',10,1,'assets/img/audi/a1.jpg'),
+(9,9,2,'Lamborghini Huracan LP610-4','10:00:00','2022-12-26 00:00:00','2022-12-26 00:00:00',1,'2022-12-29','10:00:00','10:30:00',10,1,'assets/img/ranger/r1.jpg');
 /*!40000 ALTER TABLE `room` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -642,7 +674,13 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'viethoang1','$2a$10$yTAC9kRU6xV.hUskdeMbduaYFCzeuDqTQjik0cqVB6VLCaa2eEKiq','Viet Hoang','0122333444','viethoang1@gmail.com','img',1,'2022-11-02 07:02:56',NULL),(2,'viethoang2','$2a$10$yTAC9kRU6xV.hUskdeMbduaYFCzeuDqTQjik0cqVB6VLCaa2eEKiq','Viet Hoang','0166232333','viethoang2@gmail.com','img',1,'2022-11-02 07:02:56',NULL),(3,'viethoang3','$2a$10$yTAC9kRU6xV.hUskdeMbduaYFCzeuDqTQjik0cqVB6VLCaa2eEKiq','Viet Hoang','0966812311','viethoang3@gmail.com','img',1,'2022-11-02 07:02:56',NULL),(4,'viethoang','$2a$10$yTAC9kRU6xV.hUskdeMbduaYFCzeuDqTQjik0cqVB6VLCaa2eEKiq','Viet Hoang','0234123123','viethoang42gmail.com','img',1,'2022-11-02 07:02:56',NULL);
+INSERT INTO `user` VALUES (1,'viethoang1','$2a$10$yTAC9kRU6xV.hUskdeMbduaYFCzeuDqTQjik0cqVB6VLCaa2eEKiq','Viet Hoang','0122333444','viethoang1@gmail.com','user.png',1,'2022-11-02 07:02:56',NULL),
+(2,'viethoang2','$2a$10$yTAC9kRU6xV.hUskdeMbduaYFCzeuDqTQjik0cqVB6VLCaa2eEKiq','Viet Hoang','0166232333','viethoang2@gmail.com','user.png',1,'2022-11-02 07:02:56',NULL),
+(3,'viethoang3','$2a$10$yTAC9kRU6xV.hUskdeMbduaYFCzeuDqTQjik0cqVB6VLCaa2eEKiq','Viet Hoang','0966812311','viethoang3@gmail.com','user.png',1,'2022-11-02 07:02:56',NULL),
+(4,'viethoang','$2a$10$yTAC9kRU6xV.hUskdeMbduaYFCzeuDqTQjik0cqVB6VLCaa2eEKiq','Viet Hoang','0234123123','viethoang42@gmail.com','user.png',1,'2022-11-02 07:02:56',NULL),
+(5,'test1','$2a$10$yTAC9kRU6xV.hUskdeMbduaYFCzeuDqTQjik0cqVB6VLCaa2eEKiq','Test1','0234123123','test1@gmail.com','user.png',1,'2022-11-02 07:02:56',NULL),
+(6,'test2','$2a$10$yTAC9kRU6xV.hUskdeMbduaYFCzeuDqTQjik0cqVB6VLCaa2eEKiq','Test2','0234123123','test2@gmail.com','user.png',1,'2022-11-02 07:02:56',NULL),
+(7,'test3','$2a$10$yTAC9kRU6xV.hUskdeMbduaYFCzeuDqTQjik0cqVB6VLCaa2eEKiq','Test3','0234123123','test3@gmail.com','user.png',1,'2022-11-02 07:02:56',NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -667,7 +705,7 @@ CREATE TABLE `user_role` (
 
 LOCK TABLES `user_role` WRITE;
 /*!40000 ALTER TABLE `user_role` DISABLE KEYS */;
-INSERT INTO `user_role` VALUES (1,1),(2,2),(3,3),(4,4);
+INSERT INTO `user_role` VALUES (1,1),(2,2),(3,3),(4,4),(5,4),(6,4),(7,4);
 /*!40000 ALTER TABLE `user_role` ENABLE KEYS */;
 UNLOCK TABLES;
 
