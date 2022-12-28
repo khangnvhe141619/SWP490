@@ -8,6 +8,7 @@ import com.workshop.carauctionsystem.service.RoomDetailPlayerService;
 import com.workshop.carauctionsystem.service.RoomService;
 import com.workshop.carauctionsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.repository.query.Param;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +20,8 @@ import java.util.List;
 
 @RestController
 public class WinPageController {
+    @Value("${PRIVATE_KEY}")
+    private String key;
     @Autowired
     UserService userService;
 
@@ -84,5 +87,9 @@ public class WinPageController {
         }
         view.setViewName("winner");
         return view;
+    }
+    @GetMapping("/getKey")
+    public String getKey(){
+        return key;
     }
 }
