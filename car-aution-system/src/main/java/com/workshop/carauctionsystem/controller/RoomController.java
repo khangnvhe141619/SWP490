@@ -131,9 +131,9 @@ public class RoomController {
     }
 
     @PostMapping("/allBid")
-    public String allBid() {
+    public String allBid(@RequestParam("roomId") int roomId) {
         String html = "";
-        List<HistoryBid> historyBidList = roomDetailPlayerService.getAllHistoryBidByRoomId(1);
+        List<HistoryBid> historyBidList = roomDetailPlayerService.getAllHistoryBidByRoomId(roomId);
         for (HistoryBid historyBid : historyBidList){
             html += "<div class=\"row\">";
             html += "<div class=\"col-md-1\">";

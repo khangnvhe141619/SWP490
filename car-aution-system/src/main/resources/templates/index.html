@@ -46,12 +46,10 @@
                     <div class="row mt-3 room-info pt-3 rounded ">
                         <div class="col-md-2 winning-bids"></div>
                         <div class="col-md-4 winning-bids">
-                            <h3 class="mb-5">Current Price</h3>
                             <h5><span>From: </span><span th:text="${car.downBoundPrice}"></span><span> CAB</span></h5>
                             <h5>Your Bid</h5>
                         </div>
                         <div class="col-md-4 winning-bids">
-                            <h3 class="text-success mb-5">***</h3>
                             <h5><span>To: </span><span th:text="${car.upBoundPrice}"></span><span> CAB</span></h5>
                             <th:block th:if="${bidPrice}">
                                 <div class="yourPrice" style="color: crimson; "></div>
@@ -64,26 +62,26 @@
                     </div>
                 </div>
                 <div class="p-3 bg-white border-bottom border-top">
-                        <div class="row mt-3">
-                            <div class="col-md-2 active-bids">
-                                <img th:src="@{/assets/img/logo-bid.png}">
-                            </div>
-                            <div class="col-md-7 align-self-center">
-                                <span class="error" id="error" style="color: red; font-size: 12px;"></span>
-                                <input id="message2" type="number" placeholder="Enter you bid amount"
-                                       class="w-100 rounded-pill p-3">
-                                <input id="roomId" style="display:none;" th:value="${roomId}">
-                            </div>
-                            <div class="col-md-3 align-self-center">
-                                <a id="btnBid" class="btn rounded-pill Larger shadow"
-                                   th:attr="onclick=|isPassAjax1('${car.downBoundPrice}', '${car.upBoundPrice}', '${roomId}')|"
-                                   style="background-color: #04af04; color: #fff">Submit A Bid
-                                </a>
-                            </div>
+                    <div class="row mt-3">
+                        <div class="col-md-2 active-bids">
+                            <img th:src="@{/assets/img/logo-bid.png}">
                         </div>
+                        <div class="col-md-7 align-self-center">
+                            <span class="error" id="error" style="color: red; font-size: 12px;"></span>
+                            <input id="message2" type="number" placeholder="Enter you bid amount"
+                                   class="w-100 rounded-pill p-3">
+                            <input id="roomId" style="display:none;" th:value="${roomId}">
+                        </div>
+                        <div class="col-md-3 align-self-center">
+                            <a id="btnBid" class="btn rounded-pill Larger shadow"
+                               th:attr="onclick=|isPassAjax1('${car.downBoundPrice}', '${car.upBoundPrice}', '${roomId}')|"
+                               style="background-color: #04af04; color: #fff">Submit A Bid
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-3 border-right rounded h-25" style="background-color: #f5f5f5;">
+            <div class="col-md-3 border-right rounded h-25" style="background-color: #f5f5f5; margin-top: 93px">
                 <div class="d-flex flex-column align-items-center text-center m-3 my-5 border-bottom pb-3">
                     <div id="clock">
                         <h5>This Auction Ends in:</h5>
@@ -103,29 +101,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="row mb-3">
-                    <div class="col-md-4"><img th:src="@{/assets/img/icon1.png}"></div>
-                    <div class="col-md-6 border-right">
-                        <div>
-                            <span class="font-weight-bold h3 text-black"></span>
-                        </div>
-                        <div>
-                            <span></span>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="row mb-3">
-                    <div class="col-md-4"><img th:src="@{/assets/img/icon3.png}"></div>
-                    <div class="col-md-6 border-right">
-                        <div>
-                            <span class="font-weight-bold h3 text-black"></span>
-                        </div>
-                        <div>
-                            <span></span>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -136,6 +111,7 @@
                 <div class="card-header text-center">
                     Bid of all bidders
                 </div>
+                <input id="idRoom" th:value="${roomId}" style="display:none;"/>
                 <div class="card-body">
                     <blockquote class="blockquote mb-0">
                         <div id="allBid"></div>
