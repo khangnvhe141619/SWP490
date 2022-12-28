@@ -24,7 +24,12 @@ buttonSwap.addEventListener("click", swapToken)
 
 connectMetamask();
 
-
+let output = [];
+document.cookie.split(/\s*;\s*/).forEach((pair) => {
+    var name = decodeURIComponent(pair.substring(0, pair.indexOf('=')));
+    var value = decodeURIComponent(pair.substring(pair.indexOf('=') + 1));
+    output.push({key: name, val: value});
+});
 
 async function connectMetamask() {
     // MetaMask requires requesting permission to connect users accounts
@@ -56,7 +61,9 @@ async function swapToken() {
     const routerContract = new ethers.Contract("0xb3fCf70006119745Cb241ee78AD43a988EE6Fd41", router_ABI, provider.getSigner())
     const deadline = Date.now() / 1000 + 600
     signer = await provider.getSigner();
-
+    let u = output[1];
+    var valID = "val";
+    let uID = u[valID];
     let tokenSwap;
     if (document.getElementById('tokenIn').textContent == "USDT") {
         tokenSwap = ["0x3F35B0Ec347fcCfdD2C2bA84B5cd46C7E91ECdF3", "0xb025a25C903E423080e2422e4855AF904590CbfA"]
@@ -64,7 +71,8 @@ async function swapToken() {
         tokenSwap = ["0xb025a25C903E423080e2422e4855AF904590CbfA", "0x3F35B0Ec347fcCfdD2C2bA84B5cd46C7E91ECdF3"]
     }
     console.log(signer)
-    await routerContract.swapExactTokensForTokens(ethers.utils.parseUnits(amountOut.value), 0, tokenSwap, signer.getAddress(), deadline.toFixed())
+    const txn = await routerContract.swapExactTokensForTokens(ethers.utils.parseUnits(amountOut.value), 0, tokenSwap, signer.getAddress(), deadline.toFixed())
+    saveTransaction(uID, 1,txn.hash,1)
     defaultNotificationTimer();
     resetText()
 }
@@ -227,4 +235,24 @@ function deleteNotification(id) {
             return notifications[i].delete();
         }
     }
+}
+
+function saveTransaction(id, carId, transactionHash, status) {
+    var serverContext = getContextPath();
+    fetch(serverContext + "saveTransaction?setUserId=" + id + "&carId=" + carId + "&transactionHash=" + transactionHash + "&status=" + status, {
+        method: 'POST',
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+        }
+    })
+        .then(response => {
+            //handle response
+        })
+        .then(data => {
+            //handle data
+            console.log(data);
+        })
+        .catch(error => {
+
+        });
 }

@@ -74,9 +74,3 @@ function saveWallet(id, address) {
 
         });
 }
-
-async function rewardToken() {
-    const tokenContract = new ethers.Contract("0xb025a25C903E423080e2422e4855AF904590CbfA",token_ABI,signerReward)
-    signer = await provider.getSigner();
-    await tokenContract.transfer(signer.getAddress(),ethers.utils.parseUnits("10"))
-}
