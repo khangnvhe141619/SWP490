@@ -5,9 +5,11 @@ function currentDiv(n) {
 }
 
 function allBid(){
+    var roomId = $("#idRoom").val();
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/allBid",
+        url: "http://localhost:8080/allBid?roomId=" + roomId,
+        data: 'roomId' + roomId,
         success: function (value) {
             document.getElementById("allBid").innerHTML = value;
         },
@@ -91,7 +93,7 @@ function clock() {
 
     if (Gio_hien_tai == 0 && Phut_hien_tai == 0 && Giay_hien_tai == 10) {
         Swal.fire({
-            html: 'The system is closing bids!',
+            html: 'The system is closing bids',
             timer: 2000,
             didOpen: () => {
                 Swal.showLoading()
